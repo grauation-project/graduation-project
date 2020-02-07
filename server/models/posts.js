@@ -20,7 +20,7 @@ var posts = new Schema({
   authortype: {
     type: String,
     required: true,
-    enum: ['charity', '.....']
+    enum: ['charity', 'volunteer']
   }
 
 

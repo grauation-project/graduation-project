@@ -1,0 +1,36 @@
+.navbar {
+  background-color: #0086bf;
+}
+
+.navbar a {
+  color: white;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+}
+
+
+.navbar-nav {
+  margin-left: 10%;
+  width: 50%
+}
+
+.navbar-nav li {
+  margin-left: 3%;
+}
+
+.navbar-nav a:hover {
+  color: #ffb500;
+}
+
+.navbar-nav li:hover {
+  border-bottom: 2px solid #ffb500
+}
+
+.navbar .btn {
+  color: black;
+  background-color: #ffb500;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  margin-right: 5%;
+
+}
