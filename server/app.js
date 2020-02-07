@@ -55,6 +55,13 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+mongoose.Promise = global.Promise;
+
+mongoose.connect("mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connection.on("error", err => {
+  console.error(`MongoDB connection error: ${err}`);
+  process.exit(1);
+});
 
 app.listen(3000, function () {
   console.log("server running....");
