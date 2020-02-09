@@ -3,44 +3,43 @@ const Joi = require("joi");
 
 const Schema = mongoose.Schema
 const charityschema = new Schema({
-    name:
-    {
-        type:String,
-        required:true,
-        max:25
+  name: {
+    type: String,
+    required: true,
+    max: 25
 
-    },
-    img:
-    {
-        type:String
-    },
-    email:
-    {
-        type:String,
-        required:true,
-        unique:true,
-        max:225
+  },
+  img: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    max: 225
 
-    },
-    password:
-    {
-        type:String,
-        required:true,
-        min:8,
-        max:16
-    },
-    phone:
-    {
-        type:Number,
-        required:true,
-        max:10
-       
-    },
-    bankaccount:
-    {
-        type:Number,
-        unique:true
+  },
+  password: {
+    type: String,
+    required: true,
+    min: 8,
+    max: 16
+  },
+  phone: {
+    type: Number,
+    required: true,
+    max: 10
 
+  },
+  bankaccount: {
+    type: Number,
+    unique: true
+
+  },
+  address: {
+    country: {
+      type: String,
+      required: true,
     },
     address:
          {
@@ -52,7 +51,8 @@ const charityschema = new Schema({
            type:String,
            required:true,
          }
-})
+        }
+      })
 
 const charityvalidation= (data)=>{
     const schema = Joi.object({

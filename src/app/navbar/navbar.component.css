@@ -1,0 +1,80 @@
+.navbar {
+  background-color: #0086bf;
+}
+
+.navbar a {
+  color: white;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+}
+
+
+.navbar-nav {
+  margin-left: 10%;
+  width: 50%
+}
+
+.navbar-nav li {
+  margin-left: 3%;
+}
+
+.navbar-nav a:hover {
+  color: #ffb500;
+}
+
+.navbar-nav li:hover {
+  border-bottom: 2px solid #ffb500
+}
+
+.navbar .btn {
+  color: black;
+  background-color: #ffb500;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  margin-right: 5%;
+
+}
+.modal-title
+{
+    text-align: center;
+}
+.inputamount
+{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+ 
+}
+.title
+{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+.amount
+{
+    border: black .5px solid;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.amount:hover
+{
+    background-color: black;
+    color: cornsilk;
+}
+p
+{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.a-donate:active
+{
+  color: #0086bf;
+}
+

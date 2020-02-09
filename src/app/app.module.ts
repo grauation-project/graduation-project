@@ -6,19 +6,33 @@ import { AppComponent } from './app.component';
 import { DonateComponent } from './donate/donate.component';
 import { LoginComponent } from './login/login.component';
 import { from } from 'rxjs';
+import { NavbarComponent } from "./navbar/navbar.component";
+import { HomeregisterationComponent } from "./homeregisteration/homeregisteration.component";
+import { AboutusComponent } from "./aboutus/aboutus.component";
+import { HowitworkComponent } from "./howitwork/howitwork.component";
+import { ContactComponent } from './contact/contact.component';
+import { DonateMaterialComponent } from './donate-material/donate-material.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DonateComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    HomeregisterationComponent,
+    AboutusComponent,
+    HowitworkComponent,
+    ContactComponent,
+    DonateMaterialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
