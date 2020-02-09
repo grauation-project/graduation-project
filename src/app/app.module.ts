@@ -8,6 +8,9 @@ import { HomeregisterationComponent } from "./homeregisteration/homeregisteratio
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { HowitworkComponent } from "./howitwork/howitwork.component";
 import { ContactComponent } from './contact/contact.component';
+import { CharityAccountComponent } from './charity-account/charity-account/charity-account.component';
+import { FooterComponent } from './footer/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { ContactComponent } from './contact/contact.component';
     HomeregisterationComponent,
     AboutusComponent,
     HowitworkComponent,
-    ContactComponent
+    ContactComponent,
+    CharityAccountComponent,
+    FooterComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
