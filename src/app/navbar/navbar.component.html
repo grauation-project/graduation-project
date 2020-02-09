@@ -17,18 +17,20 @@
         <a class="nav-link" routerLink='/home'>Home <span class=" sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" (click)="scrolltoel()"> About Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel()" routerLink='/home'> About Us <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link">How It Work <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink='/home'>How It Work <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" (click)="scrolltoel3()">Contact Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel3()" routerLink='/home'>Contact Us <span
+            class="sr-only">(current)</span></a>
       </li>
 
     </ul>
 
-    <a class="nav-link user_logo" (click)="scrolltoel3()">
+    <a class="nav-link user_logo" routerLink='/login' (click)="scrolltoel3()">
       <i class="fa fa-user-circle" style="font-size:30px;"></i>
       <span class="sr-only">(current)</span></a>
 
