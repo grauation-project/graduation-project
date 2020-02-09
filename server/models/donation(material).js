@@ -21,15 +21,27 @@ var donationmaterial = new Schema({
         lowercase: true,
         required: true
     },
+    country:
+    {
+        type:String,
+        required:true,
+        maxlength:50
+    },
+    City:
+    {
+        type:String,
+        required:true,
+        maxlength:50
+    },
     address: {
         type: String,
         minlength: 10,
         maxlength: 200,
         required: true,
     },
-    createdat: {
-        type: Date
-    },
+    // createdat: {
+    //     type: Date
+    // },
     charityname: {
         type: String,
         minlength: 3,

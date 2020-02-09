@@ -1,0 +1,61 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+.img
+{
+    width:100%;
+    height: 350px;
+}
+.modal-title
+{
+    text-align: center;
+}
+.centered {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+  }
+.btn
+{
+    margin-top: 40px;
+  margin-right: 60px;
+    margin-left: 60px;
+   
+
+   
+}
+.btnstock
+{
+   
+   
+   margin-top: 50px;
+    color:wheat;
+   
+    
+box-shadow: black 4px;
+}
+.amount
+{
+    border: black .5px solid;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.amount:hover
+{
+    background-color: black;
+    color: cornsilk;
+}
+p
+{
+    text-align: center;
+    margin-top: 15px;
+}
