@@ -74,3 +74,50 @@
   margin-right: 5%;
 
 }
+
+.modal-title {
+  text-align: center;
+}
+
+.inputamount {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  text-decoration: underline;
+}
+
+.amount {
+  border: black .5px solid;
+  width: 65px;
+  height: 30px;
+  text-align: center;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.amount:hover {
+  background-color: black;
+  color: cornsilk;
+}
+
+.modal {
+
+  z-index: 4577678;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.a-donate:active {
+  color: #0086bf;
+}

@@ -7,7 +7,6 @@ declare var require: any;
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
   imgnav = require("../../assets/1.jpg");
   scrolltoel() {
     document
@@ -20,4 +19,17 @@ export class NavbarComponent implements OnInit {
       .scrollIntoView({ behavior: "smooth", block: "center" });
   }
   ngOnInit() {}
+
+  constructor() {}
+  displaydiv1 = true;
+  displaydiv2 = false;
+
+  material() {
+    this.displaydiv1 = false;
+    this.displaydiv2 = true;
+  }
+  online() {
+    this.displaydiv1 = true;
+    this.displaydiv2 = false;
+  }
 }
