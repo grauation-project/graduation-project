@@ -1,9 +1,3 @@
-* {
-  overflow: hidden;
-}
-
-
-
 a {
   text-decoration: none;
 }
@@ -57,7 +51,11 @@ a {
 }
 
 .profile_img {
-  margin-left: 15%
+  margin-left: 20%;
+  position: absolute;
+  top: -100px;
+  border: 5px solid white;
+  border-radius: 65%;
 }
 
 .folowing_details {
@@ -206,6 +204,7 @@ ul a:visited {
 
 .contain {
   background-color: #f2f2f2;
+  position: relative;
 }
 
 .tab_feed {

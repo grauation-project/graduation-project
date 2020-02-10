@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { ContactComponent } from "./contact/contact.component";
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 import { DonateMaterialComponent } from "./donate-material/donate-material.component";
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DonateMaterialComponent } from "./donate-material/donate-material.compo
     CharityAccountComponent,
     FooterComponent,
     VolunteerAccountComponent,
-    DonateMaterialComponent
+    DonateMaterialComponent,
+    SignupComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
 
