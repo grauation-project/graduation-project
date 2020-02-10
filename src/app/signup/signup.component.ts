@@ -7,6 +7,15 @@ import { Component, OnInit } from "@angular/core";
 })
 export class SignupComponent implements OnInit {
   constructor() {}
-
+  ischarity = true;
+  isvolunteer = false;
   ngOnInit() {}
+  charityregister() {
+    this.ischarity = true;
+    this.isvolunteer = false;
+  }
+  volunregister() {
+    this.ischarity = false;
+    this.isvolunteer = true;
+  }
 }

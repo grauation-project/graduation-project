@@ -96,7 +96,7 @@ h2 {
   font-size: 24px;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .clear {
@@ -176,6 +176,36 @@ body {
 .form-group {
   overflow: hidden;
   margin-bottom: 20px;
+}
+
+a.button1 {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #0086bf;
+  margin-left: 17%;
+  margin-bottom: 6%;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Merriweather', serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #AFBF34;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+a.button1:hover {
+  color: #AFBF34;
+  background-color: #0086bf;
+}
+
+@media all and (max-width:30em) {
+  a.button1 {
+    display: block;
+    margin: 0.4em auto;
+  }
 }
 
 .form-input {
