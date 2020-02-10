@@ -1,0 +1,61 @@
+/* body
+{
+    background-image:url(../../assets/images/2uONJKZYCR.jpg);
+} */
+.logindiv {
+  right: 28%;
+  margin-top: 20px;
+  position: absolute;
+}
+
+.logform {
+
+  margin-top: 40px;
+  background-color: #dfe3e6;
+  border: 1px solid lightgray;
+  height: 280px;
+  padding-top: 20px;
+  padding: 15px;
+}
+
+.FACEBOOKbtn {
+  background-color: rgb(54, 54, 163);
+  color: cornsilk;
+  width: 100%;
+
+}
+
+.resetPW {
+  text-align: center;
+
+  padding-top: 10px;
+}
+
+.resetPW a {
+  text-decoration: none;
+}
+
+.registration {
+
+  right: 28%;
+  padding-top: 5%;
+
+}
+
+.registerbtn {
+  width: 80%;
+  background-color: #dfe3e6;
+  color: gray;
+
+  margin-left: 10%;
+
+
+
+
+
+}
+
+.img {
+  width: 99.9%;
+  height: 513px;
+}

@@ -1,10 +1,14 @@
 <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet" />
 
 <nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" routerLink='/home'><img src={{imgnav}} class="nav_logo" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line" style="margin-bottom: 0;"></span>
+    </span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -13,20 +17,223 @@
         <a class="nav-link" routerLink='/home'>Home <span class=" sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/about'> About Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel()" routerLink='/home'> About Us <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/work'>How It Work <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink='/home'>How It Work <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/contact'>Contact Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel3()" routerLink='/home'>Contact Us <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink='/cacharityaccount'>Cacharity Account</a>
       </li>
     </ul>
-    <button class="btn">
+
+    <a class="nav-link user_logo" routerLink='/login' (click)="scrolltoel3()">
+      <i class="fa fa-user-circle" style="font-size:30px;"></i>
+      <span class="sr-only">(current)</span></a>
+
+    <button class="btn btn-info btn-lg w-40 " data-toggle="modal" data-target="#myModal" value="DONATE" name="">
+
       Donate Now
     </button>
   </div>
+
 </nav>
+
+<div class="modal fade  " id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <nav>
+          <a href="#online" (click)="online()">donate Online</a>|
+          <a href="#material" (click)="material()">donate Material</a>
+        </nav>
+        <button type="button" class="close " data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div *ngIf="displaydiv1">
+          <h5 class="title">Online Donate</h5>
+          <div class="row ">
+            <input type="submit" value="$25" (click)="donate(amount1.value)" #amount1 class="amount">
+            <input type="submit" value="$50" (click)="donate(amount2.value)" #amount2 class="amount">
+            <input type="submit" value="$100" (click)="donate(amount3.value)" #amount3 class="amount">
+            <input type="submit" value="$250" (click)="donate(amount4.value)" #amount4 class="amount">
+            <input type="submit" value="$500" (click)="donate(amount5.value)" #amount5 class="amount">
+            <input type="submit" value="$1000" (click)="donate(amount6.value)" #amount6 class="amount">
+
+          </div>
+          <div>
+            <p>or enter your own amount</p>
+
+            <form #donateOnlineForm="ngForm">
+
+              <input type="text" placeholder="100" value="{{donateamount}}" name="amount" class="inputamount">
+              <br><br>
+              <hr>
+              <p class="title">your Information</p>
+              <div class="form-group ">
+                <label class="float-left">Name :</label>
+                <input type="text" class="form-control" required [class.is-invalid]="name.invalid &&name.touched"
+                  #name="ngModel" [(ngModel)]="donateOnlineForm.name" name="doner">
+                <small class="text-danger " [class.d-none]="name.valid || name.untouched">Name is Required</small>
+              </div>
+              <div class="form-group">
+                <label class="float-left">Email :</label>
+                <input type="email" class="form-control" required [class.is-invalid]="Demail.invalid &&Demail.touched"
+                  #Demail="ngModel" [(ngModel)]="donateOnlineForm.Demail" name="email">
+                <small class="text-danger " [class.d-none]="Demail.valid || Demail.untouched">Email is
+                  Required</small>
+              </div>
+              <div class="form-group">
+                <label class="float-left">Card Number :</label>
+                <input type="" class="form-control" required [class.is-invalid]="cardNum.invalid &&cardNum.touched"
+                  #cardNum="ngModel" pattern="^\d{16}$" [(ngModel)]="donateOnlineForm.cardNum" name="donorcreditnum">
+                <div *ngIf="cardNum.errors && (cardNum.invalid || cardNum.touched)">
+                  <small class="text-danger" [class.d-none]="cardNum.valid || cardNum.untouched"
+                    *ngIf="cardNum.errors.required">CardNum number is
+                    required</small>
+                  <small class="text-danger" *ngIf="cardNum.errors.pattern">CardNum number must be 16
+                    digits</small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="float-left">Country :</label>
+                <input type="text" required [class.is-invalid]="Dcountry.invalid &&Dcountry.touched" #Dcountry="ngModel"
+                  [(ngModel)]="donateOnlineForm.Dcountry" class="form-control" name="country">
+                <small class="text-danger " [class.d-none]="Dcountry.valid || Dcountry.untouched">country is
+                  Required</small>
+              </div>
+              <div class="form-group">
+                <label class="float-left">City :</label>
+                <input type="text" name="City" required [class.is-invalid]="DCity.invalid &&DCity.touched"
+                  #DCity="ngModel" [(ngModel)]="donateOnlineForm.DCity" class="form-control">
+                <small class="text-danger " [class.d-none]="DCity.valid || DCity.untouched">City is Required</small>
+              </div>
+              <div class="form-group">
+                <label class="float-left">Postal Code :</label>
+                <input type="text" name="PostalCode" required
+                  [class.is-invalid]="PostalCode.invalid &&PostalCode.touched" #PostalCode="ngModel"
+                  [(ngModel)]="donateOnlineForm.PostalCode" class="form-control">
+                <small class="text-danger " [class.d-none]="PostalCode.valid || PostalCode.untouched">PostalCode is
+                  Required</small>
+              </div>
+              <hr>
+              <p class="title">Charity Information</p>
+
+
+              <div class="form-group">
+                <label class="float-left">Charity Name :</label>
+                <select (blur)="Validatecharity(charity.value)" (change)="Validatecharity(charity.value) "
+                  class="custom-select" [class.is-invalid]="charityHasErr&&charity.touched" required #charity="ngModel"
+                  [(ngModel)]="donateOnlineForm.charity" name="charity">
+                  <option value="default">charities</option>
+                  <option *ngFor="let charity of charities">{{charity}}</option>
+                </select>
+                <small class="text-danger" [class.d-none]="!charityHasErr|| charity.untouched"> Please choose a
+                  charity name</small>
+              </div>
+
+              <div class="form-group">
+                <label class="float-left">Charity Banking Account :</label>
+                <input type="text" class="form-control" required
+                  [class.is-invalid]="charityBankAccount.invalid &&charityBankAccount.touched"
+                  [(ngModel)]="donateOnlineForm.charityBankAccount" #charityBankAccount="ngModel"
+                  name="charityBankAccount">
+                <small class="text-danger "
+                  [class.d-none]="charityBankAccount.valid || charityBankAccount.untouched">charity Bank Account is
+                  Required</small>
+              </div>
+              <input type="submit" class="btn btn-info " [disabled]="donateOnlineForm.form.invalid" value="Donate">
+            </form>
+
+          </div>
+        </div>
+        <!-- material -->
+
+        <div id="material" *ngIf="displaydiv2">
+          <h5 class="title">Material Donate</h5>
+
+          <form #stockDonateForm="ngForm">
+
+            <div class="form-group">
+              <label class="col-form-label float-left">Doner name:</label>
+              <input type="text" class="form-control" name="doner" required
+                [class.is-invalid]="doner.invalid &&doner.touched" #doner="ngModel" [(ngModel)]="stockDonateForm.doner">
+              <small class="text-danger " [class.d-none]="doner.valid || doner.untouched">name is Required</small>
+
+            </div>
+            <div class="form-group">
+              <label class="col-form-label float-left">Email:</label>
+              <input type="text" class="form-control" name="email" required
+                [class.is-invalid]="email.invalid &&email.touched" #email="ngModel" [(ngModel)]="stockDonateForm.email">
+              <small class="text-danger " [class.d-none]="email.valid || email.untouched">email is Required</small>
+
+            </div>
+            <div class="form-group">
+              <label class="float-left">Phone :</label>
+              <input type="tel" [class.is-invalid]="phone.invalid && phone.touched" class="form-control"
+                #phone="ngModel" pattern="^\d{10}$" required [class.is-invalid]="phone.invalid && phone.touched"
+                [(ngModel)]="stockDonateForm.phone" name="phone">
+              <div *ngIf="phone.errors && (phone.invalid ||phone.touched)">
+                <small class="text-danger" [class.d-none]="phone.valid || phone.untouched"
+                  *ngIf="phone.errors.required">Phone number is required</small>
+                <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="float-left">Country :</label>
+              <input type="text" name="country" required [class.is-invalid]="country.invalid &&country.touched"
+                #country="ngModel" [(ngModel)]="stockDonateForm.country" class="form-control">
+              <small class="text-danger " [class.d-none]="country.valid || country.untouched">country is
+                Required</small>
+            </div>
+            <div class="form-group">
+              <label class="float-left">City :</label>
+              <input type="text" name="City" required [class.is-invalid]="City.invalid &&City.touched" #City="ngModel"
+                [(ngModel)]="stockDonateForm.City" class="form-control">
+              <small class="text-danger " [class.d-none]="City.valid || City.untouched">City is Required</small>
+            </div>
+            <div class="form-group">
+              <label class=" col-form-label float-left">Address:</label>
+              <input type="text" name="address" required [class.is-invalid]="address.invalid &&address.touched"
+                #address="ngModel" [(ngModel)]="stockDonateForm.address" class="form-control" />
+              <small class="text-danger " [class.d-none]="address.valid || address.untouched">address is
+                Required</small>
+            </div>
+            <div class="form-group">
+              <label class="float-left">Charity Name :</label>
+              <select (blur)="Validatecharity(charityname.value)" (change)="Validatecharity(charityname.value) "
+                class="custom-select" [class.is-invalid]="charityHasErr&&charityname.touched" required
+                #charityname="ngModel" [(ngModel)]="stockDonateForm.charityname" name="charityname">
+                <option value="default">charities</option>
+                <option *ngFor="let charity of charities">{{charity}}</option>
+              </select>
+              <small class="text-danger" [class.d-none]="!charityHasErr|| charityname.untouched"> Please choose a
+                charity name</small>
+            </div>
+            <div class="form-group">
+              <label class=" col-form-label float-left">Type of material:</label>
+              <input type="text" name="type" required [class.is-invalid]="type.invalid &&type.touched" #type="ngModel"
+                [(ngModel)]="stockDonateForm.type" class="form-control" />
+              <small class="text-danger " [class.d-none]="type.valid || type.untouched">Type of material is
+                Required</small>
+            </div>
+            <input type="submit" class="btn btn-info " [disabled]="stockDonateForm.form.invalid" value="Donate">
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

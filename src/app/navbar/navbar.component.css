@@ -1,5 +1,14 @@
 .navbar {
-  background-color: #0086bf;
+  background-color: #3B6D8C;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  transition: padding 0.5s;
+
+}
+
+.navbar:hover {
+  opacity: 0.97;
+  padding: 1%;
 }
 
 .navbar a {
@@ -8,6 +17,18 @@
   font-size: 18px;
 }
 
+.navbar-toggler {
+  padding: 2%;
+  border: none;
+}
+
+.navbar-toggler .line {
+  width: 100%;
+  float: left;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 5px;
+}
 
 .navbar-nav {
   margin-left: 10%;
@@ -18,19 +39,85 @@
   margin-left: 3%;
 }
 
+.nav_logo {
+  width: 70px;
+  height: 60px;
+  border-radius: 55%;
+  margin-left: 70%;
+}
+
 .navbar-nav a:hover {
-  color: #ffb500;
+  color: #AFBF34;
+
+}
+
+.user_logo {
+  margin-right: 5%;
+  cursor: pointer;
+}
+
+.user_logo:hover i {
+  color: #AFBF34;
+
 }
 
 .navbar-nav li:hover {
-  border-bottom: 2px solid #ffb500
+  border-bottom: 2px solid #AFBF34;
+  cursor: pointer;
 }
 
 .navbar .btn {
-  color: black;
-  background-color: #ffb500;
+  color: white;
+  background-color: #AFBF34;
   font-family: 'Merriweather', serif;
   font-size: 18px;
   margin-right: 5%;
 
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.inputamount {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  text-decoration: underline;
+}
+
+.amount {
+  border: black .5px solid;
+  width: 65px;
+  height: 30px;
+  text-align: center;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.amount:hover {
+  background-color: black;
+  color: cornsilk;
+}
+
+.modal {
+
+  z-index: 4577678;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.a-donate:active {
+  color: #0086bf;
 }
