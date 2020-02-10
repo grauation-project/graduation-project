@@ -10,6 +10,9 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeregisterationComponent } from "./homeregisteration/homeregisteration.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { HowitworkComponent } from "./howitwork/howitwork.component";
+import { CharityAccountComponent } from './charity-account/charity-account/charity-account.component';
+import { FooterComponent } from './footer/footer/footer.component';
+
 import { ContactComponent } from "./contact/contact.component";
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 import { DonateMaterialComponent } from "./donate-material/donate-material.component";
@@ -24,6 +27,8 @@ import { DonateMaterialComponent } from "./donate-material/donate-material.compo
     AboutusComponent,
     HowitworkComponent,
     ContactComponent,
+    CharityAccountComponent,
+    FooterComponent,
     VolunteerAccountComponent,
     DonateMaterialComponent
   ],
