@@ -1,0 +1,147 @@
+body
+{
+    
+    box-sizing: border-box;
+}
+.profileimg
+{
+    width: 10%;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: 4%;
+    margin-left: 3%;
+}
+.image
+{
+    
+    bottom: -100px;
+    top:100px;
+    text-align: center;
+}
+.myprofile
+{
+    margin-top: 20px;
+}
+.bg-white
+{
+    background-color: white;
+}
+
+.followdiv
+{
+    background-color: white;
+    text-align: center;
+    width: 100%;
+}
+.viewprofile a
+{
+    text-decoration: none;
+    color: gray;
+}
+.viewprofile a:hover
+{
+    color:rgb(62, 83, 122) ;
+}
+.writepost
+{
+   
+    height: 80px;
+    margin-top: 20px;
+    background-color: white;
+}
+.postbtn
+{
+ margin-left:68% ;
+  height: 40px;
+  width: 15%;
+  margin-top: 4%;
+ 
+}
+.postForm
+{
+    text-align: center;
+}
+.img-vedio-btn
+{
+    margin-right: 55%;
+}
+.cricle-img
+{
+    border-radius: 50%;
+    margin-top: 4px;
+    margin-left: 4px;
+   
+}
+.Suggestions
+{
+    width: 100%;
+    margin-top: 40px;
+    background-color: white;
+    padding-top: 5%;
+    margin-left: 5%;
+    margin-right: 50%;
+    
+}
+.plusIconDiv
+{
+    border: gray .5px solid;
+    color: grey;
+    height: 28px;
+    width: 9%;
+    margin-left: 15%;
+    margin-top: 6%;
+}
+.plusIconDiv:hover
+{
+    background-color:rgb(62, 83, 122) ;
+    color: white;
+}
+.plusicon
+{
+   
+    font-size: 15px;
+   padding-top: 5px;
+   padding-left: 5px;
+
+    
+    
+}
+
+.modal-header
+{
+    background-color: rgb(62, 83, 122);
+    color: snow;
+}
+.post
+{
+    background-color: white;
+    width: 100%;
+}
+#secondpost {
+   
+    padding-left: 2%;
+    padding-top: 2%;
+    margin-top: 2%;
+    background-color: white;
+}
+.editposticon
+{
+   margin-left: 400px;
+}
+.fas
+{
+    color: grey;
+}
+.fas:hover
+{
+    color:rgb(62, 83, 122) ;
+
+}
+.postfooter
+{
+    color: grey;
+}
+.postfooter:hover
+{
+    color:rgb(62, 83, 122) ;
+}
