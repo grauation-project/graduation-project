@@ -2,6 +2,12 @@
   overflow: hidden;
 }
 
+
+
+a {
+  text-decoration: none;
+}
+
 .profile_background {
   width: 100%;
   height: 330px;
@@ -42,4 +48,170 @@
 .btn:hover a {
   color: white;
 
+}
+
+.account_details {
+  margin-left: 5%;
+  margin-right: 3%;
+  background-color: #f2f2f2;
+}
+
+.profile_img {
+  margin-left: 15%
+}
+
+.folowing_details {
+  margin-left: 6%;
+}
+
+.folowing_details div {
+  float: left;
+}
+
+.folowing_details p {
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}
+
+.folowing_details span {
+  font-size: 22px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.right_container {
+  width: 80%;
+  background-color: white;
+  margin-left: 10%;
+  padding-top: 40%;
+
+}
+
+.profile_links div {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  padding-left: 8%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+
+}
+
+.profile_links i {
+  color: #3B6D8C;
+  font-size: 15px;
+  display: inline-block;
+  margin-right: 5%;
+}
+
+.profile_links a {
+  text-decoration: none;
+}
+
+.account_main {
+  padding-top: 5%;
+  background-color: #f2f2f2;
+  /* margin-right: 3%; */
+}
+
+.account_headline h1 {
+  color: black
+}
+
+.account_headline p {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 8%;
+}
+
+.account_headline span {
+  margin-left: 5%
+}
+
+.account_headline i {
+  color: #AFBF34;
+  margin-right: 2%;
+}
+
+ul li {
+  float: left;
+  margin-right: 4%;
+
+}
+
+ul i {
+  display: block;
+  color: grey
+}
+
+ul a {
+  color: grey;
+}
+
+ul a:visited {
+  color: #3B6D8C
+}
+
+.account_main button {
+
+  background-color: #3B6D8C;
+  float: right;
+  margin-right: 10%;
+  border-radius: 3%;
+  padding: 1% 2% 1% 2%;
+  border: 3px solid #3B6D8C;
+}
+
+.account_main button a {
+  color: white
+}
+
+.posts .post {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.post {
+  padding-top: 4%;
+  padding-right: 2%;
+  margin-bottom: 5%;
+
+  padding-left: 2%;
+  background-color: white;
+  border-radius: 3%;
+}
+
+.post p {
+  margin-top: 3%;
+  margin-left: 2%
+}
+
+.reactions {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 2%;
+
+}
+
+.reactions a {
+  color: grey;
+  margin-right: 9%;
+  margin-left: 2%
+}
+
+.reactions a:hover {
+  color: #3B6D8C;
+}
+
+.contain {
+  background-color: #f2f2f2;
+}
+
+.tab_feed {
+  margin: 0px
+}
+
+ul {
+  margin-left: -5%;
 }
