@@ -30,7 +30,7 @@ import { DonateMaterialComponent } from "./donate-material/donate-material.compo
     CharityAccountComponent,
     FooterComponent,
     VolunteerAccountComponent,
-    DonateMaterialComponent
+    DonateMaterialComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
 
