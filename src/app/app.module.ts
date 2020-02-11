@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 import { SignupComponent } from './signup/signup.component';
+import { VolunteersignupService } from './services/volunteersignup.service';
 
 
 @NgModule({
@@ -30,8 +31,8 @@ import { SignupComponent } from './signup/signup.component';
     FooterComponent,
     HomeComponent,
     VolunteerAccountComponent,
-    SignupComponent
-   
+    SignupComponent,
+   VolunteersignupService,
   ],
   imports: [
     BrowserModule,

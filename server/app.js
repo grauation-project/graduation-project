@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyparser = require("body-parser");
 // var error = require("./middleware/error");
-
 require("express-async-errors");
 var winston = require("winston");
 var joi = require("joi");
@@ -14,6 +13,7 @@ var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
 const app = express();
+const volunteer=require("./controllers/volunteer");
 
 winston.configure({
   transports: [
@@ -55,6 +55,7 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
 mongoose.Promise = global.Promise;
 
 mongoose.connect("mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority");
@@ -62,6 +63,9 @@ mongoose.connection.on("error", err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(1);
 });
+
+
+app.use("/volunteer",volunteer);
 
 app.listen(3000, function () {
   console.log("server running....");
