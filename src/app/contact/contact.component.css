@@ -1,25 +1,51 @@
 .contact {
-  background-color: #252934;
+  background-color: #3B6D8C;
   color: #fff;
   text-align: center;
   padding-top: 10%;
   padding-bottom: 10%;
   font-size: 36px;
-  height: auto
+  height: auto;
+  font-family: "Nike TG", "Arial black", "Arial Bold", Arial, sans-serif;
+
+  position: relative;
 }
 
+
+
+
 .line {
-  height: 5px;
+  height: 2px;
+  background-color: #fff;
+  width: 4%;
+  margin: auto;
+  margin-bottom: 0.3%;
+}
+
+.line2 {
+  height: 2px;
   background-color: #fff;
   width: 8%;
+  margin: auto;
+  margin-bottom: 0.3%;
+
+}
+
+.line3 {
+  height: 2px;
+  background-color: #fff;
+  width: 4%;
   margin: auto;
 }
 
 .contact h2 {
-  color: #ffb500;
+  color: #AFBF34;
   font-size: 18px;
   padding-top: 3%;
+  font-family: "Nike TG", "Arial black", "Arial Bold", Arial, sans-serif;
+
 }
+
 
 .contact-info {
   margin: auto;
@@ -29,7 +55,7 @@
 }
 
 .form-control {
-  background-color: #1E242C;
+  background-color: white;
   border-style: none;
   margin-bottom: 3px !important;
 }
@@ -44,21 +70,17 @@ textarea {
   padding: 10px 30px;
   border: 2px solid #fff;
   font-size: 16pt;
-  font-family: 'Indie Flower', cursive;
+  font-family: "Nike TG", "Arial black", "Arial Bold", Arial, sans-serif;
   transition: 1s;
 }
 
 .contact a:hover {
-  background-color: #ffb500;
+  background-color: #AFBF34;
 }
 
-/* input,
-select,
-textarea {
-  color: #ff0000;
-} */
+
 
 textarea:focus,
 input:focus {
-  color: white
+  color: #AFBF34
 }

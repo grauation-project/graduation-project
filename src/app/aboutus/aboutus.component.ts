@@ -7,7 +7,7 @@ declare var require: any;
   styleUrls: ["./aboutus.component.css"]
 })
 export class AboutusComponent implements OnInit {
-  // imgname = require("../../assets/fb9fLIXXL8.jpg");
+  imgname = require("../../assets/2.jpg");
 
   constructor() {}
 

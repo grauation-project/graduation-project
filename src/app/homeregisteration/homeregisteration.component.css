@@ -1,137 +1,46 @@
 #myVideo {
-  position: fixed;
-  top: 9%;
+  /* top: 9%;
   right: 0;
-  bottom: 0;
+  bottom: 0;  */
   z-index: -100;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 580px;
+}
+
+.home_layout {
+  position: relative;
+
+  height: 580px;
 }
 
 .content {
-  position: fixed;
-  z-index: -50;
+  position: absolute;
+  z-index: 212545;
 
-  top: 9%;
-  right: 0;
-  bottom: 0;
+  top: 0%;
+  /* right: 0;
+  bottom: 0; */
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 20px;
+  height: 580px;
+
+  /* padding: 20px; */
 }
 
-.button2 {
-  position: absolute;
-  top: 38%;
-  left: 22%;
-  width: 20%;
-  height: 100px;
-
-  background-size: cover;
-
-
-  overflow: hidden;
-  display: block;
-
-
-
-
-}
-
-.button3 {
-  position: absolute;
-  top: 38%;
-  left: 48%;
-  width: 20%;
-  height: 100px;
-
-  background-size: cover;
-
-
-  overflow: hidden;
-  display: block;
-
-
-
-
-}
-
-.button2 span {
-  transition: all 0.6s ease;
-  overflow: hidden;
-  font-size: 62px;
-  font-weight: 800;
-  font-family: sans-serif;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0px;
+.content h1 {
+  font-family: "Nike TG", "Arial black", "Arial Bold", Arial, sans-serif;
+  font-size: 80px;
+  line-height: 1.5;
   color: white;
-  border-radius: 4px;
-  cursor: pointer;
+  text-align: center;
+  margin-top: 17%;
 }
 
-.button3 span {
-  transition: all 0.6s ease;
-  overflow: hidden;
-  font-size: 62px;
-  font-weight: 800;
-  font-family: sans-serif;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0px;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
+.content span {
+  color: #AFBF34;
+  font-family: "Nike TG", "Arial black", "Arial Bold", Arial, sans-serif;
+  font-size: 80px;
+  line-height: 1.5;
+  text-align: center;
 
-.button2::after {
-  content: '';
-  display: block;
-  position: absolute;
-  bottom: -50px;
-  left: -60px;
-  width: 90px;
-  height: 90px;
-  background: #000;
-  z-index: -1;
-  box-shadow: 0px 0px 120px #024768, 0px 0px 120px #04B0BC, 0px 0px 120px #33C9C7, 0px 0px 120px #94DFDD, 0px 0px 120px #97D3D3;
-  transition: all 0.3s ease;
-  transform: rotate(-45deg);
-
-}
-
-.button3::after {
-  content: '';
-  display: block;
-  position: absolute;
-  bottom: -50px;
-  left: -60px;
-  width: 90px;
-  height: 90px;
-  background: #000;
-  z-index: -1;
-  box-shadow: 0px 0px 120px #024768, 0px 0px 120px #04B0BC, 0px 0px 120px #33C9C7, 0px 0px 120px #94DFDD, 0px 0px 120px #97D3D3;
-  transition: all 0.3s ease;
-  transform: rotate(-45deg);
-
-}
-
-.button2:hover::after {
-  box-shadow: 40px -20px 0px #024768, 41px -20px 8px rgba(0, 0, 0, 0.3), 80px 20px 0px #04B0BC, 81px 20px 8px rgba(0, 0, 0, 0.3), 120px 60px 0px #22CBCB, 121px 60px 8px rgba(0, 0, 0, 0.3), 160px 100px 0px #94DFDD, 161px 100px 8px rgba(0, 0, 0, 0.3), 200px 120px 0px #97D3D3;
-}
-
-.button3:hover::after {
-  box-shadow: 40px -20px 0px #024768, 41px -20px 8px rgba(0, 0, 0, 0.3), 80px 20px 0px #04B0BC, 81px 20px 8px rgba(0, 0, 0, 0.3), 120px 60px 0px #22CBCB, 121px 60px 8px rgba(0, 0, 0, 0.3), 160px 100px 0px #94DFDD, 161px 100px 8px rgba(0, 0, 0, 0.3), 200px 120px 0px #97D3D3;
-}
-
-.button2:hover {
-  box-shadow: 4px 34px 24px rgba(0, 0, 0, 0.3);
-}
-
-.button3:hover {
-  box-shadow: 4px 34px 24px rgba(0, 0, 0, 0.3);
 }

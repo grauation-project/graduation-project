@@ -1,42 +1,42 @@
 <div class="container-fluid">
-    
-    <div class="row">
-        <img src="../../assets/images/2uONJKZYCR.jpg" class="img">
-        <div class="col-6 logindiv">
-            <h4 style="text-align: center;">Sign in</h4>
-            <input type="submit" class="btn FACEBOOKbtn " value="SIGN IN WITH FACEBOOK" >
-            
-            <div class="logform">
-            <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()" action="/login" method="POST">
 
-                <div class="form-group">
-                    <label>EMAIL :</label>
-                    <input type="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required
-                        class="form-control" [(ngModel)]=" userModel.email" placeholder="Email" name="email">
-                    <small [class.d-none]="email.valid || email.untouched" class="text-danger">email is required</small>
-                </div>
-                <div class="form-group">
-                    <label>PASSWORD :</label>
-                    <input type="password" #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
-                        required class="form-control" [(ngModel)]=" userModel.password" placeholder="Password" name="password">
-                    <small [class.d-none]="password.valid || password.untouched" class="text-danger">password is
-                        required</small>
-                </div>
-                <input type="submit" [disabled]="userForm.form.invalid" class="btn btn-info w-100 " value="Sign in">
-                 <p class="resetPW"><a href="resetpassword" >Forget password</a></p>
-                
-            </form>
-        
-        </div>
-        <div class="registration" >
-            <input type="submit" class="btn registerbtn" value="NEED AN ACCOUNT ? JOIN NOW"> 
-        </div>
+  <div class="row">
+    <img src="../../assets/3.jpg" class="backgroundimg">
+    <div class="col-6 pt-3 pb-3 logindiv bg-light">
+      <h4 style="text-align: center;">Sign in</h4>
+      <input type="submit" class="btn FACEBOOKbtn " value="SIGN IN WITH FACEBOOK">
 
-       
-        
-        </div>
-       
-       
-      
+      <div class="logform bg-light">
+        <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()" action="/login" method="POST">
+
+          <div class="form-group">
+            <label>EMAIL :</label>
+            <input type="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required
+              class="form-control" [(ngModel)]=" userModel.email" placeholder="Email" name="email">
+            <small [class.d-none]="email.valid || email.untouched" class="text-danger">email is required</small>
+          </div>
+          <div class="form-group">
+            <label>PASSWORD :</label>
+            <input type="password" #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+              required class="form-control" [(ngModel)]=" userModel.password" placeholder="Password" name="password">
+            <small [class.d-none]="password.valid || password.untouched" class="text-danger">password is
+              required</small>
+          </div>
+          <input type="submit" [disabled]="userForm.form.invalid" class="btn maincolor w-100 " value="Sign in">
+          <p class="resetPW"><a href="resetpassword">Forget password</a></p>
+
+        </form>
+
+      </div>
+      <div class="registration bg-light">
+        <input type="submit" class="btn registerbtn" value="NEED AN ACCOUNT ? JOIN NOW">
+      </div>
+
+
+
     </div>
+
+
+
+  </div>
 </div>

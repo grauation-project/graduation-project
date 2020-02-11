@@ -5,16 +5,20 @@ body
 }
 .profileimg
 {
-    width: 10%;
+    width: 12%;
     height: 40px;
     border-radius: 50%;
     margin-top: 4%;
     margin-left: 3%;
 }
-.image
-{
-    
-    bottom: -100px;
+.profileimage
+{   
+    width: 40%;
+    height: 70px;
+    border-radius: 50%;
+    top: 180px;
+
+ /* bottom: -100px;  */
     top:100px;
     text-align: center;
 }
@@ -36,12 +40,9 @@ body
 .viewprofile a
 {
     text-decoration: none;
-    color: gray;
+    color:#3B6D8C ;
 }
-.viewprofile a:hover
-{
-    color:rgb(62, 83, 122) ;
-}
+
 .writepost
 {
    
@@ -61,10 +62,10 @@ body
 {
     text-align: center;
 }
-.img-vedio-btn
+/* .img-vedio-btn
 {
-    margin-right: 55%;
-}
+    margin-right: 50%;
+} */
 .cricle-img
 {
     border-radius: 50%;
@@ -75,7 +76,7 @@ body
 .Suggestions
 {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
     background-color: white;
     padding-top: 5%;
     margin-left: 5%;
@@ -86,14 +87,15 @@ body
 {
     border: gray .5px solid;
     color: grey;
-    height: 28px;
-    width: 9%;
-    margin-left: 15%;
-    margin-top: 6%;
+    height: 27px;
+    width: 10%;
+    /* margin-left: 15%;
+    margin-top: 6%; */
 }
 .plusIconDiv:hover
 {
-    background-color:rgb(62, 83, 122) ;
+    
+    background-color:#3B6D8C ;
     color: white;
 }
 .plusicon
@@ -102,6 +104,8 @@ body
     font-size: 15px;
    padding-top: 5px;
    padding-left: 5px;
+   
+   
 
     
     
@@ -109,7 +113,7 @@ body
 
 .modal-header
 {
-    background-color: rgb(62, 83, 122);
+    background-color:#3B6D8C;
     color: snow;
 }
 .post
@@ -126,7 +130,8 @@ body
 }
 .editposticon
 {
-   margin-left: 400px;
+   /* margin-left: 320px; */
+   margin-left: 250px;
 }
 .fas
 {
@@ -134,14 +139,20 @@ body
 }
 .fas:hover
 {
-    color:rgb(62, 83, 122) ;
+    color:#3B6D8C ;
 
 }
 .postfooter
 {
     color: grey;
+    
 }
 .postfooter:hover
 {
-    color:rgb(62, 83, 122) ;
+    color:#3B6D8C ;
+}
+.maincolor
+{
+  background-color: #3B6D8C ;
+  color: white;
 }

@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { LoginComponent } from './login/login.component';
-import { from } from 'rxjs';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { LoginComponent } from "./login/login.component";
+import { from } from "rxjs";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeregisterationComponent } from "./homeregisteration/homeregisteration.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { HowitworkComponent } from "./howitwork/howitwork.component";
 import { ContactComponent } from './contact/contact.component';
-import { FooterComponent } from './footer/footer/footer.component';
 import { CharityAccountComponent } from './charity-account/charity-account/charity-account.component';
+import { FooterComponent } from './footer/footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
     CharityAccountComponent,
     FooterComponent,
     HomeComponent,
+    VolunteerAccountComponent
    
   ],
   imports: [
@@ -38,6 +39,7 @@ import { HomeComponent } from './home/home.component';
     
   ],
   
+
   providers: [],
   bootstrap: [AppComponent]
 })

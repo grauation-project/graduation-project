@@ -1,10 +1,14 @@
 <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet" />
 
 <nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" routerLink='/home'><img src={{imgnav}} class="nav_logo" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line" style="margin-bottom: 0;"></span>
+    </span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -13,53 +17,64 @@
         <a class="nav-link" routerLink='/home'>Home <span class=" sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/about'> About Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel()" routerLink='/home'> About Us <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/work'>How It Work <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink='/home'>How It Work <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink='/contact'>Contact Us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="scrolltoel3()" routerLink='/home'>Contact Us <span
+            class="sr-only">(current)</span></a>
       </li>
+      <!-- <li class="nav-item active">
+        <a class="nav-link" routerLink='/cacharityaccount'>Cacharity Account</a>
+      </li> -->
     </ul>
+
+    <a class="nav-link user_logo" routerLink='/login' (click)="scrolltoel3()">
+      <i class="fa fa-user-circle" style="font-size:30px;"></i>
+      <span class="sr-only">(current)</span></a>
+
     <button class="btn btn-info btn-lg w-40 " data-toggle="modal" data-target="#myModal" value="DONATE" name="">
+
       Donate Now
     </button>
   </div>
 
 </nav>
 
- <div class="modal fade " id="myModal" role="dialog">
+<div class="modal fade  " id="myModal" role="dialog">
   <div class="modal-dialog">
 
 
     <div class="modal-content">
       <div class="modal-header">
-        
+
         <nav>
-          <a href="#online" (click)="online()" >donate Online</a>|
-          <a  href="#material" (click)="material()">donate Material</a>
+          <a href="#online" (click)="online()">donate Online</a>|
+          <a href="#material" (click)="material()">donate Material</a>
         </nav>
         <button type="button" class="close " data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-         
-          <div  *ngIf="displaydiv1">
-            <h5 class="title">Online Donate</h5>
-           <div class="row ">
+      </div>
+      <div class="modal-body">
+
+        <div *ngIf="displaydiv1">
+          <h5 class="title">Online Donate</h5>
+          <div class="row ">
             <input type="submit" value="$25" (click)="donate(amount1.value)" #amount1 class="amount">
             <input type="submit" value="$50" (click)="donate(amount2.value)" #amount2 class="amount">
             <input type="submit" value="$100" (click)="donate(amount3.value)" #amount3 class="amount">
             <input type="submit" value="$250" (click)="donate(amount4.value)" #amount4 class="amount">
             <input type="submit" value="$500" (click)="donate(amount5.value)" #amount5 class="amount">
             <input type="submit" value="$1000" (click)="donate(amount6.value)" #amount6 class="amount">
-  
+
           </div>
           <div>
             <p>or enter your own amount</p>
-  
+
             <form #donateOnlineForm="ngForm">
-  
+
               <input type="text" placeholder="100" value="{{donateamount}}" name="amount" class="inputamount">
               <br><br>
               <hr>
@@ -89,7 +104,7 @@
                     digits</small>
                 </div>
               </div>
-  
+
               <div class="form-group">
                 <label class="float-left">Country :</label>
                 <input type="text" required [class.is-invalid]="Dcountry.invalid &&Dcountry.touched" #Dcountry="ngModel"
@@ -105,15 +120,16 @@
               </div>
               <div class="form-group">
                 <label class="float-left">Postal Code :</label>
-                <input type="text" name="PostalCode" required [class.is-invalid]="PostalCode.invalid &&PostalCode.touched"
-                  #PostalCode="ngModel" [(ngModel)]="donateOnlineForm.PostalCode" class="form-control">
+                <input type="text" name="PostalCode" required
+                  [class.is-invalid]="PostalCode.invalid &&PostalCode.touched" #PostalCode="ngModel"
+                  [(ngModel)]="donateOnlineForm.PostalCode" class="form-control">
                 <small class="text-danger " [class.d-none]="PostalCode.valid || PostalCode.untouched">PostalCode is
                   Required</small>
               </div>
               <hr>
               <p class="title">Charity Information</p>
-  
-  
+
+
               <div class="form-group">
                 <label class="float-left">Charity Name :</label>
                 <select (blur)="Validatecharity(charity.value)" (change)="Validatecharity(charity.value) "
@@ -125,7 +141,7 @@
                 <small class="text-danger" [class.d-none]="!charityHasErr|| charity.untouched"> Please choose a
                   charity name</small>
               </div>
-  
+
               <div class="form-group">
                 <label class="float-left">Charity Banking Account :</label>
                 <input type="text" class="form-control" required
@@ -138,16 +154,16 @@
               </div>
               <input type="submit" class="btn btn-info " [disabled]="donateOnlineForm.form.invalid" value="Donate">
             </form>
-        
-            </div>
+
+          </div>
         </div>
-          <!-- material -->
-         
+        <!-- material -->
+
         <div id="material" *ngIf="displaydiv2">
           <h5 class="title">Material Donate</h5>
-         
-        <form #stockDonateForm="ngForm">
-         
+
+          <form #stockDonateForm="ngForm">
+
             <div class="form-group">
               <label class="col-form-label float-left">Doner name:</label>
               <input type="text" class="form-control" name="doner" required
@@ -213,11 +229,11 @@
                 Required</small>
             </div>
             <input type="submit" class="btn btn-info " [disabled]="stockDonateForm.form.invalid" value="Donate">
-         
-        </form>
-      </div> 
+
+          </form>
         </div>
+      </div>
 
     </div>
-  </div> 
+  </div>
 </div>

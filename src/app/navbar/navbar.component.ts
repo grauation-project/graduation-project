@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+declare var require: any;
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
   public donateamount = ''
@@ -34,5 +35,15 @@ online(){
   this.displaydiv1=true;
   this.displaydiv2=false;
 }
-
+  imgnav = require("../../assets/1.jpg");
+  scrolltoel() {
+    document
+      .querySelector("#about_us")
+      .scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  scrolltoel3() {
+    document
+      .querySelector("#contact_us")
+      .scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 }
