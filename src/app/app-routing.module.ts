@@ -7,9 +7,10 @@ import { AboutusComponent } from "./aboutus/aboutus.component";
 import { HowitworkComponent } from "./howitwork/howitwork.component";
 import { ContactComponent } from "./contact/contact.component";
 import { HomeComponent } from './home/home.component';
-import { CharityAccountComponent } from './charity-account/charity-account/charity-account.component';
+import { CharityAccountComponent } from "./charity-account/charity-account/charity-account.component";
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 
+import { SignupComponent } from "./signup/signup.component";
 
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
@@ -20,6 +21,9 @@ const routes: Routes = [
   {path:"homepage",component:HomeComponent},
   { path: "volunteer", component: VolunteerAccountComponent },
   { path: "cacharityaccount",component:CharityAccountComponent },
+
+  { path: "cacharityaccount", component: CharityAccountComponent },
+  { path: "signup", component: SignupComponent },
 
 ];
 

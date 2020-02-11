@@ -14,6 +14,7 @@ import { CharityAccountComponent } from './charity-account/charity-account/chari
 import { FooterComponent } from './footer/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -28,14 +29,14 @@ import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account
     CharityAccountComponent,
     FooterComponent,
     HomeComponent,
-    VolunteerAccountComponent
+    VolunteerAccountComponent,
+    SignupComponent
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    
+    FormsModule
     
   ],
   
