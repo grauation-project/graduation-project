@@ -74,6 +74,7 @@ footer {
     margin: 0;
     padding: 0;
 }
+
 ul {
     display: block;
     list-style-type: none;
@@ -139,4 +140,7 @@ a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: none;
+}
+.footer-links-title{
+    margin-left: 13%;
 }
