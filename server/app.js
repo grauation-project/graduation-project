@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyparser = require("body-parser");
+var router = express.Router()
 // var error = require("./middleware/error");
-
+var donatematerial = require("./controllers/donationone")
 require("express-async-errors");
 var winston = require("winston");
 var joi = require("joi");
@@ -14,37 +14,36 @@ var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
 const app = express();
+// winston.configure({
+//   transports: [
+//     new winston.transports.File({
+//       filename: "logfile.log"
+//     })
+//   ]
+// });
+// app.use(cors());
 
-winston.configure({
-  transports: [
-    new winston.transports.File({
-      filename: "logfile.log"
-    })
-  ]
-});
-app.use(cors());
+// var files_arr = fs.readdirSync(__dirname + "/models");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/" + file);
+// });
 
-var files_arr = fs.readdirSync(__dirname + "/models");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/" + file);
-});
+// var limiter = ratelimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many requests from this ip,Please try again in an hour !"
+// });
 
-var limiter = ratelimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this ip,Please try again in an hour !"
-});
-
-// limit number of requests from the same ip address
-// app.use("/MITCHA", limiter);
-// http security headers
-app.use(helmet());
-// data sanitization against nosql query injection
-app.use(mongosanatize());
-// data sanitization against xss
-app.use(xss());
-// prevent parameter pollution
-app.use(hpp());
+// // limit number of requests from the same ip address
+// app.use("/savethem", limiter);
+// // http security headers
+// app.use(helmet());
+// // data sanitization against nosql query injection
+// app.use(mongosanatize());
+// // data sanitization against xss
+// app.use(xss());
+// // prevent parameter pollution
+// app.use(hpp());
 
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -55,14 +54,17 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+app.use("/savethem", donatematerial)
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect(
+  "mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority"
+);
 mongoose.connection.on("error", err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(1);
 });
 
-app.listen(3000, function () {
+app.listen(8080, function () {
   console.log("server running....");
 });
