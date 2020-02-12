@@ -14,6 +14,8 @@ var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
 const app = express();
+const volunteer = require("./controllers/volunteer");
+
 winston.configure({
   transports: [
     new winston.transports.File({
@@ -55,6 +57,7 @@ app.all("*", function (req, res, next) {
   next();
 });
 app.use("/savethem", donatematerial)
+app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
@@ -65,6 +68,10 @@ mongoose.connection.on("error", err => {
   process.exit(1);
 });
 
-app.listen(8080, function () {
+
+
+
+
+app.listen(3000, function () {
   console.log("server running....");
 });
