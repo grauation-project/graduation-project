@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { VolunteersignupService } from '../services/volunteersignup.service';
 
 @Component({
   selector: "app-signup",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./signup.component.css"]
 })
 export class SignupComponent implements OnInit {
-  constructor() {}
+  constructor(private volunteerservices:VolunteersignupService) {}
   ischarity = true;
   isvolunteer = false;
   ngOnInit() {}
@@ -18,4 +19,5 @@ export class SignupComponent implements OnInit {
     this.ischarity = false;
     this.isvolunteer = true;
   }
+  
 }

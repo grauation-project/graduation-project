@@ -23,7 +23,7 @@ winston.configure({
   ]
 });
 app.use(cors());
-
+app.use(bodyparser.json());
 var files_arr = fs.readdirSync(__dirname + "/models");
 files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);

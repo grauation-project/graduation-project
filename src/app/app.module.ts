@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
 import { SignupComponent } from './signup/signup.component';
 import { VolunteersignupService } from './services/volunteersignup.service';
+import{HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { VolunteersignupService } from './services/volunteersignup.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
     
   ],
   
