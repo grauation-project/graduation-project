@@ -4,35 +4,38 @@ var joi = require("joi");
 var donationpayment = mongoose.model("donationpayment", new mongoose.Schema({
   donor: {
     type: String,
-    minlength: 3,
-    maxlength: 55,
+    minlength: 6,
     required: true
+
   },
   email: {
     type: String,
     maxlength: 255,
-    required: true,
+    required: true
 
   },
   donorcreditnum: {
     type: String,
     minlength: 15,
+    required: true
 
-    required: true,
   },
   country: {
     type: String,
-    required: true,
-    maxlength: 50
+    maxlength: 50,
+    required: true
+
   },
   City: {
     type: String,
-    required: true,
-    maxlength: 50
+    maxlength: 50,
+    required: true
+
   },
   PostalCode: {
     type: Number,
-    required: true,
+    required: true
+
 
   },
   charity: {
@@ -40,23 +43,26 @@ var donationpayment = mongoose.model("donationpayment", new mongoose.Schema({
     minlength: 3,
     maxlength: 55,
     required: true
+
   },
   charityBankAccount: {
     type: Number,
     maxlength: 15,
-    required: true,
+    required: true
+
   },
   amount: {
     type: Number,
     minlength: 1,
     required: true
+
   }
 }));
 
 function validatepayment(payment) {
   var Schema = {
-    donor: joi.string().min(3).max(55).required(),
-    email: joi.string().max(255).required().email(),
+    donor: joi.string().min(6).required(),
+    email: joi.string().max(255).email().required(),
     donorcreditnum: joi.string().min(15).required(),
     charityBankAccount: joi.number().min(15).required(),
     amount: joi.number().min(1).required(),
