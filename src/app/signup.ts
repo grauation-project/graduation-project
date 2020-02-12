@@ -3,11 +3,11 @@ export class Signup {
         public name:string,
         public email:string,
         public password:string,
-        public phone:number,
-        public address:string,
-        public city:string,
-        public street:string,
+        public re_password:string,
         public banckaccount:number,
+        public country:string,
+        public address:string,
+        public phone:number,
         public img:string
     ){}
 }

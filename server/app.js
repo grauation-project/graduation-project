@@ -13,6 +13,7 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
+var charityController = require ("./controllers/charity")
 const app = express();
 
 winston.configure({
@@ -23,7 +24,7 @@ winston.configure({
   ]
 });
 app.use(cors());
-
+app.use(bodyparser.json());
 var files_arr = fs.readdirSync(__dirname + "/models");
 files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);
@@ -55,6 +56,9 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use('/charity', charityController)
+
 mongoose.Promise = global.Promise;
 
 mongoose.connect("mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority");

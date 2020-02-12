@@ -7,6 +7,34 @@ declare var require: any;
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
+  public donateamount = ''
+  charityHasErr: any;
+  constructor() { }
+displaydiv1=true;
+displaydiv2=false
+  ngOnInit() {
+  }
+  donate(amount) {
+    this.donateamount = amount
+
+
+  }
+  Validatecharity(charityname) {
+    if (charityname === "default") {
+      this.charityHasErr = true;
+    }
+    else {
+      this.charityHasErr = false;
+    }
+  }
+material(){
+  this.displaydiv1=false;
+  this.displaydiv2=true;
+}
+online(){
+  this.displaydiv1=true;
+  this.displaydiv2=false;
+}
   imgnav = require("../../assets/1.jpg");
   scrolltoel() {
     document
@@ -17,19 +45,5 @@ export class NavbarComponent implements OnInit {
     document
       .querySelector("#contact_us")
       .scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-  ngOnInit() {}
-
-  constructor() {}
-  displaydiv1 = true;
-  displaydiv2 = false;
-
-  material() {
-    this.displaydiv1 = false;
-    this.displaydiv2 = true;
-  }
-  online() {
-    this.displaydiv1 = true;
-    this.displaydiv2 = false;
   }
 }

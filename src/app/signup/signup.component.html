@@ -1,0 +1,117 @@
+<body>
+
+  <div class="main">
+
+    <section class="signup">
+      <!-- <img src="images/signup-bg.jpg" alt=""> -->
+      <div class="container">
+        <div class="signup-content">
+          
+            <h2 class="form-title">Create account</h2>
+            <a (click)="charityregister()" class="button1">Charity</a>
+            <a (click)="volunregister()" class="button1">Volunteer</a>
+            <div class="charity" *ngIf="ischarity">
+
+              <form method="POST" #userForm="ngForm" novalidate (ngSubmit)="onSubmit()" id="signup-form" class="signup-form">
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" id="name" #name="ngModel" [class.is-invalid]=" name.invalid && name.touched" required placeholder="Your Name" [(ngModel)]="charitymodel.name" />
+                <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required placeholder="Your Email" [(ngModel)]="charitymodel.email" />
+                <small [class.d-none]="email.valid || email.untouched" class="text-danger">email is required</small>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" id="password" #password="ngModel" [class.is-invalid]=" password.invalid && password.touched" required placeholder="Password" [(ngModel)]="charitymodel.password"/>
+                <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="re_password" id="re_password" #re_password="ngModel" [class.is-invalid]=" re_password.invalid && re_password.touched" required
+                  placeholder="Repeat your password" [(ngModel)]="charitymodel.re_password" />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="bankaccount" id="bankaccount" #bankaccount="ngModel" [class.is-invalid]=" bankaccount.invalid && bankaccount.touched" required
+                  placeholder="Enter Your Bank Account Number" [(ngModel)]="charitymodel.bankaccount"/>
+                  <small [class.d-none]="bankaccount.valid || bankaccount.untouched" class="text-danger">Bank Account is required</small>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="country" id="country" #country="ngModel" [class.is-invalid]=" country.invalid && country.touched" required
+                  placeholder="Enter Your Country" [(ngModel)]="charitymodel.country"/>
+              </div>
+              <div class="form-group">
+                <input type="text" #address="ngModel" [class.is-invalid]=" address.invalid && address.touched" required
+                  class="form-control" [(ngModel)]="charitymodel.address" placeholder="Enter your Address" name="address">
+                <small [class.d-none]="address.valid || address.untouched" class="text-danger">Address is required</small>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="phone" id="phone"
+                  placeholder="Enter Your Phone" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched" pattern="^\d{10}$" required [(ngModel)]="charitymodel.phone"/>
+                  <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+                    <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
+                    <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>
+                    </div>
+              </div>
+              <div class="form-group">
+                <label>Choose an image</label>
+                <input type="file" class="form-input" name="img" id="img" #img="ngModel" [class.is-invalid]="img.invalid && img.touched" required
+                  placeholder="Enter your image" [(ngModel)]="charitymodel.img"/>
+                  <small [class.d-none]="img.valid || img.untouched" class="text-danger">Image is required</small>
+              </div>
+
+              <div class="form-group">
+                <input type="submit" name="submit" [disabled]="userForm.form.invalid" class="form-submit" value="Sign up"/>
+              </div>
+              </form>
+            </div>
+          
+            <!--VOLUNTEER-->
+            <div class="volunteer" *ngIf="isvolunteer">
+              <form method="POST" class="signup-form">
+
+              <div class="form-group">
+                <input type="text" class="form-input" name="name" id="name" placeholder="Your First Name" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-input" name="name" id="name" placeholder="Your Second Name" />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-input" name="password" id="password" placeholder="Password" />
+                <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-input" name="re_password" 
+                  placeholder="Repeat your password" />
+              </div>
+              <div class="form-group">
+                <input type="Number" class="form-input" name="re_password" 
+                  placeholder="Enter Your Age" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-input" name="re_password" 
+                  placeholder="Enter Your Phone" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-input" name="re_password" 
+                  placeholder="Enter Your Country" />
+              </div>
+              <div class="form-group">
+                <label>Choose an image</label>
+                <input type="file" class="form-input" name="re_password" 
+                  placeholder="Enter Your Bank Account Number" />
+              </div>
+
+              <div class="form-group">
+                <input type="submit" name="submit"  class="form-submit" value="Sign up" />
+              </div>
+              </form>
+            </div>
+          
+
+        </div>
+      </div>
+    </section>
+
+  </div>

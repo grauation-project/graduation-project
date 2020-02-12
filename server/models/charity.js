@@ -25,6 +25,12 @@ const charityschema = new Schema({
     min: 8,
     max: 16
   },
+  re_password: {
+    type: String,
+    required: true,
+    min: 8,
+    max: 16
+  },
   phone: {
     type: Number,
     required: true,
@@ -36,23 +42,16 @@ const charityschema = new Schema({
     unique: true
 
   },
-  address: {
-    country: {
-      type: String,
-      required: true,
-    },
-    address:
-         {
-             type:String,
-             required:true
-            },
-    country:
-         {
-           type:String,
-           required:true,
-         }
-        }
-      })
+  country:{
+    type: String,
+    required: true,
+  },
+  address:{
+    type:String,
+    required:true
+  },
+    
+  })
 
 const charityvalidation= (data)=>{
     const schema = Joi.object({
