@@ -15,6 +15,7 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
+var charityController = require("./controllers/charity")
 const app = express();
 const volunteer = require("./controllers/volunteer");
 
@@ -58,6 +59,9 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use('/charity', charityController)
+
 app.use("/savethem", donatematerial)
 app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
