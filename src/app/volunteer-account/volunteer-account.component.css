@@ -10,6 +10,12 @@ a {
   background-size: 100% 100%;
 }
 
+
+
+.postForm {
+  text-align: center;
+}
+
 .clr {
   clear: both
 }
@@ -60,6 +66,17 @@ a {
 
 .folowing_details {
   margin-left: 6%;
+}
+
+@media screen and (max-width: 600px) {
+  .profile_img {
+    margin-left: 26%;
+  }
+
+  .folowing_details {
+    margin-left: 20%;
+
+  }
 }
 
 .folowing_details div {
@@ -138,6 +155,10 @@ ul li {
 
 }
 
+.modal-header {
+  background-color: #3B6D8C;
+}
+
 ul i {
   display: block;
   color: grey
@@ -159,6 +180,25 @@ ul a:visited {
   border-radius: 3%;
   padding: 1% 2% 1% 2%;
   border: 3px solid #3B6D8C;
+}
+
+.create_post {
+  background-color: white;
+}
+
+.create_post .btn_post {
+  background-color: #3B6D8C;
+  float: right;
+  border-radius: 3%;
+  padding: 1% 2% 1% 2%;
+  border: 3px solid #3B6D8C;
+}
+
+.close {
+  margin-left: 85%;
+  margin-bottom: 2px;
+  float: right;
+
 }
 
 .account_main button a {

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 var router = express.Router();
-var bodyparser = require("body-parser");
+var bodyparser=require("body-parser");
 // var error = require("./middleware/error");
 var donatematerial = require("./controllers/donationone")
 require("express-async-errors");
@@ -10,13 +10,19 @@ var winston = require("winston");
 var joi = require("joi");
 var hpp = require("hpp");
 var ratelimit = require("express-rate-limit");
+var bodyParser = require("body-parser");
+
 var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
-var charityController = require ("./controllers/charity")
+var charityController = require("./controllers/charity")
 const app = express();
 const volunteer = require("./controllers/volunteer");
+
+const bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+const login = require("./controllers/login");
 
 winston.configure({
   transports: [
@@ -26,7 +32,7 @@ winston.configure({
   ]
 });
 app.use(cors());
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 var files_arr = fs.readdirSync(__dirname + "/models");
 files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);
@@ -59,9 +65,10 @@ app.all("*", function (req, res, next) {
   next();
 });
 
-app.use('/charity', charityController)
+app.use("/charity", charityController);
 
-app.use("/savethem", donatematerial)
+app.use("/login", login);
+app.use("/savethem", donatematerial);
 app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
 

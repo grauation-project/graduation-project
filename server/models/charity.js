@@ -49,8 +49,4 @@ const charityschema = new Schema({
     
   })
 
-
-
 module.exports = mongoose.model("charity", charityschema)
-
-

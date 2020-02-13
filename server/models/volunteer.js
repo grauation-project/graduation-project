@@ -22,7 +22,7 @@ var volunteer = new Schema({
         type:String,
         required:true,
         minlength:8,
-        maxlength:16
+        // maxlength:16
     },
     Age:Number,
     phone:{

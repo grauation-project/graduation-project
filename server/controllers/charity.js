@@ -21,12 +21,15 @@ route.post("/signup", bodypar, function(req,res){
     new_charity.img = req.body.img;
 
     new_charity.save(function(err,data){
-        if(!err){
-            console.log("save....");
-            res.json(data)
-        }else{
-            console.log(err)
-        }
+        // if(!err){
+        //     console.log("save....");
+        //     res.json(data)
+        // }else{
+        //     console.log(err)
+        // }
+        console.log(err)
+        res.json(data);
+        console.log(data);
     })
 })
 module.exports=route;
