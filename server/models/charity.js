@@ -25,11 +25,12 @@ const charityschema = new Schema({
     min: 8,
     max: 16
   },
- 
+  
   phone: {
-    type: Number,
+    type: String,
+    min:4,
+    max:14,
     required: true,
-    max: 11
 
   },
   bankaccount: {
