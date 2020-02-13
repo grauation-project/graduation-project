@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyparser = require("body-parser");
+var router = express.Router();
+var bodyparser=require("body-parser");
 // var error = require("./middleware/error");
+var donatematerial = require("./controllers/donationone")
 require("express-async-errors");
 var winston = require("winston");
 var joi = require("joi");
@@ -12,8 +14,9 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
+var charityController = require ("./controllers/charity")
 const app = express();
-const volunteer=require("./controllers/volunteer");
+const volunteer = require("./controllers/volunteer");
 
 winston.configure({
   transports: [
@@ -36,7 +39,7 @@ var limiter = ratelimit({
 });
 
 // limit number of requests from the same ip address
-// app.use("/MITCHA", limiter);
+app.use("/savethem", limiter);
 // http security headers
 app.use(helmet());
 // data sanitization against nosql query injection
@@ -56,16 +59,23 @@ app.all("*", function (req, res, next) {
   next();
 });
 
+app.use("/charity", charityController);
+
+app.use("/savethem", donatematerial);
+app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect(
+  "mongodb+srv://mona:123456aa@graduationsite-gnpxx.mongodb.net/test?retryWrites=true&w=majority"
+);
 mongoose.connection.on("error", err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(1);
 });
 
 
-app.use("/volunteer",volunteer);
+
+
 
 app.listen(3000, function () {
   console.log("server running....");

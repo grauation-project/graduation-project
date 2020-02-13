@@ -5,10 +5,10 @@ import { Volunteer } from '../volunteer';
   providedIn: 'root'
 })
 export class VolunteersignupService {
-   public signupurl="localhost:3000/volunteer/signup";
+   public signupurl="http://localhost:3000/volunteer/signup";
   constructor(private http:HttpClient) { 
   }
-  volunteersignup(volunteer:Volunteer){
+ public volunteersignup(volunteer:Volunteer){
     return this.http.post(this.signupurl,volunteer);
   }
 }

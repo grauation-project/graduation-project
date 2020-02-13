@@ -25,10 +25,11 @@ const charityschema = new Schema({
     min: 8,
     max: 16
   },
+ 
   phone: {
     type: Number,
     required: true,
-    max: 10
+    max: 11
 
   },
   bankaccount: {
@@ -36,39 +37,15 @@ const charityschema = new Schema({
     unique: true
 
   },
-  address: {
-    country: {
-      type: String,
-      required: true,
-    },
-    address:
-         {
-             type:String,
-             required:true
-            },
-    country:
-         {
-           type:String,
-           required:true,
-         }
-        }
-      })
-
-const charityvalidation= (data)=>{
-    const schema = Joi.object({
-        name : Joi.string().min(25).required(),
-        img: Joi.string(),
-        email: Joi.string().required().unique().max(225),
-        password: Joi.string().required().min(8).max(16),
-        phone: Joi.Number().required().max(10),
-        bankaccount: Joi.Number().required().unique(),
-        country: Joi.string().required(),
-        address: Joi.string().required()
+  country:{
+    type: String,
+    required: true,
+  },
+  address:{
+    type:String,
+    required:true
+  },
     
-    });
-   return schema.validate(data)
-};
+  })
 
 module.exports = mongoose.model("charity", charityschema)
-
-module.exports.charityvalidation=charityvalidation

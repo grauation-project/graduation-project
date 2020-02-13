@@ -33,18 +33,18 @@ import{HttpClientModule} from '@angular/common/http';
     HomeComponent,
     VolunteerAccountComponent,
     SignupComponent,
-   VolunteersignupService,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    
   ],
   
 
-  providers: [],
+  providers: [
+    VolunteersignupService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
