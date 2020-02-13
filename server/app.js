@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-var router = express.Router()
+var router = express.Router();
+var bodyparser=require("body-parser");
 // var error = require("./middleware/error");
 var donatematerial = require("./controllers/donationone")
 require("express-async-errors");
@@ -60,9 +61,9 @@ app.all("*", function (req, res, next) {
   next();
 });
 
-app.use('/charity', charityController)
+app.use("/charity", charityController);
 
-app.use("/savethem", donatematerial)
+app.use("/savethem", donatematerial);
 app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
 

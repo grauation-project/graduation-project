@@ -1,527 +1,347 @@
-<div class="container-fluid">
-    <div class="row">
-        <img src="../../../assets/2uONJKZYCR.jpg" alt="" class="rounded coverimg">
-    </div>
-    <div class="row">
-        <div class="col-sm-3 bg-light">
-            <div class="row">
-                <div class="row imgdivs">
-                    <img src="../../../assets/2uONJKZYCR.jpg" class="rounded-circle d-block mx-auto proimg" alt="">
-                </div>
-                <div class="row">
-                    <ul>
-                        <li>
-                            <button href="#" title="" class="flww">
-                                + Follow</button>
-                        </li>
-                        <li>
-                            <a class="followers">
-                                <div>Followers
-                                    <p>155</p>
-                                </div>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="social_links">
-                        <li><a href="#" title="">
-                                <i class="fa fa-facebook"></i>
-                                Http://www.facebook.com/john...</a></li>
-                        <li><a href="#" title="">
-                                <i class="fa fa-twitter"></i>
-                                Http://www.Twitter.com/john...</a></li>
-                        <li><a href="#" title="">
-                                <i class="fa fa-google-plus-square"></i>
-                                Http://www.googleplus.com/john...</a></li>
-                        <li><a href="#" title="">
-                                <i class="fa fa-pinterest"></i>
-                                Http://www.pinterest.com/john...</a></li>
-                        <li><a href="#" title="">
-                                <i class="fa fa-instagram"></i>
-                                Http://www.instagram.com/john...</a></li>
-                        <li><a href="#" title="">
-                                <i class="fa fa-youtube"></i>
-                                Http://www.youtube.com/john...</a></li>
-                    </ul>
-                </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav> -->
+<nav class="navbar navbar-expand-lg ">
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line" style="margin-bottom: 0;"></span>
+    </span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-light" router-link="/homepage">Home <span class=" sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="scrolltoel()" href="#">
+          <i class="fas fa-bell"></i>
+          <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link " href="#"><i class="far fa-comment"></i>
+          <span class="sr-only">(current)</span></a>
+      </li>
+    
+    </ul>
+  </div>
+</nav>
+<div class="contain">
+  <div class="container-fluid p-0 overflow-hidden">
+    <div class="row">
+      <div class="col-md-12 profile_background">
+        <button class="btnprofile">
+          <a href="#">Change Image</a>
+        </button>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-md-3  account_details ">
+        <div class="row">
+          <img class="profile_img" src="http://gambolthemes.net/workwise-new/images/resources/user-pro-img.png" />
+          <div class="right_container">
+
+            <div class="folowing_details overflow-hidden">
+              <div class="ml-4">
+                <span>Following</span>
+                <p>34</p>
+              </div>
+              <div class="ml-4">
+                <span>Followers</span>
+                <p>155</p>
+              </div>
             </div>
-        </div>
-        <div class="col-sm-6 bg-light">
-            <div class="middilcontant">
-                <div class="user-tab-sec">
-                    <h3>charity name</h3>
-                    <div class="star-descp">
-                        <span>Established Since 2009</span>
-                        <ul>
-                            <li> <i class="fa fa-star"></i></li>
-                            <li> <i class="fa fa-star-o"></i></li>
-                            <li> <i class="fa fa-star-o"></i></li>
-                            <li> <i class="fa fa-star-o"></i></li>
-                            <li> <i class="fa fa-star-o"></i></li>
-                        </ul>
-                    </div>
-                    <!--star-descp end-->
-                    <div class="tab-feed">
-                        <ul>
-                            <li data-tab="feed-dd" class="active animated fadeIn">
-                                <a href="feed-dd" title="">
-                                    <img src="../../../assets/ic1.png" alt="">
-                                    <span>Feed</span>
-                                </a>
-                            </li>
-                            <li data-tab="info-dd">
-                                <a href="info-dd" title="">
-                                    <img src="../../../assets/ic2.png" alt="">
-                                    <span>Info</span>
-                                </a>
-                            </li>
-                            <li data-tab="portfolio-dd" class="animated fadeIn">
-                                <a href="portfolio-dd" title="">
-                                    <img src="../../../assets/ic3.png" alt="">
-                                    <span>Portfolio</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- tab-feed end-->
-                </div>
-                <!--user-tab-sec end-->
-                <div class="product-feed-tab current animated fadeIn" id="feed-dd">
-                    <div class="posts-section">
-                        <div class="post-bar">
-                            <div class="post_topbar">
-                                <div class="usy-dt">
-                                    <img src="../../../assets/profile.jpg" alt="">
-                                    <div class="usy-name">
-                                        <h3>Charity name</h3>
-                                    </div>
-                                </div>
-                                <!-- <div class="ed-opts">
-                                    <a href="#" title="" class="ed-opts-open">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="ed-options">
-                                        <li><a href="#" title="">Edit Post</a></li>
-                                        <li><a href="#" title="">Unsaved</a></li>
-                                        <li><a href="#" title="">Unbid</a></li>
-                                        <li><a href="#" title="">Close</a></li>
-                                        <li><a href="#" title="">Hide</a></li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <div class="epi-sec">
-                                <ul class="descp">
-                                    <li><img src="../../../assets/icon9.png" alt=""><span>India</span></li>
-                                </ul>
-                                <ul class="bk-links">
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a></li>
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-envelope"></i>
-                                    </a></li>
-                                </ul>
-                            </div>
-                            <div class="job_descp">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit
-                                    metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... 
-                                    <a href="#"
-                                        title="">view more</a>
-                                    </p>
-                            </div>
-                            <div class="job-status-bar">
-                                <ul class="like-com">
-                                    <li>
-                                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                        <span>25</span>
-                                    </li>
-                                    <li><a href="#" class="com">
-                                        <i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--post-bar end-->
-                        <div class="post-bar">
-                            <div class="post_topbar">
-                                <div class="usy-dt">
-                                    <img src="../../../assets/profile.jpg" alt="">
-                                    <div class="usy-name">
-                                        <h3>Charity name</h3>
-                                    </div>
-                                </div>
-                                <!-- <div class="ed-opts">
-                                    <a href="#" title="" class="ed-opts-open">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="ed-options">
-                                        <li><a href="#" title="">Edit Post</a></li>
-                                        <li><a href="#" title="">Unsaved</a></li>
-                                        <li><a href="#" title="">Unbid</a></li>
-                                        <li><a href="#" title="">Close</a></li>
-                                        <li><a href="#" title="">Hide</a></li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <div class="epi-sec">
-                                <ul class="descp">
-                                    <li><img src="../../../assets/icon9.png" alt=""><span>India</span></li>
-                                </ul>
-                                <ul class="bk-links">
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a></li>
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-envelope"></i>
-                                    </a></li>
-                                </ul>
-                            </div>
-                            <div class="job_descp">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit
-                                    metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... 
-                                    <a href="#"
-                                        title="">view more</a>
-                                    </p>
-                            </div>
-                            <div class="job-status-bar">
-                                <ul class="like-com">
-                                    <li>
-                                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                        <span>25</span>
-                                    </li>
-                                    <li><a href="#" class="com">
-                                        <i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--post-bar end-->
-                        <div class="post-bar">
-                            <div class="post_topbar">
-                                <div class="usy-dt">
-                                    <img src="../../../assets/profile.jpg" alt="">
-                                    <div class="usy-name">
-                                        <h3>Charity name</h3>
-                                    </div>
-                                </div>
-                                <!-- <div class="ed-opts">
-                                    <a href="#" title="" class="ed-opts-open">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="ed-options">
-                                        <li><a href="#" title="">Edit Post</a></li>
-                                        <li><a href="#" title="">Unsaved</a></li>
-                                        <li><a href="#" title="">Unbid</a></li>
-                                        <li><a href="#" title="">Close</a></li>
-                                        <li><a href="#" title="">Hide</a></li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <div class="epi-sec">
-                                <ul class="descp">
-                                    <li><img src="../../../assets/icon9.png" alt=""><span>India</span></li>
-                                </ul>
-                                <ul class="bk-links">
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a></li>
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-envelope"></i>
-                                    </a></li>
-                                </ul>
-                            </div>
-                            <div class="job_descp">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit
-                                    metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... 
-                                    <a href="#"
-                                        title="">view more</a>
-                                    </p>
-                            </div>
-                            <div class="job-status-bar">
-                                <ul class="like-com">
-                                    <li>
-                                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                        <span>25</span>
-                                    </li>
-                                    <li><a href="#" class="com">
-                                        <i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--post-bar end-->
-                        <div class="post-bar">
-                            <div class="post_topbar">
-                                <div class="usy-dt">
-                                    <img src="../../../assets/profile.jpg" alt="">
-                                    <div class="usy-name">
-                                        <h3>Charity name</h3>
-                                    </div>
-                                </div>
-                                <!-- <div class="ed-opts">
-                                    <a href="#" title="" class="ed-opts-open">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="ed-options">
-                                        <li><a href="#" title="">Edit Post</a></li>
-                                        <li><a href="#" title="">Unsaved</a></li>
-                                        <li><a href="#" title="">Unbid</a></li>
-                                        <li><a href="#" title="">Close</a></li>
-                                        <li><a href="#" title="">Hide</a></li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <div class="epi-sec">
-                                <ul class="descp">
-                                    <li><img src="../../../assets/icon9.png" alt=""><span>India</span></li>
-                                </ul>
-                                <ul class="bk-links">
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a></li>
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-envelope"></i>
-                                    </a></li>
-                                </ul>
-                            </div>
-                            <div class="job_descp">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit
-                                    metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... 
-                                    <a href="#"
-                                        title="">view more</a>
-                                    </p>
-                            </div>
-                            <div class="job-status-bar">
-                                <ul class="like-com">
-                                    <li>
-                                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                        <span>25</span>
-                                    </li>
-                                    <li><a href="#" class="com">
-                                        <i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--post-bar end-->
-                        <div class="post-bar">
-                            <div class="post_topbar">
-                                <div class="usy-dt">
-                                    <img src="../../../assets/profile.jpg" alt="">
-                                    <div class="usy-name">
-                                        <h3>Charity name</h3>
-                                    </div>
-                                </div>
-                                <!-- <div class="ed-opts">
-                                    <a href="#" title="" class="ed-opts-open">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="ed-options">
-                                        <li><a href="#" title="">Edit Post</a></li>
-                                        <li><a href="#" title="">Unsaved</a></li>
-                                        <li><a href="#" title="">Unbid</a></li>
-                                        <li><a href="#" title="">Close</a></li>
-                                        <li><a href="#" title="">Hide</a></li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <div class="epi-sec">
-                                <ul class="descp">
-                                    <li><img src="../../../assets/icon9.png" alt=""><span>India</span></li>
-                                </ul>
-                                <ul class="bk-links">
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a></li>
-                                    <li><a href="#" title="">
-                                        <i class="fa fa-envelope"></i>
-                                    </a></li>
-                                </ul>
-                            </div>
-                            <div class="job_descp">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit
-                                    metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... 
-                                    <a href="#"
-                                        title="">view more</a>
-                                    </p>
-                            </div>
-                            <div class="job-status-bar">
-                                <ul class="like-com">
-                                    <li>
-                                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                        <span>25</span>
-                                    </li>
-                                    <li><a href="#" class="com">
-                                        <i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--post-bar end-->
-                        <!-- <div class="process-comm">
-                            <div class="spinner">
-                                <div class="bounce1"></div>
-                                <div class="bounce2"></div>
-                                <div class="bounce3"></div>
-                            </div>
-                        </div> -->
-                        <!--process-comm end-->
-                    </div>
-                    <!--posts-section end-->
-                </div>
-                <!--product-feed-tab end-->
-                <div class="product-feed-tab" id="info-dd">
-                    <div class="user-profile-ov">
-                        <h3><a href="#" title="" class="overview-open">Overview</a> <a href="#" title=""
-                                class="overview-open"><i class="fa fa-pencil"></i></a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec
-                            condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus
-                            consectetur aliquam lectus commodo viverra. Nunc eu augue nec arcu efficitur faucibus.
-                            Aliquam accumsan ac magna convallis bibendum. Quisque laoreet augue eget augue fermentum
-                            scelerisque. Vivamus dignissim mollis est dictum blandit. Nam porta auctor neque sed congue.
-                            Nullam rutrum eget ex at maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Donec eget vestibulum lorem.</p>
-                    </div>
-                    <!--user-profile-ov end-->
-                </div>
-                <!--product-feed-tab end-->
-                <div class="product-feed-tab animated fadeIn" id="portfolio-dd">
-                    <div class="portfolio-gallery-sec">
-                        <h3>Portfolio</h3>
-                        <div class="gallery_pf">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img1.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img2.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img3.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img4.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img5.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img6.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img7.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img8.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img9.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
-                                    <div class="gallery_pt">
-                                        <img src="images/resources/pf-img10.jpg" alt="">
-                                        <a href="#" title=""><img src="images/all-out.png" alt=""></a>
-                                    </div>
-                                    <!--gallery_pt end-->
-                                </div>
-                            </div>
-                        </div>
-                        <!--gallery_pf end-->
-                    </div>
-                    <!--portfolio-gallery-sec end-->
-                </div>
-                <!--product-feed-tab end-->
+            <div class="profile_links">
+              <div>
+                <i class="fas fa-globe-asia"></i>
+                <a href="#">www.example.com</a>
+              </div>
+              <div>
+                <i class="fab fa-facebook-square"></i>
+                <a href="#">www.facebook.com</a>
+              </div>
+              <div>
+                <i class="fab fa-twitter-square"></i>
+                <a href="#">www.twitter.com</a>
+              </div>
+              <div>
+                <i class="fab fa-google-plus-square"></i>
+                <a href="#">www.googleplus.com</a>
+              </div>
+              <div>
+                <i class="fab fa-behance-square"></i>
+                <a href="#">www.behance.com</a>
+              </div>
+              <div>
+                <i class="fab fa-pinterest-square"></i>
+                <a href="#">www.pinterest.com</a>
+              </div>
+              <div>
+                <i class="fa fa-instagram-square"></i>
+                <a href="#">www.instagram.com</a>
+              </div>
+              <div>
+                <i class="fab fa-youtube-square"></i>
+                <a href="#">www.youtube.com</a>
+              </div>
             </div>
-            <!--main-ws-sec end-->
+          </div>
+
 
         </div>
-        <div class="col-sm-3 bg-light">
-            <div class="row">
-                <div class="suggestions full-width">
-                    <div class="sd-title">
-                        <h3>Suggestions</h3>
-                        <i class="fa fa-ellipsis-v"></i>
-                    </div>
-                    <!--sd-title end-->
-                    <div class="suggestions-list">
-                        <div class="suggestion-usd">
-                            <img src="../../../assets/profile.jpg" alt="">
-                            <div class="sgt-text">
-                                <h4>caharity name</h4>
-                                <span>country</span>
-                            </div>
-                            <span>
-                                <i class="fa fa-plus"></i>
-                            </span>
-                        </div>
-                        <div class="suggestion-usd">
-                            <img src="../../../assets/profile.jpg" alt="">
-                            <div class="sgt-text">
-                                <h4>caharity name</h4>
-                                <span>country</span>
-                            </div>
-                            <span>
-                                <i class="fa fa-plus"></i>
-                            </span>
-                        </div>
-                        <div class="suggestion-usd">
-                            <img src="../../../assets/profile.jpg" alt="">
-                            <div class="sgt-text">
-                                <h4>caharity name</h4>
-                                <span>country</span>
-                            </div>
-                            <span>
-                                <i class="fa fa-plus"></i>
-                            </span>
-                        </div>
-                        <div class="suggestion-usd">
-                            <img src="../../../assets/profile.jpg" alt="">
-                            <div class="sgt-text">
-                                <h4>caharity name</h4>
-                                <span>country</span>
-                            </div>
-                            <span>
-                                <i class="fa fa-plus"></i>
-                            </span>
-                        </div>
-                        <div class="view-more">
-                            <a href="#" title="">View More</a>
-                        </div>
-                    </div>
-                    <!--suggestions-list end-->
+        <div class="row">
+          <div class="right_container">
+            <div class="needs">
+              <div class="post_topbar">
+                <div class="usy-dt">
+                  <div class="usy-name">
+                    <h5>Needs</h5>
+                  </div>
                 </div>
+                <div class="ed-opts">
+                  <a href="#" title="" class="ed-opts-open">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <ul class="ed-options active">
+                    <li><a href="#" title="">Edit Post</a></li>
+                    <li><a href="#" title="">Unsaved</a></li>
+                    <li><a href="#" title="">Unbid</a></li>
+                    <li><a href="#" title="">Close</a></li>
+                    <li><a href="#" title="">Hide</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                dfdffffffffffffffffffffffffff
+              </p>
             </div>
+            <div class="provides">
+              <div class="post_topbar">
+                <div class="usy-dt">
+                  <div class="usy-name">
+                    <h5>Provides</h5>
+                  </div>
+                </div>
+                <div class="ed-opts">
+                  <a href="#" title="" class="ed-opts-open">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <ul class="ed-options active">
+                    <li><a href="#" title="">Edit Post</a></li>
+                    <li><a href="#" title="">Unsaved</a></li>
+                    <li><a href="#" title="">Close</a></li>
+                    <li><a href="#" title="">Hide</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <p>
+                dfdffffffffffffffffffffffffff
+              </p>
+
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-6 account_main ">
+        <div class="account_headline overflow-hidden">
+          <h4>John Doe</h4>
+          <p>
+            Graphic and web designer
+            <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                class="fa fa-star"></i></span>
+            <button>
+              <a href="#">
+                <i class="fas fa-user-plus text-light"></i>
+                Follow</a>
+            </button>
+          </p>
+        </div>
+        <div class="tab_feed overflow-hidden">
+          <ul class="list-unstyled ml-2">
+            <li>
+              <a href="#">
+                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
+                <p>Feed</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
+                <p>Info</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
+                <p>Feed</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
+                <p>Feed</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="posts">
+          <div class="post">
+            <div class="dropdown show">
+              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit Post</a>
+                <a class="dropdown-item" href="#">Unsaved</a>
+                <a class="dropdown-item" href="#">Close</a>
+              </div>
+            </div>
+            <div>
+              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+              <h5>john doe</h5>
+              <span><i class="fa fa-clock-o"></i>3 minutes</span>
+            </div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                magna sit amet...
+              </p>
+            </div>
+            <div class="reactions">
+              <a href="#">
+                <i class="far fa-heart"></i>
+                Like</a>
+              <a href="#">
+                <i class="far fa-comment"></i>
+                Comment</a>
+            </div>
+          </div>
+          <div class="post">
+            <div class="dropdown show">
+              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit Post</a>
+                <a class="dropdown-item" href="#">Unsaved</a>
+                <a class="dropdown-item" href="#">Close</a>
+              </div>
+            </div>
+            <div>
+              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+              <h5>john doe</h5>
+              <span><i class="fa fa-clock-o"></i>3 minutes</span>
+            </div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                magna sit amet...
+              </p>
+            </div>
+            <div class="reactions">
+              <a href="#">
+                <i class="far fa-heart"></i>
+                Like</a>
+              <a href="#">
+                <i class="far fa-comment"></i>
+                Comment</a>
+            </div>
+          </div>
+          <div class="post">
+            <div class="dropdown show">
+              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit Post</a>
+                <a class="dropdown-item" href="#">Unsaved</a>
+                <a class="dropdown-item" href="#">Close</a>
+              </div>
+            </div>
+            <div>
+              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+              <h5>john doe</h5>
+              <span><i class="fa fa-clock-o"></i>3 minutes</span>
+            </div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                magna sit amet...
+              </p>
+            </div>
+            <div class="reactions">
+              <a href="#">
+                <i class="far fa-heart"></i>
+                Like</a>
+              <a href="#">
+                <i class="far fa-comment"></i>
+                Comment</a>
+            </div>
+          </div>
+          <div class="post">
+            <div class="dropdown show">
+              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit Post</a>
+                <a class="dropdown-item" href="#">Unsaved</a>
+                <a class="dropdown-item" href="#">Close</a>
+              </div>
+            </div>
+            <div>
+              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+              <h5>john doe</h5>
+              <span><i class="fa fa-clock-o"></i>3 minutes</span>
+            </div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                magna sit amet...
+              </p>
+            </div>
+            <div class="reactions">
+              <a href="#">
+                <i class="far fa-heart"></i>
+                Like</a>
+              <a href="#">
+                <i class="far fa-comment"></i>
+                Comment</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
