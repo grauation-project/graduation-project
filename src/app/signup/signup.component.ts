@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Signup } from '../signup';
+import { CharityService } from '../services/charity.service';
+
 
 @Component({
   selector: "app-signup",
@@ -7,7 +9,7 @@ import { Signup } from '../signup';
   styleUrls: ["./signup.component.css"]
 })
 export class SignupComponent implements OnInit {
-  constructor() {}
+  constructor(private charityserve:CharityService ) {}
   
   charitymodel= new Signup("","","","",0,"","",0,"");
   ischarity = true;
@@ -21,4 +23,14 @@ export class SignupComponent implements OnInit {
     this.ischarity = false;
     this.isvolunteer = true;
   }
+  onSubmit(){
+    console.log(this.charitymodel)
+    this.charityserve.signUpCharity(this.charitymodel).subscribe(
+      response => console.log('Success!', response),
+      
+      error => console.log('error',error)
+      )
+  }
+
+
 }

@@ -4,16 +4,16 @@ var bodyParser=require("body-parser");
 var route=express.Router();
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+var bodypar=bodyParser.urlencoded({ extended: true });
 var middlewareBodyParser = bodyParser.json();
 
-route.post("/signup", middlewareBodyParser, function(req,res){
+route.post("/signup", bodypar, function(req,res){
+    console.log("hey");
     var charityModel=mongoose.model("charity")
     var new_charity=new charityModel()
     new_charity.name = req.body.name;
     new_charity.email = req.body.email;
     new_charity.password = req.body.password;
-    new_charity.re_password = req.body.re_password;
     new_charity.bankaccount = req.body.bankaccount;
     new_charity.country = req.body.country;
     new_charity.address = req.body.address;
