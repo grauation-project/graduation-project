@@ -10,11 +10,13 @@ var winston = require("winston");
 var joi = require("joi");
 var hpp = require("hpp");
 var ratelimit = require("express-rate-limit");
+var bodyParser = require("body-parser");
+
 var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
-var charityController = require ("./controllers/charity")
+var charityController = require("./controllers/charity")
 const app = express();
 const volunteer = require("./controllers/volunteer");
 
@@ -26,7 +28,7 @@ winston.configure({
   ]
 });
 app.use(cors());
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 var files_arr = fs.readdirSync(__dirname + "/models");
 files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);

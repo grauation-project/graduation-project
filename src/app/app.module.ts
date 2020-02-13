@@ -9,15 +9,15 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeregisterationComponent } from "./homeregisteration/homeregisteration.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { HowitworkComponent } from "./howitwork/howitwork.component";
-import { ContactComponent } from './contact/contact.component';
-import { CharityAccountComponent } from './charity-account/charity-account/charity-account.component';
-import { FooterComponent } from './footer/footer/footer.component';
-import { HomeComponent } from './home/home.component';
+import { ContactComponent } from "./contact/contact.component";
+import { CharityAccountComponent } from "./charity-account/charity-account/charity-account.component";
+import { FooterComponent } from "./footer/footer/footer.component";
+import { HomeComponent } from "./home/home.component";
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
-import { SignupComponent } from './signup/signup.component';
-import { VolunteersignupService } from './services/volunteersignup.service';
-import{HttpClientModule} from '@angular/common/http';
-
+import { SignupComponent } from "./signup/signup.component";
+import { VolunteersignupService } from "./services/volunteersignup.service";
+import { PaymentService } from "./services/payment.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -39,12 +39,11 @@ import{HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SignupComponent
   ],
-  
 
-  providers: [
-    VolunteersignupService,
-  ],
+
+  providers: [VolunteersignupService, PaymentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
