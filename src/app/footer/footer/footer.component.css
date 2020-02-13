@@ -39,6 +39,7 @@ i:hover {
 
 footer {
   background-color: #3B6D8C;
+  border-top: 3px solid white;
 }
 
 a {
