@@ -20,6 +20,10 @@ var charityController = require("./controllers/charity")
 const app = express();
 const volunteer = require("./controllers/volunteer");
 
+const bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+const login = require("./controllers/login");
+
 winston.configure({
   transports: [
     new winston.transports.File({
@@ -63,6 +67,7 @@ app.all("*", function (req, res, next) {
 
 app.use("/charity", charityController);
 
+app.use("/login", login);
 app.use("/savethem", donatematerial);
 app.use("/volunteer", volunteer);
 mongoose.Promise = global.Promise;
