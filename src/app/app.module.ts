@@ -32,16 +32,9 @@ import { HttpClientModule } from "@angular/common/http";
     FooterComponent,
     HomeComponent,
     VolunteerAccountComponent,
-    SignupComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     SignupComponent
   ],
-
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
 
   providers: [VolunteersignupService, PaymentService],
   bootstrap: [AppComponent]

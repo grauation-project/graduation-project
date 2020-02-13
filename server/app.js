@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 var router = express.Router();
-var bodyparser=require("body-parser");
+var bodyparser = require("body-parser");
 // var error = require("./middleware/error");
-var donatematerial = require("./controllers/donationone")
+var donatematerial = require("./controllers/donationone");
+var admin = require("./controllers/admin")
 require("express-async-errors");
 var winston = require("winston");
 var joi = require("joi");
@@ -65,6 +66,7 @@ app.use("/charity", charityController);
 
 app.use("/savethem", donatematerial);
 app.use("/volunteer", volunteer);
+app.use("/admin", admin)
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
@@ -74,6 +76,8 @@ mongoose.connection.on("error", err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(1);
 });
+
+
 
 
 

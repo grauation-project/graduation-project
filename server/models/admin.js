@@ -1,20 +1,31 @@
 var mongoose = require('mongoose');
- 
-var Schema = mongoose.Schema;
 
-var admin = new Schema({
-  email:{
-      type:String,
-      required:true,
-      unique:true
+var joi = require("joi");
+
+var admin = mongoose.model("admin", new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
   },
-  password:{
-    type:Number,
-    required:true,
-    unique:true,
-    minlength:6,
-    maxlength:15
+  password: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 6,
   }
-});
+}));
 
-mongoose.model("admin",admin);
+
+function validateadmin(admin) {
+  var Schema = {
+    password: joi.string().min(6).required(),
+    email: joi.string().max(255).email().required(),
+
+
+  };
+  return joi.validate(admin, Schema)
+}
+
+exports.validateadmin = validateadmin;
+exports.admin = admin;
