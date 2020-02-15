@@ -1,7 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { DonatationService } from '../services/donatation.service';
+
+import {Router} from '@angular/router';
+
+import { error } from 'protractor';
+
 declare var require: any;
 import { PaymentService } from "../services/payment.service";
 import { Payment } from "../class/payment";
+import { DonationMaterial } from '../class/donation-material';
 
 @Component({
   selector: "app-navbar",
@@ -12,9 +19,25 @@ import { Payment } from "../class/payment";
 export class NavbarComponent implements OnInit {
   public donateamount = "";
   charityHasErr: any;
+  displaydiv1 = true;
+  displaydiv2 = false;
   public new_payment = new Payment("", "", "", "", "", 0, "", 0, 0);
 
-  constructor(private _PaymentService: PaymentService) {}
+  constructor(
+    private donateMaterialSerives: DonatationService,
+    private router :Router,
+    private _PaymentService: PaymentService
+    ) { }
+ public donationMaterial= new DonationMaterial("","","","","","","","")
+  ngOnInit() {
+    
+   
+  }
+  
+  donate(amount) {
+    this.donateamount = amount
+  }
+  
   onSubmit() {
     console.log(this.new_payment);
     this._PaymentService.postpayment(this.new_payment).subscribe(
@@ -23,12 +46,12 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  displaydiv1 = true;
-  displaydiv2 = false;
-  ngOnInit() {}
-  donate(amount) {
-    this.donateamount = amount;
-  }
+  
+  // ngOnInit() {}
+  // donate(amount) {
+  //   this.donateamount = amount;
+  // }
+
   Validatecharity(charityname) {
     if (charityname === "default") {
       this.charityHasErr = true;
@@ -55,6 +78,15 @@ export class NavbarComponent implements OnInit {
       .querySelector("#contact_us")
       .scrollIntoView({ behavior: "smooth", block: "center" });
   }
+  closeDonate(){
+    this.router.navigate(["/home"])
+  }
+  
+  Donate(){
+     this.donateMaterialSerives.donateMaterial(this.donationMaterial).subscribe(
+       response => console.log('Success!', response),  
+       error => console.log(error))
+     }
   scrolltoel4() {
     document
       .querySelector("#howitwork")

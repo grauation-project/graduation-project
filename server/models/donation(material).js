@@ -1,11 +1,11 @@
 var mongoose = require("mongoose");
+var joi = require("joi");
 const Schema = mongoose.Schema;
 var donationmaterial = new Schema({
-    donor: {
+    donorName: {
         type: String,
-        minlength: 3,
-        maxlength: 55,
-        required: true
+       
+      
     },
     phone: {
         type: String,
@@ -15,8 +15,6 @@ var donationmaterial = new Schema({
     },
     email: {
         type: String,
-        unique: true,
-        minlength: 5,
         maxlength: 255,
         lowercase: true,
         required: true
@@ -30,8 +28,8 @@ var donationmaterial = new Schema({
     City:
     {
         type:String,
-        required:true,
-        maxlength:50
+    //    required:true,
+        maxlength:40
     },
     address: {
         type: String,
@@ -53,10 +51,14 @@ var donationmaterial = new Schema({
 
 function validatedonation(donation) {
     var schema = {
-        donor: joi.string().min(3).max(55).required(),
-        donorcreditnum: joi.Number().min(15).max(15).required(),
+        donorName: joi.string(),
+        email:joi.string().email().required(),
         phone: joi.String().min(11).max(15).required(),
-        type: joi.String().required()
+        country: joi.String().required(),
+        City: joi.String().required(),
+        address: joi.String().required(),
+        charityname:joi.string().required(),
+        type:joi.string()
     };
     return joi.validate(donation, schema)
 }

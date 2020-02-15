@@ -5,7 +5,7 @@ body
 }
 .profileimg
 {
-    width: 12%;
+    width: 8%;
     height: 40px;
     border-radius: 50%;
     margin-top: 4%;
@@ -13,7 +13,7 @@ body
 }
 .profileimage
 {   
-    width: 40%;
+    width: 30%;
     height: 70px;
     border-radius: 50%;
     top: 180px;
@@ -45,44 +45,36 @@ body
 
 .writepost
 {
-   
+  
     height: 80px;
     margin-top: 20px;
     background-color: white;
 }
 .postbtn
 {
- margin-left:68% ;
+ margin-left:65% ;
   height: 40px;
   width: 15%;
-  margin-top: 4%;
+ 
+  padding: 2px 4px;
+  
+  
  
 }
 .postForm
 {
     text-align: center;
 }
-/* .img-vedio-btn
-{
-    margin-right: 50%;
-} */
+
 .cricle-img
 {
     border-radius: 50%;
     margin-top: 4px;
     margin-left: 4px;
-   
+    width: 10%;
+   position: static;
 }
-.Suggestions
-{
-    width: 100%;
-    margin-top: 20px;
-    background-color: white;
-    padding-top: 5%;
-    margin-left: 5%;
-    margin-right: 50%;
-    
-}
+
 .plusIconDiv
 {
     border: gray .5px solid;
@@ -104,10 +96,6 @@ body
     font-size: 15px;
    padding-top: 5px;
    padding-left: 5px;
-   
-   
-
-    
     
 }
 
@@ -128,18 +116,30 @@ body
     margin-top: 2%;
     background-color: white;
 }
-.editposticon
+.editPost
 {
-   /* margin-left: 320px; */
-   margin-left: 250px;
+    float: right;
+    position: relative;
+    color: grey;
+    margin-top: 10px;
 }
+.ed-opts > a {
+   
+    font-size: 24px;
+    float: right;
+    position: relative;
+    left: 10px;
+    top: -10px;
+}
+
 .fas
 {
     color: grey;
 }
 .fas:hover
 {
-    color:#3B6D8C ;
+    background: white ;
+    color: #3B6D8C;
 
 }
 .postfooter
@@ -155,4 +155,55 @@ body
 {
   background-color: #3B6D8C ;
   color: white;
+}
+
+.suggestions-list {
+    float: left;
+    width: 100%;
+    padding: 13px 0 30px 0;
+    margin-top: 20px;
+   
+}
+.suggestion-usd {
+    float: left;
+    width: 100%;
+    padding: 15px 20px;
+}
+.suggestion-usd img {
+    border-radius: 50%;
+    width: 20%;
+    height: 60px;
+}
+.sgt-text {
+    float: left;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+.sgt-text h4 {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    /* margin-bottom: 4px; */
+}
+.sgt-text span {
+    color: #686868;
+    font-size: 14px;
+    
+}
+.suggestion-usd > span {
+   float: right;
+    margin-top: 16px;
+    position: relative;
+    /* color: lightgray; */
+}
+.suggestion-usd > span i {
+    color: #b2b2b2;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    line-height: 30px;
+    font-weight: 700;
+    /* cursor: pointer; */
 }

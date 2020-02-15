@@ -4,11 +4,10 @@ const cors = require("cors");
 var router = express.Router();
 var bodyparser = require("body-parser");
 // var error = require("./middleware/error");
-var donatematerial = require("./controllers/donationone");
-var admin = require("./controllers/admin")
+
 require("express-async-errors");
 var winston = require("winston");
-var joi = require("joi");
+
 var hpp = require("hpp");
 var ratelimit = require("express-rate-limit");
 var bodyParser = require("body-parser");
@@ -17,14 +16,17 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
-var charityController = require("./controllers/charity")
 const app = express();
-const volunteer = require("./controllers/volunteer");
+
 
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const login = require("./controllers/login");
-
+var donatematerial = require("./controllers/donate material");
+var admin = require("./controllers/admin")
+const volunteer = require("./controllers/volunteer");
+var charityController = require("./controllers/charity");
+const donateonline =require("./controllers/donationone")
 winston.configure({
   transports: [
     new winston.transports.File({
@@ -67,9 +69,9 @@ app.all("*", function (req, res, next) {
 });
 
 app.use("/charity", charityController);
-
+app.use("/donate",donatematerial)
 app.use("/login", login);
-app.use("/savethem", donatematerial);
+app.use("/savethem", donateonline);
 app.use("/volunteer", volunteer);
 app.use("/admin", admin)
 mongoose.Promise = global.Promise;

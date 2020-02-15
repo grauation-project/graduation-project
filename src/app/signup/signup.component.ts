@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { VolunteersignupService } from '../services/volunteersignup.service';
-import { Signup } from '../signup';
-import { CharityService } from '../services/charity.service';
 
-import { Volunteer } from '../volunteer';
+import { CharityService } from '../services/charity.service';
+import { Volunteer } from '../class/volunteer';
+import { Signup } from '../class/signup';
+
+
 
 @Component({
   selector: "app-signup",
@@ -16,7 +18,7 @@ export class SignupComponent implements OnInit {
   volunteersignup=new Volunteer("","","","",0,0,"","");
 
   
-  charitymodel= new Signup("","","","",0,"","",0,"");
+  charitymodel= new Signup("","","","",0,"","","","");
   ischarity = true;
   isvolunteer = false;
   ngOnInit() {}
