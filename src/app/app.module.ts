@@ -14,12 +14,11 @@ import { CharityAccountComponent } from "./charity-account/charity-account/chari
 import { FooterComponent } from "./footer/footer/footer.component";
 import { HomeComponent } from "./home/home.component";
 import { VolunteerAccountComponent } from "./volunteer-account/volunteer-account.component";
-import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
-import { DashBoardComponent } from './dash-board/dash-board.component';
+import { SignupComponent } from "./signup/signup.component";
+import { HttpClientModule } from "@angular/common/http";
+import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { VolunteersignupService } from "./services/volunteersignup.service";
 import { PaymentService } from "./services/payment.service";
-
 
 @NgModule({
   declarations: [
@@ -35,15 +34,9 @@ import { PaymentService } from "./services/payment.service";
     HomeComponent,
     VolunteerAccountComponent,
     SignupComponent,
-    DashBoardComponent,
+    DashBoardComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
-
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
 
   providers: [VolunteersignupService, PaymentService],
   bootstrap: [AppComponent]
