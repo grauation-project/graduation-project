@@ -147,14 +147,15 @@ a {
     color: grey;
   }
   
-  ul a:visited {
+  .ml-2 a:visited {
     color: #3B6D8C
   }
+  .account_main .setting   {
   
+  }
   .account_main button {
-  
-    background-color: #3B6D8C;
     float: right;
+    background-color: #3B6D8C;
     margin-right: 10%;
     border-radius: 3%;
     padding: 1% 2% 1% 2%;
@@ -330,7 +331,7 @@ a {
   font-size: 14px;
   font-weight: 600;
 }
-.navbar {
+/* .navbar {
   background-color: #3B6D8C;
   border:1px solid whitesmoke;
   padding-top: 0.5%;
@@ -382,7 +383,7 @@ a {
   cursor: pointer;
 }*/
 
-
+/* 
 .navbar-nav li:hover {
   border-bottom: 2px solid #AFBF34;
   cursor: pointer;
@@ -415,9 +416,48 @@ a {
 }
 .navbar-nav ul a:visited {
   color: #3B6D8C
-}
+}  */
 .dropdown{
   float: right;
 margin-top: auto;
 background-color: #3B6D8C;
 }
+.nav_logo {
+  width: 70px;
+  height: 60px;
+  border-radius: 55%;
+  margin-left: 70%;
+}
+
+.nav-item i {
+  margin-left: 40%;
+  color: #AFBF34
+}
+
+.navbar {
+  background-color: #3B6D8C;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  transition: padding 0.5s;
+
+}
+
+.navbar:hover {
+  opacity: 0.97;
+  padding: 1%;
+}
+
+.navbar a {
+  color: white;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+}
+
+.navbar-toggler {
+  padding: 2%;
+  border: none;
+}
+
+/* .dropdown-menu {
+  z-index: 5454546875
+} */
