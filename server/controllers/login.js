@@ -4,41 +4,43 @@ var bodyParser=require("body-parser");
 var route=express.Router();
 var app = express();   
 var parseUrlencoded= bodyParser.urlencoded({extended:true});
-// app.use(bodyParser.urlencoded({useNewUrlParser:true},{useUnifiedTopology:true},{extended:true}));
 
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-// User Model 
+ 
 const volunteer = require('../models/volunteer');
 const charity = require('../models/charity');
 const admin = require('../models/admin');
+const user=require("../models/user");
 
-route.post('/login',parseUrlencoded, (req, res, next) => {
-  const {email,password} = req.body
-  // console.log(req.body)
-  // console.log("asd")
-  login.findOne({
-    email: email
-  })
-  .then(login => {
-    console.log(login)
-    if (!login) {
-      res.status(501).json({Msg :'Email Not Registered'});
-    }
+route.post('/save',parseUrlencoded, async(req, res, next) => {
+  
+  var email = req.body.email
+    console.log(email);
 
-    // Match password
-    // bcrypt.compare(password, login.password, (err, isMatch) => {
-    //   if (isMatch) {
-    //     let token = jwt.sign({email : login.email},'Secret',{expiresIn:'3h'})
-    //     res.status(200).json(token);
-    //   } else {
-    //     res.status(501).json({Msg :'Password Does not Match'});
-   
-    //   }
-    // });
-  });  
 
+
+    // if 
+  //   charity.findOne({email:req.body.email})
+  //   if(!charity){
+  //     volunteer.findOne({email:req.body.email})
+  //   }
+  //   else if(!volunteer){
+  //     admin.findOne({email:req.body.email})
+  //   }
+  // else if(!admin){
+  //   console.log('Email Not Registered')
+  //   res.status(501).json({Msg :'Email Not Registered'})
+  // }
+  //   else{
+  //     bcrypt.compare(req.body.password, volunteer.password, (err, match) => {
+  //       if (match) {
+  //         console.log("login");
+  //       }
+  //       console.log(err);
+  //     })
+  //   }
 
 });
 module.exports=route;

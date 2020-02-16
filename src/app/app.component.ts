@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OnlineDonate } from './online-donate';
+import { OnlineDonate } from './class/online-donate';
 
 @Component({
   selector: 'app-root',

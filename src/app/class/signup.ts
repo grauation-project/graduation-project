@@ -7,7 +7,7 @@ export class Signup {
         public banckaccount:number,
         public country:string,
         public address:string,
-        public phone:number,
+        public phone:string,
         public img:string
     ){}
 }
