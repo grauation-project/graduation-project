@@ -3,6 +3,8 @@ var bodyParser = require("body-parser");
 var router = express.Router();
 var mongoose = require("mongoose");
 var bcrypt = require("bcryptjs");
+var auth = require('../middleware/auth');
+
 var parseUrlencoded = bodyParser.urlencoded({
   extended: true
 });
@@ -61,6 +63,17 @@ router.post("/add", parseUrlencoded, async (req, res) => {
   new_admin.password = await bcrypt.hash(new_admin.password, salt);
   await new_admin.save();
   res.json(new_admin);
+});
+
+
+router.get("/account/:id", auth, async (req, res) => {
+
+  console.log("hi hi")
+  let adminspec = await admin.findOne({
+    _id: req.params.id
+  });
+
+  res.json(adminspec)
 });
 
 module.exports = router;

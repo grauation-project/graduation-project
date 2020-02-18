@@ -1,42 +1,67 @@
 var mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-var volunteer = new Schema({
-    fname:{
-        type:String,
-        required:true,
-    },
-    lname:{
-        type:String,
-        required:true,
-    },
-    email:{
-        type:String,
-        unique: true,
-        minlength: 5,
-        maxlength: 100,
-        lowercase: true,
-        unique:true,
-        required: true
-    },
-    password:{
-        type:String,
-        required:true,
-        minlength:8,
-        // maxlength:16
-    },
-    Age:Number,
-    phone:{
-        type:Number,
-        minlength: 11,
-        maxlength: 15,
-        required: true
-    },
-    country:{
-        type:String,
-        required:true
-    },
-    img:String,
-})
+var joi = require("joi");
+
+var volunteer = mongoose.model("volunteer", new mongoose.Schema({
+  fname: {
+    type: String,
+    minlength: 3,
+    maxlength: 7,
+    required: true,
+  },
+  lname: {
+    type: String,
+    minlength: 3,
+    maxlength: 7,
+    required: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    maxlength: 255,
+    lowercase: true,
+    required: true
+  },
+  password: {
+    type: String,
+    minlength: 5,
+    maxlength: 255,
+    required: true
+  },
+  Age: {
+    type: String,
+    maxlength: 3,
+    required: true
+  },
+  phone: {
+    type: String,
+    minlength: 11,
+    maxlength: 14,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  img: {
+    type: String
+  }
+}))
 
 
-module.exports = mongoose.model('volunteer',volunteer);
+function validatevolunteer(volunteers) {
+  var schema = {
+    fname: joi.string().min(3).max(7).required(),
+    lname: joi.string().min(3).max(7).required(),
+    email: joi.string().max(255).email().required(),
+    password: joi.string().min(5).max(255).required(),
+    Age: joi.string().min(2).max(3).required(),
+    phone: joi.string().min(11).max(14).required(),
+    country: joi.string().min(5).max(7).required(),
+    img: joi.string()
+
+  };
+  return joi.validate(volunteers, schema)
+}
+
+exports.validatevolunteer = validatevolunteer;
+exports.volunteer = volunteer

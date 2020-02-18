@@ -19,6 +19,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { VolunteersignupService } from "./services/volunteersignup.service";
 import { PaymentService } from "./services/payment.service";
+import { ReactiveFormsModule } from "@angular/forms";
+import { FileUploadModule } from "ng2-file-upload";
+import { DonationComponent } from "./donation/donation.component";
+import { CongrateComponent } from "./congrate/congrate.component";
 
 @NgModule({
   declarations: [
@@ -34,9 +38,18 @@ import { PaymentService } from "./services/payment.service";
     HomeComponent,
     VolunteerAccountComponent,
     SignupComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    DonationComponent,
+    CongrateComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FileUploadModule
+  ],
 
   providers: [VolunteersignupService, PaymentService],
   bootstrap: [AppComponent]

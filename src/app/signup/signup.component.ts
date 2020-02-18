@@ -1,25 +1,57 @@
 import { Component, OnInit } from "@angular/core";
-import { VolunteersignupService } from '../services/volunteersignup.service';
-import { Signup } from '../signup';
-import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from "../services/volunteersignup.service";
+import { Signup } from "../signup";
+import { CharityService } from "../services/charity.service";
+import { Router } from "@angular/router";
+import { FileUploader, FileSelectDirective } from "ng2-file-upload";
 
-import { Volunteer } from '../volunteer';
+import { Volunteer } from "../volunteer";
+const URL = "http://localhost:3000/savethem/volunteer/signup";
 
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
-  styleUrls: ["./signup.component.css"]
+  styleUrls: ["./signup.component.css"],
+  providers: [VolunteersignupService]
 })
 export class SignupComponent implements OnInit {
-  constructor(private charityserve:CharityService ,private volunteerservices:VolunteersignupService ) {};
-  
-  volunteersignup=new Volunteer("","","","",0,0,"","");
-
-  
-  charitymodel= new Signup("","","","",0,"","",0,"");
+  // title = "ng8fileuploadexample";
+  title = "ng8fileupload";
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: "img"
+  });
+  constructor(
+    private charityserve: CharityService,
+    private volunteerservices: VolunteersignupService,
+    private router: Router
+  ) {}
+  charityerror = "";
+  volunteererror = "";
+  fileselected = "";
+  charitymodel = new Signup("", "", "", "", "", "", "", "");
   ischarity = true;
   isvolunteer = false;
-  ngOnInit() {}
+  ngOnInit() {
+    this.uploader.onAfterAddingFile = file => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (
+      item: any,
+      response: any,
+      status: any,
+      headers: any
+    ) => {
+      console.log("ImageUpload:uploaded:", item.file);
+      alert("File uploaded successfully");
+    };
+    console.log(this.uploader);
+  }
+  // onfileselected(event) {
+  //   fileselected = event.target.files[0].name;
+  // }
+  volunteersignup = new Volunteer("", "", "", "", "", "", "", "");
+
   charityregister() {
     this.ischarity = true;
     this.isvolunteer = false;
@@ -28,20 +60,38 @@ export class SignupComponent implements OnInit {
     this.ischarity = false;
     this.isvolunteer = true;
   }
-  onSubmit(){
-    console.log(this.charitymodel)
+  onSubmit() {
+    console.log(this.charitymodel);
     this.charityserve.signUpCharity(this.charitymodel).subscribe(
-      response => console.log('Success!', response),
-      
-      error => console.log('error',error)
-      )
+      response => {
+        console.log("Success!", response);
+        this.router.navigate(["login"]);
+      },
+
+      error => {
+        console.log("error", error);
+        this.charityerror = error.error;
+
+        this.router.navigate(["signup"]);
+      }
+    );
   }
 
+  onSubmitvolunteer() {
+    console.log(this.volunteersignup);
 
-  onSubmitvolunteer(){
     this.volunteerservices.volunteersign(this.volunteersignup).subscribe(
-      response => console.log('Success!', response),
-      error => console.log('error',error)
-      )
+      response => {
+        console.log("Success!", response);
+        this.router.navigate(["login"]);
+      },
+
+      error => {
+        console.log("error", error);
+        this.volunteererror = error.error;
+
+        this.router.navigate(["signup"]);
+      }
+    );
   }
 }

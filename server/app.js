@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-var router = express.Router();
-var bodyparser = require("body-parser");
+var config = require("config")
+
+var Strategy = require('passport-facebook').Strategy;
+var passport = require('passport');
+var session = require("session");
 // var error = require("./middleware/error");
-var donatematerial = require("./controllers/donationone");
-var admin = require("./controllers/admin")
+var donatepayment = require("./controllers/donationone");
+var donatematerial = require("./controllers/donate material")
+var admin = require("./controllers/admin");
 require("express-async-errors");
 var winston = require("winston");
 var joi = require("joi");
@@ -17,12 +21,11 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
-var charityController = require("./controllers/charity")
+var charityController = require("./controllers/charity");
 const app = express();
 const volunteer = require("./controllers/volunteer");
 
-const bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+
 const login = require("./controllers/login");
 
 winston.configure({
@@ -32,8 +35,16 @@ winston.configure({
     })
   ]
 });
+
+if (!config.get("jwtprivatekey")) {
+  console.error("jwtprivatekey undefined");
+  process.exit(1);
+}
+app.use(express.static("upload"));
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(passport.intialize());
+// app.use(passport.session())
 var files_arr = fs.readdirSync(__dirname + "/models");
 files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);
@@ -55,9 +66,15 @@ app.use(mongosanatize());
 app.use(xss());
 // prevent parameter pollution
 app.use(hpp());
-
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+}
+app.use(cors(corsOptions));
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
   res.header(
     "Access-Control-Allow-Methods",
     "DELETE, HEAD, GET, OPTIONS, POST, PUT"
@@ -66,12 +83,24 @@ app.all("*", function (req, res, next) {
   next();
 });
 
-app.use("/charity", charityController);
 
-app.use("/login", login);
-app.use("/savethem", donatematerial);
-app.use("/volunteer", volunteer);
-app.use("/admin", admin)
+
+
+
+
+app.use("/savethem/charity", charityController);
+
+app.use("/savethem/login", login);
+app.use("/savethem/donatepayment", donatepayment);
+app.use("/savethem/volunteer", volunteer);
+app.use("/savethem/admin", admin);
+
+
+
+
+
+
+
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
@@ -84,9 +113,51 @@ mongoose.connection.on("error", err => {
 
 
 
+passport.use(
+  new Strategy({
+      clientID: 799856253853537,
+      clientSecret: 'a1a57004dbdefed95f388a9a402a621f',
+      callbackURL: "http://localhost:3000/auth/facebook/callback"
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      User.findOrCreate({
+          facebookId: profile.id
+        },
+        function (err, user) {
+          return cb(err, user);
+        }
+      );
+    }
+  )
+);
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
 
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/login'
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
 
+passport.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
+app.get('/login/facebook',
+  passport.authenticate('facebook'));
 
+app.get('/return',
+  passport.authenticate('facebook', {
+    failureRedirect: '/login'
+  }),
+  function (req, res) {
+    res.redirect('/');
+  });
 
 app.listen(3000, function () {
   console.log("server running....");
