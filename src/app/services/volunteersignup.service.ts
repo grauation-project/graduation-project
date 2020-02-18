@@ -6,7 +6,8 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 
-import { Volunteer } from "../volunteer";
+import { Volunteer } from "../class/volunteer";
+
 @Injectable({
   providedIn: "root"
 })

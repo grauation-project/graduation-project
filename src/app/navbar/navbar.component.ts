@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+
 declare var require: any;
-declare var $: any;
 
 @Component({
   selector: "app-navbar",
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
       .querySelector("#contact_us")
       .scrollIntoView({ behavior: "smooth", block: "center" });
   }
+
   scrolltoel4() {
     document
       .querySelector("#howitwork")

@@ -66,4 +66,10 @@ export class DonationComponent implements OnInit {
       this.charityHasErr = false;
     }
   }
+  // Donate() {
+  //   this.donateMaterialSerives.donateMaterial(this.donationMaterial).subscribe(
+  //     response => console.log("Success!", response),
+  //     error => console.log(error)
+  //   );
+  // }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
@@ -5,6 +6,14 @@ var router = express.Router();
 var app = express();
 var joi = require("joi")
 var config = require("config")
+=======
+var express =require("express");
+var mongoose=require("mongoose");
+var bodyParser=require("body-parser");
+var route=express.Router();
+var app = express();   
+var parseUrlencoded= bodyParser.urlencoded({extended:true});
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 
 
 var parseUrlencoded = bodyParser.urlencoded({
@@ -14,6 +23,7 @@ var passport = require('passport');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
+<<<<<<< HEAD
 // User Model 
 
 
@@ -96,6 +106,18 @@ router.post('/', parseUrlencoded, async (req, res) => {
     validepassword = await bcrypt.compare(req.body.password, volunteers.password);
     if (!validepassword) {
       return res.status(400).send("invalid email or password.");
+=======
+ 
+const volunteer = require('../models/volunteer');
+const charity = require('../models/charity');
+const admin = require('../models/admin');
+const user=require("../models/user");
+
+route.post('/save',parseUrlencoded, async(req, res, next) => {
+  
+  var email = req.body.email
+    console.log(email);
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 
     } else {
       console.log("you are volunteer")
@@ -113,6 +135,7 @@ router.post('/', parseUrlencoded, async (req, res) => {
     }
   }
 
+<<<<<<< HEAD
 })
 
 function validate(req) {
@@ -122,5 +145,31 @@ function validate(req) {
   };
   return joi.validate(req, schema)
 }
+=======
+
+    // if 
+  //   charity.findOne({email:req.body.email})
+  //   if(!charity){
+  //     volunteer.findOne({email:req.body.email})
+  //   }
+  //   else if(!volunteer){
+  //     admin.findOne({email:req.body.email})
+  //   }
+  // else if(!admin){
+  //   console.log('Email Not Registered')
+  //   res.status(501).json({Msg :'Email Not Registered'})
+  // }
+  //   else{
+  //     bcrypt.compare(req.body.password, volunteer.password, (err, match) => {
+  //       if (match) {
+  //         console.log("login");
+  //       }
+  //       console.log(err);
+  //     })
+  //   }
+
+});
+module.exports=route;
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 
 module.exports = router;

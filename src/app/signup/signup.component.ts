@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { VolunteersignupService } from "../services/volunteersignup.service";
-import { Signup } from "../signup";
+import { Signup } from "../class/signup";
 import { CharityService } from "../services/charity.service";
 import { Router } from "@angular/router";
 import { FileUploader, FileSelectDirective } from "ng2-file-upload";
 
-import { Volunteer } from "../volunteer";
+import { Volunteer } from "../class/volunteer";
 const URL = "http://localhost:3000/savethem/volunteer/signup";
 
 @Component({

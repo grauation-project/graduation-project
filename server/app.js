@@ -7,12 +7,16 @@ var Strategy = require('passport-facebook').Strategy;
 var passport = require('passport');
 var session = require("session");
 // var error = require("./middleware/error");
+<<<<<<< HEAD
 var donatepayment = require("./controllers/donationone");
 var donatematerial = require("./controllers/donate material")
 var admin = require("./controllers/admin");
+=======
+
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 require("express-async-errors");
 var winston = require("winston");
-var joi = require("joi");
+
 var hpp = require("hpp");
 var ratelimit = require("express-rate-limit");
 var bodyParser = require("body-parser");
@@ -21,13 +25,20 @@ var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
+<<<<<<< HEAD
 var charityController = require("./controllers/charity");
+=======
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 const app = express();
-const volunteer = require("./controllers/volunteer");
+
 
 
 const login = require("./controllers/login");
-
+var donatematerial = require("./controllers/donate material");
+var admin = require("./controllers/admin")
+const volunteer = require("./controllers/volunteer");
+var charityController = require("./controllers/charity");
+const donateonline =require("./controllers/donationone")
 winston.configure({
   transports: [
     new winston.transports.File({
@@ -83,6 +94,7 @@ app.all("*", function (req, res, next) {
   next();
 });
 
+<<<<<<< HEAD
 
 
 
@@ -101,6 +113,14 @@ app.use("/savethem/admin", admin);
 
 
 
+=======
+app.use("/charity", charityController);
+app.use("/donate",donatematerial)
+app.use("/login", login);
+app.use("/savethem", donateonline);
+app.use("/volunteer", volunteer);
+app.use("/admin", admin)
+>>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
