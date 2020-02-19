@@ -11,5 +11,6 @@ export class CharityAccountComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  
 }

@@ -1,27 +1,5 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav> -->
-<nav class="navbar navbar-expand-lg ">
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon">
@@ -31,22 +9,32 @@
     </span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto ml-5">
       <li class="nav-item active">
-        <a class="nav-link text-light" router-link="/homepage">Home <span class=" sr-only">(current)</span></a>
+        <i class="fas fa-home align-center "></i>
+        <a class="nav-link " href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" (click)="scrolltoel()" href="#">
-          <i class="fas fa-bell"></i>
-          <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <i class="fas fa-envelope align-center  "></i>
+
+        <a class="nav-link my-0" href="#">Messages</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link " href="#"><i class="far fa-comment"></i>
-          <span class="sr-only">(current)</span></a>
+      <li class="nav-item mr-5">
+        <i class="fas fa-bell align-center"></i>
+
+        <a class="nav-link" href="#">Notifications</a>
       </li>
-    
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </form>
+      <li class="nav-item mr-5">
+        <i class="fa fa-user-circle"></i>
+
+        <a class="nav-link" href="#">Logout</a>
+      </li>
     </ul>
+
   </div>
 </nav>
 <div class="contain">
@@ -124,17 +112,17 @@
                     <h5>Needs</h5>
                   </div>
                 </div>
-                <div class="ed-opts">
-                  <a href="#" title="" class="ed-opts-open">
-                    <i class="fas fa-ellipsis-v"></i>
+                <div class="editPost  pr-0">
+                  <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fa fa-ellipsis-v  pt-0"></i>
                   </a>
-                  <ul class="ed-options active">
-                    <li><a href="#" title="">Edit Post</a></li>
-                    <li><a href="#" title="">Unsaved</a></li>
-                    <li><a href="#" title="">Unbid</a></li>
-                    <li><a href="#" title="">Close</a></li>
-                    <li><a href="#" title="">Hide</a></li>
-                  </ul>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Edit post</a>
+                    <a class="dropdown-item" href="#">delete post</a>
+                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                  </div>
                 </div>
               </div>
               <p>
@@ -148,16 +136,17 @@
                     <h5>Provides</h5>
                   </div>
                 </div>
-                <div class="ed-opts">
-                  <a href="#" title="" class="ed-opts-open">
-                    <i class="fas fa-ellipsis-v"></i>
+                <div class="editPost  pr-0">
+                  <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fa fa-ellipsis-v  pt-0"></i>
                   </a>
-                  <ul class="ed-options active">
-                    <li><a href="#" title="">Edit Post</a></li>
-                    <li><a href="#" title="">Unsaved</a></li>
-                    <li><a href="#" title="">Close</a></li>
-                    <li><a href="#" title="">Hide</a></li>
-                  </ul>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Edit post</a>
+                    <a class="dropdown-item" href="#">delete post</a>
+                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                  </div>
                 </div>
               </div>
 
@@ -176,172 +165,241 @@
             Graphic and web designer
             <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                 class="fa fa-star"></i></span>
-            <button>
-              <a href="#">
-                <i class="fas fa-user-plus text-light"></i>
-                Follow</a>
-            </button>
+            <span>
+              <button class="setting">
+                <a href="#">Setting</a>
+              </button>
+              <button class="followbtn">
+                <a href="#">
+                  <i class="fas fa-user-plus text-light"></i>
+                </a>
+              </button>
+            </span>
           </p>
         </div>
         <div class="tab_feed overflow-hidden">
-          <ul class="list-unstyled ml-2">
-            <li>
-              <a href="#">
-                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
-                <p>Feed</p>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
-                <p>Info</p>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
-                <p>Feed</p>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="http://gambolthemes.net/workwise-new/images/ic1.png" />
-                <p>Feed</p>
-              </a>
-            </li>
-          </ul>
+          <div class="nav nav-tabs " id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="feeddiv-tab" data-toggle="tab" href="#feeddiv" role="tab"
+              aria-controls="feeddiv" aria-selected="true">Feed</a>
+            <a class="nav-item nav-link" id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
+              aria-controls="infodiv" aria-selected="false">Info</a>
+
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
+              <div class="mb-5 mt-3 p-3 create_post">
+                <img class="ml-2 w-22" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
+                  class="btn_post text-light ">
+                <div class="modal fade" id="post" role="dialog">
+                  <div class="modal-dialog">
+
+
+                    <div class="modal-content">
+                      <div class="modal-header ">
+
+                        <h4 class="modal-title text-light float-left">Post</h4>
+                        <button type="button" class="close text-light float-right" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <input type="text" class="form-control postForm" name="titleOfPost"
+                              placeholder="Title of Post">
+                            <br>
+                            <textarea class=" form-control postForm" rows="5" id="comment"
+                              placeholder="what are you need "></textarea>
+                          </div>
+                          <div class="row modal-footer">
+                            <button type="submit" class="btn maincolor img-vedio-btn text-light"
+                              data-dismiss="modal">images/video</button>
+                            <button type="submit" class=" btn maincolor mr-3 text-light"
+                              data-dismiss="modal">post</button>
+                          </div>
+                        </form>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <div class="posts">
+                <div class="post">
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Edit post</a>
+                      <a class="dropdown-item" href="#">delete post</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                  <div>
+                    <img class="float-left mr-2"
+                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    <h5>john doe</h5>
+                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                  </div>
+                  <div>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                      magna sit amet...
+                    </p>
+                  </div>
+                  <div class="reactions">
+                    <a href="#">
+                      <i class="far fa-heart"></i>
+                      Like</a>
+                    <a href="#">
+                      <i class="far fa-comment"></i>
+                      Comment</a>
+                  </div>
+                </div>
+                <div class="post">
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Edit post</a>
+                      <a class="dropdown-item" href="#">delete post</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                  <div>
+                    <img class="float-left mr-2"
+                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    <h5>john doe</h5>
+                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                  </div>
+                  <div>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                      magna sit amet...
+                    </p>
+                  </div>
+                  <div class="reactions">
+                    <a href="#">
+                      <i class="far fa-heart"></i>
+                      Like</a>
+                    <a href="#">
+                      <i class="far fa-comment"></i>
+                      Comment</a>
+                  </div>
+                </div>
+                <div class="post">
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Edit post</a>
+                      <a class="dropdown-item" href="#">delete post</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                  <div>
+                    <img class="float-left mr-2"
+                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    <h5>john doe</h5>
+                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                  </div>
+                  <div>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                      magna sit amet...
+                    </p>
+                  </div>
+                  <div class="reactions">
+                    <a href="#">
+                      <i class="far fa-heart"></i>
+                      Like</a>
+                    <a href="#">
+                      <i class="far fa-comment"></i>
+                      Comment</a>
+                  </div>
+                </div>
+                <div class="post">
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Edit post</a>
+                      <a class="dropdown-item" href="#">delete post</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                  <div>
+                    <img class="float-left mr-2"
+                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    <h5>john doe</h5>
+                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                  </div>
+                  <div>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                      magna sit amet...
+                    </p>
+                  </div>
+                  <div class="reactions">
+                    <a href="#">
+                      <i class="far fa-heart"></i>
+                      Like</a>
+                    <a href="#">
+                      <i class="far fa-comment"></i>
+                      Comment</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
+              <div class="info">
+                <div class="details">
+                  <h6>Charity Name</h6>
+                </div>
+                <div class="details">
+                  <h6>Charity address</h6>
+                  <p>ffffffffffffff</p>
+
+                </div>
+                <div class="details">
+                  <h6>Charity phone</h6>
+                  <p>ffffffffffffff</p>
+
+                </div>
+                <div class="details">
+                  <h6> About</h6>
+                  <p>ffffffffffffff</p>
+                </div>
+                <div class="details">
+                  <h6>Charity Country</h6>
+                  <p>ffffffffffffff</p>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="posts">
-          <div class="post">
-            <div class="dropdown show">
-              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Post</a>
-                <a class="dropdown-item" href="#">Unsaved</a>
-                <a class="dropdown-item" href="#">Close</a>
-              </div>
-            </div>
-            <div>
-              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-              <h5>john doe</h5>
-              <span><i class="fa fa-clock-o"></i>3 minutes</span>
-            </div>
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                magna sit amet...
-              </p>
-            </div>
-            <div class="reactions">
-              <a href="#">
-                <i class="far fa-heart"></i>
-                Like</a>
-              <a href="#">
-                <i class="far fa-comment"></i>
-                Comment</a>
-            </div>
-          </div>
-          <div class="post">
-            <div class="dropdown show">
-              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Post</a>
-                <a class="dropdown-item" href="#">Unsaved</a>
-                <a class="dropdown-item" href="#">Close</a>
-              </div>
-            </div>
-            <div>
-              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-              <h5>john doe</h5>
-              <span><i class="fa fa-clock-o"></i>3 minutes</span>
-            </div>
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                magna sit amet...
-              </p>
-            </div>
-            <div class="reactions">
-              <a href="#">
-                <i class="far fa-heart"></i>
-                Like</a>
-              <a href="#">
-                <i class="far fa-comment"></i>
-                Comment</a>
-            </div>
-          </div>
-          <div class="post">
-            <div class="dropdown show">
-              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Post</a>
-                <a class="dropdown-item" href="#">Unsaved</a>
-                <a class="dropdown-item" href="#">Close</a>
-              </div>
-            </div>
-            <div>
-              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-              <h5>john doe</h5>
-              <span><i class="fa fa-clock-o"></i>3 minutes</span>
-            </div>
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                magna sit amet...
-              </p>
-            </div>
-            <div class="reactions">
-              <a href="#">
-                <i class="far fa-heart"></i>
-                Like</a>
-              <a href="#">
-                <i class="far fa-comment"></i>
-                Comment</a>
-            </div>
-          </div>
-          <div class="post">
-            <div class="dropdown show">
-              <a class="btn btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Post</a>
-                <a class="dropdown-item" href="#">Unsaved</a>
-                <a class="dropdown-item" href="#">Close</a>
-              </div>
-            </div>
-            <div>
-              <img class="float-left mr-2" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-              <h5>john doe</h5>
-              <span><i class="fa fa-clock-o"></i>3 minutes</span>
-            </div>
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                magna sit amet...
-              </p>
-            </div>
-            <div class="reactions">
-              <a href="#">
-                <i class="far fa-heart"></i>
-                Like</a>
-              <a href="#">
-                <i class="far fa-comment"></i>
-                Comment</a>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
-</div>
