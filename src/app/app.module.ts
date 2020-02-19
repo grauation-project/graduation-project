@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { FileUploadModule } from "ng2-file-upload";
 import { DonationComponent } from "./donation/donation.component";
 import { CongrateComponent } from "./congrate/congrate.component";
+import { CharityhomeComponent } from './charityhome/charityhome.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CongrateComponent } from "./congrate/congrate.component";
     SignupComponent,
     DashBoardComponent,
     DonationComponent,
-    CongrateComponent
+    CongrateComponent,
+    CharityhomeComponent
   ],
   imports: [
     BrowserModule,

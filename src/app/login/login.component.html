@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="container-fluid">
 
   <div class="row">
@@ -8,7 +10,7 @@
 
       <div class="logform bg-light">
         <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()" action="/login" method="POST">
-
+          <h5 style="color: red;text-align: center;">{{loginerror}}</h5>
           <div class="form-group">
             <label>EMAIL :</label>
             <input type="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required
@@ -40,3 +42,4 @@
 
   </div>
 </div>
+<app-footer></app-footer>

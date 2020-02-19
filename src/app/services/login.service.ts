@@ -32,4 +32,15 @@ export class LoginService {
       }
     );
   }
+  charitydetails(_id): Observable<any> {
+    return this._http.get<any>(
+      "http://localhost:3000/savethem/charity/account/" + _id,
+      {
+        headers: new HttpHeaders().set(
+          "x_auth_token_charity",
+          localStorage.getItem("token")
+        )
+      }
+    );
+  }
 }

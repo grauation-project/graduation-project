@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-<<<<<<< HEAD
 var joi = require("joi");
 
 var volunteer = mongoose.model("volunteer", new mongoose.Schema({
@@ -47,62 +46,6 @@ var volunteer = mongoose.model("volunteer", new mongoose.Schema({
     type: String
   }
 }))
-=======
-const Schema = mongoose.Schema;
-var joi = require("joi");
-var volunteer = new Schema({
-    fname:{
-        type:String,
-        required:true,
-    },
-    lname:{
-        type:String,
-        required:true,
-    },
-    email:{
-        type:String,
-        unique: true,
-        maxlength: 255,
-        lowercase: true,
-        required: true
-    },
-    password:{
-        type:String,
-        required:true,
-        minlength:8,
-        // maxlength:16
-    },
-    Age:Number,
-    phone:{
-        type:Number,
-        minlength: 11,
-        maxlength: 15,
-        required: true
-    },
-    country:{
-        type:String,
-        required:true,
-        maxlength:50,
-    },
-    img:String,
-})
-
-function validateVolunter(volunteer) {
-    var Schema = {
-    fname: joi.string().required(),
-     lname: joi.string().required(),
-      email: joi.string().max(255).email().unique().required(),
-      password: joi.string().min(8).required(),
-      phone: joi.number().min(11).max(15).required(),
-      country: joi.string().max(50).required(),
-
-    };
-    return joi.validate(volunteer, Schema)
-  }
-  
-  exports.validateVolunter = validateVolunter;
-  
->>>>>>> 6ad8930f7ab4a5962fa0b1c87988e3980a8782e9
 
 
 function validatevolunteer(volunteers) {
