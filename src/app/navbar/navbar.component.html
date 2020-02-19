@@ -94,9 +94,8 @@
               </div>
               <div class="form-group">
                 <label class="float-left">Card Number :</label>
-                <input type="" class="form-control" required [class.is-invalid]="
-                    donorcreditnum.invalid && donorcreditnum.touched
-                  " #donorcreditnum="ngModel" pattern="^\d{16}$" [(ngModel)]="new_payment.donorcreditnum"
+                <input type="" class="form-control" required [class.is-invalid]="donorcreditnum.invalid && donorcreditnum.touched" 
+                    #donorcreditnum="ngModel" pattern="^\d{16}$" [(ngModel)]="new_payment.donorcreditnum"
                   name="donorcreditnum" />
                 <div *ngIf="
                     donorcreditnum.errors &&

@@ -36,6 +36,7 @@ var volunteer = new Schema({
         maxlength:50,
     },
     img:String,
+    
 })
 
 function validateVolunter(volunteer) {
