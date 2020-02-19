@@ -26,8 +26,16 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [GuardService]
   },
-  { path: "volunteer", component: VolunteerAccountComponent },
-  { path: "charityaccount", component: CharityAccountComponent },
+  {
+    path: "home/volunteer/:_id/volunteer/account",
+    component: VolunteerAccountComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: "home/charity/:_id/charity/account",
+    component: CharityAccountComponent,
+    canActivate: [GuardService]
+  },
   { path: "donation", component: DonationComponent },
   { path: "signup", component: SignupComponent },
   { path: "done", component: CongrateComponent },

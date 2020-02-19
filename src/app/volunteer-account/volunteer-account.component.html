@@ -10,7 +10,7 @@
   </button>
 
   <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ml-5">
+    <ul class="navbar-nav  ">
       <li class="nav-item active">
         <i class="fas fa-home align-center "></i>
         <a class="nav-link " href="#">Home <span class="sr-only">(current)</span></a>
@@ -28,10 +28,10 @@
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       </form>
-      <li class="nav-item mr-5">
+      <li class="nav-item log">
         <i class="fa fa-user-circle"></i>
 
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
 
@@ -104,12 +104,12 @@
 
         </div>
         <div class="row">
-         
+
         </div>
       </div>
       <div class="col-md-6 account_main ">
         <div class="account_headline overflow-hidden">
-          <h4>John Doe</h4>
+          <h4>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
           <p>
             Graphic and web designer
             <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -319,16 +319,18 @@
               <div class="info">
                 <div class="details">
                   <h6>Volunteer Name</h6>
+                  <h4>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
+
                 </div>
-               
+
                 <div class="details">
                   <h6>Volunteer phone</h6>
-                  <p>ffffffffffffff</p>
+                  <p>{{volunteerdetaile.phone }}</p>
 
                 </div>
                 <div class="details">
                   <h6>Volunteer Country</h6>
-                  <p>ffffffffffffff</p>
+                  <p>{{volunteerdetaile. country }}</p>
 
                 </div>
               </div>

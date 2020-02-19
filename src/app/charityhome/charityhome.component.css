@@ -211,6 +211,99 @@ body {
 }
 
 
+.log {
+  margin-left: 15%
+}
+
+.nav-item {
+  margin-right: 4%;
+}
+
+ul li {
+  float: left;
+  margin-right: 7%;
+
+}
+
+ul i {
+  display: block;
+  color: whitesmoke
+}
+
+ul a {
+  color: grey;
+}
+
+.navbar-nav {
+  margin-left: 10%
+}
+
+.navbar-nav {
+  margin-left: 10%
+}
+
+.ml-2 a:visited {
+  color: #3B6D8C
+}
+
+ul {
+  margin-left: -5%;
+}
+
+.navbar-nav li:hover {
+  border-bottom: 2px solid #AFBF34;
+  cursor: pointer;
+}
+
+.navbar .btn {
+  color: white;
+  background-color: #AFBF34;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  margin-right: 5%;
+
+}
+
+.navbar-nav ul li {
+  float: left;
+  margin-right: 4%;
+  text-decoration: none;
+
+}
+
+.navbar a:hover {
+  text-decoration: none;
+
+}
+
+.navbar-nav ul i {
+  display: block;
+  color: white
+}
+
+.navbar-nav ul a {
+  color: white;
+}
+
+.iconcoler {
+  color: white;
+}
+
+.navbar-nav ul a:visited {
+  color: #3B6D8C
+}
+
+.dropdownpost {
+  float: right;
+  margin-top: auto;
+}
+
+.dropdown {
+  float: right;
+  margin-top: auto;
+  background-color: #3B6D8C;
+}
+
 .nav_logo {
   width: 70px;
   height: 60px;
@@ -247,37 +340,15 @@ body {
   border: none;
 }
 
-.dropdown-menu {
-  z-index: 5454546875
-}
-
-
-
 .navbar-toggler .line {
   width: 100%;
   float: left;
   height: 2px;
-  background-color: #fff;
+  background-color: #fff !important;
   margin-bottom: 5px;
 }
 
-.navbar-nav {
-  margin-left: 10%;
-  width: 50%
-}
-
-.navbar-nav li {
-  margin-left: 3%;
-}
-
-.nav_logo {
-  width: 70px;
-  height: 60px;
-  border-radius: 55%;
-  margin-left: 70%;
-}
-
-.navbar-nav a:hover {
-  color: #AFBF34;
-
+.dropdown-menu {
+  z-index: 5454546875;
+  margin-right: 200px;
 }

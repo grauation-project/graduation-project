@@ -31,7 +31,7 @@
       <li class="nav-item mr-5">
         <i class="fa fa-user-circle"></i>
 
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
 
@@ -160,7 +160,7 @@
       </div>
       <div class="col-md-6 account_main ">
         <div class="account_headline overflow-hidden">
-          <h4>John Doe</h4>
+          <h4>{{charitydetaile.name}}</h4>
           <p>
             Graphic and web designer
             <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -375,15 +375,18 @@
               <div class="info">
                 <div class="details">
                   <h6>Charity Name</h6>
+                  <h6>{{charitydetaile.name}}</h6>
+
+
                 </div>
                 <div class="details">
                   <h6>Charity address</h6>
-                  <p>ffffffffffffff</p>
+                  <p>{{charitydetaile.address}}</p>
 
                 </div>
                 <div class="details">
                   <h6>Charity phone</h6>
-                  <p>ffffffffffffff</p>
+                  <p>{{charitydetaile.phone}}</p>
 
                 </div>
                 <div class="details">
@@ -392,7 +395,7 @@
                 </div>
                 <div class="details">
                   <h6>Charity Country</h6>
-                  <p>ffffffffffffff</p>
+                  <p>{{charitydetaile.country}}</p>
 
                 </div>
               </div>

@@ -112,10 +112,11 @@ a {
   background-color: #f2f2f2;
   /* margin-right: 3%; */
 }
-.account_headline button
-{
-    margin-right: 3px !important;
+
+.account_headline button {
+  margin-right: 3px !important;
 }
+
 .account_headline h1 {
   color: black
 }
@@ -124,6 +125,14 @@ a {
   color: #333;
   font-size: 15px;
   margin-bottom: 8%;
+}
+
+.log {
+  margin-left: 15%
+}
+
+.nav-item {
+  margin-right: 4%;
 }
 
 .account_headline span {
@@ -150,12 +159,18 @@ ul a {
   color: grey;
 }
 
+.navbar-nav {
+  margin-left: 10%
+}
+
 .ml-2 a:visited {
   color: #3B6D8C
 }
-.account_main .setting   {
-float: right;
+
+.account_main .setting {
+  float: right;
 }
+
 .account_main button {
   float: right;
   background-color: #3B6D8C;
@@ -219,7 +234,7 @@ ul {
   margin-left: -5%;
 }
 
-.needs{
+.needs {
   padding-top: 4%;
   padding-bottom: 4%;
   padding-left: 8%;
@@ -227,7 +242,8 @@ ul {
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 
 }
-.provides{
+
+.provides {
   padding-top: 4%;
   padding-bottom: 4%;
   padding-left: 8%;
@@ -235,250 +251,277 @@ ul {
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 
 }
+
 .post_topbar {
   float: left;
   width: 100%;
   position: relative;
 }
+
 .usy-dt {
-float: left;
+  float: left;
 }
+
 .usy-name {
-float: left;
-/* margin-left: 15px; */
-margin-top: 4%;
+  float: left;
+  /* margin-left: 15px; */
+  margin-top: 4%;
 }
+
 .usy-name h5 {
-color: #000000;
-font-size: 18px;
-text-transform: capitalize;
-font-weight: 600;
-float: left;
+  color: #000000;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+  float: left;
 }
+
 .ed-opts {
-float: right;
-position: relative;
-top: 7px;
+  float: right;
+  position: relative;
+  top: 7px;
 }
-.ed-opts > a {
-color: #3B6D8C;
-font-size: 20px;
-float: right;
-position: relative;
-/* left: -10px; */
-top: -10px;
+
+.ed-opts>a {
+  color: #3B6D8C;
+  font-size: 20px;
+  float: right;
+  position: relative;
+  /* left: -10px; */
+  top: -10px;
 }
+
 .ed-options {
-position: absolute;
-top: 100%;
-right: 0;
-width: 130px;
-background-color: #fff;
--webkit-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--moz-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--ms-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--o-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-padding: 20px;
-opacity: 0;
-visibility: hidden;
-z-index: 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 130px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
 }
+
 .ed-options li {
-float: left;
-width: 100%;
-margin-bottom: 15px;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
 }
+
 .ed-options li a {
-color: #686868;
-font-size: 14px;
-font-weight: 600;
+  color: #686868;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .post-opts {
-float: right;
-position: relative;
-top: -25px;
+  float: right;
+  position: relative;
+  top: -25px;
 }
-.post-opts > a {
-color: #3B6D8C;
-font-size: 20px;
-float: right;
-position: relative;
-left: -10px;
-top: -10px;
+
+.post-opts>a {
+  color: #3B6D8C;
+  font-size: 20px;
+  float: right;
+  position: relative;
+  left: -10px;
+  top: -10px;
 }
+
 .post-options {
-position: absolute;
-top: 100%;
-right: 0;
-width: 130px;
-background-color: #fff;
--webkit-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--moz-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--ms-box-shadow: 0 0 10px rgba(0,0,0,0.28);
--o-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-padding: 20px;
-opacity: 0;
-visibility: hidden;
-z-index: 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 130px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
 }
+
 .post-options li {
-float: left;
-width: 100%;
-margin-bottom: 15px;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
 }
+
 .post-options li a {
-color: #686868;
-font-size: 14px;
-font-weight: 600;
+  color: #686868;
+  font-size: 14px;
+  font-weight: 600;
 }
+
 .navbar-nav li:hover {
-border-bottom: 2px solid #AFBF34;
-cursor: pointer;
+  border-bottom: 2px solid #AFBF34;
+  cursor: pointer;
 }
 
 .navbar .btn {
-color: white;
-background-color: #AFBF34;
-font-family: 'Merriweather', serif;
-font-size: 18px;
-margin-right: 5%;
+  color: white;
+  background-color: #AFBF34;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  margin-right: 5%;
 
 }
+
 .navbar-nav ul li {
-float: left;
-margin-right: 4%;
-text-decoration: none;
+  float: left;
+  margin-right: 4%;
+  text-decoration: none;
 
 }
-.navbar a:hover{
-text-decoration: none;
+
+.navbar a:hover {
+  text-decoration: none;
 
 }
+
 .navbar-nav ul i {
-display: block;
-color: white
+  display: block;
+  color: white
 }
 
 .navbar-nav ul a {
-color: white;
+  color: white;
 }
-.iconcoler{
-color: white;
+
+.iconcoler {
+  color: white;
 }
+
 .navbar-nav ul a:visited {
-color: #3B6D8C
-}  
-.dropdownpost{
-float: right;
-margin-top: auto;
+  color: #3B6D8C
 }
-.dropdown{
-float: right;
-margin-top: auto;
-background-color: #3B6D8C;
+
+.dropdownpost {
+  float: right;
+  margin-top: auto;
 }
+
+.dropdown {
+  float: right;
+  margin-top: auto;
+  background-color: #3B6D8C;
+}
+
 .nav_logo {
-width: 70px;
-height: 60px;
-border-radius: 55%;
-margin-left: 70%;
+  width: 70px;
+  height: 60px;
+  border-radius: 55%;
+  margin-left: 70%;
 }
 
 .nav-item i {
-margin-left: 40%;
-color: #AFBF34
+  margin-left: 40%;
+  color: #AFBF34
 }
 
 .navbar {
-background-color: #3B6D8C;
-padding-top: 0.5%;
-padding-bottom: 0.5%;
-transition: padding 0.5s;
+  background-color: #3B6D8C;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  transition: padding 0.5s;
 
 }
 
 .navbar:hover {
-opacity: 0.97;
-padding: 1%;
+  opacity: 0.97;
+  padding: 1%;
 }
 
 .navbar a {
-color: white;
-font-family: 'Merriweather', serif;
-font-size: 18px;
+  color: white;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
 }
 
 .navbar-toggler {
-padding: 2%;
-border: none;
+  padding: 2%;
+  border: none;
 }
+
 .navbar-toggler .line {
-width: 100%;
-float: left;
-height: 2px;
-background-color: #fff !important;
-margin-bottom: 5px;
+  width: 100%;
+  float: left;
+  height: 2px;
+  background-color: #fff !important;
+  margin-bottom: 5px;
 }
+
 .dropdown-menu {
-z-index: 5454546875;
-margin-right:  200px;
+  z-index: 5454546875;
+  margin-right: 200px;
 }
 
 
 .create_post {
-background-color: white;
+  background-color: white;
 }
 
 .create_post .btn_post {
-background-color: #3B6D8C;
-float: right;
-border-radius: 3%;
-padding: 1% 2% 1% 2%;
-border: 3px solid #3B6D8C;
+  background-color: #3B6D8C;
+  float: right;
+  border-radius: 3%;
+  padding: 1% 2% 1% 2%;
+  border: 3px solid #3B6D8C;
 }
 
 .close {
-margin-left: 85%;
-margin-bottom: 2px;
-float: right;
+  margin-left: 85%;
+  margin-bottom: 2px;
+  float: right;
 
 }
-.editPost
-{
+
+.editPost {
   float: right;
   position: relative;
   color: grey;
   margin-top: 10px;
   left: -10px;
 }
-.ed-opts > a {
- 
+
+.ed-opts>a {
+
   font-size: 24px;
   float: right;
   position: relative;
   left: -10px;
   top: -10px;
 }
-.modal-header
-{
-  background-color:#3B6D8C !important ;
+
+.modal-header {
+  background-color: #3B6D8C !important;
   color: snow;
 }
+
 /* infodiv */
-.info{
+.info {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.details{
-padding-top: 4%;
-padding-bottom: 4%;
-padding-right: 2%;
-margin-bottom: 5%;
 
-padding-left: 2%;
-background-color: white;
-border-radius: 3%;
+.details {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  padding-right: 2%;
+  margin-bottom: 5%;
+
+  padding-left: 2%;
+  background-color: white;
+  border-radius: 3%;
 }

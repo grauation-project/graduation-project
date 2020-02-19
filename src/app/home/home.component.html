@@ -54,7 +54,9 @@
                   
                 </div> -->
         <div style="text-align: center;background-color: white;">
-          <h5 class="pt-5">{{volunteerdetaile.fname}} {{volunteerdetaile.lname}}</h5>
+          <a [routerLink]="['volunteer/account']">
+            <h5 class="pt-5">{{volunteerdetaile.fname}} {{volunteerdetaile.lname}}</h5>
+          </a>
           <p style="color: gray;">developer</p>
           <hr>
           <div class="followdiv">
