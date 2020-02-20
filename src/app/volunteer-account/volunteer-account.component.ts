@@ -41,4 +41,14 @@ export class VolunteerAccountComponent implements OnInit {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
+  searchs = [
+    { id: 20, name: 'Tornado' , country: 'Sri Lanka'}
+  ];
+displaydiv = false;
+searcheng(){
+  this.displaydiv = true;
+}
+ 
 }

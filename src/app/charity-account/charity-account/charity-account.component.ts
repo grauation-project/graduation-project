@@ -16,6 +16,16 @@ export class CharityAccountComponent implements OnInit {
   public code;
   public ID;
   charitydetaile = new Signup("", "", "", "", "", "", "", "");
+    title = 'Angular Search Using ng2-search-filter';
+    searchText;
+    searchs = [
+      { id: 20, name: 'Tornado' , country: 'Sri Lanka'}
+    ];
+  displaydiv = false;
+  searcheng(){
+    this.displaydiv = true;
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");

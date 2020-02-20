@@ -31,7 +31,9 @@ var donatematerial = require("./controllers/donate material");
 var admin = require("./controllers/admin")
 const volunteer = require("./controllers/volunteer");
 var charityController = require("./controllers/charity");
-const donateonline = require("./controllers/donationone")
+const donateonline =require("./controllers/donationone");
+var searchController = require("./controllers/search");
+
 winston.configure({
   transports: [
     new winston.transports.File({
@@ -86,6 +88,7 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+app.use("/search", searchController);
 
 
 

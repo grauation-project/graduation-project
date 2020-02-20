@@ -10,7 +10,7 @@
   </button>
 
   <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ml-5">
+    <ul class="navbar-nav mr-auto ml-4">
       <li class="nav-item active">
         <i class="fas fa-home align-center "></i>
         <a class="nav-link " href="#">Home <span class="sr-only">(current)</span></a>
@@ -25,18 +25,38 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
+
       <li class="nav-item mr-5">
         <i class="fa fa-user-circle"></i>
 
         <a class="nav-link" (click)="logout()">Logout</a>
       </li>
+      <form class="form-inline mr-auto searchform">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Start searching" aria-label="Search"
+          (click)="searcheng()">
+        <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2 searchbtn" type="submit">Search</button>
+      </form>
     </ul>
-
   </div>
 </nav>
+<div class="container-fluid bg-light" *ngIf=displaydiv>
+  <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Charity or Volunter Name</th>
+      <th>Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let search of searchs | filter:searchText">
+      <td><a href="">{{search.name}}</a</td>
+      <td>{{search.country}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 <div class="contain">
   <div class="container-fluid p-0 overflow-hidden">
     <div class="row">
@@ -406,3 +426,5 @@
       </div>
     </div>
   </div>
+</div>
+ 
