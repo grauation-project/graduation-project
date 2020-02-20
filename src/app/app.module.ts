@@ -19,6 +19,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { VolunteersignupService } from "./services/volunteersignup.service";
 import { PaymentService } from "./services/payment.service";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { PaymentService } from "./services/payment.service";
     SignupComponent,
     DashBoardComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,Ng2SearchPipeModule],
 
   providers: [VolunteersignupService, PaymentService],
   bootstrap: [AppComponent]
