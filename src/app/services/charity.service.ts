@@ -14,4 +14,7 @@ export class CharityService {
       signup
     );
   }
+  listCharity(){
+    return this.http.get('http://localhost:3000/search/listcharity')
+  }
 }

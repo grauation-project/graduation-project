@@ -33,29 +33,40 @@
       </li>
       <form class="form-inline mr-auto searchform">
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search"
-          (click)="searcheng()">
+          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
         <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2 searchbtn" type="submit">Search</button>
       </form>
     </ul>
   </div>
 </nav>
 <div class="container-fluid bg-light" *ngIf=displaydiv>
-  <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Charity or Volunter Name</th>
-      <th>Country</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let search of searchs | filter:searchText">
-      <td><a href="">{{search.name}}</a</td>
-      <td>{{search.country}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Charity or Volunter Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+            <td><a href="">{{volunteer.fname }} {{volunteer.lname}} </a></td>
+            <td>{{volunteer.country}}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+            <td><a href="">{{charity.name}}</a></td>
+            <td>{{charity.country}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
 </div>
 <div class="contain">
   <div class="container-fluid p-0 overflow-hidden">
@@ -427,4 +438,3 @@
     </div>
   </div>
 </div>
- 

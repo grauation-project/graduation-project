@@ -19,4 +19,7 @@ export class VolunteersignupService {
   public volunteersign(volunteerone: Volunteer): Observable<any> {
     return this._http.post<any>(this.signupurl, volunteerone);
   }
+  listvolunteer(){
+    return this._http.get('http://localhost:3000/search/listvolunteer')
+  }
 }
