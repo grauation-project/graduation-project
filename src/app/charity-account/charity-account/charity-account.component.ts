@@ -47,6 +47,7 @@ export class CharityAccountComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+  // subscribe search
     this.charityService.listCharity().subscribe(data=>{
       this.listcharitysearch=data
     });

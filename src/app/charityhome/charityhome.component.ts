@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { LoginService } from "../services/login.service";
 import { Signup } from "../class/signup";
+import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from '../services/volunteersignup.service';
 @Component({
   selector: "app-charityhome",
   templateUrl: "./charityhome.component.html",
@@ -11,11 +13,24 @@ export class CharityhomeComponent implements OnInit {
   constructor(
     private _LoginService: LoginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private charityService:CharityService,
+    private volunteerService:VolunteersignupService,
+
   ) {}
   public code;
   public ID;
   charitydetaile = new Signup("", "", "", "", "", "", "", "");
+
+  searchText;
+  listvolunteersearch ;
+  listcharitysearch ;
+  // slsText;
+displaydiv = false;
+searcheng(){
+  this.displaydiv = true;
+}
+
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
@@ -32,6 +47,13 @@ export class CharityhomeComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+     // subscribe search
+  this.charityService.listCharity().subscribe(data=>{
+    this.listcharitysearch=data
+  });
+  this.volunteerService.listvolunteer().subscribe(data=>{
+    this.listvolunteersearch=data
+  })
   }
   refresh() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -54,4 +76,5 @@ export class CharityhomeComponent implements OnInit {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
+ 
 }

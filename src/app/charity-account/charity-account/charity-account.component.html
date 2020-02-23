@@ -13,7 +13,7 @@
     <ul class="navbar-nav mr-auto ml-4">
       <li class="nav-item active">
         <i class="fas fa-home align-center "></i>
-        <a class="nav-link " href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <i class="fas fa-envelope align-center  "></i>
@@ -41,13 +41,12 @@
 </nav>
 <div class="container-fluid bg-light" *ngIf=displaydiv>
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Charity or Volunter Name</th>
+            <th> Volunter Name</th>
             <th>Country</th>
           </tr>
         </thead>
@@ -57,6 +56,17 @@
             <td>{{volunteer.country}}</td>
           </tr>
         </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <br>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Charity Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
         <tbody>
           <tr *ngFor="let charity of listcharitysearch | filter:searchText">
             <td><a href="">{{charity.name}}</a></td>
@@ -65,7 +75,6 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-2"></div>
   </div>
 </div>
 <div class="contain">

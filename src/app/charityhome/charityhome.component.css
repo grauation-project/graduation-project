@@ -352,3 +352,19 @@ ul {
   z-index: 5454546875;
   margin-right: 200px;
 }
+.searchform{
+  display: contents !important;
+  
+  }
+  .searchbtn{
+height: 15%; 
+ }
+ .form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+  font-family: 'FontAwesome';
+}
+.searchsmall{
+color: black;
+}

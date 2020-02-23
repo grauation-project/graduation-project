@@ -54,11 +54,7 @@ body {
   width: 15%;
 
   padding: 2px 4px;
-
-
-
 }
-
 .postForm {
   text-align: center;
 }
@@ -281,4 +277,22 @@ body {
 .navbar-nav a:hover {
   color: #AFBF34;
 
+}
+.searchform{
+  display: contents !important;
+  
+  }
+  .searchbtn{
+height: 15% !important;
+background-color:#AFBF34 ;
+color: whitesmoke;
+ }
+ .form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+  font-family: 'FontAwesome';
+}
+.searchsmall{
+color: black;
 }

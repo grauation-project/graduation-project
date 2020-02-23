@@ -3,6 +3,8 @@ declare var require: any;
 import { Volunteerdetails } from "../class/Volunteerdetails";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { LoginService } from "../services/login.service";
+import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from '../services/volunteersignup.service';
 @Component({
   selector: "app-volunteer-account",
   templateUrl: "./volunteer-account.component.html",
@@ -14,10 +16,23 @@ export class VolunteerAccountComponent implements OnInit {
   volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
   public code;
   public ID;
+
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
+  listvolunteersearch ;
+  listcharitysearch ;
+  // slsText;
+displaydiv = false;
+searcheng(){
+  this.displaydiv = true;
+}
   constructor(
     private _LoginService: LoginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private charityService:CharityService,
+    private volunteerService:VolunteersignupService
+
   ) {}
 
   ngOnInit() {
@@ -36,19 +51,18 @@ export class VolunteerAccountComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+     // subscribe search
+     this.charityService.listCharity().subscribe(data=>{
+      this.listcharitysearch=data
+    });
+    this.volunteerService.listvolunteer().subscribe(data=>{
+      this.listvolunteersearch=data
+    })
   }
   logout() {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
-  title = 'Angular Search Using ng2-search-filter';
-  searchText;
-  searchs = [
-    { id: 20, name: 'Tornado' , country: 'Sri Lanka'}
-  ];
-displaydiv = false;
-searcheng(){
-  this.displaydiv = true;
-}
+  
  
 }

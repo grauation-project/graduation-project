@@ -2,6 +2,8 @@ import { LoginService } from "../services/login.service";
 import { Volunteerdetails } from "../class/Volunteerdetails";
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from '../services/volunteersignup.service';
 declare var require: any;
 
 @Component({
@@ -13,8 +15,20 @@ export class HomeComponent implements OnInit {
   constructor(
     private _LoginService: LoginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private charityService:CharityService,
+    private volunteerService:VolunteersignupService
+
   ) {}
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
+  listvolunteersearch ;
+  listcharitysearch ;
+  // slsText;
+displaydiv = false;
+searcheng(){
+  this.displaydiv = true;
+}
   volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
   public code;
   public ID;
@@ -36,6 +50,13 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+     // subscribe search
+     this.charityService.listCharity().subscribe(data=>{
+      this.listcharitysearch=data
+    });
+    this.volunteerService.listvolunteer().subscribe(data=>{
+      this.listvolunteersearch=data
+    })
   }
 
   logout() {

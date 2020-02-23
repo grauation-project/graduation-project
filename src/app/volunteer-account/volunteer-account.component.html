@@ -40,25 +40,40 @@
 </nav>
 <div class="container-fluid bg-light" *ngIf=displaydiv>
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Charity or Volunter Name</th>
+            <th> Volunter Name</th>
             <th>Country</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let search of searchs | filter:searchText">
-            <td><a href="">{{search.name}}</a></td>
-            <td>{{search.country}}</td>
+          <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+            <td><a href="">{{volunteer.fname }} {{volunteer.lname}} </a></td>
+            <td>{{volunteer.country}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <br>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Charity Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+            <td><a href="">{{charity.name}}</a></td>
+            <td>{{charity.country}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <div class="contain">
