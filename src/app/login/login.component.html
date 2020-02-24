@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="container-fluid">
 
   <div class="row">
@@ -8,17 +10,17 @@
 
       <div class="logform bg-light">
         <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()" action="/login" method="POST">
-
+          <h5 style="color: red;text-align: center;">{{loginerror}}</h5>
           <div class="form-group">
             <label>EMAIL :</label>
             <input type="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required
-              class="form-control" [(ngModel)]=" userModel.email" placeholder="Email" name="email">
+              class="form-control" [(ngModel)]=" loginModel.email" placeholder="Email" name="email">
             <small [class.d-none]="email.valid || email.untouched" class="text-danger">email is required</small>
           </div>
           <div class="form-group">
             <label>PASSWORD :</label>
             <input type="password" #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
-              required class="form-control" [(ngModel)]=" userModel.password" placeholder="Password" name="password">
+              required class="form-control" [(ngModel)]=" loginModel.password" placeholder="Password" name="password">
             <small [class.d-none]="password.valid || password.untouched" class="text-danger">password is
               required</small>
           </div>
@@ -40,3 +42,4 @@
 
   </div>
 </div>
+<app-footer></app-footer>

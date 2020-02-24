@@ -15,7 +15,16 @@ const post = new Schema({
   {
     type:mongoose.Schema.Types.ObjectId,
     enum:['volunteer','charity']
-  }
+  },
+  comment:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'comment'
+  } ,
+ like:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'like'
+    }
+
 });
 
 module.exports = mongoose.model("post", post)    

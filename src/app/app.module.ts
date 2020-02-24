@@ -20,6 +20,11 @@ import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { VolunteersignupService } from "./services/volunteersignup.service";
 import { PaymentService } from "./services/payment.service";
 import { PostSeriveService } from './services/post-serive.service';
+import { ReactiveFormsModule } from "@angular/forms";
+import { FileUploadModule } from "ng2-file-upload";
+import { DonationComponent } from "./donation/donation.component";
+import { CongrateComponent } from "./congrate/congrate.component";
+import { CharityhomeComponent } from './charityhome/charityhome.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +40,20 @@ import { PostSeriveService } from './services/post-serive.service';
     HomeComponent,
     VolunteerAccountComponent,
     SignupComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    DonationComponent,
+    CongrateComponent,
+    CharityhomeComponent
   ],
   imports: [
     BrowserModule,
-     AppRoutingModule,
-      FormsModule,
-       HttpClientModule],
-
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FileUploadModule
+  ],
+  
   providers: [
     VolunteersignupService,
      PaymentService,

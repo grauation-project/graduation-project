@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var router = express.Router();
-var mongoose = require("mongoose");
 var bcrypt = require("bcryptjs");
 var parseUrlencoded = bodyParser.urlencoded({
   extended: true

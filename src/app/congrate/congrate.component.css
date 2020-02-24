@@ -1,0 +1,28 @@
+.congrate {
+  background-image: url("https://technext.github.io/layla/assets/map.jpg");
+  background-size: cover;
+  height: 550px;
+  /* width: 100% */
+}
+
+h1 {
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 9.7vh;
+
+  line-height: 1.5;
+  color: #AFBF34;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 9.7vh;
+  line-height: 1.5;
+  color: #AFBF34;
+  text-align: center;
+
+}
+
+.caption {
+  padding-top: 5%;
+}

@@ -10,7 +10,7 @@ export class PaymentService {
   constructor(private _http: HttpClient) {}
   postpayment(storepayment: Payment) {
     return this._http.post<any>(
-      "http://localhost:3000/savethem/payment",
+      "http://localhost:3000/savethem/donatepayment/payment",
       storepayment
     );
   }

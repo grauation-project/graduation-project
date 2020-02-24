@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
-const joi = require("joi");
+var joi = require("joi");
 
-const Schema = mongoose.Schema
-const charityschema = new Schema({
+var charity = mongoose.model("charity", new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -23,50 +22,54 @@ const charityschema = new Schema({
     type: String,
     required: true,
     min: 8,
-   
+    max: 255
   },
-  
+
   phone: {
     type: String,
-    max:15,
+    min: 11,
+    max: 14,
     required: true,
 
   },
   bankaccount: {
-    type: Number,
-    unique: true,
-    required:true
+    type: String,
+    unique: true
 
   },
-  country:{
+  country: {
     type: String,
     required: true,
-    maxlength:50
+    maxlength: 50
   },
-  address:{
-    type:String,
-    required:true,
-    maxlength:225
+  address: {
+    type: String,
+    required: true
   },
-    
-  })
+  post: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'post'
+  },
+  // follower:{
 
-  function validatecharity(payment) {
-    var Schema = {
-      name: joi.string().max(25).required(),
-      email: joi.string().max(255).email({minDomainSegments:2,tlds:{allow:['com','net']}}).unique().required(),
-      password: joi.string().min(8).required(),
-      bankaccount: joi.number().unique().required(),
-      phone: joi.number().max(15).required(),
-      country: joi.string().max(50).required(),
-      address: joi.string().max(225).required(),
-     
-     
-  
-    };
-    return joi.validate(payment, Schema)
-  }
-  
-  exports.validatecharity = validatecharity;
+  // }
+}));
 
-module.exports = mongoose.model("charity", charityschema)
+
+function validatecharity(charities) {
+  var Schema = {
+    name: joi.string().min(6).max(25).required(),
+    img: joi.string(),
+    email: joi.string().min(15).max(225).required(),
+    password: joi.string().min(8).max(255).required(),
+    phone: joi.string().min(11).max(14).required(),
+    bankaccount: joi.string().max(20).required(),
+    country: joi.string().max(15).required(),
+    address: joi.string().min(5).max(55).required(),
+
+  };
+  return joi.validate(charities, Schema)
+}
+exports.validatecharity = validatecharity;
+
+exports.charity = charity;

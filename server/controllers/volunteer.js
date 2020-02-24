@@ -1,52 +1,111 @@
-var express =require("express");
-var mongoose=require("mongoose");
-var bodyParser=require("body-parser");
-const jwt=require("jsonwebtoken");
-const bcrypt = require('bcryptjs');
-var route=express.Router();
-var app = express(); 
+var express = require("express");
+var bodyParser = require("body-parser");
+var router = express.Router();
 
-const validateVolunter =require("../models/volunteer")
-const volunteer=require("../models/volunteer")
+var parseUrlencoded = bodyParser.urlencoded({
+  extended: true
+});
+var mongoose = require("mongoose");
+var jwt = require("jsonwebtoken");
+var config = require("config");
+const multer = require("multer");
+const path = require("path");
+var bcrypt = require("bcryptjs");
 
-var parseUrlencoded= bodyParser.urlencoded({extended:true});
-// app.use(bodyParser.urlencoded({useNewUrlParser:true},{useUnifiedTopology:true},{extended:true}));
+var auth = require('../middleware/auth');
+var {
+  validatevolunteer,
+  volunteer
+} = require("../models/volunteer");
 
-route.post("/signup",parseUrlencoded,async(req,res)=>{
-
-  const { error } = validateVolunter(req.body);
-  if (error){
-    return res.status(400).send(error.details[0].message)
-  } 
-  const emailexist = await volunteer.findOne({ email: req.body.email });
-  if (emailexist) {
-    return res.status(400).json({msg:"email aready exists"});
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../upload/"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
   }
-  const salt = await bcrypt.genSalt(10);
-    const hashpassword = await bcrypt.hash(req.body.password, salt)
-
-
-  var volunteersignup=new volunteer()
-  volunteersignup.fname=req.body.fname;
-  volunteersignup.lname=req.body.lname;
-  volunteersignup.email=req.body.email;
-  volunteersignup.password=hashpassword;
-  volunteersignup.Age=req.body.Age;
-  volunteersignup.phone=req.body.phone;
-  volunteersignup.country=req.body.country;
-  volunteersignup.img=req.body.img;
-
-  volunteersignup.save(function(err,data){
-    if(err){
-      console.log(err)
-    }
-    else{
-      res.json(data);
-      console.log(data);
-    }
-  })
+});
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+var upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
 });
 
-  
 
-module.exports=route;
+
+// app.use(bodyParser.urlencoded({useNewUrlParser:true},{useUnifiedTopology:true},{extended:true}));
+
+router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, next) => {
+  // console.log(req.file);
+  const url = req.protocol + '://' + req.get('host')
+  var {
+    error
+  } = validatevolunteer(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
+  let volunterr = await volunteer.findOne({
+    email: req.body.email
+  });
+  if (volunterr) {
+    return res.status(400).send("user already registered.");
+  }
+
+  volunterr = new volunteer({
+    fname: req.body.fname,
+    lname: req.body.lname,
+    email: req.body.email,
+    password: req.body.password,
+    Age: req.body.Age,
+    phone: req.body.phone,
+    country: req.body.country,
+    img: url + '/upload/' + req.body.img,
+  });
+
+  var salt = await bcrypt.genSalt(10);
+  volunterr.password = await bcrypt.hash(volunterr.password, salt);
+  await volunterr.save();
+
+  // var token = jwt.sign({
+  //     _id: volunterr._id,
+  //   },
+  //   config.get("jwtprivatekey")
+  // );
+  // res.cookie('jwt', token, {
+  //   // secure: true,
+  //   httpOnly: true
+  // })
+  res.status(200).json({
+    volunterr,
+    Request: {
+      type: "GET",
+      url: "http://localhost:3000/volunteers/" + volunterr._id
+    }
+  });
+});
+
+
+router.get("/account/:id", auth, async (req, res) => {
+
+  console.log("hi hi")
+  let volunterspec = await volunteer.findOne({
+    _id: req.params.id
+  });
+
+  res.json(volunterspec)
+});
+
+
+
+module.exports = router;

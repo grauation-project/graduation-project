@@ -5,9 +5,9 @@ export class Payment {
     public donorcreditnum: String,
     public country: String,
     public City: String,
-    public PostalCode: Number,
+    public PostalCode: String,
     public charity: String,
-    public charityBankAccount: Number,
+    public charityBankAccount: String,
     public amount: Number
   ) {}
 }

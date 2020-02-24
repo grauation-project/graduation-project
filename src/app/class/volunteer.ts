@@ -1,14 +1,12 @@
 export class Volunteer {
-    constructor(
-        public fname:string,
-        public lname:string,
-        public email:string,
-        public password:string,
-        public Age:Number,
-        public phone:Number,
-        public country:string,
-        public img:string,
-        ){
-
-    }
+  constructor(
+    public fname: String,
+    public lname: String,
+    public email: String,
+    public password: String,
+    public Age: String,
+    public phone: String,
+    public country: String,
+    public img: any
+  ) {}
 }

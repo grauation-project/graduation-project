@@ -14,7 +14,6 @@ var admin = mongoose.model("admin", new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    unique: true,
     minlength: 6,
   }
 }));
