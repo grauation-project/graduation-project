@@ -64,5 +64,14 @@ searcheng(){
     this.router.navigate(["login"]);
   }
   
+  govolunteer(volunteer){
+    console.log(volunteer);
+    this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
+    
+  }
+  gocharity(charity){
+    console.log(charity);
+    this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
+  }
  
 }

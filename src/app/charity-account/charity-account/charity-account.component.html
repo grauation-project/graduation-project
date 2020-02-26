@@ -1,82 +1,81 @@
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon">
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line" style="margin-bottom: 0;"></span>
-    </span>
-  </button>
-
-  <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ml-4">
-      <li class="nav-item active">
-        <i class="fas fa-home align-center "></i>
-        <a class="nav-link " href="">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <i class="fas fa-envelope align-center  "></i>
-
-        <a class="nav-link my-0" href="#">Messages</a>
-      </li>
-      <li class="nav-item mr-5">
-        <i class="fas fa-bell align-center"></i>
-
-        <a class="nav-link" href="#">Notifications</a>
-      </li>
-
-      <li class="nav-item mr-5">
-        <i class="fa fa-user-circle"></i>
-
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-      <form class="form-inline mr-auto searchform">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-        <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2 searchbtn" type="submit">Search</button>
-      </form>
-    </ul>
-  </div>
-</nav>
-<div class="container-fluid bg-light" *ngIf=displaydiv>
-  <div class="row">
-    <div class="col-md-6">
-      <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th> Volunter Name</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-            <td><a href="">{{volunteer.fname }} {{volunteer.lname}} </a></td>
-            <td>{{volunteer.country}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line" style="margin-bottom: 0;"></span>
+      </span>
+    </button>
+  
+    <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
+      <ul class="navbar-nav  ">
+        <li class="nav-item active">
+            <i class="fas fa-home align-center "></i>
+          <a class="nav-link " (click)="refresh()"> 
+            Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <i class="fas fa-envelope align-center  "></i>
+  
+          <a class="nav-link my-0" href="#">Messages</a>
+        </li>
+        <li class="nav-item mr-4">
+          <i class="fas fa-bell align-center"></i>
+  
+          <a class="nav-link" href="#">Notifications</a>
+        </li>
+        <li class="nav-item mr-5">
+          <i class="fa fa-user-circle"></i>
+  
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+        <form class="form-inline mr-auto searchform">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+        </form>
+      </ul>
     </div>
-    <div class="col-md-6">
-      <br>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Charity Name</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-            <td><a href="">{{charity.name}}</a></td>
-            <td>{{charity.country}}</td>
-          </tr>
-        </tbody>
-      </table>
+  </nav>
+  <div class="container-fluid bg-light" *ngIf=displaydiv>
+      <div class="row">
+        <div class="col-md-6">
+          <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> Volunter Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                <td>{{volunteer.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Charity Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                <td (click)="gocharity(charity)">{{charity.name}}</td>
+                <td>{{charity.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 <div class="contain">
   <div class="container-fluid p-0 overflow-hidden">
     <div class="row">

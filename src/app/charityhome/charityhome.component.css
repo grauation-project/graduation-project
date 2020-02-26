@@ -170,6 +170,8 @@ body {
   border-radius: 50%;
   width: 20%;
   height: 60px;
+  float: left;
+
 }
 
 .sgt-text {
@@ -315,7 +317,23 @@ ul {
   margin-left: 40%;
   color: #AFBF34
 }
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .nav-item i {
+    margin-left: 5% !important;
 
+  }
+}
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  .nav-item i {
+    margin-left: 5% !important;
+
+  }
+}
+.nav-item i {
+  color: #AFBF34;
+}
 .navbar {
   background-color: #3B6D8C;
   padding-top: 0.5%;

@@ -21,14 +21,15 @@ const charity = require('../models/charity');
 //     })
 // });
 route.get('/listcharity',(req,res)=>{
-    mongoose.model('charity').find().then(listcharity=>{
+    mongoose.model('charity').find().select('name country').then(listcharity=>{
+      
         res.json(listcharity)
     }).catch(err=>{
         res.json(err)
     })
 })
 route.get('/listvolunteer',(req,res)=>{
-    mongoose.model('volunteer').find().then(listvolunteer=>{
+    mongoose.model('volunteer').find().select('fname lname country').then(listvolunteer=>{
         res.json(listvolunteer)
     }).catch(err=>{
         res.json(err)
