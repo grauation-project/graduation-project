@@ -4,6 +4,9 @@ import { Post } from '../class/post';
 import { LoginService } from "../services/login.service";
 import { Volunteerdetails } from "../class/Volunteerdetails";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from '../services/volunteersignup.service';
+import { Follow } from '../class/follow';
 declare var require: any;
 
 @Component({
@@ -12,28 +15,42 @@ declare var require: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  charities: unknown;
   
   constructor(
     private _LoginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
-    private postSerives:PostSeriveService
+    private postSerives:PostSeriveService,
+    private charityService:CharityService,
+    private volunteerService:VolunteersignupService
+
   ) {}
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
+  listvolunteersearch ;
+  listcharitysearch ;
+  // slsText;
+displaydiv = false;
+searcheng(){
+  this.displaydiv = true;
+}
   volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
+  
   public code;
   public ID;
   imgnav = require("../../assets/1.jpg");
   public Allpost
-  public newPost = new Post('','', '',[],[])
+  public newPost = new Post('','', '',[],[],null)
   post
   ngOnInit() {
 
     this.postSerives.getpost().subscribe(data=>{
       console.log(data)
       this.Allpost=data
-    })
+    });
 
-
+    
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
       console.log(typeof params.get("_id"));
@@ -49,20 +66,37 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+     // subscribe search
+     this.charityService.listCharity().subscribe(data=>{
+      this.listcharitysearch=data
+    });
+    this.volunteerService.listvolunteer().subscribe(data=>{
+      this.listvolunteersearch=data
+    })
   }
 
 onSubmit(){
-  console.log("create")
-  this.newPost.postedby = this.code
-      this.postSerives.newpost(this.newPost),
-      this.postSerives.getpost().subscribe(data=>{
+  console.log(this.code)
+    console.log("create")
+     this.newPost.postedby = this.code
+    console.log(this.code)
+    this.postSerives.newpost(this.newPost)
+    console.log(this.newPost),
+      this.postSerives.getpost().subscribe(data => {
         console.log(data)
-        this.Allpost=data
-      }) 
-    }
+        this.Allpost = data
+      })
+
+      this.newPost.title="",
+      this.newPost.content=""
+
+  }
+
 
   logout() {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
+
+  
 }

@@ -62,7 +62,7 @@ router.post("/signup", parseUrlencoded, async (req, res, next) => {
 
 })
 
-router.get("/account/:id", auth, async (req, res) => {
+router.get("/account/:id" , auth, async (req, res) => {
 
   console.log("hi hi")
   let charityspec = await charity.findOne({
@@ -71,5 +71,64 @@ router.get("/account/:id", auth, async (req, res) => {
 
   res.json(charityspec)
 });
+
+
+router.post("/following/:id" , parseUrlencoded, async (req, res) => {
+  console.log("asd")
+  let exit = charity.findOne({following:req.body.id},function(err,data){
+
+    if(err){
+      console.log(err)
+    }
+  });
+  if(!exit){
+
+    charity.update({_id:req.params.id},{$push:{following:req.body.id}},(err,data)=>{
+      if(err){
+        console.log(err);
+        
+      }
+      else{
+        let exit1 = charity.findOne({follower:req.params.id},function(err,data){
+
+          if(err){
+            console.log(err)
+          }
+        
+        
+        })
+        console.log(data);
+        res.json(data)
+        if(!exit1){
+          console.log("follow")
+          charity.update({_id:req.body.id},{$push:{follower:req.params.id.toString()}},(err,data)=>{
+            if(err){
+              console.log(err);
+              
+            }
+            else{
+              console.log(data);
+              res.json(data)
+            }
+          })
+
+        }
+        else{
+          res.json("you are follower")
+        }
+ 
+      }
+    
+    })
+    
+  }
+else{
+
+  res.json("sorry you are already follow this account")
+}
+
+});
+
+
 
 module.exports = router;

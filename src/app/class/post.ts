@@ -4,6 +4,7 @@ export class Post {
         public content:string,
        public postedby:string,
        public comment:string[],
-       public like:string[]
+       public like:string[],
+       public createdat:Date
     ){ }
 }

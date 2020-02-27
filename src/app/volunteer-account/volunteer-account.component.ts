@@ -7,6 +7,9 @@ import { PostSeriveService } from '../services/post-serive.service';
 import { Post } from '../class/post';
 import { Like } from '../class/like';
 import { Comment } from 'src/app/class/comment';
+import { CharityService } from '../services/charity.service';
+import { VolunteersignupService } from '../services/volunteersignup.service';
+import { Edit } from '../class/edit';
 @Component({
   selector: "app-volunteer-account",
   templateUrl: "./volunteer-account.component.html",
@@ -26,15 +29,33 @@ export class VolunteerAccountComponent implements OnInit {
   commentpost;
   edititle: any;
   AllLikes;
+  postTitle;
+  postContent;
   likesPostedby: any;
+  public showcomment =false
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
-  public newPost = new Post('', '', '', [], []);
+  public newPost = new Post('', '', '', [], [],null);
+  public editclass = new Edit("", "", "", "")
+
+  title = 'Angular Search Using ng2-search-filter';
+  searchText;
+  listvolunteersearch ;
+  listcharitysearch ;
+  // slsText;
+displaydiv = false;
+  IDpostdelete: any;
+searcheng(){
+  this.displaydiv = true;
+}
   constructor(
     private _LoginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
-    private postSerives: PostSeriveService
+    private postSerives: PostSeriveService,
+    private charityService:CharityService,
+    private volunteerService:VolunteersignupService
+
   ) {}
 
   ngOnInit() {
@@ -60,6 +81,13 @@ export class VolunteerAccountComponent implements OnInit {
     this.postSerives.charityposts().subscribe(posts => {
       console.log(posts)
       this.charityposts = posts
+    })
+     // subscribe search
+     this.charityService.listCharity().subscribe(data=>{
+      this.listcharitysearch=data
+    });
+    this.volunteerService.listvolunteer().subscribe(data=>{
+      this.listvolunteersearch=data
     })
   }
   logout() {
@@ -113,32 +141,57 @@ export class VolunteerAccountComponent implements OnInit {
   }
   comment() {
     this.iscomment = true;
+    this.showcomment=true
+
+this.IDpost = document.getElementById('postID').innerHTML
+    this.postSerives.displaycomment(this.IDpost)
+    this.postSerives.allcomment().subscribe(allcomment => {
+      console.log(allcomment)
+      this.commentpost = allcomment
+    })
+
     
 }
 
+editbutton(post) {
+
+  console.log(post._id)
+  this.IDpost=post._id
+  this.postTitle=post.title
+  console.log(this.postTitle)
+  this.postContent=post.content
+  console.log(this.postContent)
+  
+}
+
   edit() {
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.getpostbyid(this.IDpost)
-    console.log(this.IDpost)
-      // this.postSerives.getpostwilledit().subscribe(post => {
-      //   console.log(post)
-      //   this.editpost = post
-      //   console.log(this.editpost);
-        
-        // this.editpost.title=this.edititle
-        // this.postSerives.edit( this.IDpost)
+    this.editclass.postID = this.IDpost
+    this.editclass.postedby = this.code
 
-      // })
+    console.log(this.editclass)
+    this.postSerives.edit(this.editclass)
 
-      this.newPost.title="",
-      this.newPost.content=""
+    this.postSerives.getcharityid(this.code)
+    console.log(this.code)
+    this.postSerives.charityposts().subscribe(allpostcharity => {
+      console.log(allpostcharity)
+      this.charityposts = allpostcharity
+
+      this.editclass.title = "",
+        this.editclass.content = ""
+
+
+    })
+  }
+  deletebutton(post){
+    console.log(post._id)
+    this.IDpostdelete=post._id
   }
   delete() {
-    // this.postSerives.getcharityid(post)
-    // console.log(post)
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.delete(this.IDpost)
-    console.log(this.IDpost);
+
+    // this.IDpost = document.getElementById('postID').innerHTML
+    this.postSerives.delete(this.IDpostdelete)
+    console.log(this.IDpostdelete);
     this.postSerives.getcharityid(this.code)
     console.log(this.code)
     this.postSerives.charityposts().subscribe(posts => {
@@ -146,6 +199,7 @@ export class VolunteerAccountComponent implements OnInit {
       this.charityposts = posts
     })
   }
+
 
   sendcomment() {
     console.log('comment')
@@ -163,4 +217,6 @@ export class VolunteerAccountComponent implements OnInit {
       this.commentpost=allcomment
   })
   }
+  
+ 
 }

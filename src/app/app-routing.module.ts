@@ -48,7 +48,9 @@ const routes: Routes = [
     path: "home/charity/:_id",
     component: CharityhomeComponent,
     canActivate: [GuardService]
-  }
+  },
+  {path:"charity/account/_id",component:CharityAccountComponent},
+  {path:"charity/home/:_id",component:CharityhomeComponent}
 ];
 
 @NgModule({

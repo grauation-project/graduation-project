@@ -137,11 +137,6 @@ color:#3B6D8C ;
   font-size: 15px;
   margin-bottom: 8%;
 }
-
-.log {
-  margin-left: 15%
-}
-
 .nav-item {
   margin-right: 4%;
 }
@@ -535,4 +530,21 @@ ul {
   padding-left: 2%;
   background-color: white;
   border-radius: 3%;
+}
+
+.searchform{
+  display: contents !important;
+  
+  }
+  .searchbtn{
+height: 15%; 
+ }
+ .form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
+.form-control::placeholder  {
+  font-family: 'FontAwesome';
+}
+.searchsmall{
+color: black;
 }

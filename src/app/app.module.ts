@@ -25,6 +25,7 @@ import { FileUploadModule } from "ng2-file-upload";
 import { DonationComponent } from "./donation/donation.component";
 import { CongrateComponent } from "./congrate/congrate.component";
 import { CharityhomeComponent } from './charityhome/charityhome.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CharityhomeComponent } from './charityhome/charityhome.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    Ng2SearchPipeModule
   ],
   
   providers: [

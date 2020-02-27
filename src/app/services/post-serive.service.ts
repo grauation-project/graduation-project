@@ -120,4 +120,32 @@ getLikes(){
 getlikesPostedby(postedbyid){
   this.socket.emit("likesPostedBy",postedbyid)
 }
+
+
+
+
+
+
+
+getallcharity(){
+this.socket.emit("allCharity")
+}
+
+charities(){
+  let charities =new Observable(observer=>{
+    this.socket.on("getCharities",charity=>{
+      observer.next(charity)
+    }) 
+    })
+    return charities
+  
+};
+follow(followData){
+  this.socket.emit("follow",followData)
+}
+
+finduser(id){
+  this.socket.emit("user",id)
+}
+
 }

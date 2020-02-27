@@ -11,7 +11,7 @@ public DonateMaterialURL = "http://localhost:3000/donate/material";
 constructor(private http:HttpClient)  { }
 
 
-  donateMaterial(materialDonate:DonationMaterial){
+  DonateMaterial(materialDonate:DonationMaterial){
     return this.http.post(this.DonateMaterialURL,materialDonate);
   }
 }

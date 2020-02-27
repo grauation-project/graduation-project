@@ -23,28 +23,68 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
-
-      <li class="nav-item dropdown ">
+      <!-- <li class="nav-item dropdown ">
         <a class="nav-link dropdown-toggle mt-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()" href="#">Logout</a>
         </div>
+      </li> -->
+      <li class="nav-item mr-5 log">
+        <i class="fa fa-user-circle"></i>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
-
+      <form class="form-inline mr-auto searchform">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+        <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2 searchbtn" type="submit">Search</button>
+      </form>
     </ul>
 
   </div>
 </nav>
 
 <body class="container-fluid bg-light">
+  <div class="container-fluid bg-light" *ngIf=displaydiv>
+    <div class="row">
+      <div class="col-md-6">
+        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Volunter Name</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+              <td><a href="">{{volunteer.fname }} {{volunteer.lname}} </a></td>
+              <td>{{volunteer.country}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Charity Name</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+              <td><a href="">{{charity.name}}</a></td>
+              <td>{{charity.country}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <div class=" row pr-5 pl-5 pb-5">
     <div class="col-md-3  pr-4 pl-4 ">
       <div class="shadow myprofile">
@@ -57,10 +97,10 @@
           <a [routerLink]="['volunteer/account']">
             <h5 class="pt-5">{{volunteerdetaile.fname}} {{volunteerdetaile.lname}}</h5>
           </a>
-          <p style="color: gray;">developer</p>
+          <p style="color: gray;">volunteer</p>
           <hr>
           <div class="followdiv">
-            <h6 style="color: grey;">Following</h6>
+            <h6 style="color: grey;"><a>Following</a></h6>
             <p>22</p>
           </div>
 
@@ -70,7 +110,7 @@
           </div>
           <hr>
           <div class="viewprofile pb-4">
-            <a href="#">view profile</a>
+            <a [routerLink]="['volunteer/account']">view profile</a>
           </div>
         </div>
       </div>
@@ -355,14 +395,14 @@
         <div class="suggestions-list bg-white mt-4">
             <h5 class="pl-3">Suggestions</h5>
             <hr>
-            <div class="row">
+            <div class="row" *ngFor="let charity of charities">
                 <div class="col-md-12 suggestion-usd  ">
                     <img src="../../../assets/download.jpg" class="cricle-img" alt="">
                     <div class="sgt-text">
-                        <h4 class="mb-0">caharity name</h4>
-                        <span>country</span>
+                        <h4 class="mb-0">{{charity.name}}</h4>
+                        <span>{{charity.country}}</span>
                     </div>
-                    <span class="pr-1">
+                    <span class="pr-1" (click)="follow(charity)">
                         <i class="fa fa-plus"></i>
                     </span>
                 </div>
