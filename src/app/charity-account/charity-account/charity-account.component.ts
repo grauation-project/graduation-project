@@ -7,12 +7,15 @@ import { VolunteersignupService } from 'src/app/services/volunteersignup.service
 import { Needs } from "../../class/needs"
 import { NgForm } from '@angular/forms';
 import { Listneed } from 'src/app/class/listneed';
+declare var require: any;
+
 @Component({
   selector: "app-charity-account",
   templateUrl: "./charity-account.component.html",
   styleUrls: ["./charity-account.component.css"]
 })
 export class CharityAccountComponent implements OnInit {
+  profileimageee=""
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -231,6 +234,8 @@ this.isupdate=false
     this._LoginService.charitydetails(this.code).subscribe(
       data => {
         this.charitydetaile = data;
+        this.profileimageee= require("../../../../server/upload/"+this.charitydetaile.img.substr(12));
+
         this.ID = this.code.slice(0, 9);
         console.log(this.charitydetaile);
       },

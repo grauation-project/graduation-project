@@ -15,7 +15,6 @@ const URL = "http://localhost:3000/savethem/volunteer/signup";
   providers: [VolunteersignupService]
 })
 export class SignupComponent implements OnInit {
-  // title = "ng8fileuploadexample";
   title = "ng8fileupload";
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -29,9 +28,9 @@ export class SignupComponent implements OnInit {
   charityerror = "";
   volunteererror = "";
   fileselected = "";
-  charitymodel = new Signup("", "", "", "", "", "", "", "");
   ischarity = true;
   isvolunteer = false;
+
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {
       file.withCredentials = false;
@@ -47,10 +46,12 @@ export class SignupComponent implements OnInit {
     };
     console.log(this.uploader);
   }
-  // onfileselected(event) {
-  //   fileselected = event.target.files[0].name;
-  // }
-  volunteersignup = new Volunteer("", "", "", "", "", "", "", "");
+  onfileselected(event) {
+    this.fileselected = event.target.files[0].name;
+    console.log( this.fileselected )
+  }
+  volunteersignup = new Volunteer("", "", "", "", "", "", "",this.fileselected);
+  charitymodel = new Signup("", "", "", "", "", "", "", this.fileselected);
 
   charityregister() {
     this.ischarity = true;

@@ -70,7 +70,7 @@ router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, n
     Age: req.body.Age,
     phone: req.body.phone,
     country: req.body.country,
-    img: url + '/upload/' + req.body.img,
+    img: req.body.img,
   });
 
   var salt = await bcrypt.genSalt(10);

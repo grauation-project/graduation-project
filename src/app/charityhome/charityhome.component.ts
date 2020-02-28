@@ -4,12 +4,15 @@ import { LoginService } from "../services/login.service";
 import { Signup } from "../class/signup";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
+declare var require: any;
+
 @Component({
   selector: "app-charityhome",
   templateUrl: "./charityhome.component.html",
   styleUrls: ["./charityhome.component.css"]
 })
 export class CharityhomeComponent implements OnInit {
+  profileimageee="";
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -39,6 +42,8 @@ searcheng(){
     this._LoginService.charitydetails(this.code).subscribe(
       data => {
         this.charitydetaile = data;
+        this.profileimageee= require("../../../server/upload/"+this.charitydetaile.img.substr(12));
+
         this.ID = this.code.slice(0, 9);
         console.log(this.charitydetaile);
       },

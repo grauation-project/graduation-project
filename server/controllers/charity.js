@@ -6,6 +6,31 @@ var jwt = require("jsonwebtoken");
 var config = require("config");
 var bcrypt = require("bcryptjs");
 var auth = require('../middleware/auth');
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../upload/"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+var upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
 
 var parseUrlencoded = bodyParser.urlencoded({
   extended: true
@@ -19,7 +44,7 @@ var {
 
 
 
-router.post("/signup", parseUrlencoded, async (req, res, next) => {
+router.post("/signup",upload.single("img"), parseUrlencoded, async (req, res, next) => {
   console.log("hey");
   var {
     error
