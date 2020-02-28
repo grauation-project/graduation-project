@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
 import { log } from 'util';
-import { VolunteerList } from '../class/volunteer copy';
+// import { VolunteerList } from '../class/volunteer copy';
 declare var require: any;
 
 @Component({

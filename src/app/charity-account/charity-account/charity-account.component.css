@@ -12,9 +12,7 @@
   .searchbtn{
 height: 15%; 
  }
- .form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
+
 .form-control::placeholder  {
   font-family: 'FontAwesome';
 }
@@ -68,8 +66,8 @@ a {
   }
   
   .account_details {
-    margin-left: 5%;
-    margin-right: 3%;
+    margin-left: 1%;
+    margin-right: 2%;
     background-color: #f2f2f2;
   }
   
@@ -106,8 +104,15 @@ a {
     width: 80%;
     background-color: white;
     margin-left: 10%;
-    padding-top: 40%;
+    padding-top: 20%;
   
+  }
+  .right_containerr{
+    width: 80%;
+    background-color: white;
+    margin-left: 10%;
+    padding-top: 10%;
+
   }
   
   .profile_links div {
@@ -250,6 +255,61 @@ a {
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
   
   }
+  .need{
+    border:1px solid #3B6D8C;
+    background-color:#AFBF34;
+    color:white;
+    width: 40%;
+    float: left;
+text-align: center;    
+padding-top: 3%;
+padding-bottom: 2%;
+margin-left: 2%;
+margin-bottom: 10%;
+transition:all 2s
+
+  }
+  .test{
+    display: none;
+  }
+  .drop{
+    display: none;
+  }
+  .dropdown-menu a:hover{
+    background-color:#3B6D8C
+  }
+  .need:hover .drop{
+    display: block;
+    
+  }
+.view i:hover{
+cursor: pointer;
+}
+.dropdown-item:hover{
+  cursor: pointer;
+}
+  .view{
+  
+    /* background-color:#3B6D8C; */
+    color:white;
+    width: 50%;
+    float: left;
+text-align: center;    
+padding-top: 3%;
+padding-bottom: 2%;
+margin-left: 2%;
+margin-bottom: 10%;
+border-radius: 2%;
+border:1px solid rgba(0, 0, 0, 0.2);
+padding: 5px;
+
+  }
+  .need:hover{
+    cursor: pointer;
+  }
+  .clr{
+    clear: both;
+  }
   .provides{
     padding-top: 4%;
     padding-bottom: 4%;
@@ -270,13 +330,17 @@ a {
   float: left;
   /* margin-left: 15px; */
   margin-top: 4%;
+  margin-bottom: 20%;
+
+
 }
-.usy-name h5 {
-  color: #000000;
-  font-size: 18px;
+.usy-name h3 {
+  color: #3B6D8C;
+  font-size: 25px;
   text-transform: capitalize;
   font-weight: 600;
   float: left;
+
 }
 .ed-opts {
   float: right;
@@ -297,11 +361,7 @@ a {
   right: 0;
   width: 130px;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -ms-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -o-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  box-shadow: 0 0 10px rgba(0,0,0,0.28);
+
   padding: 20px;
   opacity: 0;
   visibility: hidden;
@@ -337,11 +397,7 @@ a {
   right: 0;
   width: 130px;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -ms-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  -o-box-shadow: 0 0 10px rgba(0,0,0,0.28);
-  box-shadow: 0 0 10px rgba(0,0,0,0.28);
+ 
   padding: 20px;
   opacity: 0;
   visibility: hidden;

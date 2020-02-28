@@ -1,3 +1,5 @@
+
+<body>
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -89,7 +91,7 @@
   </div>
   <div class="container-fluid ">
     <div class="row">
-      <div class="col-md-3  account_details ">
+      <div class="col-md-5  account_details ">
         <div class="row">
           <img class="profile_img" src="http://gambolthemes.net/workwise-new/images/resources/user-pro-img.png" />
           <div class="right_container">
@@ -105,10 +107,7 @@
               </div>
             </div>
             <div class="profile_links">
-              <div>
-                <i class="fas fa-globe-asia"></i>
-                <a href="#">www.example.com</a>
-              </div>
+            
               <div>
                 <i class="fab fa-facebook-square"></i>
                 <a href="#">www.facebook.com</a>
@@ -121,34 +120,21 @@
                 <i class="fab fa-google-plus-square"></i>
                 <a href="#">www.googleplus.com</a>
               </div>
-              <div>
-                <i class="fab fa-behance-square"></i>
-                <a href="#">www.behance.com</a>
-              </div>
-              <div>
-                <i class="fab fa-pinterest-square"></i>
-                <a href="#">www.pinterest.com</a>
-              </div>
-              <div>
-                <i class="fa fa-instagram-square"></i>
-                <a href="#">www.instagram.com</a>
-              </div>
-              <div>
-                <i class="fab fa-youtube-square"></i>
-                <a href="#">www.youtube.com</a>
-              </div>
+        
             </div>
           </div>
 
 
         </div>
         <div class="row">
-          <div class="right_container">
+          <div class="right_containerr">
+            <div class="clr"></div>
+
             <div class="needs">
               <div class="post_topbar">
                 <div class="usy-dt">
                   <div class="usy-name">
-                    <h5>Needs</h5>
+                    <h3 >Needs :</h3>
                   </div>
                 </div>
                 <div class="editPost  pr-0">
@@ -157,17 +143,97 @@
                     <i class="fa fa-ellipsis-v  pt-0"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Edit post</a>
-                    <a class="dropdown-item" href="#">delete post</a>
+                    <a class="dropdown-item" (click)="toggleadd()" >Add Need</a>
                     <!-- <a class="dropdown-item" href="#">Something else here</a> -->
 
                   </div>
                 </div>
               </div>
-              <p>
-                dfdffffffffffffffffffffffffff
-              </p>
+              <div class="view" *ngIf="isadd">
+                <i (click)="closeview()" class="fas fa-times-circle" style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>              
+                  <form #addneeds="ngForm"  novalidate (ngSubmit)="addneed(addneeds)">
+                  <div class="form-group">
+                    <input type="text" class="form-control"  placeholder="Enter Name" name="name" id="name" #name="ngModel"
+                    [class.is-invalid]="name.invalid && name.touched" required [(ngModel)]="need.name">
+                    <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
+
+                  </div>
+                 
+                  <div class="form-group">
+                    <input type="text" class="form-control"  placeholder="Enter Quantity" required [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                    [(ngModel)]="need.quantity" class="form-control" name="quantity">
+                    <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                      Required</small>
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" name="description" id="description" #description="ngModel"
+                    [class.is-invalid]="description.invalid && description.touched" required 
+                    [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
+                    <small [class.d-none]="description.valid || description.untouched" class="text-danger">description is required</small>
+
+                  </div>
+                  
+                  <button type="submit" name="submit"  [disabled]="addneeds.form.invalid" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+       
+            <div class="need " *ngFor="let needs of listneeds; let i = index" >
+              <div class="btn-group drop float-right ">
+                <button class="btn  btn-sm " type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-v s mr-1" style="color: white;"></i>
+
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="updateneeds(needs)">Edit</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" (click)="deleteneeds(needs)" >Delete</a>
+                </div>
+              </div>
+         <div  data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false" [attr.aria-controls] = "'collapse-' + i"> 
+             <h5>{{needs.name}}</h5>
+             <div class="collapse" [attr.id]="'collapse-' + i">
+              <div class="card card-body" style="background-color: #AFBF34;">
+                <h6>Quantity :</h6>
+                <p style="color: #3B6D8C;font-size: 17px;">{{needs.quantity}}</p>
+                <h6>Description :</h6>
+                <p style="color: #3B6D8C;font-size: 17px;">{{needs.description}}</p>
+
+              </div>
             </div>
+          </div>
+          <div class="view w-100 " class="test" [id]="needs._id" >
+            <i (click)="closetest(needs)" class="fas fa-times-circle" style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>              
+              <form #addneeds="ngForm"  novalidate (ngSubmit)="updateneedss(needs,addneeds)">
+              <div class="form-group">
+                <input type="text" class="form-control"  placeholder="Enter Name"  name="name" id="name" #name="ngModel"
+                [class.is-invalid]="name.invalid && name.touched"  required [(ngModel)]="need.name">
+                <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
+
+              </div>
+             
+              <div class="form-group">
+                <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" required [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                [(ngModel)]="need.quantity" class="form-control" name="quantity">
+                <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                  Required</small>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="description" id="description" #description="ngModel"
+                [class.is-invalid]="description.invalid && description.touched" required 
+                [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
+                <small [class.d-none]="description.valid || description.untouched" class="text-danger">description is required</small>
+
+              </div>
+              
+              <button type="submit" name="submit"  [disabled]="addneeds.form.invalid" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+            </div>
+        
+            
+            </div>
+            <div class="clr"></div>
             <div class="provides">
               <div class="post_topbar">
                 <div class="usy-dt">
@@ -446,3 +512,4 @@
     </div>
   </div>
 </div>
+</body>
