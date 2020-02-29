@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Volunteer } from '../class/volunteer';
 
 @Component({
   selector: 'app-admin-volunteer',
@@ -6,10 +9,62 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-volunteer.component.css']
 })
 export class AdminVolunteerComponent implements OnInit {
-
-  constructor() { }
+  public code;
+  public ID;
+  Volunteerdetails:any =new Volunteer("","","","","","","","")
+  constructor(private _AdminService : AdminService, private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
+    this._AdminService.getvolunteers().subscribe(
+      data  => {
+        this.Volunteerdetails = data;
+        console.log(this.Volunteerdetails);
 
+      },
+
+      error => {
+        console.log("error", error);
+
+      }
+    );
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log(typeof params.get("_id"));
+    });
+  }
+  deletevolunteer(Volunteerdetails){
+
+    this._AdminService.deletevolunteer(Volunteerdetails._id).subscribe(
+
+
+      response => {console.log("Success!", response)
+    
+      this._AdminService.getvolunteers().subscribe(
+        data  => {
+          this.Volunteerdetails = data;
+          console.log(this.Volunteerdetails);
+  
+        },
+  
+        error => {
+          console.log("error", error);
+  
+        }
+      );
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        this.code = params.get("_id");
+        console.log(typeof params.get("_id"));
+      });
+   
+        },
+    
+        error => {
+          console.log("error", error);
+    
+        }
+      );
+     
+
+  }
 }

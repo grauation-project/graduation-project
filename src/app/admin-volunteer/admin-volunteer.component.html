@@ -1,1 +1,31 @@
-<p>admin-volunteer works!</p>
+<table class="table table-hover">
+
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">E.mail</th>
+        <th scope="col">Country</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let Volunteer of Volunteerdetails">
+       
+        <td>{{Volunteer.fname }} {{Volunteer.lname }}</td>
+        <td>{{Volunteer.email }}</td>
+        <td>{{Volunteer.country }}
+            <div class="btn-group drop float-right ">
+                <button class="btn  btn-sm " type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-v s mr-1" style="color: #3B6D8C;"></i>
+    
+                </button>
+                <div class="dropdown-menu">
+               
+                  <a class="dropdown-item" (click)="deletevolunteer(Volunteer)" >Delete</a>
+                </div>
+              </div>
+        </td>
+      </tr>
+    
+    </tbody>
+  </table>

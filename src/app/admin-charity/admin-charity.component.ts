@@ -15,6 +15,7 @@ export class AdminCharityComponent implements OnInit {
   charitydetails:any= new Signup("", "", "", "", "", "", "", "");
   public code;
   public ID;
+
   ngOnInit() {
     this._AdminService.getcharities().subscribe(
       data  => {
@@ -34,5 +35,49 @@ export class AdminCharityComponent implements OnInit {
     });
   
   }
+  deletecharity(charitydetails){
 
+this._AdminService.deletecharity(charitydetails._id).subscribe(
+
+
+  response => {console.log("Success!", response)
+
+
+  this._AdminService.getcharities().subscribe(
+    data  => {
+      this.charitydetails = data;
+      console.log(this.charitydetails);
+
+    },
+
+    error => {
+      console.log("error", error);
+
+    }
+  );
+  this.route.paramMap.subscribe((params: ParamMap) => {
+    this.code = params.get("_id");
+    console.log(typeof params.get("_id"));
+  });
+
+
+
+
+},  error => {
+  console.log("error!", error)
+
+} 
+
+
+
+
+
+
+
+
+
+
+)
+
+  }
 }
