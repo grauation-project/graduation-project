@@ -119,11 +119,11 @@
 
 
 
-<body>
+<body class="p-0 m-0 ">
   <nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#3B6D8C;">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <div class="nav-link admin1">Admin name</div>
+    <ul class="navbar-nav  w-100">
+      <li class="nav-item active name">
+        <div class="nav-link admin1">Admin Dashboard</div>
       </li>
       <li class="nav-item">
         <a class="nav-link icon user_logo" href="#"><i class=" material-icons"
@@ -142,17 +142,19 @@
       </li>
     </ul>
   </nav>
-  <div class="sidenav">
+  <div class="container-fluid main_body">
+    <div class="row">
+  <div class="sidenav col-md-2">
     <a routerLink="admin/add">Add Admin</a>
     <a routerLink="admin/charity">Charities</a>
     <a routerLink="admin/volunteer">Volunteers</a>
-    <a href="#contact">Contact</a>
+    <a routerLink="admin/posts">Posts</a>
   </div>
-  <div class="main">
+  <div class="main col-md-8 ">
 
-<router-outlet></router-outlet>
-
-
+<router-outlet ></router-outlet>
+</div>
+</div>
 
 
   </div>

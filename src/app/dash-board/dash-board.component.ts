@@ -16,11 +16,8 @@ export class DashBoardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  displaydiv = false;
-  charityerror=""
-  addAdmin() {
-    this.displaydiv = true;
-  }
+ 
+ 
   public code;
   public ID;
   charitydetails:any= new Signup("", "", "", "", "", "", "", "");
@@ -32,9 +29,7 @@ export class DashBoardComponent implements OnInit {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
-  closeview(){
-    this.displaydiv=false
-  }
+  
  
   
 }

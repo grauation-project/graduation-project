@@ -28,6 +28,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
+import { PostsadminComponent } from './postsadmin/postsadmin.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AddadminComponent } from './addadmin/addadmin.component';
     CharityhomeComponent,
     AdminCharityComponent,
     AdminVolunteerComponent,
-    AddadminComponent
+    AddadminComponent,
+    PostsadminComponent
   ],
   imports: [
     BrowserModule,

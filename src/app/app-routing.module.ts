@@ -17,6 +17,7 @@ import { CharityhomeComponent } from "./charityhome/charityhome.component";
 import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
+import { PostsadminComponent } from './postsadmin/postsadmin.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
   { path: "login", component: LoginComponent },
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: "admin/add",
         component: AddadminComponent,
+      },
+      {
+        path: "admin/posts",
+        component: PostsadminComponent,
       }
     ]
   },
