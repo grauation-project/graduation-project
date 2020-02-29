@@ -78,9 +78,14 @@
 <div class="contain">
   <div class="container-fluid p-0 overflow-hidden">
     <div class="row">
-      <div class="col-md-12 profile_background">
+      <div class="col-md-12 profile_background"  [ngStyle]="{ 'background-image': 'url(' +coverimmg + ')'}">
         <button class="btnprofile">
-          <a href="#">Change Image</a>
+          <form (ngSubmit)="coverimg()" >
+          <input type="file" [(ngModel)]="volunteerdetaile.coverimg" ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
+          (change)="onfileselected($event)"  class="form-input"   #coverimg="ngModel" name="coverimg" id="file" class="inputfile" />
+          <label for="file">Change Image</label>       
+          <input type="submit" name="submit" (click)="uploader.uploadAll()" >
+        </form>
         </button>
         <div class="clr"></div>
       </div>
@@ -90,7 +95,7 @@
     <div class="row">
       <div class="col-md-3  account_details ">
         <div class="row">
-          <img class="profile_img" src="http://gambolthemes.net/workwise-new/images/resources/user-pro-img.png" />
+          <img class="profile_img" [src]="profileimageee" />
           <div class="right_container">
 
             <div class="folowing_details overflow-hidden">
@@ -170,7 +175,7 @@
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
               <div class="mb-5 mt-3 p-3 create_post">
-                <img class="ml-2 w-22" src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                <img class="ml-2 w-22" [src]="profileimageee"  />
                 <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
                   class="btn_post text-light ">
                 <div class="modal fade" id="post" role="dialog">
@@ -226,7 +231,7 @@
                   </div>
                   <div>
                     <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    [src]="profileimageee"  />
                     <h5>john doe</h5>
                     <span><i class="fa fa-clock-o"></i>3 minutes</span>
                   </div>
@@ -261,7 +266,7 @@
                   </div>
                   <div>
                     <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    [src]="profileimageee"  />
                     <h5>john doe</h5>
                     <span><i class="fa fa-clock-o"></i>3 minutes</span>
                   </div>
@@ -296,7 +301,7 @@
                   </div>
                   <div>
                     <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    [src]="profileimageee"  />
                     <h5>john doe</h5>
                     <span><i class="fa fa-clock-o"></i>3 minutes</span>
                   </div>
@@ -331,7 +336,7 @@
                   </div>
                   <div>
                     <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                    [src]="profileimageee"  />
                     <h5>john doe</h5>
                     <span><i class="fa fa-clock-o"></i>3 minutes</span>
                   </div>

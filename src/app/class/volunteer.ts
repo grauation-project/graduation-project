@@ -7,6 +7,6 @@ export class Volunteer {
     public Age: String,
     public phone: String,
     public country: String,
-    public img: any
+    public img: any,
   ) {}
 }

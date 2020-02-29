@@ -95,7 +95,22 @@ router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, n
   });
 });
 
+router.post("/coverimg/:id", upload.single("coverimg"),function(req,res){
+  let volunterr =  volunteer.findOne({
+    _id: req.body.id
+  });
+  if( volunterr ){
+    volunterr=new volunteer ({
 
+      coverimg:req.body.coverimg
+    })
+
+  }
+ 
+res.status(200).json("done")
+
+
+})
 router.get("/account/:id", auth, async (req, res) => {
 
   console.log("hi hi")

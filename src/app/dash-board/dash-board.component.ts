@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Login } from "../class/login";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { AdminService } from '../services/admin.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-dash-board",
@@ -9,7 +11,7 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 })
 export class DashBoardComponent implements OnInit {
   constructor(
-    // private _LoginService: LoginService,
+    private _AdminService : AdminService ,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -25,20 +27,33 @@ export class DashBoardComponent implements OnInit {
       this.code = params.get("_id");
       console.log(typeof params.get("_id"));
     });
-    // this._LoginService.volunteerdetails(this.code).subscribe(
-    //   data => {
-    //     this.volunteerdetaile = data;
-    //     this.ID = this.code.slice(0, 9);
-    //     console.log(this.volunteerdetaile);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //     this.router.navigate(["login"]);
-    //   }
-    // );
+  
   }
   logout() {
     localStorage.removeItem("token");
     this.router.navigate(["login"]);
   }
+  closeview(){
+    this.displaydiv=false
+  }
+  onSubmit(userForm:NgForm){
+
+
+    console.log(this.adminModel);
+    this. _AdminService.addadmin(this.adminModel).subscribe(
+      response => {
+        console.log("Success!", response);
+        userForm.reset();
+        this.displaydiv=false
+
+      },
+
+      error => {
+        console.log("error", error);
+        // this.charityerror = error.error;
+
+      }
+    );
+  }
+  
 }

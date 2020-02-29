@@ -72,7 +72,8 @@ a {
   }
   
   .profile_img {
-    margin-left: 15%;
+    margin-left: 25%;
+    width:30%;
     position: absolute;
     top: -100px;
     border: 5px solid white;
@@ -212,7 +213,9 @@ a {
     background-color: white;
     border-radius: 3%;
   }
-  
+  .post  img{
+    width: 10%;
+  }
   .post p {
     margin-top: 3%;
     margin-left: 2%
@@ -514,7 +517,9 @@ background-color: #3B6D8C;
 .create_post {
   background-color: white;
 }
-
+.create_post img{
+  width: 14%;
+}
 .create_post .btn_post {
   background-color: #3B6D8C;
   float: right;

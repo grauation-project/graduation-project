@@ -32,7 +32,7 @@ displaydiv = false;
 searcheng(){
   this.displaydiv = true;
 }
-  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
+  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
   public code;
   public ID;
   imgnav = require("../../assets/1.jpg");

@@ -46,6 +46,9 @@ var charity = mongoose.model("charity", new mongoose.Schema({
     type: String,
     required: true
   },
+  coverimg: {
+    type: String
+  }
 
 }));
 
