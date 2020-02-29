@@ -14,4 +14,7 @@ export class AdminService {
       "http://localhost:3000/savethem/admin/add",
       admin)
   }
+  getcharities(){
+    return this.http.get('http://localhost:3000/savethem/admin/charity/list')
+  }
 }

@@ -33,12 +33,14 @@ body {
 .volunteer{
     padding-left: 87px;
     padding-top: 15px;
+    margin-bottom: 4%;
 }
 
 .admin1{
     margin-left: 70px;
     font-family: 'Merriweather', serif;
     font-size: 19px;
+
 }
 .icon{
     margin-left: 800px;
