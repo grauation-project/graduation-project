@@ -42,7 +42,7 @@ const voluntermodel = require("./models/volunteer");
 const charityModel = require('./models/charity')
 const donateonline = require("./controllers/donationone");
 var searchController = require("./controllers/search");
-const need = require("./controllers/need")
+
 
 winston.configure({
   transports: [
@@ -102,7 +102,7 @@ app.use("/search", searchController);
 
 
 
-app.use("/savethem/need", need)
+
 
 app.use("/savethem/charity", charityController);
 app.use("/post", postcontroller)
@@ -296,7 +296,7 @@ io.on("connection", (socket) => {
     })
   });
 
-  socket.on("displaycomment", (postid) => {
+  socket.on("displaycomment",async (postid) => {
     console.log(postid)
     commentModel.find({ post: postid }, (err, comment) => {
       if (!err) {
@@ -374,17 +374,17 @@ io.on("connection", (socket) => {
   socket.on("follow", async (data) => {
     console.log(data)
     console.log("asd")
-    mongoose.model("charity").findOne({ _id: data.follower },(err, charity)=> {
+    mongoose.model("charity").findOne({ _id: data.follower }, (err, charity) => {
       if (!err) {
         // console.log(charity.following)
         var ccc = charity.following
         var vvv = ''
         for (var i; i < ccc.length; i++)
-        
 
-        console.log(vvv += ccc[7] +"<br>" );
 
-        if (vvv += ccc[i]  == data.following) {
+          console.log(vvv += ccc[7] + "<br>");
+
+        if (vvv += ccc[i] == data.following) {
           console.log("you foooooooooo");
 
         }
@@ -429,68 +429,91 @@ io.on("connection", (socket) => {
     })
 
 
+  });
+
+
+
+  socket.on("getfollowing", (data) => {
+    console.log("lllllllllllllllllllllll");
+
+    console.log(data);
+
+    mongoose.model("charity").findOne({ _id: data }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+
+        // console.log(charity.following)
+        var following = charity.following
+        for (var i = 0; i < following.length; i++) {
+          console.log(following[i]);
+
+          mongoose.model("charity").find({ _id: following[i] }, (err, following) => {
+            console.log("nnnnnnnnnnnnnn");
+
+            if (err) {
+              console.log(err)
+            }
+            else {
+              console.log("kkkkkkkkkkkkkkkkkkkkkkkkk")
+              console.log(following)
+              io.emit("following", following)
+            }
+          })
+        }
+      }
+    })
+  });
+
+
+  socket.on("removeFollow", (remove) => {
+    console.log(remove)
+    mongoose.model("charity").findOne({ _id: remove.charityID }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(charity)
+      }
+    })
+  });
+
+  socket.on("findUser", (id) => {
+    console.log("USER")
+    console.log(id);
+    mongoose.model("charity").findOne({ _id: id }, (err, charity) => {
+
+      if (err) {
+        console.log(err);
+
+      }
+
+      if (charity == null) {
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteer) => {
+
+          if (err) {
+            console.log(err)
+          }
+          else {
+            console.log(volunteer)
+            io.emit("isVolunteer",volunteer)
+            console.log(volunteer)
+          }
+
+        })
+      }
+      else {
+        console.log(charity)
+        io.emit("ischarity",charity)
+      }
+
+    });
+    
+
   })
-  //   let exit = mongoose.model("charity").findOne({following:data.following},function(err,data){
 
-  //     if(err){
-  //       console.log(err)
-  //     }
-  //     else{
-  //       console.log(data)
-  //     }
-  //   });
-  //   if(!exit){
-
-  //     mongoose.model("charity").update({_id:data.follower},{$push:{following:data.following}},(err,data)=>{
-  //       if(err){
-  //         console.log(err);
-
-  //       }
-  //       else{
-  //         let exit1 =mongoose.model("charity").findOne({follower:data.follower},function(err,data){
-
-  //           if(err){
-  //             console.log(err)
-  //           }
-
-
-  //         })
-  //         console.log(data);
-  //         // res.json(data)
-  //         if(!exit1){
-  //           console.log("follow")
-  //           mongoose.model("charity").update({_id:data.following},{$push:{follower:data.follower.toString()}},(err,data)=>{
-  //             if(err){
-  //               console.log(err);
-
-  //             }
-  //             else{
-  //               console.log(data);
-  //               // res.json(data)
-  //             }
-  //           })
-
-  //         }
-  //         else{
-  //          console.log("you are follower")
-  //         }
-
-  //       }
-
-  //     })
-
-  //   }
-  // else{
-
-  //   console.log("sorry you are already follow this account")
-  // }
-
-
-  // }
-
-  //     })
-
-  // });
 
 });
 

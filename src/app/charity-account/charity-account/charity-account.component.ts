@@ -29,9 +29,10 @@ export class CharityAccountComponent implements OnInit {
   commentby;
   TitlePost: string;
   IDpostdelete: any;
-  idpostcomment: any;
+  idPostComment: any;
   public com: false
   ccc: boolean;
+  postedByVolunteer: unknown;
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -44,13 +45,13 @@ export class CharityAccountComponent implements OnInit {
   public islike = false;
   public showcomment = false
 
-
-
+public commentByCharity;
+public commentByVolunteer ;
   public code;
   public ID;
   public Allpost
   public editTitle;
-
+public commentPostedBy;
   public editcontent;
   public newPost = new Post('', '', '', [], [], null);
   public likeclass = new Like([], '')
@@ -69,11 +70,6 @@ export class CharityAccountComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.postSerives.charityposts().subscribe(allpostcharity => {
-    //   console.log(allpostcharity)
-    //   // this.charityposts=allpostcharity
-    // })
-
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
       // console.log(this.code)
@@ -90,6 +86,8 @@ export class CharityAccountComponent implements OnInit {
         this.router.navigate(["login"]);
       }
     );
+
+    //charity post
     this.postSerives.getcharityid(this.code)
     console.log(this.code)
 
@@ -114,7 +112,9 @@ export class CharityAccountComponent implements OnInit {
   charityid() {
     this.postSerives.getcharityid(this.code)
   }
-  onSubmit() {
+
+  // create post
+  createPost() {
     console.log("create")
     this.newPost.postedby = this.code
     this.postSerives.newpostfromACC(this.newPost),
@@ -130,6 +130,11 @@ export class CharityAccountComponent implements OnInit {
       this.newPost.content = ""
 
   }
+
+
+
+// like
+
   like(post) {
     document.getElementById("like").style.color = "#3B6D8C";
     this.likeclass.postedby = this.code
@@ -157,49 +162,9 @@ export class CharityAccountComponent implements OnInit {
   //     // this.islike = true
   //   })
   // }
-  comment(post) {
+ 
+// Edit post
 
-    this.iscomment = true
-    // console.log(post)
-    this.idpostcomment = post._id
-    // console.log( this.idpostcomment)
-    this.postSerives.displaycomment(this.idpostcomment)
-
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost = allcomment
-
-
-
-    })
-    // for(var i=0;i<this.commentpost.length; i++){
-    //   this.commentby = this.commentpost[i]
-    //   console.log(this.commentby.post)
-    // }
-
-
-
-
-
-
-
-    // var ID =document.getElementById("commentBY").innerHTML
-    // console.log(ID)
-
-
-    // var i = 0;
-    // this.commentby = this.commentpost.postedby
-    // var id=""
-    // for (; i < this.commentby.length; i++)
-    //   // this.commentby = this.commentpost[i].postedby
-    //    id +=this.commentpost[i].postedby
-    // this.commentby = this.commentpost[0].postedby
-    // /console.log(this.commentby)
-
-
-
-
-  }
   editbutton(post) {
 
     console.log(post._id)
@@ -233,13 +198,13 @@ export class CharityAccountComponent implements OnInit {
 
   }
 
+  // delete post
   deletebutton(post) {
     console.log(post._id)
     this.IDpostdelete = post._id
   }
   delete() {
 
-    // this.IDpost = document.getElementById('postID').innerHTML
     this.postSerives.delete(this.IDpostdelete)
     console.log(this.IDpostdelete);
     this.postSerives.getcharityid(this.code)
@@ -250,63 +215,121 @@ export class CharityAccountComponent implements OnInit {
     })
   }
 
-  sendcomment(comment) {
-    console.log(comment)
-    this.commentclass.postedby = this.code
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.commentclass.post = this.IDpost
-    console.log(this.commentclass);
-
-    this.postSerives.comment(this.commentclass)
-
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost = allcomment
-      // this.commentby = this.commentpost.postedby
-      // console.log(this.commentby)
-    })
-    //   this.commentby=document.getElementById("commentBY").innerHTML
-
-    //   console.log(this.commentby)
-
-    // }
 
 
-  }
-
+ 
   follow(charity) {
     console.log(charity._id)
 
 
   }
 
+//   commntt(pp,cc){
+//     console.log(pp);
+//     console.log(cc);
+//     if(pp===cc)
+// {
+//   return true
+// }    
+    
+//   }
+
+  Comment(post) {
+   
+      this.IDpost = post._id
+    this.postSerives.displaycomment(this.IDpost)
+    this.postSerives.allcomment().subscribe(allcomment => {
+      // console.log(allcomment)
+      this.commentpost = allcomment
+
+      for(let comment of this.commentpost){
+        // console.log(comment.postedby)
+        this.commentPostedBy = comment.postedby
 
 
-  // home()){
-  //   this.router.navigate(["/home/charity/:_id",this.charitydetaile)])
-  // }
+        this.postSerives.findUser(this.commentPostedBy)
+        // console.log(this.commentPostedBy)
 
+        this.postSerives.volunteer().subscribe(volunteer => {
+          this.commentByVolunteer = volunteer
+          // console.log(this.commentByVolunteer)
+          console.log(this.commentByVolunteer.name);
+          
+        })
+      
+        this.postSerives.charity().subscribe(charity => {
+          this.commentByCharity = charity
+          // console.log(this.commentByCharity)
+          console.log(this.commentByCharity.name);
+          
+        })
+
+
+      }
+      
+    })
+  }
+  commentByC(comment,commentByC){
+    if(comment === commentByC){
+      return true
+    }
+  }
+
+
+  commentByV(comment,commentByV){
+if(comment === commentByV){
+  return true
+}
+  }
+
+  
+
+  sendcomment(comment,post) {
+    console.log(comment)
+    console.log(post)
+    this.commentclass.postedby = this.code
+    this.IDpost = post._id
+    this.commentclass.post = this.IDpost
+    console.log(this.commentclass);
+
+    this.postSerives.comment(this.commentclass)
+
+    this.IDpost = post._id
+    this.postSerives.displaycomment(this.IDpost)
+    this.postSerives.allcomment().subscribe(allcomment => {
+      console.log(allcomment)
+      this.commentpost = allcomment
+      
+    })
+
+
+    this.commentclass.text =''
+   
+
+  }
+
+
+
+
+  
   commentt(p,c) {
-    console.log(p);
-    console.log(c);
+    // console.log(p);
+    // console.log(c);
     if (p== c) {
       return true
     }
   }
 
-  commen(pp,cc) {
-    console.log(pp);
-    console.log(cc);
-    // if (post == comment) {
-    //   return true
-    // }
-  }
+ 
 
-  hidden(comment) {
-    console.log(comment.postedby)
-    this.postSerives.finduser(comment.postedby)
+  
+  govolunteer(volunteer){
+    console.log(volunteer);
+    this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
+    
   }
-
+  gocharity(charity){
+    console.log(charity);
+    this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
+  }
 }

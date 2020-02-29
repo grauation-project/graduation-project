@@ -76,7 +76,7 @@ function validatecharity(charities) {
     bankaccount: joi.string().max(20).required(),
     country: joi.string().max(15).required(),
     address: joi.string().min(5).max(55).required(),
-    following:joi.string().unique()
+    following:joi.string()
   };
   return joi.validate(charities, Schema)
 }

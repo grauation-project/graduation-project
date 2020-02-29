@@ -2,7 +2,12 @@ body {
 
   box-sizing: border-box;
 }
-
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .nav-item i {
+    margin-left: 5% !important;
+  }
+}
 .profileimg {
   width: 8%;
   height: 40px;
@@ -46,6 +51,7 @@ body {
   height: 80px;
   margin-top: 20px;
   background-color: white;
+  border-radius: 2%;
 }
 
 .postbtn {
@@ -106,6 +112,7 @@ body {
   padding-top: 2%;
   margin-top: 2%;
   background-color: white;
+  border-radius: 2%;
 }
 
 .editPost {

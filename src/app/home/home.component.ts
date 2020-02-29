@@ -7,6 +7,8 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
 import { Follow } from '../class/follow';
+import { log } from 'util';
+// import { VolunteerList } from '../class/volunteer copy';
 declare var require: any;
 
 @Component({
@@ -27,8 +29,8 @@ export class HomeComponent implements OnInit {
 
   ) {}
   title = 'Angular Search Using ng2-search-filter';
-  searchText;
-  listvolunteersearch ;
+  searchText ;
+  listvolunteersearch;
   listcharitysearch ;
   // slsText;
 displaydiv = false;
@@ -71,7 +73,8 @@ searcheng(){
       this.listcharitysearch=data
     });
     this.volunteerService.listvolunteer().subscribe(data=>{
-      this.listvolunteersearch=data
+      this.listvolunteersearch=data 
+      
     })
   }
 
@@ -99,4 +102,13 @@ onSubmit(){
   }
 
   
+  govolunteer(volunteer){
+    console.log(volunteer);
+    this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
+    
+  }
+  gocharity(charity){
+    console.log(charity);
+    this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
+  }
 }

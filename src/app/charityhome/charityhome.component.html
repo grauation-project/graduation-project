@@ -14,7 +14,8 @@
     <ul class="navbar-nav  ">
       <li class="nav-item active">
         <i class="fas fa-home align-center "></i>
-        <a class="nav-link " (click)="refresh()">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link " (click)="refresh()">
+          Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <i class="fas fa-envelope align-center  "></i>
@@ -34,7 +35,6 @@
       <form class="form-inline mr-auto searchform">
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-        <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2 searchbtn" type="submit">Search</button>
       </form>
     </ul>
   </div>
@@ -54,13 +54,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td><a href="">{{volunteer.fname }} {{volunteer.lname}} </a></td>
+              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
               <td>{{volunteer.country}}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="col-md-6"><br>
+      <div class="col-md-6">
+        <br>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -70,7 +71,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td><a href="">{{charity.name}}</a></td>
+              <td (click)="gocharity(charity)">{{charity.name}}</td>
               <td>{{charity.country}}</td>
             </tr>
           </tbody>
@@ -80,38 +81,43 @@
   </div>
   <div class=" row pr-5 pl-5 pb-5">
     <div class="col-md-3  pr-4 pl-4 ">
-      <div class="shadow myprofile">
+      <div class="shadow myprofile" style="border-radius: 4%;">
         <div class="" style="background-color: #3B6D8C;height: 80px;text-align: center;">
           <img src="../../assets/download.jpg" class=" profileimage mt-5"> </div>
         <!-- <div class="image bg-white">
                   
                 </div> -->
         <div style="text-align: center;background-color: white;">
-          <a [routerLink]="['charity/account']" class="bg-dark">
+          <a [routerLink]="['charity/account']" style="text-decoration: none;color:#3B6D8C" class="bg-dark">
             <h5 class="pt-5">{{charitydetaile.name}}</h5>
           </a>
 
           <p style="color: gray;">charity</p>
           <hr>
-          <div class="followdiv">
+          <div class="followdiv" (click)="Folllowing()">
             <h6 style="color: grey;">Following</h6>
             <p>22</p>
           </div>
 
+          <div>
+            <p>{{Following.name}}</p>
+
+          </div>
+
           <div class="followdiv">
-            <h6 style="color: grey;">Followors</h6>
+            <h6 style="color: grey;"><a>Followors</a></h6>
             <p>22</p>
           </div>
           <hr>
           <div class="viewprofile pb-4">
-            <a  [routerLink]="['charity/account']">view profile</a>
+            <a [routerLink]="['charity/account']">view profile</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="col-md-6 pr-4 pl-4">
-      <div class="row shadow writepost">
+      <div class="row shadow writepost  mb-4">
 
         <img src="../../assets/download.jpg" class="profileimg mt-4">
         <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
@@ -150,40 +156,35 @@
         </div>
       </div>
 
-      <div id="secondpost" class="row shadow " *ngFor='let post of Allpost'>
+      <div id="secondpost" class="row shadow mb-4 " *ngFor='let post of Allpost'>
         <div class="col-md-11 mb-0   mr-5 mt-2  pb-0">
-          <div>
+          <div class="row">
             <img src="../../assets/download.jpg" class="cricle-img " height="40px">
-            hope
-            <!-- <div class="editPost  pr-0">
-              <a href="#" title="" class="ed-opts-open dropdown" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="fa fa-ellipsis-v pb-5 pt-0"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit post</a>
-                <a class="dropdown-item" href="#">delete post</a> -->
-            <!-- <a class="dropdown-item" href="#">Something else here</a> -->
 
-            <!-- </div> -->
-            <!-- </div> -->
+            <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
+
+              <h6>{{postedByCharity.name}}</h6>
+            </div>
+
+            <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
+
+              <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
+            </div>
+           
           </div>
+         
+        </div>
+      
+        <div class=" col-12 ml-3 mr-3 pt-3 mt-0">
+          <h6>{{post.title}}</h6>
 
-        </div>
-        <hr>
-        <div class=" col-12 ml-3 mr-3 pt-0 mt-0">
-          <p>{{post.title}}</p>
-          
-          <p>{{post.content}}
-            <!--Jung Ho-seok (Korean: 정호석; born February 18, 1994), better known by his stage name J-Hope
-            (stylized as j-hope), is a South Korean rapper, songwriter, dancer, and record producer. In
-            2013, J-Hope made his debut as a member of the South Korean boy band BTS, managed under Big Hit
-            Entertainment. -->
-          </p>
-          <p>{{post.postedby}}</p>
-        </div>
+          <p>{{post.content}} </p>
+          <hr>
+             </div>
+             
         <div class="row ml-2  postfooter">
           <div class="mr-3 ml-3">
+            
             <p><i class="fas fa-heart mr-1"></i>like</p>
           </div>
           <div>
@@ -195,12 +196,12 @@
 
       </div>
 
-      <div class="row mt-3  pb-4 shadow">
+      <div class="row mt-3  mb-4 pb-4 shadow">
         <div class="col-12">
           <h5 class="mt-3 ml-4">Top profiles</h5>
         </div>
 
-        <!-- <div class="row pr-3 pl-3 "> -->
+
         <div class="col-md-4 col-sm-9">
           <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
             <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
@@ -212,7 +213,7 @@
                 <input type="button" class="btn maincolor" value="Follow">
               </div>
 
-              <!-- <a href="#" class="btn maincolor">follow</a> -->
+
             </div>
           </div>
 
@@ -242,7 +243,7 @@
           </div>
 
         </div>
-        <!-- </div> -->
+
 
 
 
@@ -251,7 +252,7 @@
 
 
 
-      <div id="secondpost" class="row shadow ">
+      <div id="secondpost" class="row shadow  mb-4">
         <div class="row ml-2 mr-5">
           <span>
             <img src="../../assets/download.jpg" class="cricle-img " height="40px">
@@ -288,34 +289,37 @@
 
     <div class="col-md-3 pl-2 pr-4">
 
-      <div class="suggestions-list bg-white mt-4">
-        <h5 class="pl-3">Suggestions</h5>
+      <div class="suggestions-list bg-white mt-4 shadow">
+        <h5 class="pl-3 mt-3 mb-3">Suggestions</h5>
+      
         <hr>
-        <div class="row col-md-12 suggestion-usd" *ngFor="let charity of charities">
-            <!-- <div class="  "> -->
-                <img src="../../../assets/download.jpg" class="cricle-img" alt="">
-                <div class="sgt-text mr-4">
-                    <h4 class="mb-0" (click)="charityProfile(charity)">{{charity.name}}</h4>
-                    <span>{{charity.country}}</span>
-                </div>
-                <span class="pr-1"   attr.id="{{charity._id}}" (click)="follow(charity)">
-                    <i  class="fa fa-plus" ></i>
-                </span>
+        <div class="row" *ngFor="let charity of charities">
 
-                <span class="pr-1"  attr.id="{{charity.email}}" style="display: none;"    >
-                  <i class="far fa-check-circle" style="color: #3B6D8C;" ></i>
-              </span>
-            <!-- </div> -->
 
+          <div class="col-md-12 suggestion-usd  ">
+            <img src="../../../assets/download.jpg" class="cricle-img ml-2" alt="">
+            <div class="sgt-text ">
+              <h4 class="mb-0" (click)="charityProfile(charity)">{{charity.name}}</h4>
+              <span>{{charity.country}}</span>
+            </div>
+            <span class="pr-2 ml-4" attr.id="{{charity._id}}" (click)="follow(charity)">
+              <i class="fa fa-plus"></i>
+            </span>
+
+            <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
+              <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
+            </span>
+          </div>
         </div>
       </div>
+
 
     </div>
 
 
 
 
-</div>
+  </div>
 
 
 </body>

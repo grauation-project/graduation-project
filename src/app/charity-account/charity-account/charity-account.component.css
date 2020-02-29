@@ -1,3 +1,10 @@
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .nav-item i {
+    margin-left: 5% !important;
+
+  }
+}
 .searchform{
   display: contents !important;
   
@@ -5,7 +12,7 @@
   .searchbtn{
 height: 15%; 
  }
- .form-control {
+ .searchform.form-control {
   box-shadow: 0 10px 40px 0 #B0C1D9;
 }
 .form-control::placeholder  {
@@ -264,6 +271,9 @@ a {
   /* margin-left: 15px; */
   margin-top: 4%;
 }
+.postinput{
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+}
 .usy-name h5 {
   color: #000000;
   font-size: 18px;
@@ -362,6 +372,10 @@ a {
   font-size: 18px;
   margin-right: 5%;
 
+}
+.navbar-nav{
+  margin-left: 10%;
+    width: 50%;
 }
 .navbar-nav ul li {
   float: left;

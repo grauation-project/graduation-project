@@ -144,8 +144,45 @@ follow(followData){
   this.socket.emit("follow",followData)
 }
 
-finduser(id){
-  this.socket.emit("user",id)
+getfollowing(idcharity){
+  this.socket.emit("getfollowing",idcharity)
 }
+
+following(){
+
+  let following =new Observable(observer=>{
+    this.socket.on("following",follow=>{
+      observer.next(follow)
+    }) 
+    })
+    return following
+};
+
+
+//home
+
+findUser(id){
+  this.socket.emit("findUser",id)
+}
+
+volunteer(){
+  let volunteer =new Observable(observer=>{
+  this.socket.on("isVolunteer",volunteer=>{
+    observer.next(volunteer)
+  }) 
+})
+  return volunteer
+};
+
+
+charity(){
+
+  let charity =new Observable(observer=>{
+    this.socket.on("ischarity",charity=>{
+      observer.next(charity)
+    }) 
+  })
+    return charity
+  };
 
 }
