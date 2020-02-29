@@ -14,6 +14,9 @@ import { CongrateComponent } from "./congrate/congrate.component";
 import { GuardService } from "./services/guard.service";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { CharityhomeComponent } from "./charityhome/charityhome.component";
+import { AdminCharityComponent } from './admin-charity/admin-charity.component';
+import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
+import { AddadminComponent } from './addadmin/addadmin.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
   { path: "login", component: LoginComponent },
@@ -42,13 +45,31 @@ const routes: Routes = [
   {
     path: "admin/:_id",
     component: DashBoardComponent,
-    canActivate: [GuardService]
+    canActivate: [GuardService],
+    children: [
+      {
+        path: "admin/charity",
+        component: AdminCharityComponent,
+      },
+      {
+        path: "admin/volunteer",
+        component: AdminVolunteerComponent,
+      },
+      {
+        path: "admin/add",
+        component: AddadminComponent,
+      }
+    ]
   },
   {
     path: "home/charity/:_id",
     component: CharityhomeComponent,
     canActivate: [GuardService]
-  }
+  },
+ 
+ 
+ 
+
 ];
 
 @NgModule({

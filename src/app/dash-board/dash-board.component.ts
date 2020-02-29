@@ -16,7 +16,6 @@ export class DashBoardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  adminModel = new Login("", "");
   displaydiv = false;
   charityerror=""
   addAdmin() {
@@ -27,23 +26,7 @@ export class DashBoardComponent implements OnInit {
   charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   ngOnInit() {
-    this._AdminService.getcharities().subscribe(
-      data  => {
-        this.charitydetails = data;
-        console.log(this.charitydetails);
-
-      },
-
-      error => {
-        console.log("error", error);
-
-      }
-    );
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
-    });
-  
+   
   }
   logout() {
     localStorage.removeItem("token");
@@ -52,24 +35,6 @@ export class DashBoardComponent implements OnInit {
   closeview(){
     this.displaydiv=false
   }
-  onSubmit(userForm:NgForm){
-
-
-    console.log(this.adminModel);
-    this. _AdminService.addadmin(this.adminModel).subscribe(
-      response => {
-        console.log("Success!", response);
-        userForm.reset();
-        this.displaydiv=false
-
-      },
-
-      error => {
-        console.log("error", error);
-        this.charityerror = error.error;
-
-      }
-    );
-  }
+ 
   
 }
