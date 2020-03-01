@@ -202,10 +202,18 @@ app.post('/send', function (req, res) {
 });
 
 var mailOptions={
-  from : req.body.email,
-  to:'monasoliman009@gmail.com',
-  subject : req.body.name,
-  text : req.body.msg
+  from :req.body.email ,
+  to:"monasoliman009@gmail.com",
+  subject : 'This email is from savethem website',
+  text : req.body.msg,
+  html:`<ul>
+  <p>This email is from savethem website<p/>
+  <li>Customer Name :${req.body.name}</li>
+  <li>Customer E.mail :${req.body.email}</li>
+  <li>Customer Message :${req.body.msg}</li>
+
+  
+  </ul>`
 }
 console.log(mailOptions);
 smtpTransport.sendMail(mailOptions, function(error, response){

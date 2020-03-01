@@ -18,9 +18,12 @@ import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
 import { PostsadminComponent } from './postsadmin/postsadmin.component';
+import { CheckauthService } from './services/checkauth.service';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent,    
+  canActivate: [CheckauthService]
+  },
   { path: "home", component: HomeregisterationComponent },
   { path: "about", component: AboutusComponent },
   { path: "howitwork", component: HowitworkComponent },

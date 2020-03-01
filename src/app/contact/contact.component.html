@@ -10,7 +10,7 @@
   <div class="contact-info">
 
 
-    <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+    <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit(userForm)">
       <div class="form-group">
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="NAME" #name="ngModel" [class.is-invalid]=" name.invalid && name.touched" required
        [(ngModel)]=" contactModel.name"  name="name">

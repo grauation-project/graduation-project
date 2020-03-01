@@ -14,11 +14,13 @@ export class ContactComponent implements OnInit {
   contactModel = new Contactus("","","")
   ngOnInit() {
   }
-  onSubmit(){
+  onSubmit(userForm){
 
 this._LoginService.contactus(this.contactModel).subscribe(
 
-response =>console.log(response),
+response =>{console.log(response);
+  userForm.reset()
+},
 error=>console.log(error)
 
 )
