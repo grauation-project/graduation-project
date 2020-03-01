@@ -1,0 +1,73 @@
+body
+{
+  background-image: url("../../assets/3.jpg");
+
+}
+.logindiv {
+margin:auto;
+  position: absolute;
+  top: 22%;
+  left: 46%;
+ opacity: .9;
+}
+.backgroundimg
+{
+height: 700px;
+width: 100%;
+}
+.maincolor
+{
+  background-color: #3B6D8C ;
+}
+.logform {
+
+  margin-top: 40px;
+  /* border: 1px solid lightgray; */
+  padding-top: 20px;
+  padding: 15px;
+}
+
+.FACEBOOKbtn {
+  background-color: #3B6D8C;;
+  color: cornsilk;
+  width: 100%;
+
+}
+
+.resetPW {
+  text-align: center;
+
+  padding-top: 10px;
+}
+
+.resetPW a {
+  text-decoration: none;
+}
+
+.registration {
+
+  right: 28%;
+  padding-top: 5%;
+
+}
+
+.registerbtn {
+  width: 80%;
+  background-color: #dfe3e6;
+  color: gray;
+
+  margin-left: 10%;
+
+
+
+
+
+}
+
+.img {
+  width: 99.9%;
+  height: 513px;
+}
+.panel-body{
+    border-radius: 2%;
+}

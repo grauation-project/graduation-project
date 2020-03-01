@@ -19,6 +19,8 @@ import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.compo
 import { AddadminComponent } from './addadmin/addadmin.component';
 import { PostsadminComponent } from './postsadmin/postsadmin.component';
 import { CheckauthService } from './services/checkauth.service';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+import { ResetComponent } from './reset/reset.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
   { path: "login", component: LoginComponent,    
@@ -68,6 +70,14 @@ const routes: Routes = [
         component: PostsadminComponent,
       }
     ]
+  },
+  {
+    path: "resetpassword",
+    component: ForgetpassComponent,
+  },
+  {
+    path: "reset-password",
+    component: ResetComponent,
   },
   {
     path: "home/charity/:_id",

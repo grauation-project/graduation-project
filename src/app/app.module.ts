@@ -29,6 +29,8 @@ import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
 import { PostsadminComponent } from './postsadmin/postsadmin.component';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { PostsadminComponent } from './postsadmin/postsadmin.component';
     AdminVolunteerComponent,
     AddadminComponent,
     PostsadminComponent,
+    ForgetpassComponent,
+    ResetComponent,
     
   ],
   imports: [

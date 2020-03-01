@@ -48,6 +48,8 @@ searcheng(){
 
   ) {}
   fileselected = "";
+  istrusted=false;
+
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {
       file.withCredentials = false;
@@ -86,7 +88,12 @@ searcheng(){
     });
     this.volunteerService.listvolunteer().subscribe(data=>{
       this.listvolunteersearch=data
-    })
+    });
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
   }
   logout() {
     localStorage.removeItem("token");
