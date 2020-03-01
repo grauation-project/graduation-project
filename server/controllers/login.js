@@ -171,8 +171,8 @@ var mailOptions={
   <h1 style="text-align:center;margin-bottom:20px">Reset your password?</h1>
   <h4 style="text-align:center;margin-bottom:20px">If you requested a password reset for ${req.body.email}, click the button below. 
   If you didn't make this request, ignore this email.</h4>
-  <button style="background-color:#3B6D8C;margin:auto"><a style="text-decoration:none;background-color:#3B6D8C;color:white" href="http://localhost:3000/savethem/reset-password">Reset Password</a></button>
-<p>This email was meant for ${req.body.email}</p>
+  <button style="background-color:#3B6D8C;margin-left:50%"><a style="text-decoration:none;background-color:#3B6D8C;color:white" href="http://localhost:4200/reset-password">Reset Password</a></button>
+<p style="text-align:center">This email was meant for ${req.body.email}</p>
 
   `
 }

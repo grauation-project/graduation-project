@@ -12,22 +12,27 @@
                <div class=" col-md-8 ">
                    <div class="panel panel-default ">
                      <div class="panel-body p-5  bg-light">
-                       <div class="text-center">
+                         <h1 *ngIf="submit" style="text-align: center;color: green;">Check Your E.mail</h1>
+                       <div class="text-center" *ngIf="submitted">
                          <h3><i class="fa fa-lock fa-4x"></i></h3>
                          <h2 class="text-center">Forgot Password?</h2>
                          <p>You can reset your password here.</p>
                          <div class="panel-body">
            
-                           <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                           <form id="register-form" role="form"  #emailForm="ngForm" novalidate (ngSubmit)="onSubmit()" autocomplete="off" class="form" >
            
                              <div class="form-group">
                                <div class="input-group">
                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                 <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                                 <input id="email" name="email" placeholder="email address" class="form-control" required [class.is-invalid]="email.invalid && email.touched"
+                                 #email="ngModel" [(ngModel)]="useremail.email"  type="email">
+                           
                                </div>
+                               <small class="text-danger " [class.d-none]="email.valid || email.untouched">Email is
+                                Required</small>
                              </div>
                              <div class="form-group">
-                               <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                               <input name="recover-submit" style="background-color: #3B6D8C;color:white"  [disabled]="emailForm.form.invalid"class="btn btn-lg  btn-block" value="Reset Password" type="submit">
                              </div>
                              
                              <input type="hidden" class="hide" name="token" id="token" value=""> 
