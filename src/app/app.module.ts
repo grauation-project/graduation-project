@@ -51,7 +51,8 @@ import { PostsadminComponent } from './postsadmin/postsadmin.component';
     AdminCharityComponent,
     AdminVolunteerComponent,
     AddadminComponent,
-    PostsadminComponent
+    PostsadminComponent,
+    
   ],
   imports: [
     BrowserModule,

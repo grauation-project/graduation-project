@@ -4,6 +4,7 @@ import { LoginService } from "../services/login.service";
 import { Signup } from "../class/signup";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
+import { AdminService } from '../services/admin.service';
 declare var require: any;
 
 @Component({
@@ -13,12 +14,14 @@ declare var require: any;
 })
 export class CharityhomeComponent implements OnInit {
   profileimageee="";
+  profileimag=""
   constructor(
     private _LoginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
     private charityService:CharityService,
     private volunteerService:VolunteersignupService,
+    private _AdminService : AdminService
 
   ) {}
   public code;
@@ -33,6 +36,7 @@ displaydiv = false;
 searcheng(){
   this.displaydiv = true;
 }
+charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -58,7 +62,22 @@ searcheng(){
   });
   this.volunteerService.listvolunteer().subscribe(data=>{
     this.listvolunteersearch=data
-  })
+  });
+  this._AdminService.getcharities().subscribe(
+    data  => {
+      this.charitydetails = data;
+  
+
+      
+      console.log(this.charitydetails);
+
+    },
+
+    error => {
+      console.log("error", error);
+
+    }
+  )
   }
   refresh() {
     this.route.paramMap.subscribe((params: ParamMap) => {

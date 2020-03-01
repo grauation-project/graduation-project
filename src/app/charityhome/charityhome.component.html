@@ -287,11 +287,11 @@
         <h5 class="pl-3">Suggestions</h5>
         <hr>
         <div class="row">
-          <div class="col-md-12 suggestion-usd  ">
-            <img src="../../../assets/download.jpg" class="cricle-img" alt="">
+          <div class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
+            <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
             <div class="sgt-text">
-              <h4 class="mb-0">caharity name</h4>
-              <span>country</span>
+              <h4 class="mb-0">{{ charity.name}}</h4>
+              <span>{{ charity.country}}</span>
             </div>
             <span class="pr-1">
               <i class="fa fa-plus"></i>
@@ -300,19 +300,7 @@
 
         </div>
 
-        <div class="row">
-          <div class="col-md-12 suggestion-usd  ">
-            <img src="../../../assets/download.jpg" class="cricle-img " alt="">
-            <div class="sgt-text ">
-              <h4 class="mb-0">caharity name</h4>
-              <span>country</span>
-            </div>
-            <span class="pr-1">
-              <i class="fa fa-plus"></i>
-            </span>
-          </div>
-
-        </div>
+      
 
       </div>
     </div>
