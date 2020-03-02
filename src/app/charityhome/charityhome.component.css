@@ -344,9 +344,8 @@ ul {
 
 }
 
-.navbar:hover {
-  opacity: 0.97;
-  padding: 1%;
+.nav-item i:hover{
+background-color:#3B6D8C
 }
 
 .navbar a {
@@ -379,9 +378,11 @@ ul {
   .searchbtn{
 height: 15%; 
  }
- .form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
+ nav .form-control {
+
+margin-top: 1%;
+margin-left: 6%;
+margin-right: 15%;}
 .form-control::placeholder  {
   font-family: 'FontAwesome';
 }

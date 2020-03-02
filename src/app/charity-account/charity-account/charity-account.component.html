@@ -27,15 +27,16 @@
 
           <a class="nav-link" href="#">Notifications</a>
         </li>
+        <form class="form-inline mr-auto searchform">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+        </form>
         <li class="nav-item mr-5">
           <i class="fa fa-user-circle"></i>
 
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
-        <form class="form-inline mr-auto searchform">
-          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-            placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-        </form>
+       
       </ul>
     </div>
   </nav>
@@ -93,7 +94,9 @@
         <div class="col-md-5  account_details ">
           <div class="row">
             <img class="profile_img" [src]="profileimageee" />
-            <div class="right_container">
+
+            <div class="right_container ">
+              <h4 style="text-align: center;margin-bottom: 5%;">{{charitydetaile.name}}</h4>
 
               <div class="folowing_details overflow-hidden">
                 <div class="ml-4">
@@ -276,14 +279,14 @@
         </div>
         <div class="col-md-6 account_main ">
           <div class="account_headline overflow-hidden">
-            <h4>{{charitydetaile.name}}</h4>
             <p>
               charity
               <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                   class="fa fa-star"></i></span>
               <span>
                 <button class="setting">
-                  <a href="#">Setting</a>
+                  <a  id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
+                  aria-controls="infodiv"  aria-selected="false">Setting</a>
                 </button>
                 <button class="followbtn">
                   <a (click)="follow(charitydetaile)">
@@ -392,7 +395,7 @@
 
                         <div class="row form-group">
                           <img class="float-left ml-3"
-                            src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                          [src]="profileimageee" />
                           <input type="text" class="form-control ml-2 pr-0  "
                             style="border-radius:55px;text-align: center; width: 80%;" [(ngModel)]="commentclass.text"
                             #text placeholder="your comment" name="text">
