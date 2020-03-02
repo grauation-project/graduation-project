@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Login } from "../class/login";
 import { Observable } from "rxjs";
+import { Contactus } from '../class/contactus';
 
 @Injectable({
   providedIn: "root"
@@ -42,5 +43,11 @@ export class LoginService {
         )
       }
     );
+  }
+  contactus(_Contactus: Contactus): Observable<any> {
+    return this._http.post<any>("http://localhost:3000/send",_Contactus);
+  }
+  forgerpassword(_login: Login){
+    return this._http.post<any>("http://localhost:3000/savethem/login/forget/password", _login);
   }
 }

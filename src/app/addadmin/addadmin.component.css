@@ -1,0 +1,17 @@
+form{
+    width: 50%;
+    margin-left: 20%;
+    margin-top: 4%;
+    border:1px solid #AFBF34;
+    border-radius:1%;
+    padding: 2%;
+    margin-bottom: 15.7%;
+    background-color:rgba(0, 0, 0, 0.1)
+}
+label{
+
+  font-weight: bold;
+    color: #3B6D8C;
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+}

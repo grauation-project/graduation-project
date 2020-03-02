@@ -17,4 +17,17 @@ export class AdminService {
   getcharities(){
     return this.http.get('http://localhost:3000/savethem/admin/charity/list')
   }
+  deletecharity(_id){
+    return this.http.delete(
+      "http://localhost:3000/savethem/admin/charity/delete/"+_id)
+
+  }
+  getvolunteers(){
+    return this.http.get('http://localhost:3000/savethem/admin/volunteer/list')
+  }
+  deletevolunteer(_id){
+    return this.http.delete(
+      "http://localhost:3000/savethem/admin/volunteer/delete/"+_id)
+
+  }
 }

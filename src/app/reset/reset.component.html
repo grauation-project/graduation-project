@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <img src="../../assets/3.jpg" class="backgroundimg">
+    <div class="col-6 pt-3 pb-3 logindiv ">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <div class="form-gap"></div>
+       <div class="container-fluid">
+           <div class="row">
+               <div class=" col-md-8 ">
+                   <div class="panel panel-default ">
+                     <div class="panel-body p-5  bg-light">
+                       <div class="text-center">
+                         <h3><i class="fa fa-lock fa-4x"></i></h3>
+                         <h2 class="text-center">Reset Password</h2>
+                         <p>You can reset your password here.</p>
+                         <div class="panel-body">
+           
+                           <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+           
+                             <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                 <input id="email" name="email" placeholder="New Password" class="form-control"  type="email">
+                               </div>
+                             </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                  <input id="email" name="email" placeholder="Confirm Password" class="form-control"  type="email">
+                                </div>
+                              </div>
+                             <div class="form-group">
+                               <input name="recover-submit" class="btn btn-lg btn-block" style="background-color: #3B6D8C;color:white" value="Reset Password" type="submit">
+                             </div>
+                             
+                             <input type="hidden" class="hide" name="token" id="token" value=""> 
+                           </form>
+           
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+           </div>
+       </div>
+
+
+
+    </div>
+
+
+
+  </div>
+</div>
+<app-footer></app-footer>

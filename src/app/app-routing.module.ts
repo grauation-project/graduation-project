@@ -15,9 +15,18 @@ import { GuardService } from "./services/guard.service";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { CharityhomeComponent } from "./charityhome/charityhome.component";
 import { FollowingComponent } from './following/following.component';
+import { AdminCharityComponent } from './admin-charity/admin-charity.component';
+import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
+import { AddadminComponent } from './addadmin/addadmin.component';
+import { PostsadminComponent } from './postsadmin/postsadmin.component';
+import { CheckauthService } from './services/checkauth.service';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+import { ResetComponent } from './reset/reset.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent,    
+  canActivate: [CheckauthService]
+  },
   { path: "home", component: HomeregisterationComponent },
   { path: "about", component: AboutusComponent },
   { path: "howitwork", component: HowitworkComponent },
@@ -43,7 +52,33 @@ const routes: Routes = [
   {
     path: "admin/:_id",
     component: DashBoardComponent,
-    canActivate: [GuardService]
+    canActivate: [GuardService],
+    children: [
+      {
+        path: "admin/charity",
+        component: AdminCharityComponent,
+      },
+      {
+        path: "admin/volunteer",
+        component: AdminVolunteerComponent,
+      },
+      {
+        path: "admin/add",
+        component: AddadminComponent,
+      },
+      {
+        path: "admin/posts",
+        component: PostsadminComponent,
+      }
+    ]
+  },
+  {
+    path: "resetpassword",
+    component: ForgetpassComponent,
+  },
+  {
+    path: "reset-password",
+    component: ResetComponent,
   },
   {
     path: "home/charity/:_id",

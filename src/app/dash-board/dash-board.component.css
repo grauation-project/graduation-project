@@ -1,74 +1,49 @@
 body {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #222;
-    font-weight: 400;
-    font-family: 'Montserrat';
+ 
+   
     background-image: url("https://images.unsplash.com/photo-1538049535840-0580971b3b5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
     background-position: center center;
-    height:625px
 }
-.user_logo:hover{
-    color: #AFBF34;
+
+
+ 
+  .sidenav {
+    z-index: 1;
   
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-x: hidden;
+    padding-top: 8%;
   }
-.centerDiv{
-    height: 80px;
-    background-color: #AFBF34;
-    color: white;
-    border-radius: 15px;
-    box-shadow: 5px 10px 18px #747373;
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f1f1f1;
+    display: block;
+    margin-bottom: 15%;
+  }
+  .name{
+    margin-right: 72%;
+  }
+  .sidenav a:hover {
+    color:  #AFBF34;
+  }
+  
+  .main {
+    font-size: 28px; /* Increased text to enable scrolling */
+    margin-left:6%;
+    margin-top: 6%;
 
-}  
-.charity{
-    padding-left: 95px;
-    padding-top: 15px;
-}
-.volunteer{
-    padding-left: 87px;
-    padding-top: 15px;
-    margin-bottom: 4%;
-}
-
-.admin1{
-    margin-left: 70px;
-    font-family: 'Merriweather', serif;
-    font-size: 19px;
-
-}
-.icon{
-    margin-left: 800px;
-}
-
-.manageCharity{
-    margin-left: 390px;
-    background-color: darkgrey;
-    width: 248px;
-    height: 60px;
-    padding-left: 65px;
-    padding-top: 12px;
-}
-.manageVolunteer{
-    margin-left: 11px;
-    background-color: darkgrey;
-    width: 248px;
-    height: 60px;
-    padding-left: 48px;
-    padding-top: 12px;
-}
-.wallpapper{
-    background-color: white;
-    opacity: .9;
-    height: 290px;
-    
-}
-.maincolor
-{
-  background-color: #3B6D8C ;
-}
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

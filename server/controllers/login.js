@@ -5,6 +5,7 @@ var router = express.Router();
 var app = express();
 var joi = require("joi")
 var config = require("config")
+const nodemailer = require('nodemailer');
 
 
 var parseUrlencoded = bodyParser.urlencoded({
@@ -149,7 +150,97 @@ function validate(req) {
 //     })
 //   }
 
+router.post("/forget/password", parseUrlencoded,async(req,res)=>{
+  var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+        user: "savethemiti@gmail.com",
+        pass: "123456789@@"
+    }
+});
 
+var mailOptions={
+  from :"savethemiti@gmail.com" ,
+  to:req.body.email,
+  subject : 'This email is from savethem website',
+  html:`
+  <h1 style="text-align:center;margin-bottom:20px">Reset your password?</h1>
+  <h4 style="text-align:center;margin-bottom:20px">If you requested a password reset for ${req.body.email}, click the button below. 
+  If you didn't make this request, ignore this email.</h4>
+  <button style="background-color:#3B6D8C;margin-left:50%"><a style="text-decoration:none;background-color:#3B6D8C;color:white" href="http://localhost:4200/reset-password">Reset Password</a></button>
+<p style="text-align:center">This email was meant for ${req.body.email}</p>
+
+  `
+}
+console.log(mailOptions);
+
+  let volunteers = await volunteer.findOne({
+    email: req.body.email
+  });
+
+  if (!volunteers) {
+    let charitiy = await charity.findOne({
+      email: req.body.email
+    });
+    if (charitiy) {
+    
+      smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+              console.log(error);
+          res.json(error);
+        }
+        else{
+              console.log("Message sent: " + response.message);
+          res.json("sent");
+           }
+
+          })
+
+    } else {
+      let admins = await admin.findOne({
+        email: req.body.email
+      });
+      if (admins) {
+        smtpTransport.sendMail(mailOptions, function(error, response){
+          if(error){
+                console.log(error);
+            res.json(error);
+          }
+          else{
+                console.log("Message sent: " + response.message);
+            res.json("sent");
+             }
+  
+            })
+
+      } else {
+        return res.status(400).send("invalid email or password.");
+
+      }
+    }
+
+  } else {
+    smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+            console.log(error);
+        res.json(error);
+      }
+      else{
+            console.log("Message sent: " + response.message);
+        res.json("sent");
+         }
+
+        })
+  }
+
+
+
+
+})
 
 
 module.exports = router;

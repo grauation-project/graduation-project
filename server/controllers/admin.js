@@ -13,7 +13,9 @@ var {
   validateadmin,
   admin
 } = require("../models/admin");
-
+var {
+  volunteer
+} = require("../models/volunteer");
 var {
   charity
 } = require("../models/charity");
@@ -29,7 +31,19 @@ res.json(result)
 
 
 })
-router.get("/volunteer/delete/:id", function (req, resp) {
+
+
+router.get("/volunteer/list",async(req,res)=>{
+  let result = await   volunteer.find({});
+res.json(result)
+
+
+
+
+
+})
+
+router.delete("/volunteer/delete/:id", function (req, resp) {
 
   mongoose.model("volunteer").findOneAndRemove({
       _id: req.params.id
@@ -45,7 +59,7 @@ router.get("/volunteer/delete/:id", function (req, resp) {
 })
 
 
-router.get("/charity/delete/:id", function (req, resp) {
+router.delete("/charity/delete/:id", function (req, resp) {
 
   mongoose.model("charity").findOneAndRemove({
       _id: req.params.id

@@ -27,6 +27,12 @@ import { CongrateComponent } from "./congrate/congrate.component";
 import { CharityhomeComponent } from './charityhome/charityhome.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FollowingComponent } from './following/following.component';
+import { AdminCharityComponent } from './admin-charity/admin-charity.component';
+import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
+import { AddadminComponent } from './addadmin/addadmin.component';
+import { PostsadminComponent } from './postsadmin/postsadmin.component';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,14 @@ import { FollowingComponent } from './following/following.component';
     DonationComponent,
     CongrateComponent,
     CharityhomeComponent,
-    FollowingComponent
+    FollowingComponent,
+    AdminCharityComponent,
+    AdminVolunteerComponent,
+    AddadminComponent,
+    PostsadminComponent,
+    ForgetpassComponent,
+    ResetComponent,
+    
   ],
   imports: [
     BrowserModule,

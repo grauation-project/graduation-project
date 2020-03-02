@@ -80,7 +80,7 @@
   <div class="container-fluid p-0 overflow-hidden">
     <div class="row">
       <div class="col-md-12 profile_background"  [ngStyle]="{ 'background-image': 'url(' +coverimmg + ')'}">
-        <button class="btnprofile">
+        <button class="btnprofile" *ngIf="istrusted">
           <form (ngSubmit)="coverimg()" >
           <input type="file" [(ngModel)]="volunteerdetaile.coverimg" ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
           (change)="onfileselected($event)"  class="form-input"   #coverimg="ngModel" name="coverimg" id="file" class="inputfile" />
@@ -159,7 +159,7 @@
             <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                 class="fa fa-star"></i></span>
             <span>
-              <button class="setting">
+              <button class="setting" *ngIf="istrusted">
                 <a href="#">Setting</a>
               </button>
             </span>
@@ -175,7 +175,7 @@
           </div>
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
-              <div class="mb-5 mt-3 p-3 create_post">
+              <div class="mb-5 mt-3 p-3 create_post" *ngIf="istrusted">
                 <img class="ml-2 w-22" [src]="profileimageee"  />
                 <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
                   class="btn_post text-light ">
@@ -183,7 +183,7 @@
                   <div class="modal-dialog">
 
 
-                    <div class="modal-content">
+                    <div class="modal-content" >
                       <div class="modal-header ">
 
                         <h4 class="modal-title text-light float-left">Post</h4>

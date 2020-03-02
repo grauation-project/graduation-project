@@ -10,6 +10,7 @@ import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
 import { Follow } from '../class/follow';
 import * as $ from 'jquery'
+import { AdminService } from '../services/admin.service';
 declare var require: any;
 
 @Component({
@@ -23,6 +24,7 @@ export class CharityhomeComponent implements OnInit {
   charities: unknown;
   postPostedBy: any;
   profileimageee="";
+  profileimag=""
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -30,6 +32,7 @@ export class CharityhomeComponent implements OnInit {
     private postSerives: PostSeriveService,
     private charityService: CharityService,
     private volunteerService: VolunteersignupService,
+    private _AdminService : AdminService
 
   ) { }
   public code;
@@ -60,6 +63,8 @@ export class CharityhomeComponent implements OnInit {
   searcheng() {
     this.displaydiv = true;
   }
+
+charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
 
   ngOnInit() {
     $("#addfolloing").on('click',function(){
@@ -124,14 +129,30 @@ export class CharityhomeComponent implements OnInit {
 
 
 
-    // subscribe search
-    this.charityService.listCharity().subscribe(data => {
-      this.listcharitysearch = data
-    });
-    this.volunteerService.listvolunteer().subscribe(data => {
-      this.listvolunteersearch = data
-    })
+   
 
+     // subscribe search
+  this.charityService.listCharity().subscribe(data=>{
+    this.listcharitysearch=data
+  });
+  this.volunteerService.listvolunteer().subscribe(data=>{
+    this.listvolunteersearch=data
+  });
+  this._AdminService.getcharities().subscribe(
+    data  => {
+      this.charitydetails = data;
+  
+
+      
+      console.log(this.charitydetails);
+
+    },
+
+    error => {
+      console.log("error", error);
+
+    }
+  )
   }
   refresh() {
     this.route.paramMap.subscribe((params: ParamMap) => {

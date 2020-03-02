@@ -84,9 +84,7 @@
       <div class="shadow myprofile" style="border-radius: 4%;">
         <div class="" style="background-color: #3B6D8C;height: 80px;text-align: center;">
           <img [src]="profileimageee" class=" profileimage mt-5"> </div>
-        <!-- <div class="image bg-white">
-                  
-                </div> -->
+        
         <div style="text-align: center;background-color: white;">
           <a [routerLink]="['charity/account']" style="text-decoration: none;color:#3B6D8C" class="bg-dark">
             <h5 class="pt-5">{{charitydetaile.name}}</h5>
@@ -156,28 +154,15 @@
         </div>
       </div>
 
-      <!-- <div id="secondpost" class="row shadow mb-4 " *ngFor='let post of Allpost'>
-        <div class="col-md-11 mb-0   mr-5 mt-2  pb-0">
-          <div class="row">
-            <img src="../../assets/download.jpg" class="cricle-img " height="40px"> -->
-
+     
 
       <div id="secondpost" class="row shadow mb-4"  *ngFor='let post of Allpost'>
         <div class="col-md-11    mr-5 mt-2  pb-0">
           <div class="row">
             <img [src]="profileimageee" class="cricle-img " height="40px">
-            <!-- hope
-            <div class="editPost  pr-0 ">
-              <a href="#" title="" class="ed-opts-open bg-light dropdown" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="fa fa-ellipsis-v pb-5 pt-0"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit post</a>
-                <a class="dropdown-item" href="#">delete post</a>
-                -->
+            
 
-            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
+            <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
 
               <h6>{{postedByCharity.name}}</h6>
             </div>
@@ -185,7 +170,7 @@
             <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
 
               <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
-            </div> -->
+            </div>
            
           </div>
          
@@ -310,23 +295,28 @@
       
         <hr>
         <div class="row" *ngFor="let charity of charities">
-
-
-          <div id="charitysuggest" class="col-md-12 suggestion-usd  ">
-            <img src="../../../assets/download.jpg" class="cricle-img ml-2" alt="">
-            <div class="sgt-text ">
-              <h4 class="mb-0" >{{charity.name}}</h4>
-              <span>{{charity.country}}</span>
+        
+          <div id="charitysuggest" class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
+            <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
+            <div class="sgt-text">
+              <h4 class="mb-0">{{ charity.name}}</h4>
+              <span>{{ charity.country}}</span>
             </div>
-            <span class="pr-2 ml-4"  id="addfolloing" (click)="follow(charity)">
+            <span class="pr-2 ml-4"  id="addfolloing" attr.id="{{charity._id}}" (click)="follow(charity)">
               <i class="fa fa-plus"></i>
             </span>
+          </div>
+
+
+          
 <!-- attr.id="{{charity._id}}" -->
-            <!-- <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
+            <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
               <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
-            </span> -->
+            </span>
           </div>
         </div>
+      
+
       </div>
 
 

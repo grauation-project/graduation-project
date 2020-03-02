@@ -10,18 +10,30 @@
   <div class="contact-info">
 
 
-    <form>
+    <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit(userForm)">
       <div class="form-group">
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="NAME">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="NAME" #name="ngModel" [class.is-invalid]=" name.invalid && name.touched" required
+       [(ngModel)]=" contactModel.name"  name="name">
+       <small [class.d-none]="name.valid || name.untouched" class="text-danger">NAME is required</small>
+
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" id="formGroupExampleInput2" placeholder="Enter email">
+        <input type="email" #email="ngModel" [class.is-invalid]=" email.invalid && email.touched" required
+        class="form-control" [(ngModel)]=" contactModel.email" placeholder="Email" name="email">
+        <small [class.d-none]="email.valid || email.untouched" class="text-danger">email is required</small>
+
       </div>
       <div class="form-group">
-        <textarea placeholder="Your message" class="form-control"></textarea>
+        <textarea placeholder="Your message" class="form-control" #msg="ngModel" [class.is-invalid]=" msg.invalid && msg.touched" required
+       [(ngModel)]=" contactModel.msg"  name="msg"></textarea>
+       <small [class.d-none]="msg.valid || msg.untouched" class="text-danger">Message is required</small>
+
       </div>
+      <div id="a-caption"><a >
+        <input style="background-color:transparent; border-style:none ;color:white"type="submit"  value="Submit">
+    
+        </a></div>
     </form>
   </div>
-  <div id="a-caption"><a href="#">SUBMIT
-    </a></div>
+ 
 </section>

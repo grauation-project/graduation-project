@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 var config = require("config")
+const nodemailer = require('nodemailer');
 
 var Strategy = require('passport-facebook').Strategy;
 var passport = require('passport');
@@ -717,6 +718,73 @@ app.get('/return',
   function (req, res) {
     res.redirect('/');
   });
+
+
+
+  // const transporter = nodemailer.createTransport({
+
+  //   host: 'smtp.gmail.com',
+  //   provider: 'gmail',
+  //   port: 465,
+  //   secure: true,
+  //   auth: {
+  //     user: ' www.manon4@gmail.com', // Enter here email address from which you want to send emails
+  //     pass: ' manon159357@@ ' // Enter here password for email account from which you want to send emails
+  //   },
+  //   tls: {
+  //   rejectUnauthorized: false
+  //   }
+  // });
+
+
+
+
+/*-----------------------------------------------------------------------*/ 
+
+
+
+app.post('/send', function (req, res) {
+
+
+  var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+        user: "monasoliman009@gmail.com",
+        pass: "mona 2019@@"
+    }
+});
+
+var mailOptions={
+  from :req.body.email ,
+  to:"monasoliman009@gmail.com",
+  subject : 'This email is from savethem website',
+  text : req.body.msg,
+  html:`<ul>
+  <p>This email is from savethem website<p/>
+  <li>Customer Name :${req.body.name}</li>
+  <li>Customer E.mail :${req.body.email}</li>
+  <li>Customer Message :${req.body.msg}</li>
+
+  
+  </ul>`
+}
+console.log(mailOptions);
+smtpTransport.sendMail(mailOptions, function(error, response){
+if(error){
+      console.log(error);
+  res.json(error);
+}else{
+      console.log("Message sent: " + response.message);
+  res.json("sent");
+   }
+});})
+
+
+/*-----------------------------------------------------------------------*/ 
 
 server.listen(3000, function () {
   console.log("server running....");
