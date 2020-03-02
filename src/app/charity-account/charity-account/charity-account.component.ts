@@ -77,7 +77,7 @@ public commentPostedBy;
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
   public editclass = new Edit("", "", "", "")
-  charitydetaile = new Signup("", "", "", "", "", "", "", "",[],[]);
+  charitydetaile = new Signup("", "", "", "", "", "", "", "");
  
   title = 'Angular Search Using ng2-search-filter';
   searchText;

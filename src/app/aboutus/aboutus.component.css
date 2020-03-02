@@ -81,3 +81,24 @@ h2 {
   text-align: left;
 
 }
+.about_text {
+  width:80%;
+}
+.about_main{
+  margin-top: 8%;
+}
+@media (max-width: 970px) and (min-width:760px){
+  .about_img {
+    height:100%
+  }
+
+
+}
+
+@media screen and (max-width: 1000px) {
+.about_details{
+
+  margin-top: 30%;
+}
+
+}
