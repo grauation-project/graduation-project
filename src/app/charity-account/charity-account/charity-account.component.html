@@ -1,6 +1,5 @@
-
 <body>
-<nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,27 +9,27 @@
         <span class="line" style="margin-bottom: 0;"></span>
       </span>
     </button>
-  
+
     <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
       <ul class="navbar-nav  ">
         <li class="nav-item active">
-            <i class="fas fa-home align-center "></i>
-          <a class="nav-link " (click)="refresh()"> 
+          <i class="fas fa-home align-center "></i>
+          <a class="nav-link " (click)="refresh()">
             Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <i class="fas fa-envelope align-center  "></i>
-  
+
           <a class="nav-link my-0" href="#">Messages</a>
         </li>
         <li class="nav-item mr-4">
           <i class="fas fa-bell align-center"></i>
-  
+
           <a class="nav-link" href="#">Notifications</a>
         </li>
         <li class="nav-item mr-5">
           <i class="fa fa-user-circle"></i>
-  
+
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
         <form class="form-inline mr-auto searchform">
@@ -41,466 +40,577 @@
     </div>
   </nav>
   <div class="container-fluid bg-light" *ngIf=displaydiv>
+    <div class="row">
+      <div class="col-md-6">
+        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Volunter Name</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+              <td>{{volunteer.country}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Charity Name</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+              <td (click)="gocharity(charity)">{{charity.name}}</td>
+              <td>{{charity.country}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="contain">
+    <div class="container-fluid p-0 overflow-hidden">
       <div class="row">
-        <div class="col-md-6">
-          <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th> Volunter Name</th>
-                <th>Country</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-                <td>{{volunteer.country}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <br>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Charity Name</th>
-                <th>Country</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-                <td (click)="gocharity(charity)">{{charity.name}}</td>
-                <td>{{charity.country}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-md-12 profile_background">
+          <button class="btnprofile">
+            <a href="#">Change Image</a>
+          </button>
+          <div class="clr"></div>
         </div>
       </div>
     </div>
-<div class="contain">
-  <div class="container-fluid p-0 overflow-hidden">
-    <div class="row">
-      <div class="col-md-12 profile_background">
-        <button class="btnprofile">
-          <a href="#">Change Image</a>
-        </button>
-        <div class="clr"></div>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid ">
-    <div class="row">
-      <div class="col-md-5  account_details ">
-        <div class="row">
-          <img class="profile_img" [src]="profileimageee"/>
-          <div class="right_container">
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col-md-5  account_details ">
+          <div class="row">
+            <img class="profile_img" [src]="profileimageee" />
+            <div class="right_container">
 
-            <div class="folowing_details overflow-hidden">
-              <div class="ml-4">
-                <span>Following</span>
-                <p>34</p>
+              <div class="folowing_details overflow-hidden">
+                <div class="ml-4">
+                  <span>Following</span>
+                  <p>34</p>
+                </div>
+                <div class="ml-4">
+                  <span>Followers</span>
+                  <p>155</p>
+                </div>
               </div>
-              <div class="ml-4">
-                <span>Followers</span>
-                <p>155</p>
+              <div class="profile_links">
+
+                <div>
+                  <i class="fab fa-facebook-square"></i>
+                  <a href="#">www.facebook.com</a>
+                </div>
+                <div>
+                  <i class="fab fa-twitter-square"></i>
+                  <a href="#">www.twitter.com</a>
+                </div>
+                <div>
+                  <i class="fab fa-google-plus-square"></i>
+                  <a href="#">www.googleplus.com</a>
+                </div>
+
               </div>
             </div>
-            <div class="profile_links">
-            
-              <div>
-                <i class="fab fa-facebook-square"></i>
-                <a href="#">www.facebook.com</a>
+
+
+          </div>
+          <div class="row">
+            <div class="right_containerr">
+              <div class="clr"></div>
+
+              <div class="needs">
+                <div class="post_topbar">
+                  <div class="usy-dt">
+                    <div class="usy-name">
+                      <h3>Needs :</h3>
+                    </div>
+                  </div>
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" (click)="toggleadd()">Add Need</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                </div>
+                <div class="view" *ngIf="isadd">
+                  <i (click)="closeview()" class="fas fa-times-circle"
+                    style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                  <form #addneeds="ngForm" novalidate (ngSubmit)="addneed(addneeds)">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                        #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                        [(ngModel)]="need.name">
+                      <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
+
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Quantity" required
+                        [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                        [(ngModel)]="need.quantity" class="form-control" name="quantity">
+                      <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                        Required</small>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="description" id="description" #description="ngModel"
+                        [class.is-invalid]="description.invalid && description.touched" required
+                        [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
+                      <small [class.d-none]="description.valid || description.untouched" class="text-danger">description
+                        is required</small>
+
+                    </div>
+
+                    <button type="submit" name="submit" [disabled]="addneeds.form.invalid"
+                      class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+
+                <div class="need " *ngFor="let needs of listneeds; let i = index">
+                  <div class="btn-group drop float-right ">
+                    <button class="btn  btn-sm " type="button" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v s mr-1" style="color: white;"></i>
+
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" (click)="updateneeds(needs)">Edit</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="deleteneeds(needs)">Delete</a>
+                    </div>
+                  </div>
+                  <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i">
+                    <h5>{{needs.name}}</h5>
+                    <div class="collapse" [attr.id]="'collapse-' + i">
+                      <div class="card card-body" style="background-color: #AFBF34;">
+                        <h6>Quantity :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{needs.quantity}}</p>
+                        <h6>Description :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{needs.description}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="view w-100 " class="test" [id]="needs._id">
+                    <i (click)="closetest(needs)" class="fas fa-times-circle"
+                      style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                    <form #addneeds="ngForm" novalidate (ngSubmit)="updateneedss(needs,addneeds)">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                          #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                          [(ngModel)]="need.name">
+                        <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is
+                          required</small>
+
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" required
+                          [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                          [(ngModel)]="need.quantity" class="form-control" name="quantity">
+                        <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                          Required</small>
+                      </div>
+                      <div class="form-group">
+                        <textarea class="form-control" name="description" id="description" #description="ngModel"
+                          [class.is-invalid]="description.invalid && description.touched" required
+                          [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
+                        <small [class.d-none]="description.valid || description.untouched"
+                          class="text-danger">description is required</small>
+
+                      </div>
+
+                      <button type="submit" name="submit" [disabled]="addneeds.form.invalid"
+                        class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+
+
               </div>
-              <div>
-                <i class="fab fa-twitter-square"></i>
-                <a href="#">www.twitter.com</a>
+              <div class="clr"></div>
+              <div class="provides">
+                <div class="post_topbar">
+                  <div class="usy-dt">
+                    <div class="usy-name">
+                      <h5>Provides</h5>
+                    </div>
+                  </div>
+                  <div class="editPost  pr-0">
+                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v  pt-0"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Edit post</a>
+                      <a class="dropdown-item" href="#">delete post</a>
+                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  dfdffffffffffffffffffffffffff
+                </p>
+
               </div>
-              <div>
-                <i class="fab fa-google-plus-square"></i>
-                <a href="#">www.googleplus.com</a>
-              </div>
-        
             </div>
           </div>
-
-
         </div>
-        <div class="row">
-          <div class="right_containerr">
-            <div class="clr"></div>
-
-            <div class="needs">
-              <div class="post_topbar">
-                <div class="usy-dt">
-                  <div class="usy-name">
-                    <h3 >Needs :</h3>
-                  </div>
-                </div>
-                <div class="editPost  pr-0">
-                  <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <i class="fa fa-ellipsis-v  pt-0"></i>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" (click)="toggleadd()" >Add Need</a>
-                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                  </div>
-                </div>
-              </div>
-              <div class="view" *ngIf="isadd">
-                <i (click)="closeview()" class="fas fa-times-circle" style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>              
-                  <form #addneeds="ngForm"  novalidate (ngSubmit)="addneed(addneeds)">
-                  <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Enter Name" name="name" id="name" #name="ngModel"
-                    [class.is-invalid]="name.invalid && name.touched" required [(ngModel)]="need.name">
-                    <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
-
-                  </div>
-                 
-                  <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Enter Quantity" required [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
-                    [(ngModel)]="need.quantity" class="form-control" name="quantity">
-                    <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
-                      Required</small>
-                  </div>
-                  <div class="form-group">
-                    <textarea class="form-control" name="description" id="description" #description="ngModel"
-                    [class.is-invalid]="description.invalid && description.touched" required 
-                    [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
-                    <small [class.d-none]="description.valid || description.untouched" class="text-danger">description is required</small>
-
-                  </div>
-                  
-                  <button type="submit" name="submit"  [disabled]="addneeds.form.invalid" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-       
-            <div class="need " *ngFor="let needs of listneeds; let i = index" >
-              <div class="btn-group drop float-right ">
-                <button class="btn  btn-sm " type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-ellipsis-v s mr-1" style="color: white;"></i>
-
+        <div class="col-md-6 account_main ">
+          <div class="account_headline overflow-hidden">
+            <h4>{{charitydetaile.name}}</h4>
+            <p>
+              charity
+              <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                  class="fa fa-star"></i></span>
+              <span>
+                <button class="setting">
+                  <a href="#">Setting</a>
                 </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" (click)="updateneeds(needs)">Edit</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" (click)="deleteneeds(needs)" >Delete</a>
-                </div>
-              </div>
-         <div  data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false" [attr.aria-controls] = "'collapse-' + i"> 
-             <h5>{{needs.name}}</h5>
-             <div class="collapse" [attr.id]="'collapse-' + i">
-              <div class="card card-body" style="background-color: #AFBF34;">
-                <h6>Quantity :</h6>
-                <p style="color: #3B6D8C;font-size: 17px;">{{needs.quantity}}</p>
-                <h6>Description :</h6>
-                <p style="color: #3B6D8C;font-size: 17px;">{{needs.description}}</p>
-
-              </div>
-            </div>
-          </div>
-          <div class="view w-100 " class="test" [id]="needs._id" >
-            <i (click)="closetest(needs)" class="fas fa-times-circle" style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>              
-              <form #addneeds="ngForm"  novalidate (ngSubmit)="updateneedss(needs,addneeds)">
-              <div class="form-group">
-                <input type="text" class="form-control"  placeholder="Enter Name"  name="name" id="name" #name="ngModel"
-                [class.is-invalid]="name.invalid && name.touched"  required [(ngModel)]="need.name">
-                <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
-
-              </div>
-             
-              <div class="form-group">
-                <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" required [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
-                [(ngModel)]="need.quantity" class="form-control" name="quantity">
-                <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
-                  Required</small>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="description" id="description" #description="ngModel"
-                [class.is-invalid]="description.invalid && description.touched" required 
-                [(ngModel)]="need.description" placeholder="Enter description" rows="3"></textarea>
-                <small [class.d-none]="description.valid || description.untouched" class="text-danger">description is required</small>
-
-              </div>
-              
-              <button type="submit" name="submit"  [disabled]="addneeds.form.invalid" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-            </div>
-        
-            
-            </div>
-            <div class="clr"></div>
-            <div class="provides">
-              <div class="post_topbar">
-                <div class="usy-dt">
-                  <div class="usy-name">
-                    <h5>Provides</h5>
-                  </div>
-                </div>
-                <div class="editPost  pr-0">
-                  <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <i class="fa fa-ellipsis-v  pt-0"></i>
+                <button class="followbtn">
+                  <a (click)="follow(charitydetaile)">
+                    <i class="fas fa-user-plus text-light"></i>
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Edit post</a>
-                    <a class="dropdown-item" href="#">delete post</a>
-                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                  </div>
-                </div>
-              </div>
-
-              <p>
-                dfdffffffffffffffffffffffffff
-              </p>
+                </button>
+              </span>
+            </p>
+          </div>
+          <div class="tab_feed overflow-hidden">
+            <div class="nav nav-tabs " id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="feeddiv-tab" data-toggle="tab" href="#feeddiv" role="tab"
+                aria-controls="feeddiv" aria-selected="true">Feed</a>
+              <a class="nav-item nav-link" id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
+                aria-controls="infodiv"  aria-selected="false">Info</a>
 
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 account_main ">
-        <div class="account_headline overflow-hidden">
-          <h4>{{charitydetaile.name}}</h4>
-          <p>
-            Graphic and web designer
-            <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                class="fa fa-star"></i></span>
-            <span>
-              <button class="setting">
-                <a href="#">Setting</a>
-              </button>
-              <button class="followbtn">
-                <a href="#">
-                  <i class="fas fa-user-plus text-light"></i>
-                </a>
-              </button>
-            </span>
-          </p>
-        </div>
-        <div class="tab_feed overflow-hidden">
-          <div class="nav nav-tabs " id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="feeddiv-tab" data-toggle="tab" href="#feeddiv" role="tab"
-              aria-controls="feeddiv" aria-selected="true">Feed</a>
-            <a class="nav-item nav-link" id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
-              aria-controls="infodiv" aria-selected="false">Info</a>
-
-          </div>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
-              <div class="mb-5 mt-3 p-3 create_post">
-                <img class="ml-2" [src]="profileimageee" />
-                <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
-                  class="btn_post text-light ">
-                <div class="modal fade" id="post" role="dialog">
-                  <div class="modal-dialog">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
+                <div class="mb-5 mt-3 p-3 create_post">
+                  <img class="ml-2" [src]="profileimageee" />
+                  <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
+                    class="btn_post text-light ">
+                  <div class="modal fade" id="post" role="dialog">
+                    <div class="modal-dialog">
 
 
-                    <div class="modal-content">
-                      <div class="modal-header ">
+                      <div class="modal-content">
+                        <div class="modal-header ">
 
-                        <h4 class="modal-title text-light float-left">Post</h4>
-                        <button type="button" class="close text-light float-right" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title text-light float-left">Post</h4>
+                          <button type="button" class="close text-light float-right"
+                            data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                              <input type="text" class="form-control postForm postinput" name="title" #title="ngModel"
+                                [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
+                              <br>
+                              <textarea class=" form-control postForm postinput" rows="5" id="comment"
+                                #content="ngModel" [(ngModel)]="newPost.content" placeholder="what are in your mind "
+                                name="content"></textarea>
+                            </div>
+                            <div class="row modal-footer">
+                              <input type="submit" (click)="createPost()" class="btn maincolor img-vedio-btn text-light"
+                                [disabled]="post.form.invalid" value="post">
+                              <button class="btn maincolor mr-3 text-light" data-dismiss="modal">close</button>
+                            </div>
+                          </form>
+                        </div>
+
                       </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="form-group">
-                            <input type="text" class="form-control postForm" name="titleOfPost"
-                              placeholder="Title of Post">
-                            <br>
-                            <textarea class=" form-control postForm" rows="5" id="comment"
-                              placeholder="what are you need "></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="posts">
+                  <div class="post" *ngFor="let post of charityposts; let i = index">
+                    <div class="editPost  pr-0">
+                      <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-ellipsis-v  pt-0"></i>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                     
+                        <button name="edit" data-toggle="modal" data-target="#editpost"  (click)="editbutton(post)"  class="text-dark "><a>Edit
+                            post</a></button>
+                        <button name="edit" data-toggle="modal" data-target="#deletepost"
+                        (click)="deletebutton(post)"  class=" text-dark "><a>Delete post</a></button>
+                       
+                      </div>
+                    </div>
+                    <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i">
+                    <div>
+                      <img class="float-left mr-2" [src]="profileimageee" />
+                      <h5>{{charitydetaile.name}}</h5>
+
+
+                      <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                    </div>
+                    <div>
+                      <p id="postTitle">{{post.title}}</p>
+                      <p id="postContent">
+                        {{post.content}}
+                      </p>
+                      <h5 class="hidden" id="postID">{{post._id}}</h5>
+                    </div>
+                    <div class="reactions ">
+                      <a id="like">
+                        <i class="fas fa-heart" (click)="like(post)"></i>
+                        Like</a>
+                      <a id="comment">
+                        <i class="far fa-comment" (click)="Comment(post)"></i>
+                        Comment</a>
+                    </div>
+                    </div>
+                    <!-- comment -->
+
+                    <!-- *ngIf="commentt(comment.postby,post._id)" -->
+
+                    <div>
+
+                      <form #comment="ngForm" class="pr-0">
+
+                        <div class="row form-group">
+                          <img class="float-left ml-3"
+                            src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                          <input type="text" class="form-control ml-2 pr-0  "
+                            style="border-radius:55px;text-align: center; width: 80%;" [(ngModel)]="commentclass.text"
+                            #text placeholder="your comment" name="text">
+                          <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
+                          <button (click)="sendcomment(comment,post)" class="hidden"></button>
+                        </div>
+
+                      </form>
+                      <div *ngFor="let comment of commentpost">
+
+                        <div *ngIf="commentt(comment.post,post._id)">
+                          <div class="row" *ngIf="commentByCharity">
+                            <input class="hidden" (click)="hidden(comment)">
+
+                            <div class="mt-2 ml-2" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+
+                              <h6>{{commentByCharity.name}}</h6>
+                            </div>
+
+                            <div class="mt-2 ml-2" id="posttedby"
+                              *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
+
+                              <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                            </div>
+
+                            <p>
+                              {{comment.text}}
+                            </p>
                           </div>
-                          <div class="row modal-footer">
-                            <button type="submit" class="btn maincolor img-vedio-btn text-light"
-                              data-dismiss="modal">images/video</button>
-                            <button type="submit" class=" btn maincolor mr-3 text-light"
-                              data-dismiss="modal">post</button>
-                          </div>
-                        </form>
+                        </div>
+                      </div>
+
+                      <!--  -->
+
+
+                    </div>
+
+
+
+
+
+
+                    <div *ngIf="islike">
+                      <div *ngFor="let like of AllLikes">
+                        <p>{{like.postedby}}</p>
                       </div>
 
                     </div>
 
+
                   </div>
+
+                  <div class="modal fade" id="editpost" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header ">
+
+                          <h4 class="modal-title text-light float-left">Edit</h4>
+                          <button type="button" class="close text-light float-right"
+                            data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                              <input type="text" class="form-control postForm" name="title" #title="ngModel"
+                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title"
+                                placeholder="Title of Post" name="title">
+                              <br>
+                              <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
+                                [(ngModel)]="newPost.content" value="{{postContent}}" name="content"></textarea>
+                            </div>
+                            <div class="row modal-footer">
+                              <input type="submit" (click)="edit()" class="btn maincolor img-vedio-btn text-light"
+                                [disabled]="post.form.invalid" value="Edit" data-dismiss="modal">
+                              <!-- <button  class=" btn maincolor mr-3 text-light" data-dismiss="modal">close</button> -->
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+
+
+                  <div class="modal fade" id="deletepost" role="dialog">
+                    <div class="modal-dialog">
+
+
+                      <div class="modal-content">
+                        <div class="modal-header ">
+
+                          <div class="modal-title text-light">Delete</div>
+                          <button type="button" class="close text-light " data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete this post?</p>
+                          <input type="submit" (click)="delete()"
+                            class="btn maincolor ml-0 img-vedio-btn text-light float-right" value="Delete"
+                            data-dismiss="modal">
+                          <!-- <button  class=" btn maincolor mr-0 text-light float-right" data-dismiss="modal">close</button> -->
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                 
                 </div>
-
-
-
               </div>
 
-              <div class="posts">
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                    </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                    [src]="profileimageee" />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
-                  </div>
-                </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                    </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
-                  </div>
-                </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                    </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
-                  </div>
-                </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
-                    </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                      src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
-              <div class="info">
-                <div class="details">
-                  <h6>Charity Name</h6>
-                  <h6>{{charitydetaile.name}}</h6>
+              <div class="tab-pane fade mt-3" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
+                <div class="info">
+                  <div class="details" *ngIf="name">
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;"
+                      (click)="editInformation(charitydetaile)"></i>
+                    <h6 style="color: #3B6D8C;">Charity Name</h6>
+                    <h6>{{charitydetaile.name}}</h6>
 
 
-                </div>
-                <div class="details">
-                  <h6>Charity address</h6>
-                  <p>{{charitydetaile.address}}</p>
+                  </div>
 
-                </div>
-                <div class="details">
-                  <h6>Charity phone</h6>
-                  <p>{{charitydetaile.phone}}</p>
+                  <div class="details pb-5" *ngIf="isEdit">
+                    <h6 style="color: #3B6D8C;">Charity Name</h6>
+                    <form #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" #name [(ngModel)]="charitydetaile.name"
+                          value="{{charitydetaile.name}}" class="w-100" name="name">
+                      </div>
+                      <button type="submit" (click)="editname(name.value)"
+                        class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                    </form>
+                  </div>
 
-                </div>
-                <div class="details">
-                  <h6> About</h6>
-                  <p>ffffffffffffff</p>
-                </div>
-                <div class="details">
-                  <h6>Charity Country</h6>
-                  <p>{{charitydetaile.country}}</p>
+
+                  <div class="details" *ngIf="about">
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="About()"></i>
+                    <h6 style="color: #3B6D8C;"> About</h6>
+                    <p></p>
+                  </div>
+
+
+                  <div class="details pb-5" *ngIf="aboutEdit">
+                    <h6 style="color: #3B6D8C;">About</h6>
+                    <form #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" #about [(ngModel)]="charitydetaile.about"
+                          value="{{charitydetaile.about}}" class="w-100" name="about">
+                      </div>
+                      <button type="submit" (click)="editabout(about.value)"
+                        class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                    </form>
+                  </div>
+
+                  <div class="details" *ngIf="address">
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editaddress()"></i>
+                    <h6 style="color: #3B6D8C;">Charity address</h6>
+                    <p>{{charitydetaile.address}}</p>
+
+                  </div>
+
+                  <div class="details pb-5" *ngIf="addressEdit">
+                    <h6 style="color: #3B6D8C;">Charity address</h6>
+                    <form #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" #address [(ngModel)]="charitydetaile.address"
+                          value="{{charitydetaile.address}}" class="w-100" name="address">
+                      </div>
+                      <button type="submit" (click)="editaddr(address.value)"
+                        class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                    </form>
+                  </div>
+
+
+                  <div class="details" *ngIf="phone">
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editphone()"></i>
+                    <h6 style="color: #3B6D8C;">Charity phone</h6>
+                    <p>{{charitydetaile.phone}}</p>
+
+                  </div>
+
+
+                  <div class="details pb-5" *ngIf="phoneEdit">
+                    <h6 style="color: #3B6D8C;">Charity phone</h6>
+                    <form #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" #phone [(ngModel)]="charitydetaile.phone"
+                          value="{{charitydetaile.phone}}" class="w-100" name="phone">
+                      </div>
+                      <button type="submit" (click)="newphone(phone.value)"
+                        class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                    </form>
+                  </div>
+
+
+                  
+
+                  <div class="details" *ngIf="Country">
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>
+                    <h6 style="color: #3B6D8C;">Charity Country</h6>
+                    <p>{{charitydetaile.country}}</p>
+
+                  </div>
+
+
+                  <div class="details pb-5" *ngIf="countryedit">
+                    <h6 style="color: #3B6D8C;">Charity Country</h6>
+                    <form #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" #country [(ngModel)]="charitydetaile.country"
+                          value="{{charitydetaile.country}}" class="w-100" name="country">
+                      </div>
+                      <button type="submit" (click)="editcountry(country.value)"
+                        class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                    </form>
+                  </div>
 
                 </div>
               </div>
@@ -508,8 +618,5 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-</div>
-</body>
+        <!-- </div> -->
+        <!-- </body> -->

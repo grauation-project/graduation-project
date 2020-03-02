@@ -51,6 +51,7 @@ body {
   height: 80px;
   margin-top: 20px;
   background-color: white;
+  border-radius: 2%;
 }
 
 .postbtn {
@@ -111,6 +112,7 @@ body {
   padding-top: 2%;
   margin-top: 2%;
   background-color: white;
+  border-radius: 2%;
 }
 
 .editPost {

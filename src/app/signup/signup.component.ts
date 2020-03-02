@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
     console.log( this.fileselected )
   }
   volunteersignup = new Volunteer("", "", "", "", "", "", "",this.fileselected);
-  charitymodel = new Signup("", "", "", "", "", "", "", this.fileselected);
+  charitymodel = new Signup("", "", "", "", "", "", "",this.fileselected,[],[]);
 
   charityregister() {
     this.ischarity = true;

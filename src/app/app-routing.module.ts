@@ -14,6 +14,7 @@ import { CongrateComponent } from "./congrate/congrate.component";
 import { GuardService } from "./services/guard.service";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { CharityhomeComponent } from "./charityhome/charityhome.component";
+import { FollowingComponent } from './following/following.component';
 import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
@@ -85,13 +86,12 @@ const routes: Routes = [
     component: CharityhomeComponent,
     canActivate: [GuardService]
   },
- 
- 
- 
-
+  {path:"charity/account/_id",component:CharityAccountComponent},
+  {path:"charity/home/:_id",component:CharityhomeComponent},
+  {path:"following/:_id",component:FollowingComponent}
 ];
 
-@NgModule({
+@NgModule({  
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

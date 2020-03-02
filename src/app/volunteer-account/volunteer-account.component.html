@@ -13,6 +13,7 @@
     <ul class="navbar-nav  ">
       <li class="nav-item active">
         <i class="fas fa-home align-center "></i>
+        <!-- <a class="nav-link "  [routerLink]='["/home/volunteer"]'>Home <span class="sr-only">(current)</span></a> -->
         <a class="nav-link " (click)="refresh()">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -154,7 +155,7 @@
         <div class="account_headline overflow-hidden">
           <h4>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
           <p>
-            Graphic and web designer
+            volunteer
             <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                 class="fa fa-star"></i></span>
             <span>
@@ -189,19 +190,19 @@
                         <button type="button" class="close text-light float-right" data-dismiss="modal">&times;</button>
                       </div>
                       <div class="modal-body">
-                        <form>
+                        <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <input type="text" class="form-control postForm" name="titleOfPost"
-                              placeholder="Title of Post">
+                            <input type="text" class="form-control postForm" name="title" #title="ngModel"
+                              [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
                             <br>
-                            <textarea class=" form-control postForm" rows="5" id="comment"
-                              placeholder="what are you need "></textarea>
+                            <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
+                              [(ngModel)]="newPost.content" placeholder="what are in your mind "
+                              name="content"></textarea>
                           </div>
                           <div class="row modal-footer">
-                            <button type="submit" class="btn maincolor img-vedio-btn text-light"
-                              data-dismiss="modal">images/video</button>
-                            <button type="submit" class=" btn maincolor mr-3 text-light"
-                              data-dismiss="modal">post</button>
+                            <input type="submit" class="btn maincolor img-vedio-btn text-light"
+                              [disabled]="post.form.invalid" value="post">
+                            <button class="btn maincolor mr-3 text-light" data-dismiss="modal">close</button>
                           </div>
                         </form>
                       </div>
@@ -216,172 +217,232 @@
               </div>
 
               <div class="posts">
-                <div class="post">
+                <div class="post" *ngFor="let post of charityposts ">
                   <div class="editPost  pr-0">
                     <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
                       <i class="fa fa-ellipsis-v  pt-0"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-
+                     
+                      <button name="edit" data-toggle="modal" data-target="#editpost"  (click)="editbutton(post)"  class="text-dark"><a>Edit
+                          post</a></button>
+                      <button name="edit" data-toggle="modal" data-target="#deletepost"
+                      (click)="deletebutton(post)"  class="btn_post text-dark "><a>Delete post</a></button>
+                     
                     </div>
                   </div>
                   <div>
                     <img class="float-left mr-2"
                     [src]="profileimageee"  />
-                    <h5>john doe</h5>
+                    <h5>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h5>
+                    
+                   
                     <span><i class="fa fa-clock-o"></i>3 minutes</span>
                   </div>
                   <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
+                    <p id="postTitle">{{post.title}}</p>
+                    <p id="postContent">
+                      {{post.content}}
                     </p>
+                    <h5 class="hidden" id="postID">{{post._id}}</h5>
                   </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
+                  <div class="reactions ">
+                    <a id="like" (click)="showlike()">
+                      <i class="fas fa-heart" (click)="like()"></i>
                       Like</a>
-                    <a href="#">
+                    <a (click)="comment()">
                       <i class="far fa-comment"></i>
                       Comment</a>
+                  </div>
+
+                  <div *ngIf="iscomment">
+                    <form #comment="ngForm">
+
+                      <div class="row form-group">
+                        <input type="text" class="form-control w-100 float-right"
+                          style="border-radius:10px;text-align: center;" [(ngModel)]="commentclass.text" #text
+                          placeholder="your comment" name="text">
+                        <button (click)="sendcomment()" class="hidden"></button>
+                      </div>
+
+                    </form>
+                  </div>
+
+
+                  <div *ngIf="showcomment">
+                    <div *ngFor="let comment of commentpost">
+                      <div class="row">
+                        <p>
+                          {{comment.postedby}}
+                        </p>
+                        <p>
+                          {{comment.text}}
+                        </p>
+                      </div>
+               
+                    </div>
+
+                    <div *ngIf="islike">
+                      <div *ngFor="let like of AllLikes">
+                        <p>{{like.postedby}}</p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="modal fade" id="editpost" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header ">
+
+                        <h4 class="modal-title text-light float-left">Edit</h4>
+                        <button type="button" class="close text-light float-right" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
+                          <div class="form-group">
+                            <input type="text" class="form-control postForm" name="title" #title="ngModel"
+                              value="{{postTitle}}" [(ngModel)]="newPost.title" placeholder="Title of Post"
+                              name="title">
+                            <br>
+                            <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
+                              [(ngModel)]="newPost.content" value="{{postContent}}" placeholder="what are in your mind "
+                              name="content"></textarea>
+                          </div>
+                          <div class="row modal-footer">
+                            <input type="submit" (click)="edit()" class="btn maincolor img-vedio-btn text-light"
+                              [disabled]="post.form.invalid" value="Edit" data-dismiss="modal">
+                            <!-- <button  class=" btn maincolor mr-3 text-light" data-dismiss="modal">close</button> -->
+                          </div>
+                        </form>
+                      </div>
+
+                    </div>
+
                   </div>
                 </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+
+
+
+                <div class="modal fade" id="deletepost" role="dialog">
+                  <div class="modal-dialog">
+
+
+                    <div class="modal-content">
+                      <div class="modal-header ">
+
+                        <div class="modal-title text-light">Delete</div>
+                        <button type="button" class="close text-light " data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete this post?</p>
+                        <input type="submit" (click)="delete()"
+                          class="btn maincolor ml-0 img-vedio-btn text-light float-right" value="Delete"
+                          data-dismiss="modal">
+                        <!-- <button  class=" btn maincolor mr-0 text-light float-right" data-dismiss="modal">close</button> -->
+                      </div>
 
                     </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                    [src]="profileimageee"  />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
+
                   </div>
                 </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+         
+
+                <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
+                  <div class="info">
+                    <div class="details" *ngIf="NameF">
+                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editfname()"></i>
+                      <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
+                      <p>{{volunteerdetaile.fname }} </p>
 
                     </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                    [src]="profileimageee"  />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
-                  </div>
-                </div>
-                <div class="post">
-                  <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fa fa-ellipsis-v  pt-0"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
-                      <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                    
+
+                    <div class="details pb-5 mb-5" *ngIf="EditFName">
+                      <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
+                      <form #userForm="ngForm">
+                        <div class="form-group">
+                          <input type="text" class="form-control" #fname [(ngModel)]="volunteerdetaile.fname"
+                            value="{{volunteerdetaile.fname}}" class="w-100" name="fname">
+                        </div>
+                        <button type="submit" (click)="editFname(fname.value)"
+                          class="float-right maincolor mt-1 mr-1 mb-5">Edit</button>
+                      </form>
+                    </div>
+
+
+                    <div class="details" *ngIf="lastname">
+                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="Lname()"></i>
+                      <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
+                      <p>{{volunteerdetaile.lname }}</p>
 
                     </div>
-                  </div>
-                  <div>
-                    <img class="float-left mr-2"
-                    [src]="profileimageee"  />
-                    <h5>john doe</h5>
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
-                  </div>
-                  <div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                      luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                      magna sit amet...
-                    </p>
-                  </div>
-                  <div class="reactions">
-                    <a href="#">
-                      <i class="far fa-heart"></i>
-                      Like</a>
-                    <a href="#">
-                      <i class="far fa-comment"></i>
-                      Comment</a>
+
+
+
+                    <div class="details pb-5" *ngIf="editlname">
+                      <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
+                      <form #userForm="ngForm">
+                        <div class="form-group">
+                          <input type="text" class="form-control" #lname [(ngModel)]="volunteerdetaile.lname"
+                            value="{{volunteerdetaile.lname}}" class="w-100" name="lname">
+                        </div>
+                        <button type="submit" (click)="editLname(lname.value)"
+                          class="float-right maincolor mt-2 mr-1 mb-5 ">Edit</button>
+                      </form>
+                    </div>
+
+                    <div class="details"*ngIf="phone" >
+                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editphone()"></i>
+                      <h6 style="color: #3B6D8C;">Volunteer phone</h6>
+                      <p>{{volunteerdetaile.phone }}</p>
+
+                    </div>
+
+
+                    <div class="details pb-5" *ngIf="phoneEdit">
+                      <h6 style="color: #3B6D8C;">Volunteer phone</h6>
+                      <form #userForm="ngForm">
+                        <div class="form-group">
+                          <input type="text" class="form-control" #phone [(ngModel)]="volunteerdetaile.phone"
+                            value="{{volunteerdetaile.phone}}" class="w-100" name="phone">
+                        </div>
+                        <button type="submit" (click)="newphone(phone.value)"
+                          class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                      </form>
+                    </div>
+
+
+                    <div class="details" *ngIf="Country">
+                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>
+                      <h6 style="color: #3B6D8C;">Volunteer Country</h6>
+                      <p>{{volunteerdetaile. country }}</p>
+
+                    </div>
+
+
+                    <div class="details pb-5" *ngIf="countryedit">
+                      <h6 style="color: #3B6D8C;">Volunteer Country</h6>
+                      <form #userForm="ngForm">
+                        <div class="form-group">
+                          <input type="text" class="form-control" #country [(ngModel)]="volunteerdetaile.country"
+                            value="{{volunteerdetaile.country}}" class="w-100" name="country">
+                        </div>
+                        <button type="submit" (click)="Editcountry(country.value)"
+                          class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                      </form>
+                    </div>
+
+
                   </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
-              <div class="info">
-                <div class="details">
-                  <h6>Volunteer Name</h6>
-                  <h4>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
 
-                </div>
-
-                <div class="details">
-                  <h6>Volunteer phone</h6>
-                  <p>{{volunteerdetaile.phone }}</p>
-
-                </div>
-                <div class="details">
-                  <h6>Volunteer Country</h6>
-                  <p>{{volunteerdetaile. country }}</p>
-
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
-</div>

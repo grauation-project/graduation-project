@@ -1,4 +1,5 @@
 const express = require("express");
+
 const mongoose = require("mongoose");
 const cors = require("cors");
 var config = require("config")
@@ -19,22 +20,31 @@ var hpp = require("hpp");
 var ratelimit = require("express-rate-limit");
 var bodyParser = require("body-parser");
 
+
 var helmet = require("helmet");
 var fs = require("fs");
 var mongosanatize = require("express-mongo-sanitize");
 var xss = require("xss-clean");
 var charityController = require("./controllers/charity");
 const app = express();
-
-
-
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 const login = require("./controllers/login");
 var donatematerial = require("./controllers/donate material");
 var admin = require("./controllers/admin")
 const volunteer = require("./controllers/volunteer");
 var charityController = require("./controllers/charity");
-const donateonline =require("./controllers/donationone");
+const postcontroller = require("./controllers/posts")
+const postModel = require('./models/post');
+const commentModel = require('./models/comment');
+const likemodel = require("./models/like")
+const voluntermodel = require("./models/volunteer");
+const charityModel = require('./models/charity')
+const donateonline = require("./controllers/donationone");
 var searchController = require("./controllers/search");
+
 
 winston.configure({
   transports: [
@@ -96,15 +106,14 @@ app.use("/search", searchController);
 
 
 
-
 app.use("/savethem/charity", charityController);
-
+app.use("/post", postcontroller)
 app.use("/savethem/login", login);
 app.use("/savethem/donatepayment", donatepayment);
 app.use("/savethem/volunteer", volunteer);
 app.use("/savethem/admin", admin);
 app.use("/donate", donatematerial);
-app.use("/savethem/needs",needs)
+app.use("/savethem/needs", needs)
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
@@ -114,19 +123,562 @@ mongoose.connection.on("error", err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(1);
 });
+var parseUrlencoded = bodyParser.urlencoded({ extended: true });
 
+// posts
+
+io.on("connection", (socket) => {
+  console.log("new user connected");
+  postModel.find({}, (err, allpost) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      io.emit("allPost", allpost)
+      // console.log(allpost)
+    }
+  });
+
+
+  socket.on("charityID", (charityid) => {
+
+    console.log(charityid)
+
+
+    postModel.find({ postedby: charityid }, (err, data) => {
+      if (!err) {
+        console.log(data)
+        io.emit('allcharitypost', data)
+      }
+      else {
+        // console.log(charitypost)
+
+      }
+    })
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnect')
+  });
+
+
+  socket.on('create post', function (data) {
+    console.log(data)
+    console.log('this  hi')
+    createPosthome = new postModel({
+      title: data.title,
+      content: data.content,
+      postedby: data.postedby,
+      createdat: Date.now()
+
+    })
+    console.log(createPosthome)
+    createPosthome.save((err, data) => {
+      if (!err) {
+        console.log("save....");
+        postModel.find({}).populate('postedby.volunteer || postedby.charity').exec(function (err, post) {
+          if (!err) {
+            console.log(post)
+            postModel.find({}, (err, allpost) => {
+              console.log("post after database")
+
+              if (err) {
+                console.log(err)
+              }
+              else {
+                io.emit("allPost", allpost)
+                console.log(allpost)
+              }
+            })
+
+          }
+
+
+        })
+      }
+      if (err) {
+        console.log(err)
+      }
+    })
+  });
+
+
+  socket.on('charitypost', (charitynewpost) => {
+    // console.log(charitynewpost)
+    createPost = new postModel({
+      title: charitynewpost.title,
+      content: charitynewpost.content,
+      postedby: charitynewpost.postedby,
+      createdat: Date.now()
+    })
+    createPost.save((err, data) => {
+      if (!err) {
+        console.log("save....");
+        postModel.find({ postedby: charitynewpost.postedby }, (err, data) => {
+          console.log("hi from post charity")
+          if (!err) {
+            console.log(data)
+            io.emit('allCharityPost', data)
+            console.log(data)
+          }
+          else {
+            console.log(err)
+          }
+        })
+
+      }
+    });
+  });
+
+
+
+  socket.on("delete", (postID) => {
+
+    console.log(postID)
+    postModel.findByIdAndDelete(postID, (err, deletepost) => {
+
+      console.log(deletepost)
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(deletepost)
+        console.log("deleted");
+
+      }
+    })
+  });
+  // socket.on("editpost",(postid)=>{
+  //   console.log(postid)
+  //   postModel.find({_id:postid},(err,post)=>{
+  //     if(!err){
+  //       console.log(post)
+  //       io.emit("postthatwilledit",post)
+  //     }
+  //     else{
+  //       console.log(err)
+  //     }
+  //   })
+  // })
+
+  socket.on("edit", (post,id) => {
+    console.log(post);
+
+    console.log("update")
+    postModel.findByIdAndUpdate(id,
+      {
+        $set: { title: post.title, content: post.content, createdat: Date.now() }
+      },
+      { new: true },
+      function (err, updatepost) {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log(updatepost)
+        }
+
+      })
+  });
+
+  socket.on("createcomment", (newcomment) => {
+    console.log(newcomment)
+    createcomment = new commentModel({
+      text: newcomment.text,
+      postedby: newcomment.postedby,
+      post: newcomment.post
+    })
+    createcomment.save((err, comment) => {
+      if (!err) {
+        console.log(comment);
+
+      }
+      else {
+        console.log(err)
+      }
+    })
+  });
+
+  socket.on("displaycomment", async (postid) => {
+    console.log(postid)
+    commentModel.find({ post: postid }, (err, comment) => {
+      if (!err) {
+        console.log(comment)
+        io.emit("comments", comment)
+      }
+      else {
+        console.log(err)
+      }
+    })
+
+  })
+
+  socket.on("like", (like) => {
+    // console.log(like)
+    newlike = new likemodel({
+      postedby: like.postedby,
+      post: like.post
+    })
+    newlike.save((err, like) => {
+      if (!err) {
+        console.log("saved")
+        likemodel.find({}).populate('postedby.volunteer').populate('postedby.charity').exec(function (err, like) {
+          if (like) {
+            console.log(like)
+            // console.log("tttttttttt")
+          }
+          else {
+            console.log(err)
+          }
+        })
+      }
+      else {
+        console.log(err)
+      }
+    })
+  })
+
+  socket.on("ALLlikes", (postid) => {
+    console.log(postid)
+
+    likemodel.find({ post: postid }, (err, likes) => {
+      if (!err) {
+        console.log(likes)
+
+        io.emit("getAllLikes", likes)
+      }
+      else {
+        console.log(err)
+      }
+    })
+  });
+  socket.on("likesPostedBy", (id) => {
+    console.log(id)
+    console.log("idpostedby like")
+  })
+
+
+
+  // charity
+
+  socket.on("allCharity", () => {
+    mongoose.model("charity").find({}, (err, data) => {
+      if (!err) {
+        console.log(data)
+        io.emit('getCharities', data)
+      }
+      else {
+        console.log(err)
+      }
+    });
+
+  });
+
+
+  // find one charity
+  socket.on("findcharity",(id)=>{
+    mongoose.model("charity").findOne({_id:id},(err,charity)=>{
+      if(err){
+        console.log(err);
+        
+      }
+      else{
+        console.log(charity)
+        io.emit("getcharitybyID",charity)
+      }
+    })
+  });
+
+
+  socket.on("follow",(data) => {
+    console.log(data)
+    console.log("asd")
+   
+    mongoose.model("charity").findOne({_id: data.follower },(err,charity)=>{
+      //  for(let followingcharity of charity){
+        
+    if(!err){
+      mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
+        if (err) {
+          console.log(err);
+
+        }
+        else {
+
+          mongoose.model("charity").findOne({ _id: data.following }, (err, Charity) => {
+            if (!err) {
+
+              console.log(Charity.follower)
+              if (Charity.follower == data.follower) {
+                console.log("fffffffffffffffff")
+              }
+              else {
+                mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
+                  if (err) {
+                    console.log(err);
+
+                  }
+                  else {
+                    // console.log(data);
+
+                  }
+                })
+              }
+            }
+          
+         })
+   }
+     
+});
+}
+    });
+   
+
+
+  });
+
+
+
+  socket.on("getfollowing", (data) => {
+    console.log("lllllllllllllllllllllll");
+
+    console.log(data);
+
+    mongoose.model("charity").findOne({ _id: data }, (err, charity) => {
+     if(err){
+       console.log(err);
+       
+     }
+     else{
+       console.log(charity);
+
+       io.emit("following", charity)
+     }
+            
+             
+    })    
+  });
+ 
+  socket.on("remove", (removeID,charityID) => {
+    console.log(removeID,charityID)
+    mongoose.model("charity").update({ _id: charityID },{$pull: {following:removeID}}, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(charity)
+        io.emit("charityAfterRemove",charity)
+        mongoose.model("charity").update({ _id: removeID },{$pull: {follower:charityID}}, (err, charity) => {
+          if (err) {
+            console.log(err)
+          }
+          else{
+            
+          }
+      })
+      }
+    })
+  });
+
+  socket.on("findUser", (id) => {
+    console.log("USER")
+    console.log(id);
+    mongoose.model("charity").findOne({ _id: id }, (err, charity) => {
+
+      if (err) {
+        console.log(err);
+
+      }
+
+      if (charity == null) {
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteer) => {
+
+          if (err) {
+            console.log(err)
+          }
+          else {
+            console.log(volunteer)
+            io.emit("isVolunteer", volunteer)
+            console.log(volunteer)
+          }
+
+        })
+      }
+      else {
+        console.log(charity)
+        io.emit("ischarity", charity)
+      }
+
+    });
+
+
+  })
+
+
+
+  // setting
+
+  socket.on("changeName", (id, change) => {
+    console.log(id, change);
+
+    mongoose.model("charity").update({ _id: id }, { name: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(charity)
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+      }
+    })
+  })
+
+  socket.on("changeAdrress", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { address: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+  socket.on("changePhone", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { phone: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+
+  socket.on("changecountry", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { country: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+
+  // volunteer
+
+  socket.on("changefname", (id, change) => {
+console.log(id, change);
+
+    mongoose.model("volunteer").update({ _id: id }, { fname: change }, (err, volunteer) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        
+        mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+          // io.emit("changed", volunteerAfterChange)
+          io.emit("changedvolunteer", volunteerAfterChange)
+          console.log(volunteerAfterChange);
+          
+        })
+        
+      }
+    })
+  });
+
+
+  socket.on("changelname", (id, change) => {
+    console.log(id, change);
+    
+        mongoose.model("volunteer").update({ _id: id }, { lname: change }, (err, volunteer) => {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            
+            mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+              // io.emit("changed", volunteerAfterChange)
+              io.emit("changedvolunteer", volunteerAfterChange)
+              console.log(volunteerAfterChange);
+              
+            })
+            
+          }
+        })
+      });
+
+      socket.on("changePhoneVOL", (id, change) => {
+        console.log(id, change);
+        
+            mongoose.model("volunteer").update({ _id: id }, { phone: change }, (err, volunteer) => {
+              if (err) {
+                console.log(err)
+              }
+              else {
+                
+                mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+                  // io.emit("changed", volunteerAfterChange)
+                  io.emit("changedvolunteer", volunteerAfterChange)
+                  console.log(volunteerAfterChange);
+                  
+                })
+                
+              }
+            })
+          });
+    
+          socket.on("changeCountryVOL", (id, change) => {
+            console.log(id, change);
+            
+                mongoose.model("volunteer").update({ _id: id }, { country: change }, (err, volunteer) => {
+                  if (err) {
+                    console.log(err)
+                  }
+                  else {
+                    
+                    mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+                      // io.emit("changed", volunteerAfterChange)
+                      io.emit("changedvolunteer", volunteerAfterChange)
+                      console.log(volunteerAfterChange);
+                      
+                    })
+                    
+                  }
+                })
+              });
+
+
+});
 
 
 passport.use(
   new Strategy({
-      clientID: 799856253853537,
-      clientSecret: 'a1a57004dbdefed95f388a9a402a621f',
-      callbackURL: "http://localhost:3000/auth/facebook/callback"
-    },
+    clientID: 799856253853537,
+    clientSecret: 'a1a57004dbdefed95f388a9a402a621f',
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
     function (accessToken, refreshToken, profile, cb) {
       User.findOrCreate({
-          facebookId: profile.id
-        },
+        facebookId: profile.id
+      },
         function (err, user) {
           return cb(err, user);
         }
@@ -134,6 +686,10 @@ passport.use(
     }
   )
 );
+
+
+
+
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
@@ -162,6 +718,7 @@ app.get('/return',
   function (req, res) {
     res.redirect('/');
   });
+
 
 
   // const transporter = nodemailer.createTransport({
@@ -229,6 +786,6 @@ if(error){
 
 /*-----------------------------------------------------------------------*/ 
 
-app.listen(3000, function () {
+server.listen(3000, function () {
   console.log("server running....");
 });

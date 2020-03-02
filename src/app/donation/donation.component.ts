@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { PaymentService } from "../services/payment.service";
 import { Payment } from "../class/payment";
 import { Router } from "@angular/router";
+import { DonationMaterial } from '../class/donation-material';
+import { DonatationService } from '../services/donatation.service';
+
 declare var require: any;
 declare var $: any;
 
@@ -17,9 +20,12 @@ export class DonationComponent implements OnInit {
   public donateamount = "";
   charityHasErr: any;
   errormsg = "";
+  
+  donationMaterial= new DonationMaterial("","","","","","","","")
 
   constructor(
     private _PaymentService: PaymentService,
+    private donateMaterialSerives :DonatationService,
     private router: Router
   ) {}
   paymentregister() {
@@ -66,10 +72,12 @@ export class DonationComponent implements OnInit {
       this.charityHasErr = false;
     }
   }
-  // Donate() {
-  //   this.donateMaterialSerives.donateMaterial(this.donationMaterial).subscribe(
-  //     response => console.log("Success!", response),
-  //     error => console.log(error)
-  //   );
-  // }
+  Donate() {
+    console.log("hiiiii")
+    this.donateMaterialSerives.DonateMaterial(this.donationMaterial).subscribe(
+      response => console.log("Success!", response),
+      error => console.log(error)
+    );
+  }
+  
 }

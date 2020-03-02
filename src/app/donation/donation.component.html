@@ -123,73 +123,82 @@
 
           <div id="material" *ngIf="ismaterial">
 
-            <form #stockDonateForm="ngForm">
+            <form #stockDonateForm="ngForm" novalidate method="POST" (submit)="Donate()" >
+           
               <div class="form-group">
-                <label class="col-form-label float-left">Doner name:</label>
-                <input type="text" class="form-control" name="doner" required
-                  [class.is-invalid]="doner.invalid && doner.touched" #doner="ngModel"
-                  [(ngModel)]="stockDonateForm.doner" />
-                <small class="text-danger " [class.d-none]="doner.valid || doner.untouched">name is Required</small>
+  
+                <label class="col-form-label float-left">
+                  Donor name:
+                </label>
+  
+                <input type="text" class="form-control" name="donorName" required
+                  [class.is-invalid]="donorName.invalid && donorName.touched" #donorName="ngModel" [(ngModel)]="donationMaterial.donorName">
+  
+                <small class="text-danger " [class.d-none]="donorName.valid || donorName.untouched">name is Required</small>
+  
               </div>
               <div class="form-group">
                 <label class="col-form-label float-left">Email:</label>
                 <input type="text" class="form-control" name="email" required
-                  [class.is-invalid]="email.invalid && email.touched" #email="ngModel"
-                  [(ngModel)]="stockDonateForm.email" />
-                <small class="text-danger " [class.d-none]="email.valid || email.untouched">email is
-                  Required</small>
+                  [class.is-invalid]="email.invalid && email.touched" #email="ngModel" [(ngModel)]="donationMaterial.email">
+                <small class="text-danger " [class.d-none]="email.valid || email.untouched">email is Required</small>
               </div>
               <div class="form-group">
                 <label class="float-left">Phone :</label>
                 <input type="tel" [class.is-invalid]="phone.invalid && phone.touched" class="form-control"
-                  #phone="ngModel" pattern="^\d{10}$" required [class.is-invalid]="phone.invalid && phone.touched"
-                  [(ngModel)]="stockDonateForm.phone" name="phone" />
-                <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+                  #phone="ngModel" pattern="^\d{11}$" required [class.is-invalid]="phone.invalid && phone.touched"
+                  [(ngModel)]="donationMaterial.phone" name="phone">
+                <div *ngIf="phone.errors && (phone.invalid ||phone.touched)">
                   <small class="text-danger" [class.d-none]="phone.valid || phone.untouched"
                     *ngIf="phone.errors.required">Phone number is required</small>
-                  <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>
+                  <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 11 digits</small>
                 </div>
               </div>
-
+  
               <div class="form-group">
                 <label class="float-left">Country :</label>
-                <input type="text" name="country" required [class.is-invalid]="country.invalid && country.touched"
-                  #country="ngModel" [(ngModel)]="stockDonateForm.country" class="form-control" />
+                <input type="text" name="country" required [class.is-invalid]="country.invalid &&country.touched"
+                  #country="ngModel" [(ngModel)]="donationMaterial.country" class="form-control">
                 <small class="text-danger " [class.d-none]="country.valid || country.untouched">country is
                   Required</small>
               </div>
               <div class="form-group">
                 <label class="float-left">City :</label>
-                <input type="text" name="City" required [class.is-invalid]="City.invalid && City.touched"
-                  #City="ngModel" [(ngModel)]="stockDonateForm.City" class="form-control" />
+                <input type="text" name="City" required [class.is-invalid]="City.invalid &&City.touched" #City="ngModel"
+                  [(ngModel)]="donationMaterial.City" class="form-control">
                 <small class="text-danger " [class.d-none]="City.valid || City.untouched">City is Required</small>
               </div>
               <div class="form-group">
                 <label class=" col-form-label float-left">Address:</label>
-                <input type="text" name="address" required [class.is-invalid]="address.invalid && address.touched"
-                  #address="ngModel" [(ngModel)]="stockDonateForm.address" class="form-control" />
+                <input type="text" name="address" required [class.is-invalid]="address.invalid &&address.touched"
+                  #address="ngModel" [(ngModel)]="donationMaterial.address" class="form-control" />
                 <small class="text-danger " [class.d-none]="address.valid || address.untouched">address is
                   Required</small>
               </div>
               <div class="form-group">
                 <label class="float-left">Charity Name :</label>
-                <select (blur)="Validatecharity(charityname.value)" (change)="Validatecharity(charityname.value)"
-                  class="custom-select" [class.is-invalid]="charityHasErr && charityname.touched" required
-                  #charityname="ngModel" [(ngModel)]="stockDonateForm.charityname" name="charityname">
+                <select (blur)="Validatecharity(charityname.value)" (change)="Validatecharity(charityname.value) "
+                  class="custom-select" [class.is-invalid]="charityHasErr&&charityname.touched" required
+                  #charityname="ngModel" [(ngModel)]="donationMaterial.charityname" name="charityname">
                   <option value="default">charities</option>
-                  <option *ngFor="let charity of charities">{{ charity }}</option>
+                  <option value="name">name</option>
+  
+                  <option *ngFor="let charity of charities">{{charity}}</option>
                 </select>
                 <small class="text-danger" [class.d-none]="!charityHasErr || charityname.untouched">
                   Please choose a charity name</small>
               </div>
               <div class="form-group">
                 <label class=" col-form-label float-left">Type of material:</label>
-                <input type="text" name="type" required [class.is-invalid]="type.invalid && type.touched"
-                  #type="ngModel" [(ngModel)]="stockDonateForm.type" class="form-control" />
+                <input type="text" name="type" required [class.is-invalid]="type.invalid &&type.touched" #type="ngModel"
+                  [(ngModel)]="donationMaterial.type" class="form-control" />
                 <small class="text-danger " [class.d-none]="type.valid || type.untouched">Type of material is
                   Required</small>
               </div>
-              <input type="submit" class="btn btn-info " [disabled]="stockDonateForm.form.invalid" value="Donate" />
+              <input type="submit"  [disabled]="stockDonateForm.form.invalid" class="btn btn-info" value="Donate">
+              <!-- <input type="submit" [disabled]="userForm.form.invalid" class="btn btn-dark" value="log in"> -->
+  
+  
             </form>
           </div>
         </div>

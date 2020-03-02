@@ -19,12 +19,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { VolunteersignupService } from "./services/volunteersignup.service";
 import { PaymentService } from "./services/payment.service";
+import { PostSeriveService } from './services/post-serive.service';
 import { ReactiveFormsModule } from "@angular/forms";
 import { FileUploadModule } from "ng2-file-upload";
 import { DonationComponent } from "./donation/donation.component";
 import { CongrateComponent } from "./congrate/congrate.component";
 import { CharityhomeComponent } from './charityhome/charityhome.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FollowingComponent } from './following/following.component';
 import { AdminCharityComponent } from './admin-charity/admin-charity.component';
 import { AdminVolunteerComponent } from './admin-volunteer/admin-volunteer.component';
 import { AddadminComponent } from './addadmin/addadmin.component';
@@ -51,6 +53,7 @@ import {  ConfirmEqualValidatorDirective } from './shared/confirmpass.directive'
     DonationComponent,
     CongrateComponent,
     CharityhomeComponent,
+    FollowingComponent,
     AdminCharityComponent,
     AdminVolunteerComponent,
     AddadminComponent,
@@ -68,8 +71,11 @@ import {  ConfirmEqualValidatorDirective } from './shared/confirmpass.directive'
     FileUploadModule,
     Ng2SearchPipeModule
   ],
-
-  providers: [VolunteersignupService, PaymentService],
+  
+  providers: [
+    VolunteersignupService,
+     PaymentService,
+    PostSeriveService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -7,6 +7,8 @@ export class Signup {
     public country: string,
     public address: string,
     public phone: String,
-    public img: string
+    public img: string,
+    public following:[],
+public follower:[]
   ) {}
 }

@@ -1,9 +1,12 @@
+import { Component, OnInit } from '@angular/core';
+import { PostSeriveService } from '../services/post-serive.service';
+import { Post } from '../class/post';
 import { LoginService } from "../services/login.service";
 import { Volunteerdetails } from "../class/Volunteerdetails";
-import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
+import { Follow } from '../class/follow';
 import { log } from 'util';
 // import { VolunteerList } from '../class/volunteer copy';
 declare var require: any;
@@ -14,10 +17,13 @@ declare var require: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  charities: unknown;
+  
   constructor(
     private _LoginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
+    private postSerives:PostSeriveService,
     private charityService:CharityService,
     private volunteerService:VolunteersignupService
 
@@ -36,8 +42,17 @@ searcheng(){
   public code;
   public ID;
   imgnav = require("../../assets/1.jpg");
-
+  public Allpost
+  public newPost = new Post('','', '',[],[],null)
+  post
   ngOnInit() {
+
+    this.postSerives.getpost().subscribe(data=>{
+      console.log(data)
+      this.Allpost=data
+    });
+
+    
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
       console.log(typeof params.get("_id"));
@@ -63,6 +78,24 @@ searcheng(){
       
     })
   }
+
+onSubmit(){
+  console.log(this.code)
+    console.log("create")
+     this.newPost.postedby = this.code
+    console.log(this.code)
+    this.postSerives.newpost(this.newPost)
+    console.log(this.newPost),
+      this.postSerives.getpost().subscribe(data => {
+        console.log(data)
+        this.Allpost = data
+      })
+
+      this.newPost.title="",
+      this.newPost.content=""
+
+  }
+
 
   logout() {
     localStorage.removeItem("token");

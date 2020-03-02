@@ -1,14 +1,18 @@
 body
 {
-  background-image: url("../../assets/3.jpg");
+  background-image:url("https://images.unsplash.com/photo-1538049535840-0580971b3b5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
 
 }
 .logindiv {
 
   position: absolute;
   top: 25%;
-  left: 46%;
+  left: 25%;
+  right: 25%;
  opacity: .9;
+ 
+ border-radius: 5%;
+
 }
 .backgroundimg
 {
@@ -25,6 +29,7 @@ width: 100%;
   /* border: 1px solid lightgray; */
   padding-top: 20px;
   padding: 15px;
+ 
 }
 
 .FACEBOOKbtn {
