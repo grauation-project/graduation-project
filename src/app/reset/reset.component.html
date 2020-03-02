@@ -18,25 +18,45 @@
                          <p>You can reset your password here.</p>
                          <div class="panel-body">
            
-                           <form id="register-form" role="form" autocomplete="off" class="form" method="post">
-           
+                           <form id="register-form" role="form" #emailForm="ngForm" novalidate (ngSubmit)="onSubmit()" class="form">
+                            <div class="form-group">
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                <input id="email"required [class.is-invalid]="email.invalid && email.touched"
+                                #email="ngModel" [(ngModel)]="userModel.email"  placeholder="Your E.mail" class="form-control"  name="email" placeholder="Your E.mail" type="text">
+                              
+                              </div>
+                              <small class="text-danger " [class.d-none]="email.valid || email.untouched">E.mail is
+                                Required</small>
+                            </div>
+    
+                            
                              <div class="form-group">
-                               <div class="input-group">
-                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                 <input id="email" name="email" placeholder="New Password" class="form-control"  type="email">
-                               </div>
-                             </div>
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                <input id="password"required [class.is-invalid]="password.invalid && password.touched"
+                                #password="ngModel" [(ngModel)]="userModel.password"  class="form-control"  name="password" placeholder="New Password" type="password">
+                              
+                              </div>
+                              <small class="text-danger " [class.d-none]="password.valid || password.untouched">password is
+                                Required</small>
+                            </div>
                              <div class="form-group">
                                 <div class="input-group">
                                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                                  <input id="email" name="email" placeholder="Confirm Password" class="form-control"  type="email">
+                                  <input id="confirmpassword"    #confirm="ngModel" [(ngModel)]="userModel.confirm" appConfirmEqualValidator="password" name="confirm" placeholder="Confirm Password" required class="form-control"  type="password">
                                 </div>
+                                <small class="text-danger " *ngIf="confirm.touched && confirm.errors?.required">Confirm password is
+                                  Required</small>
+                                  <small class="text-danger " *ngIf="confirm.touched && confirm.errors?.notEqual && !confirm.errors?.required " >Confirm password is
+                                    not matched</small>
+                                
                               </div>
+                             
                              <div class="form-group">
-                               <input name="recover-submit" class="btn btn-lg btn-block" style="background-color: #3B6D8C;color:white" value="Reset Password" type="submit">
+                               <input name="recover-submit" [disabled]="emailForm.form.invalid"  class="btn btn-lg btn-block" style="background-color: #3B6D8C;color:white" value="Reset Password" type="submit">
                              </div>
                              
-                             <input type="hidden" class="hide" name="token" id="token" value=""> 
                            </form>
            
                          </div>

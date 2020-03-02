@@ -78,6 +78,7 @@ const routes: Routes = [
   {
     path: "reset-password",
     component: ResetComponent,
+    canActivate: [GuardService]
   },
   {
     path: "home/charity/:_id",

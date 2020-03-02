@@ -91,7 +91,7 @@ export class SignupComponent implements OnInit {
         console.log("error", error);
         this.volunteererror = error.error;
 
-        this.router.navigate(["signup"]);
+        // this.router.navigate(["signup"]);
       }
     );
   }

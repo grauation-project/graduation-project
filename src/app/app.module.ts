@@ -31,6 +31,7 @@ import { AddadminComponent } from './addadmin/addadmin.component';
 import { PostsadminComponent } from './postsadmin/postsadmin.component';
 import { ForgetpassComponent } from './forgetpass/forgetpass.component';
 import { ResetComponent } from './reset/reset.component';
+import {  ConfirmEqualValidatorDirective } from './shared/confirmpass.directive';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { ResetComponent } from './reset/reset.component';
     PostsadminComponent,
     ForgetpassComponent,
     ResetComponent,
-    
+    ConfirmEqualValidatorDirective    
   ],
   imports: [
     BrowserModule,
