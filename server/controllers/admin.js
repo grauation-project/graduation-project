@@ -14,6 +14,21 @@ var {
   admin
 } = require("../models/admin");
 
+var {
+  charity
+} = require("../models/charity");
+
+
+
+router.get("/charity/list",async(req,res)=>{
+  let result = await   charity.find({});
+res.json(result)
+
+
+
+
+
+})
 router.get("/volunteer/delete/:id", function (req, resp) {
 
   mongoose.model("volunteer").findOneAndRemove({

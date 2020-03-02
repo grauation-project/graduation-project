@@ -11,6 +11,12 @@ import { Title } from '@angular/platform-browser';
 import { Edit } from 'src/app/class/edit';
 import { CharityService } from 'src/app/services/charity.service';
 import { VolunteersignupService } from 'src/app/services/volunteersignup.service';
+import { Needs } from "../../class/needs"
+import { NgForm } from '@angular/forms';
+import { Listneed } from 'src/app/class/listneed';
+import { async } from '@angular/core/testing';
+declare var require: any;
+
 @Component({
   selector: "app-charity-account",
   templateUrl: "./charity-account.component.html",
@@ -33,6 +39,8 @@ export class CharityAccountComponent implements OnInit {
   public com: false
   ccc: boolean;
   postedByVolunteer: unknown;
+  profileimageee=""
+  charitydetailchanged: unknown;
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -43,10 +51,22 @@ export class CharityAccountComponent implements OnInit {
   ) { }
   public iscomment = false;
   public islike = false;
-  public showcomment = false
+  public showcomment = false;
+public isEdit =false;
+public name =true;
+public address=true;
+public addressEdit=false;
+public phone =true;
+public phoneEdit =false;
+public about=true;
+public aboutEdit =false;
+public Country =true;
+public countryedit=false;
 
 public commentByCharity;
 public commentByVolunteer ;
+fileselected = "";
+
   public code;
   public ID;
   public Allpost
@@ -57,17 +77,209 @@ public commentPostedBy;
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
   public editclass = new Edit("", "", "", "")
-  charitydetaile = new Signup("", "", "", "", "", "", "", "");
+  charitydetaile = new Signup("", "", "", "", "", "", "", "",[],[]);
+ 
   title = 'Angular Search Using ng2-search-filter';
   searchText;
   listvolunteersearch;
   listcharitysearch;
   // slsText;
+  isadd=false;
+  isupdate=false;
+  need = new Needs ("","","")
+  listneeds = new Listneed ("","","","")
+    
+   
   displaydiv = false;
   searcheng() {
     this.displaydiv = true;
   }
+  toggleadd(){
+    this.isadd=true
+   this.need.name="";
+   this.need.quantity=""
+   this.need.description=""
 
+
+  }
+  addneed(addneeds:NgForm){
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.addneed(this.need,this.code).subscribe(
+
+      response => {console.log("Success!", response)
+      ,  this.isadd=false,
+      addneeds.reset()
+      
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+      this.charityService.listneed(this.code).subscribe(
+        data => {
+          
+          this.listneeds = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listneeds);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      
+
+    },
+        error => {
+          console.log("error!", error),
+          addneeds.reset()
+
+        } 
+          
+    )
+
+  }
+  updateneeds(needs){
+
+document.getElementById(needs._id).style.display="block"
+this.need.name=needs.name;
+this.need.quantity=needs.quantity;
+this.need.description=needs.description
+
+
+}
+closetest(needs){
+  document.getElementById(needs._id).style.display="none"
+
+}
+  updateneedss(needs,addneeds:NgForm){
+
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.updateneed(this.need,needs._id).subscribe(
+
+      response => {console.log("Success!", response)
+      this.isupdate=false;
+      addneeds.reset()
+
+      
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+      this.charityService.listneed(this.code).subscribe(
+        data => {
+          
+          this.listneeds = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listneeds);
+        },
+        error => {
+          console.log(error);
+          addneeds.reset()
+
+        }
+  
+      )
+      
+
+    },
+        error => {
+          console.log("error!", error)
+
+        } 
+          
+    )
+
+
+  }
+  deleteneeds(needs){
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.deleteneed(needs._id).subscribe(
+
+      response => {console.log("Success!", response)
+      
+      
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+      this.charityService.listneed(this.code).subscribe(
+        data => {
+          
+          this.listneeds = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listneeds);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      
+
+    },
+        error => {
+          console.log("error!", error)
+
+        } 
+          
+    )
+
+
+  }
+  closeview(){
+    this.isadd=false
+this.isupdate=false
+  }
   ngOnInit() {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -78,6 +290,8 @@ public commentPostedBy;
     this._LoginService.charitydetails(this.code).subscribe(
       data => {
         this.charitydetaile = data;
+        this.profileimageee= require("../../../../server/upload/"+this.charitydetaile.img.substr(12));
+
         this.ID = this.code.slice(0, 9);
         console.log(this.charitydetaile);
       },
@@ -103,6 +317,21 @@ public commentPostedBy;
     this.volunteerService.listvolunteer().subscribe(data => {
       this.listvolunteersearch = data
     })
+    this.volunteerService.listvolunteer().subscribe(data=>{
+      this.listvolunteersearch=data
+    });
+    this.charityService.listneed(this.code).subscribe(
+      data => {
+        
+        this.listneeds = data;
+        this.ID = this.code.slice(0, 9);
+        console.log(this.listneeds);
+      },
+      error => {
+        console.log(error);
+      }
+
+    )
   }
   logout() {
     localStorage.removeItem("token");
@@ -178,11 +407,11 @@ public commentPostedBy;
 
   edit() {
 
-    this.editclass.postID = this.IDpost
-    this.editclass.postedby = this.code
+    // /this.newPost.postID = this.IDpost
+    this.newPost.postedby = this.code
 
-    console.log(this.editclass)
-    this.postSerives.edit(this.editclass)
+    // console.log(this.editclass)
+    this.postSerives.edit(this.newPost,this.IDpost)
 
     this.postSerives.getcharityid(this.code)
     console.log(this.code)
@@ -234,24 +463,24 @@ public commentPostedBy;
     
 //   }
 
-  Comment(post) {
+  async Comment(post) {
    
       this.IDpost = post._id
     this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
+     this.postSerives.allcomment().subscribe(allcomment => {
       // console.log(allcomment)
       this.commentpost = allcomment
 
-      for(let comment of this.commentpost){
+    for(let comment of this.commentpost){
         // console.log(comment.postedby)
         this.commentPostedBy = comment.postedby
 
 
-        this.postSerives.findUser(this.commentPostedBy)
+     this.postSerives.findUser(this.commentPostedBy)
         // console.log(this.commentPostedBy)
 
-        this.postSerives.volunteer().subscribe(volunteer => {
-          this.commentByVolunteer = volunteer
+         this.postSerives.volunteer().subscribe(volunteer => {
+         this.commentByVolunteer = volunteer
           // console.log(this.commentByVolunteer)
           console.log(this.commentByVolunteer.name);
           
@@ -269,9 +498,9 @@ public commentPostedBy;
       
     })
   }
-  commentByC(comment,commentByC){
+   async commentByC(comment,commentByC){
     if(comment === commentByC){
-      return true
+     return true
     }
   }
 
@@ -321,7 +550,113 @@ if(comment === commentByV){
   }
 
  
+  editInformation(charityD){
+   this.isEdit =true
+   this.name =false
 
+
+  }
+
+  editaddress(){
+    this.addressEdit=true
+    this.address=false
+  }
+
+  editname(change){
+   this.code
+   console.log(change)
+   this.postSerives.changename(this.code,change)
+   console.log(this.code,change)
+
+   this.isEdit =false
+   this.name =true
+
+   this.postSerives.changed().subscribe(data=>{
+    console.log(data);
+     
+    data=this.charitydetailchanged
+     console.log(this.charitydetailchanged);
+     
+   })
+  }
+
+  editaddr(change){
+    this.postSerives.changeAdrress(this.code,change)
+    console.log(this.code,change)
+ 
+    this.addressEdit=false
+    this.address=true
+    
+    this.postSerives.changed().subscribe(data=>{
+     console.log(data);
+    }) 
+
+  }
+
+  editphone(){
+    this.phoneEdit=true
+    this.phone=false
+  }
+
+ 
+
+  newphone(change){
+    this.postSerives.changedphone(this.code,change)
+    console.log(this.code,change)
+ 
+    this.phoneEdit=false
+    this.phone=true
+    
+    this.postSerives.changed().subscribe(data=>{
+     console.log(data);
+    }) 
+
+  };
+
+
+  About(){
+    this.about=false
+    this.aboutEdit=true
+      }
+
+      editabout(change){
+
+        this.postSerives.changeabout(this.code,change)
+        console.log(this.code,change)
+     
+        this.aboutEdit=false
+        this.about=true
+        
+        this.postSerives.changed().subscribe(data=>{
+         console.log(data);
+        }) 
+    
+
+      }
+
+
+
+
+      country(){
+        this.Country=false
+        this.countryedit=true
+          }
+    
+          editcountry(change){
+    
+            this.postSerives.changecountry(this.code,change)
+            console.log(this.code,change)
+         
+            this.countryedit=false
+            this.Country=true
+            
+            this.postSerives.changed().subscribe(data=>{
+             console.log(data);
+            }) 
+        
+    
+          }
+    
   
   govolunteer(volunteer){
     console.log(volunteer);

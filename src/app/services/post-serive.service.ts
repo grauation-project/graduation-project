@@ -69,8 +69,8 @@ charityposts(){
 delete(idpost){
   this.socket.emit("delete",idpost)
 }
-edit(editpost){
-  this.socket.emit("edit",editpost)
+edit(editpost,postID){
+  this.socket.emit("edit",editpost,postID)
 }
 getpostbyid(id){
   this.socket.emit("editpost",id)
@@ -140,6 +140,8 @@ charities(){
     return charities
   
 };
+
+// follow
 follow(followData){
   this.socket.emit("follow",followData)
 }
@@ -158,9 +160,25 @@ following(){
     return following
 };
 
+removefollow(idFollowing,charityID){
+  this.socket.emit("remove",idFollowing,charityID) 
+}
+
+charityAfterRemove(){
+
+  let charityAfterremove =new Observable(observer=>{
+    this.socket.on("following",charity=>{
+      observer.next(charity)
+    }) 
+    })
+    return charityAfterremove
+}
+
 
 //home
-
+function(){
+  
+}
 findUser(id){
   this.socket.emit("findUser",id)
 }
@@ -184,5 +202,80 @@ charity(){
   })
     return charity
   };
+
+
+  findcharity(id){
+    this.socket.emit("findcharity",id)
+  };
+
+  getcharitybyID(){
+
+ let charity =new Observable(observer=>{
+    this.socket.on("getcharitybyID",charity=>{
+      observer.next(charity)
+    }) 
+  })
+    return charity
+  };
+
+
+  // setting
+
+  changename(charityID,name){
+    this.socket.emit("changeName",charityID,name)
+  }
+
+  changeAdrress(charityID,address){
+    this.socket.emit("changeAdrress",charityID,address)
+
+  }
+
+  changedphone(charityID,phone){
+    this.socket.emit("changePhone",charityID,phone)
+  }
+  
+  changeabout(charityID,about){
+    this.socket.emit("changePhone",charityID,about)
+  }
+
+  changecountry(charityID,country){
+    this.socket.emit("changecountry",charityID,country)
+
+  }
+
+  changefname(volunteerid,Fname){
+    this.socket.emit("changefname",volunteerid,Fname)
+  }
+
+  changeLname(volunteerid,Lname){
+    this.socket.emit("changelname",volunteerid,Lname)
+  }
+
+  changePhoneVOL(volunteerid,phone){
+    this.socket.emit("changePhoneVOL",volunteerid,phone)
+  }
+
+  changecountryVOL(volunteerid,country){
+    this.socket.emit("changeCountryVOL",volunteerid,country)
+  }
+changed(){
+
+  let newcharity =new Observable(observer=>{
+    this.socket.on("changed",charity=>{
+      observer.next(charity)
+    }) 
+  })
+    return newcharity
+}
+
+changedvolunteer(){
+
+  let newvolunteer =new Observable(observer=>{
+    this.socket.on("changedvolunteer",volunteer=>{
+      observer.next(volunteer)
+    }) 
+  })
+    return newvolunteer
+}
 
 }

@@ -81,14 +81,15 @@
               </div>
               <div class="form-group">
                 <label>Choose an image</label>
-                <input type="file" class="form-input" name="img" id="img" #img="ngModel"
+                <input type="file"  ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
+                (change)="onfileselected($event)"  class="form-input" name="img" id="img" #img="ngModel"
                   [class.is-invalid]="img.invalid && img.touched" required placeholder="Enter your image"
                   [(ngModel)]="charitymodel.img" />
                 <small [class.d-none]="img.valid || img.untouched" class="text-danger">Image is required</small>
               </div>
 
               <div class="form-group">
-                <input type="submit" name="submit" [disabled]="userForm.form.invalid" class="form-submit"
+                <input type="submit" name="submit"  (click)="uploader.uploadAll()" [disabled]="userForm.form.invalid && !uploader.getNotUploadedItems().length" class="form-submit"
                   value="Sign up" />
               </div>
             </form>
@@ -179,11 +180,10 @@
               </div>
               <div class="form-group">
                 <label>Choose an image</label>
-                <input type="file" ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
+                <input type="file"  ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
                   (change)="onfileselected($event)" class="form-control" name="img" placeholder="Choose Your image"
                   #img="ngModel" [class.is-invalid]="img.invalid && img.touched" required
                   [(ngModel)]="volunteersignup.img" />
-
                 <small [class.d-none]="img.valid || img.untouched" class="text-danger">Image is required</small>
                 <!-- <div *ngIf="fileUploadProgress">
                   Upload progress: {{ fileUploadProgress }}

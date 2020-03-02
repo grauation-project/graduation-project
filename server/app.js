@@ -11,6 +11,7 @@ var session = require("session");
 var donatepayment = require("./controllers/donationone");
 var donatematerial = require("./controllers/donate material")
 var admin = require("./controllers/admin");
+var needs = require("./controllers/needs")
 require("express-async-errors");
 var winston = require("winston");
 
@@ -66,14 +67,14 @@ files_arr.forEach(function (file) {
   require(__dirname + "/models/" + file);
 });
 
-var limiter = ratelimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this ip,Please try again in an hour !"
-});
+// var limiter = ratelimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many requests from this ip,Please try again in an hour !"
+// });
 
 // limit number of requests from the same ip address
-app.use("/savethem", limiter);
+// app.use("/savethem", limiter);
 // http security headers
 app.use(helmet());
 // data sanitization against nosql query injection
@@ -110,7 +111,8 @@ app.use("/savethem/login", login);
 app.use("/savethem/donatepayment", donatepayment);
 app.use("/savethem/volunteer", volunteer);
 app.use("/savethem/admin", admin);
-app.use("/donate", donatematerial)
+app.use("/donate", donatematerial);
+app.use("/savethem/needs", needs)
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
@@ -258,11 +260,11 @@ io.on("connection", (socket) => {
   //   })
   // })
 
-  socket.on("edit", (post) => {
+  socket.on("edit", (post,id) => {
     console.log(post);
 
     console.log("update")
-    postModel.findByIdAndUpdate(post.postID,
+    postModel.findByIdAndUpdate(id,
       {
         $set: { title: post.title, content: post.content, createdat: Date.now() }
       },
@@ -296,7 +298,7 @@ io.on("connection", (socket) => {
     })
   });
 
-  socket.on("displaycomment",async (postid) => {
+  socket.on("displaycomment", async (postid) => {
     console.log(postid)
     commentModel.find({ post: postid }, (err, comment) => {
       if (!err) {
@@ -371,62 +373,65 @@ io.on("connection", (socket) => {
 
   });
 
-  socket.on("follow", async (data) => {
+
+  // find one charity
+  socket.on("findcharity",(id)=>{
+    mongoose.model("charity").findOne({_id:id},(err,charity)=>{
+      if(err){
+        console.log(err);
+        
+      }
+      else{
+        console.log(charity)
+        io.emit("getcharitybyID",charity)
+      }
+    })
+  });
+
+
+  socket.on("follow",(data) => {
     console.log(data)
     console.log("asd")
-    mongoose.model("charity").findOne({ _id: data.follower }, (err, charity) => {
-      if (!err) {
-        // console.log(charity.following)
-        var ccc = charity.following
-        var vvv = ''
-        for (var i; i < ccc.length; i++)
-
-
-          console.log(vvv += ccc[7] + "<br>");
-
-        if (vvv += ccc[i] == data.following) {
-          console.log("you foooooooooo");
+   
+    mongoose.model("charity").findOne({_id: data.follower },(err,charity)=>{
+      //  for(let followingcharity of charity){
+        
+    if(!err){
+      mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
+        if (err) {
+          console.log(err);
 
         }
         else {
 
-          mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
-            if (err) {
-              console.log(err);
+          mongoose.model("charity").findOne({ _id: data.following }, (err, Charity) => {
+            if (!err) {
 
-            }
-            else {
+              console.log(Charity.follower)
+              if (Charity.follower == data.follower) {
+                console.log("fffffffffffffffff")
+              }
+              else {
+                mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
+                  if (err) {
+                    console.log(err);
 
-              mongoose.model("charity").findOne({ _id: data.following }, (err, Charity) => {
-                if (!err) {
-                  // console.log(data.following);
-                  // console.log(Charity);
-
-                  console.log(Charity.follower)
-                  if (charity.follower == data.follower) {
-                    console.log("fffffffffffffffff")
                   }
                   else {
-                    mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
-                      if (err) {
-                        console.log(err);
+                    // console.log(data);
 
-                      }
-                      else {
-                        // console.log(data);
-
-                      }
-                    })
                   }
-                }
-
+                })
               }
-              )
             }
-          })
-        }
-      }
-    })
+          
+         })
+   }
+     
+});
+}
+    });
+   
 
 
   });
@@ -439,42 +444,37 @@ io.on("connection", (socket) => {
     console.log(data);
 
     mongoose.model("charity").findOne({ _id: data }, (err, charity) => {
-      if (err) {
-        console.log(err)
-      }
-      else {
+     if(err){
+       console.log(err);
+       
+     }
+     else{
+       console.log(charity);
 
-        // console.log(charity.following)
-        var following = charity.following
-        for (var i = 0; i < following.length; i++) {
-          console.log(following[i]);
-
-          mongoose.model("charity").find({ _id: following[i] }, (err, following) => {
-            console.log("nnnnnnnnnnnnnn");
-
-            if (err) {
-              console.log(err)
-            }
-            else {
-              console.log("kkkkkkkkkkkkkkkkkkkkkkkkk")
-              console.log(following)
-              io.emit("following", following)
-            }
-          })
-        }
-      }
-    })
+       io.emit("following", charity)
+     }
+            
+             
+    })    
   });
-
-
-  socket.on("removeFollow", (remove) => {
-    console.log(remove)
-    mongoose.model("charity").findOne({ _id: remove.charityID }, (err, charity) => {
+ 
+  socket.on("remove", (removeID,charityID) => {
+    console.log(removeID,charityID)
+    mongoose.model("charity").update({ _id: charityID },{$pull: {following:removeID}}, (err, charity) => {
       if (err) {
         console.log(err)
       }
       else {
         console.log(charity)
+        io.emit("charityAfterRemove",charity)
+        mongoose.model("charity").update({ _id: removeID },{$pull: {follower:charityID}}, (err, charity) => {
+          if (err) {
+            console.log(err)
+          }
+          else{
+            
+          }
+      })
       }
     })
   });
@@ -498,7 +498,7 @@ io.on("connection", (socket) => {
           }
           else {
             console.log(volunteer)
-            io.emit("isVolunteer",volunteer)
+            io.emit("isVolunteer", volunteer)
             console.log(volunteer)
           }
 
@@ -506,13 +506,163 @@ io.on("connection", (socket) => {
       }
       else {
         console.log(charity)
-        io.emit("ischarity",charity)
+        io.emit("ischarity", charity)
       }
 
     });
-    
+
 
   })
+
+
+
+  // setting
+
+  socket.on("changeName", (id, change) => {
+    console.log(id, change);
+
+    mongoose.model("charity").update({ _id: id }, { name: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(charity)
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+      }
+    })
+  })
+
+  socket.on("changeAdrress", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { address: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+  socket.on("changePhone", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { phone: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+
+  socket.on("changecountry", (id, change) => {
+
+    mongoose.model("charity").update({ _id: id }, { country: change }, (err, charity) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+          io.emit("changed", charityAfterChange)
+        })
+        
+      }
+    })
+  });
+
+
+  // volunteer
+
+  socket.on("changefname", (id, change) => {
+console.log(id, change);
+
+    mongoose.model("volunteer").update({ _id: id }, { fname: change }, (err, volunteer) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        
+        mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+          // io.emit("changed", volunteerAfterChange)
+          io.emit("changedvolunteer", volunteerAfterChange)
+          console.log(volunteerAfterChange);
+          
+        })
+        
+      }
+    })
+  });
+
+
+  socket.on("changelname", (id, change) => {
+    console.log(id, change);
+    
+        mongoose.model("volunteer").update({ _id: id }, { lname: change }, (err, volunteer) => {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            
+            mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+              // io.emit("changed", volunteerAfterChange)
+              io.emit("changedvolunteer", volunteerAfterChange)
+              console.log(volunteerAfterChange);
+              
+            })
+            
+          }
+        })
+      });
+
+      socket.on("changePhoneVOL", (id, change) => {
+        console.log(id, change);
+        
+            mongoose.model("volunteer").update({ _id: id }, { phone: change }, (err, volunteer) => {
+              if (err) {
+                console.log(err)
+              }
+              else {
+                
+                mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+                  // io.emit("changed", volunteerAfterChange)
+                  io.emit("changedvolunteer", volunteerAfterChange)
+                  console.log(volunteerAfterChange);
+                  
+                })
+                
+              }
+            })
+          });
+    
+          socket.on("changeCountryVOL", (id, change) => {
+            console.log(id, change);
+            
+                mongoose.model("volunteer").update({ _id: id }, { country: change }, (err, volunteer) => {
+                  if (err) {
+                    console.log(err)
+                  }
+                  else {
+                    
+                    mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+                      // io.emit("changed", volunteerAfterChange)
+                      io.emit("changedvolunteer", volunteerAfterChange)
+                      console.log(volunteerAfterChange);
+                      
+                    })
+                    
+                  }
+                })
+              });
 
 
 });
@@ -535,6 +685,10 @@ passport.use(
     }
   )
 );
+
+
+
+
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 

@@ -1,44 +1,44 @@
 <html>
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line" style="margin-bottom: 0;"></span>
-          </span>
-        </button>
-      
-        <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
-          <ul class="navbar-nav  ">
-            <li class="nav-item active">
-                <i class="fas fa-home align-center "></i>
-              <a class="nav-link " (click)="refresh()"> 
-                Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <i class="fas fa-envelope align-center  "></i>
-      
-              <a class="nav-link my-0" href="#">Messages</a>
-            </li>
-            <li class="nav-item mr-4">
-              <i class="fas fa-bell align-center"></i>
-      
-              <a class="nav-link" href="#">Notifications</a>
-            </li>
-            <li class="nav-item mr-5">
-              <i class="fa fa-user-circle"></i>
-      
-              <a class="nav-link" (click)="logout()">Logout</a>
-            </li>
-            <form class="form-inline mr-auto searchform">
-              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-                placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-            </form>
-          </ul>
-        </div>
-      </nav>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line" style="margin-bottom: 0;"></span>
+    </span>
+  </button>
+
+  <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
+    <ul class="navbar-nav  ">
+      <li class="nav-item active">
+        <i class="fas fa-home align-center "></i>
+        <a class="nav-link " (click)="refresh()">
+          Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <i class="fas fa-envelope align-center  "></i>
+
+        <a class="nav-link my-0" href="#">Messages</a>
+      </li>
+      <li class="nav-item mr-4">
+        <i class="fas fa-bell align-center"></i>
+
+        <a class="nav-link" href="#">Notifications</a>
+      </li>
+      <li class="nav-item mr-5">
+        <i class="fa fa-user-circle"></i>
+
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+      <form class="form-inline mr-auto searchform">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+      </form>
+    </ul>
+  </div>
+</nav>
 
 <body class="container-fluid bg-light">
   <div class="container-fluid bg-light" *ngIf=displaydiv>
@@ -83,7 +83,7 @@
     <div class="col-md-3  pr-4 pl-4 ">
       <div class="shadow myprofile">
         <div class="" style="background-color: #3B6D8C;height: 80px;text-align: center;">
-          <img src="../../assets/download.jpg" class=" profileimage mt-5"></div>
+          <img [src]="profileimagee" class=" profileimage mt-5"></div>
         <!-- <div class="image bg-white">
                   
                 </div> -->
@@ -111,86 +111,82 @@
     </div>
 
     <div class="col-md-6 pr-4 pl-4">
-      
-           <div class="row shadow writepost">
 
-                <img src="../../assets/download.jpg" class="profileimg mt-4">
-                <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
-                    class="btn maincolor mt-4 mr-2 pr-2 text-light postbtn">
+      <div class="row shadow writepost">
 
-                <div class="modal fade" id="post" role="dialog">
-                    <div class="modal-dialog">
-
-
-                        <div class="modal-content">
-                            <div class="modal-header">
-
-                                <h4 class="modal-title text-light">Post</h4>
-                                <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                              <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
-                                <div class="form-group">
-                                  <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                                    [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
-                                  <br>
-                                  <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                                    [(ngModel)]="newPost.content" placeholder="what are in your mind "
-                                    name="content"></textarea>
-                                </div>
-                                <div class="row modal-footer">
-                                  <input type="submit" class="btn maincolor img-vedio-btn text-light"
-                                    [disabled]="post.form.invalid" value="post">
-                                  <button class="btn maincolor mr-3 text-light" data-dismiss="modal">close</button>
-                                </div>
-                              </form>
-                            </div>
-      
-
-                    </div> 
-
-                </div>
-            </div>
-        </div> 
+        <img [src]="profileimagee" class="profileimg mt-4">
+        <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
+          class="btn maincolor mt-4 mr-2 pr-2 text-light postbtn">
+      </div>
+    </div>
+    <div class="modal fade" id="post" role="dialog">
+      <div class="modal-dialog">
 
 
-        <div id="secondpost" class="row shadow" *ngFor="let post of Allpost">
-          <div class="col-md-11 mr-5 mt-2  pb-0">
-            <div>
-              <img src="../../assets/download.jpg" class="cricle-img " height="40px">
-              hope
-              
-            </div>
-  
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h4 class="modal-title text-light">Post</h4>
+            <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
           </div>
-          <hr>
-          <div class="col-12 ml-3 mr-3 pt-0 mt-0">
-            <p>
-              {{post.title}} 
-            </p>
-            <p>
-              {{post.content}} 
-            </p>
-            <div class="row ml-2 postfooter">
-              <div class="mr-3 ml-3">
-                <p><i class="fas fa-heart mr-1"></i>like</p>
+          <div class="modal-body">
+            <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input type="text" class="form-control postForm" name="title" #title="ngModel"
+                  [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
+                <br>
+                <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
+                  [(ngModel)]="newPost.content" placeholder="what are in your mind " name="content"></textarea>
               </div>
-              <div>
-                <p><i class="fas fa-comment mr-1 ml-3"></i>comment</p>
+              <div class="row modal-footer">
+                <input type="submit" class="btn maincolor img-vedio-btn text-light" [disabled]="post.form.invalid"
+                  value="post">
+                <button class="btn maincolor mr-3 text-light" data-dismiss="modal">close</button>
               </div>
-            </div>
+            </form>
           </div>
-          <hr>
-  
+
         </div>
-  
-       
-  
+      </div>
+
+
+      <div id="secondpost" class="row shadow" *ngFor="let post of Allpost">
+        <div class="col-md-11 mr-5 mt-2  pb-0">
+          <div>
+            <img src="../../assets/download.jpg" class="cricle-img " height="40px">
+            hope
+
+          </div>
+
+        </div>
+        <hr>
+        <div class="col-12 ml-3 mr-3 pt-0 mt-0">
+          <p>
+            {{post.title}}
+          </p>
+          <p>
+            {{post.content}}
+          </p>
+          <div class="row ml-2 postfooter">
+            <div class="mr-3 ml-3">
+              <p><i class="fas fa-heart mr-1"></i>like</p>
+            </div>
+            <div>
+              <p><i class="fas fa-comment mr-1 ml-3"></i>comment</p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+      </div>
 
 
 
 
-        <!-- <div id="secondpost" class="row shadow " *ngFor="let post of Allpost"  >
+
+
+
+      <!-- <div id="secondpost" class="row shadow " *ngFor="let post of Allpost"  >
            <div class="col-md-11    mr-5 mt-2  pb-0"  >
                 <div> 
                     <img src="../../assets/download.jpg" class="cricle-img " height="40px">
@@ -222,13 +218,13 @@
 
         </div> -->
 
-        <!-- <div class="row mt-3  pb-4 shadow">
+      <!-- <div class="row mt-3  pb-4 shadow">
             <div class="col-12">
                 <h5 class="mt-3 ml-4">Top profiles</h5>
             </div> -->
 
-            <!-- <div class="row pr-3 pl-3 "> -->
-            <!-- <div class="col-md-4 col-sm-9">
+      <!-- <div class="row pr-3 pl-3 "> -->
+      <!-- <div class="col-md-4 col-sm-9">
                 <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
                     <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
                         style="width:50%;margin: auto;">
@@ -239,76 +235,76 @@
                             <input type="button" class="btn maincolor" value="Follow">
                         </div> -->
 
-                        <!-- <a href="#" class="btn maincolor">follow</a> -->
-                    <!-- </div>
+      <!-- <a href="#" class="btn maincolor">follow</a> -->
+      <!-- </div>
                 </div>
 
             </div>  -->
 
-            <div class="row mt-3  pb-4 shadow">
-              <div class="col-12">
-                <h5 class="mt-3 ml-4">Top profiles</h5>
-              </div>
-      
-              <!-- <div class="row pr-3 pl-3 "> -->
-              <div class="col-md-4 col-sm-9">
-                <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
-                  <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-                    style="width:50%;margin: auto;">
-                  <div class="card-body">
-                    <h4 class="card-title">Joh Doe</h4>
-                    <p class="card-text">Some example text some example text.</p>
-                    <div style="text-align: center;">
-                      <input type="button" class="btn maincolor" value="Follow">
-                    </div>
-      
-                    <!-- <a href="#" class="btn maincolor">follow</a> -->
-                  </div>
-                </div>
-      
-              </div>
-    
-           
-            <div class="col-md-4 col-sm-9">
-                <div class="card mt-4 mb-3 " style="width:100%; text-align: center;">
-                    <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-                        style="width:50%;margin: auto;">
-                    <div class="card-body">
-                        <h4 class="card-title">Joh Doe</h4>
-                        <p class="card-text">Some example text some example text.</p>
-                        <a href="#" class="btn maincolor">follow</a>
-                    </div>
-                </div>
+      <div class="row mt-3  pb-4 shadow">
+        <div class="col-12">
+          <h5 class="mt-3 ml-4">Top profiles</h5>
+        </div>
 
-            </div>
-            <div class="col-md-4 col-sm-9">
-                <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
-                    <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-                        style="width:50%;margin: auto;">
-                    <div class="card-body">
-                        <h4 class="card-title">Joh Doe</h4>
-                        <p class="card-text">Some example text some example text.</p>
-                        <a class="btn maincolor">follow</a>
-                    </div>
-                </div>
+        <!-- <div class="row pr-3 pl-3 "> -->
+        <div class="col-md-4 col-sm-9">
+          <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
+            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
+              style="width:50%;margin: auto;">
+            <div class="card-body">
+              <h4 class="card-title">Joh Doe</h4>
+              <p class="card-text">Some example text some example text.</p>
+              <div style="text-align: center;">
+                <input type="button" class="btn maincolor" value="Follow">
+              </div>
 
+              <!-- <a href="#" class="btn maincolor">follow</a> -->
             </div>
-           
           </div>
-     
+
+        </div>
+
+
+        <div class="col-md-4 col-sm-9">
+          <div class="card mt-4 mb-3 " style="width:100%; text-align: center;">
+            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
+              style="width:50%;margin: auto;">
+            <div class="card-body">
+              <h4 class="card-title">Joh Doe</h4>
+              <p class="card-text">Some example text some example text.</p>
+              <a href="#" class="btn maincolor">follow</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4 col-sm-9">
+          <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
+            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
+              style="width:50%;margin: auto;">
+            <div class="card-body">
+              <h4 class="card-title">Joh Doe</h4>
+              <p class="card-text">Some example text some example text.</p>
+              <a class="btn maincolor">follow</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
       <!-- </div> -->
 
-     
-        <!-- <div id="secondpost" class="row shadow ">
+
+      <!-- <div id="secondpost" class="row shadow ">
             <div class="row ml-2 mr-5">
                 <span>
                     <img src="../../assets/download.jpg" class="cricle-img " height="40px">
                     hope -->
-                    <!-- <i class="fas fa-ellipsis-v pb-2 editposticon"></i> -->
-                <!-- </span>
+      <!-- <i class="fas fa-ellipsis-v pb-2 editposticon"></i> -->
+      <!-- </span>
             </div>
             <hr> -->
-            <!-- <div class="row ml-3 mr-3 ">
+      <!-- <div class="row ml-3 mr-3 ">
                 <h5 class="mt-3 mb-2">post title</h5>
                 <br>
                 <img src="../../assets/download.jpg" class="w-100">
@@ -329,11 +325,11 @@
 
                 </div>
             </div> -->
-            <!-- <hr>
+      <!-- <hr>
 
         </div> -->
     </div>
-<!-- 
+    <!-- 
     <div class="col-md-3 pl-2 pr-4">
 
         <div class="suggestions-list bg-white mt-4">
@@ -374,7 +370,7 @@
 
 
 
-    </div>
+  </div>
 
 
 

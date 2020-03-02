@@ -44,6 +44,9 @@ var volunteer = mongoose.model("volunteer", new mongoose.Schema({
   },
   img: {
     type: String
+  },
+  coverimg: {
+    type: String
   }
 }))
 
@@ -57,7 +60,8 @@ function validatevolunteer(volunteers) {
     Age: joi.string().min(2).max(3).required(),
     phone: joi.string().min(11).max(14).required(),
     country: joi.string().min(5).max(7).required(),
-    img: joi.string()
+    img: joi.string(),
+    coverimg: joi.string()
 
   };
   return joi.validate(volunteers, schema)

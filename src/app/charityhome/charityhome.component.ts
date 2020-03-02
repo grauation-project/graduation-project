@@ -9,6 +9,9 @@ import { Comment } from '../class/comment'
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
 import { Follow } from '../class/follow';
+import * as $ from 'jquery'
+declare var require: any;
+
 @Component({
   selector: "app-charityhome",
   templateUrl: "./charityhome.component.html",
@@ -19,6 +22,7 @@ export class CharityhomeComponent implements OnInit {
   public email;
   charities: unknown;
   postPostedBy: any;
+  profileimageee="";
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -38,10 +42,11 @@ export class CharityhomeComponent implements OnInit {
   public Allpost;
   public postedByCharity;
   public iscomment = false;
+  public following=false;
   public isfollow = false;
   public Following = {}
   public islike = false;
-  charitydetaile = new Signup("", "", "", "", "", "", "", "");
+  charitydetaile = new Signup("", "", "", "", "", "", "", "",[],[]);
   public newPost = new Post('', '', "", [], [], null)
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
@@ -57,7 +62,9 @@ export class CharityhomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    $("#addfolloing").on('click',function(){
+      $(this).closest("#charitysuggest").remove();
+     })
 
     // console.log(this.charitydetaile);
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -68,6 +75,8 @@ export class CharityhomeComponent implements OnInit {
     this._LoginService.charitydetails(this.code).subscribe(
       data => {
         this.charitydetaile = data;
+        this.profileimageee= require("../../../server/upload/"+this.charitydetaile.img.substr(12));
+
         this.ID = this.code.slice(0, 9);
         console.log(this.charitydetaile);
       },
@@ -211,33 +220,65 @@ export class CharityhomeComponent implements OnInit {
     })
   }
 
-
+  // follow
+  
   follow(charity) {
+   
 
-    document.getElementById(charity._id).style.display = "none";
-    document.getElementById(charity.email).style.display = "block";
+
+    if(this.code === charity._id){
+      alert("you can't follow yourself")
+    }
+
+    
+    // document.getElementById(charity._id).style.display = "none";
+    // document.getElementById(charity.email).style.display = "block";
 
     //     this.isfollow=false
     //     console.log("hhhhhhhhh")
-    console.log(charity._id)
+   else{
+
     this.followClass.follower = this.code
     this.followClass.following = charity._id
     console.log(this.followClass)
+   console.log(this.charitydetaile.following);
+
+  
+   
+    for(let onefollowing of this.charitydetaile.following){
+      console.log(onefollowing);
+      if(onefollowing !== this.followClass.following){
+        this.postSerives.follow(this.followClass)
+       
+      }
+      else if(onefollowing == this.followClass.following){
+        alert("you are already follow this charity")
+      }
+      else{
+        this.postSerives.follow(this.followClass)
+      }
+      
+    }
     this.postSerives.follow(this.followClass)
+
+
+   }
+    
+    
+
+  
 
 
 
   }
 
-  Folllowing() {
+  Folllowing(charityFollowing) {
     console.log("ooooooooooooooo");
-    this.postSerives.getfollowing(this.code)
-    console.log(this.code)
-    this.postSerives.following().subscribe(follow => {
-      console.log(follow)
-      this.Following = follow
-
-    })
+    console.log(charityFollowing._id);
+    
+    this.router.navigate(["/following",charityFollowing._id])
+    this.following=true;
+   
   };
 
 

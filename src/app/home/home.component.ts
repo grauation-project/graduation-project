@@ -32,13 +32,13 @@ export class HomeComponent implements OnInit {
   searchText ;
   listvolunteersearch;
   listcharitysearch ;
+  profileimagee=""
   // slsText;
 displaydiv = false;
 searcheng(){
   this.displaydiv = true;
 }
-  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
-  
+  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
   public code;
   public ID;
   imgnav = require("../../assets/1.jpg");
@@ -60,6 +60,7 @@ searcheng(){
     this._LoginService.volunteerdetails(this.code).subscribe(
       data => {
         this.volunteerdetaile = data;
+        this.profileimagee= require("../../../server/upload/"+this.volunteerdetaile .img.substr(12));
         this.ID = this.code.slice(0, 9);
         console.log(this.volunteerdetaile);
       },

@@ -26,6 +26,7 @@ import { DonationComponent } from "./donation/donation.component";
 import { CongrateComponent } from "./congrate/congrate.component";
 import { CharityhomeComponent } from './charityhome/charityhome.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FollowingComponent } from './following/following.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     DashBoardComponent,
     DonationComponent,
     CongrateComponent,
-    CharityhomeComponent
+    CharityhomeComponent,
+    FollowingComponent
   ],
   imports: [
     BrowserModule,

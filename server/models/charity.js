@@ -25,6 +25,11 @@ var charity = mongoose.model("charity", new mongoose.Schema({
     max: 255
   },
 
+  about:{
+    type:String,
+    max:600
+  },
+
   phone: {
     type: String,
     min: 11,
@@ -52,17 +57,18 @@ var charity = mongoose.model("charity", new mongoose.Schema({
   },
   follower:[
     {
-      type: String,
-      unique:true
-  
+      type: String
     }
   ] ,
   following:[ 
     {
-    type: String,
-    unique:true
+    type: String
   }
-]
+],
+  coverimg: {
+    type: String
+  }
+
 }));
 
 
@@ -76,7 +82,8 @@ function validatecharity(charities) {
     bankaccount: joi.string().max(20).required(),
     country: joi.string().max(15).required(),
     address: joi.string().min(5).max(55).required(),
-    following:joi.string()
+    following:joi.string(),
+    follower :joi.string()
   };
   return joi.validate(charities, Schema)
 }

@@ -70,7 +70,7 @@ router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, n
     Age: req.body.Age,
     phone: req.body.phone,
     country: req.body.country,
-    img: url + '/upload/' + req.body.img,
+    img: req.body.img,
   });
 
   var salt = await bcrypt.genSalt(10);
@@ -95,7 +95,22 @@ router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, n
   });
 });
 
+router.post("/coverimg/:id", upload.single("coverimg"),function(req,res){
+  let volunterr =  volunteer.findOne({
+    _id: req.body.id
+  });
+  if( volunterr ){
+    volunterr=new volunteer ({
 
+      coverimg:req.body.coverimg
+    })
+
+  }
+ 
+res.status(200).json("done")
+
+
+})
 router.get("/account/:id", auth, async (req, res) => {
 
   console.log("hi hi")

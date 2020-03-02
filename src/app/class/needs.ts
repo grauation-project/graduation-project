@@ -1,9 +1,3 @@
 export class Needs {
-
-    constructor(
-   public name:String,
-  public quantity:String,
-  public description:String,
-  public charity:String
-  ){}
+    constructor(public name: string, public quantity: string, public description: string) {}
 }

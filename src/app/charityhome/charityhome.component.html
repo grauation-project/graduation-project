@@ -83,7 +83,7 @@
     <div class="col-md-3  pr-4 pl-4 ">
       <div class="shadow myprofile" style="border-radius: 4%;">
         <div class="" style="background-color: #3B6D8C;height: 80px;text-align: center;">
-          <img src="../../assets/download.jpg" class=" profileimage mt-5"> </div>
+          <img [src]="profileimageee" class=" profileimage mt-5"> </div>
         <!-- <div class="image bg-white">
                   
                 </div> -->
@@ -94,13 +94,13 @@
 
           <p style="color: gray;">charity</p>
           <hr>
-          <div class="followdiv" (click)="Folllowing()">
-            <h6 style="color: grey;">Following</h6>
+          <div class="followdiv" >
+            <h6 style="color: grey;" (click)="Folllowing(charitydetaile)">Following</h6>
             <p>22</p>
           </div>
 
-          <div>
-            <p>{{Following.name}}</p>
+          <div *ngIf="following">
+            <p>{{charitydetaile.Following}}</p>
 
           </div>
 
@@ -119,7 +119,7 @@
     <div class="col-md-6 pr-4 pl-4">
       <div class="row shadow writepost  mb-4">
 
-        <img src="../../assets/download.jpg" class="profileimg mt-4">
+        <img [src]="profileimageee" class="profileimg mt-4">
         <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
           class="btn maincolor mt-4 mr-2 pr-2 text-light postbtn">
 
@@ -156,12 +156,28 @@
         </div>
       </div>
 
-      <div id="secondpost" class="row shadow mb-4 " *ngFor='let post of Allpost'>
+      <!-- <div id="secondpost" class="row shadow mb-4 " *ngFor='let post of Allpost'>
         <div class="col-md-11 mb-0   mr-5 mt-2  pb-0">
           <div class="row">
-            <img src="../../assets/download.jpg" class="cricle-img " height="40px">
+            <img src="../../assets/download.jpg" class="cricle-img " height="40px"> -->
 
-            <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
+
+      <div id="secondpost" class="row shadow mb-4"  *ngFor='let post of Allpost'>
+        <div class="col-md-11    mr-5 mt-2  pb-0">
+          <div class="row">
+            <img [src]="profileimageee" class="cricle-img " height="40px">
+            <!-- hope
+            <div class="editPost  pr-0 ">
+              <a href="#" title="" class="ed-opts-open bg-light dropdown" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fa fa-ellipsis-v pb-5 pt-0"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Edit post</a>
+                <a class="dropdown-item" href="#">delete post</a>
+                -->
+
+            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
 
               <h6>{{postedByCharity.name}}</h6>
             </div>
@@ -169,7 +185,7 @@
             <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
 
               <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
-            </div>
+            </div> -->
            
           </div>
          
@@ -255,9 +271,9 @@
       <div id="secondpost" class="row shadow  mb-4">
         <div class="row ml-2 mr-5">
           <span>
-            <img src="../../assets/download.jpg" class="cricle-img " height="40px">
+            <img [src]="profileimageee"class="cricle-img " height="40px">
             hope
-            <!-- <i class="fas fa-ellipsis-v pb-2 editposticon"></i> -->
+           
           </span>
         </div>
         <hr>
@@ -296,19 +312,19 @@
         <div class="row" *ngFor="let charity of charities">
 
 
-          <div class="col-md-12 suggestion-usd  ">
+          <div id="charitysuggest" class="col-md-12 suggestion-usd  ">
             <img src="../../../assets/download.jpg" class="cricle-img ml-2" alt="">
             <div class="sgt-text ">
-              <h4 class="mb-0" (click)="charityProfile(charity)">{{charity.name}}</h4>
+              <h4 class="mb-0" >{{charity.name}}</h4>
               <span>{{charity.country}}</span>
             </div>
-            <span class="pr-2 ml-4" attr.id="{{charity._id}}" (click)="follow(charity)">
+            <span class="pr-2 ml-4"  id="addfolloing" (click)="follow(charity)">
               <i class="fa fa-plus"></i>
             </span>
-
-            <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
+<!-- attr.id="{{charity._id}}" -->
+            <!-- <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
               <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
-            </span>
+            </span> -->
           </div>
         </div>
       </div>
