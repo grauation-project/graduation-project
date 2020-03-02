@@ -162,16 +162,16 @@
             <img [src]="profileimageee" class="cricle-img " height="40px">
             
 
-            <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
+            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
 
               <h6>{{postedByCharity.name}}</h6>
-            </div>
+            </div> -->
 
-            <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
+            <!-- <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
 
               <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
             </div>
-           
+            -->
           </div>
          
         </div>
@@ -294,7 +294,7 @@
         <h5 class="pl-3 mt-3 mb-3">Suggestions</h5>
       
         <hr>
-        <div class="row" *ngFor="let charity of charities">
+        <div class="row" >
         
           <div id="charitysuggest" class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
             <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
@@ -325,7 +325,7 @@
 
 
 
-  </div>
+  
 
 
 </body>

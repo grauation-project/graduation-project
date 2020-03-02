@@ -49,7 +49,7 @@ export class CharityhomeComponent implements OnInit {
   public isfollow = false;
   public Following = {}
   public islike = false;
-  charitydetaile = new Signup("", "", "", "", "", "", "", "",[],[]);
+  charitydetaile = new Signup("", "", "", "", "", "", "", "");
   public newPost = new Post('', '', "", [], [], null)
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
@@ -64,7 +64,7 @@ export class CharityhomeComponent implements OnInit {
     this.displaydiv = true;
   }
 
-charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
+charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   ngOnInit() {
     $("#addfolloing").on('click',function(){
@@ -141,7 +141,7 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
   this._AdminService.getcharities().subscribe(
     data  => {
       this.charitydetails = data;
-  
+       console.log(data)
 
       
       console.log(this.charitydetails);
@@ -262,24 +262,24 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
     this.followClass.follower = this.code
     this.followClass.following = charity._id
     console.log(this.followClass)
-   console.log(this.charitydetaile.following);
+  //  console.log(this.charitydetaile.following);
 
   
    
-    for(let onefollowing of this.charitydetaile.following){
-      console.log(onefollowing);
-      if(onefollowing !== this.followClass.following){
-        this.postSerives.follow(this.followClass)
+    // for(let onefollowing of this.charitydetaile.following){
+    //   console.log(onefollowing);
+    //   if(onefollowing !== this.followClass.following){
+    //     this.postSerives.follow(this.followClass)
        
-      }
-      else if(onefollowing == this.followClass.following){
-        alert("you are already follow this charity")
-      }
-      else{
-        this.postSerives.follow(this.followClass)
-      }
+    //   }
+    //   else if(onefollowing == this.followClass.following){
+    //     alert("you are already follow this charity")
+    //   }
+    //   else{
+    //     this.postSerives.follow(this.followClass)
+    //   }
       
-    }
+    // }
     this.postSerives.follow(this.followClass)
 
 
