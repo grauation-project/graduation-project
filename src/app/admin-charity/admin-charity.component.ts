@@ -12,7 +12,7 @@ export class AdminCharityComponent implements OnInit {
 
   constructor(private _AdminService : AdminService, private router: Router,
     private route: ActivatedRoute) { }
-  charitydetails:any= new Signup("", "", "", "", "", "", "", "");
+  charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
   public code;
   public ID;
 

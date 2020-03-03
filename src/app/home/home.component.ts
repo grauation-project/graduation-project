@@ -8,6 +8,8 @@ import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
 import { Follow } from '../class/follow';
 import { log } from 'util';
+import { Like } from '../class/like';
+import { Comment } from 'src/app/class/comment';
 // import { VolunteerList } from '../class/volunteer copy';
 declare var require: any;
 
@@ -17,8 +19,15 @@ declare var require: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  charities: unknown;
-  
+  charities;
+  commentByCharity;
+  commentByVolunteer;
+  commentpost;
+ 
+  IDpost: string;
+  AllLikes: unknown;
+  public likeclass = new Like([], '');
+  public commentclass = new Comment("", [], "");
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -39,6 +48,7 @@ searcheng(){
   this.displaydiv = true;
 }
   volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
+ 
   public code;
   public ID;
   imgnav = require("../../assets/1.jpg");
@@ -112,4 +122,97 @@ onSubmit(){
     console.log(charity);
     this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
   }
+
+
+  async Comment(post) {
+   
+    this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+   this.postSerives.allcomment().subscribe(allcomment => {
+    // console.log(allcomment)
+    this.commentpost = allcomment
+
+  for(let comment of this.commentpost){
+      // console.log(comment.postedby)
+      this.commentPostedBy = comment.postedby
+
+
+   this.postSerives.findUser(this.commentPostedBy)
+      // console.log(this.commentPostedBy)
+
+       this.postSerives.volunteer().subscribe(volunteer => {
+       this.commentByVolunteer = volunteer
+        // console.log(this.commentByVolunteer)
+        console.log(this.commentByVolunteer.name);
+        
+      })
+    
+      this.postSerives.charity().subscribe(charity => {
+        this.commentByCharity = charity
+        // console.log(this.commentByCharity)
+        console.log(this.commentByCharity.name);
+        
+      })
+
+
+    }
+    
+  })
+}
+  commentPostedBy(commentPostedBy: any) {
+    throw new Error("Method not implemented.");
+  }
+ async commentByC(comment,commentByC){
+  if(comment === commentByC){
+   return true
+  }
+}
+
+
+commentByV(comment,commentByV){
+if(comment === commentByV){
+return true
+}
+}
+
+
+
+sendcomment(comment,post) {
+  console.log(comment)
+  console.log(post)
+  this.commentclass.postedby = this.code
+  this.IDpost = post._id
+  this.commentclass.post = this.IDpost
+  console.log(this.commentclass);
+
+  this.postSerives.comment(this.commentclass)
+
+  this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+  this.postSerives.allcomment().subscribe(allcomment => {
+    console.log(allcomment)
+    this.commentpost = allcomment
+    
+  })
+
+
+  this.commentclass.text =''
+ 
+
+}
+
+like(post) {
+  document.getElementById("like").style.color = "#3B6D8C";
+  this.likeclass.postedby = this.code
+  this.IDpost = post._id
+  this.likeclass.post = this.IDpost
+  console.log(this.likeclass);
+  this.postSerives.like(this.likeclass)
+
+  this.postSerives.postlikes(this.IDpost)
+  this.postSerives.getLikes().subscribe(likes => {
+    console.log(likes)
+    this.AllLikes = likes
+  })
+}
 }

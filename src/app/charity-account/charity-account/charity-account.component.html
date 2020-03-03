@@ -298,7 +298,7 @@
               <a class="nav-item nav-link active" id="feeddiv-tab" data-toggle="tab" href="#feeddiv" role="tab"
                 aria-controls="feeddiv" aria-selected="true">Feed</a>
               <a class="nav-item nav-link" id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
-                aria-controls="infodiv"  aria-selected="false">Info</a>
+                aria-controls="infodiv" aria-selected="false">Info</a>
 
             </div>
             <div class="tab-content" id="nav-tabContent">
@@ -349,22 +349,23 @@
                         <i class="fa fa-ellipsis-v  pt-0"></i>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                     
-                        <button name="edit" data-toggle="modal" data-target="#editpost"  (click)="editbutton(post)"  class="text-dark "><a>Edit
+
+                        <button name="edit" data-toggle="modal" data-target="#editpost" (click)="editbutton(post)"
+                          class="text-dark "><a>Edit
                             post</a></button>
-                        <button name="edit" data-toggle="modal" data-target="#deletepost"
-                        (click)="deletebutton(post)"  class=" text-dark "><a>Delete post</a></button>
-                       
+                        <button name="edit" data-toggle="modal" data-target="#deletepost" (click)="deletebutton(post)"
+                          class=" text-dark "><a>Delete post</a></button>
+
                       </div>
                     </div>
-                    <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
-                    [attr.aria-controls]="'collapse-' + i">
+                    <!-- <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i"> -->
                     <div>
                       <img class="float-left mr-2" [src]="profileimageee" />
                       <h5>{{charitydetaile.name}}</h5>
 
 
-                      <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                      <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
                     </div>
                     <div>
                       <p id="postTitle">{{post.title}}</p>
@@ -373,50 +374,49 @@
                       </p>
                       <h5 class="hidden" id="postID">{{post._id}}</h5>
                     </div>
-                    <div class="reactions ">
-                      <a id="like">
-                        <i class="fas fa-heart" (click)="like(post)"></i>
+                    <div class="reactions row">
+                      <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+                        border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
+                        {{postlikes}}</div>
+                      <a>
+                        <i class="fas fa-heart" id="like" (click)="like(post)" ></i>
                         Like</a>
                       <a id="comment">
                         <i class="far fa-comment" (click)="Comment(post)"></i>
                         Comment</a>
                     </div>
-                    </div>
-                    <!-- comment -->
-
-                    <!-- *ngIf="commentt(comment.postby,post._id)" -->
-
                     <div>
 
-                      <form #comment="ngForm" class="pr-0">
+                      <form #comment="ngForm" novalidate class="pr-0">
 
                         <div class="row form-group">
                           <img class="float-left ml-3"
                             src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
                           <input type="text" class="form-control ml-2 pr-0  "
-                            style="border-radius:55px;text-align: center; width: 80%;" [(ngModel)]="commentclass.text"
-                            #text placeholder="your comment" name="text">
+                            style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" required
+                            [(ngModel)]="commentclass.text" #text placeholder="your comment" name="text">
                           <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
-                          <button (click)="sendcomment(comment,post)" class="hidden"></button>
+                          <button (click)="sendcomment(comment,post)" [disabled]="comment.form.invalid"
+                            class="hidden"></button>
                         </div>
 
                       </form>
                       <div *ngFor="let comment of commentpost">
 
                         <div *ngIf="commentt(comment.post,post._id)">
-                          <div class="row" *ngIf="commentByCharity">
-                            <input class="hidden" (click)="hidden(comment)">
+                          <div class="row pl-1" *ngIf="commentByCharity">
+                            <!-- {{commentByCharity._id}} -->
 
-                            <div class="mt-2 ml-2" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+                            <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
 
                               <h6>{{commentByCharity.name}}</h6>
-                            </div>
+                            </div> 
 
                             <div class="mt-2 ml-2" id="posttedby"
                               *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
 
                               <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
-                            </div>
+                            </div> -->
 
                             <p>
                               {{comment.text}}
@@ -425,7 +425,7 @@
                         </div>
                       </div>
 
-                      <!--  -->
+
 
 
                     </div>
@@ -458,8 +458,8 @@
                           <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                             <div class="form-group">
                               <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title"
-                                placeholder="Title of Post" name="title">
+                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title" placeholder="Title of Post"
+                                name="title">
                               <br>
                               <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
                                 [(ngModel)]="newPost.content" value="{{postContent}}" name="content"></textarea>
@@ -502,7 +502,7 @@
                     </div>
                   </div>
 
-                 
+
                 </div>
               </div>
 
@@ -590,7 +590,7 @@
                   </div>
 
 
-                  
+
 
                   <div class="details" *ngIf="Country">
                     <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>

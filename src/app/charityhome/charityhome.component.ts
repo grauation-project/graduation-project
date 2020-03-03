@@ -244,20 +244,25 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
   // follow
   
   follow(charity) {
-   
 
+    document.getElementById(charity._id).style.display = "none";
+    document.getElementById(charity.email).style.display = "block";
 
     if(this.code === charity._id){
       alert("you can't follow yourself")
     }
-
+    console.log(this.charitydetaile.following.length);
     
-    // document.getElementById(charity._id).style.display = "none";
-    // document.getElementById(charity.email).style.display = "block";
+    // if(this.charitydetaile.following.length==0){
+    //   this.postSerives.follow(this.followClass)
+    
+    // }
+    
+    
 
     //     this.isfollow=false
     //     console.log("hhhhhhhhh")
-   else{
+   if(this.charitydetaile.following.length>0){
 
     this.followClass.follower = this.code
     this.followClass.following = charity._id
@@ -280,8 +285,10 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
       }
       
     }
-    this.postSerives.follow(this.followClass)
 
+    this.postSerives.follow(this.followClass)
+    
+    
 
    }
     

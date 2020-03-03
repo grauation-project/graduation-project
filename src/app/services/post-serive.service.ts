@@ -89,9 +89,7 @@ comment(comment){
    this.socket.emit("createcomment",comment) 
 }
 
-like(like){
-  this.socket.emit("like",like)
-}
+
 
 displaycomment(postid){
   this.socket.emit("displaycomment",postid)
@@ -105,9 +103,27 @@ allcomment(){
   return comments
 }
 
+like(like){
+  this.socket.emit("like",like)
+}
+
+getThisLike(){
+  let like =new Observable(observer=>{
+    this.socket.on("getThisLike",like=>{
+      observer.next(like)
+    }) 
+    })
+    return like
+
+}
+
 postlikes(idpost){
 this.socket.emit("ALLlikes",idpost)
 }
+removelike(like){
+  this.socket.emit("removelike",like)
+}
+
 getLikes(){
   let likes =new Observable(observer=>{
   this.socket.on("getAllLikes",like=>{
@@ -116,6 +132,16 @@ getLikes(){
   })
   return likes
 }
+
+postlikeslast(){
+  let like =new Observable(observer=>{
+    this.socket.on("getAllLikes",like=>{
+      observer.next(like)
+    }) 
+    })
+    return like
+  }
+
 
 getlikesPostedby(postedbyid){
   this.socket.emit("likesPostedBy",postedbyid)

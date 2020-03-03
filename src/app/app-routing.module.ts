@@ -25,7 +25,7 @@ import { ResetComponent } from './reset/reset.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
   { path: "login", component: LoginComponent,    
-  canActivate: [CheckauthService]
+  // canActivate: [CheckauthService]
   },
   { path: "home", component: HomeregisterationComponent },
   { path: "about", component: AboutusComponent },

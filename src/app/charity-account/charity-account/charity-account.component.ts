@@ -41,6 +41,8 @@ export class CharityAccountComponent implements OnInit {
   postedByVolunteer: unknown;
   profileimageee=""
   charitydetailchanged: unknown;
+  postlikes;
+
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -50,7 +52,7 @@ export class CharityAccountComponent implements OnInit {
     private volunteerService: VolunteersignupService
   ) { }
   public iscomment = false;
-  public islike = false;
+  // public islike = false;
   public showcomment = false;
 public isEdit =false;
 public name =true;
@@ -62,7 +64,7 @@ public about=true;
 public aboutEdit =false;
 public Country =true;
 public countryedit=false;
-
+likeNo=false
 public commentByCharity;
 public commentByVolunteer ;
 fileselected = "";
@@ -89,7 +91,7 @@ public commentPostedBy;
   need = new Needs ("","","")
   listneeds = new Listneed ("","","","")
     
-   
+  
   displaydiv = false;
   searcheng() {
     this.displaydiv = true;
@@ -331,7 +333,11 @@ this.isupdate=false
         console.log(error);
       }
 
-    )
+    );
+
+
+
+    // 
   }
   logout() {
     localStorage.removeItem("token");
@@ -364,19 +370,68 @@ this.isupdate=false
 
 // like
 
+// firstlike(post){
+//   this.firstClick=true
+// }
+
+
+
   like(post) {
-    document.getElementById("like").style.color = "#3B6D8C";
+    
+    // document.getElementById("like").style.color = "#3B6D8C";
+    this.likeNo=true
     this.likeclass.postedby = this.code
     this.IDpost = post._id
     this.likeclass.post = this.IDpost
     console.log(this.likeclass);
-    this.postSerives.like(this.likeclass)
 
     this.postSerives.postlikes(this.IDpost)
     this.postSerives.getLikes().subscribe(likes => {
       console.log(likes)
       this.AllLikes = likes
+
+      for(let like of this.AllLikes){
+        // console.log(like);
+        
+        if(like.post === this.IDpost && like.postedby === this.code){
+          this.postSerives.removelike(this.likeclass)
+          this.postSerives.postlikeslast().subscribe(likes=>{
+            console.log(likes +"qqqqqqq");
+            
+          })
+        }
+      }
     })
+    this.postSerives.like(this.likeclass)
+
+    // this.postSerives.getThisLike().subscribe(like=>{
+    //   console.log(like);
+ 
+    // })
+// post like
+    this.postSerives.postlikes(this.likeclass.post)
+    this.postSerives.getLikes().subscribe(likes => {
+      console.log(likes)
+      this.AllLikes = likes
+     console.log( this.postlikes);
+     this.postlikes=this.AllLikes.length
+    });
+
+
+  }
+
+  nolike(post,comment){
+if(post===comment){
+  return true
+}
+  }
+
+  unlike(post){
+    // this.isslike=false
+    console.log(post._id);
+    
+    document.getElementById("like").style.color = "grey";
+    // alert("unlike")
   }
 
   // showlike() {
@@ -463,7 +518,7 @@ this.isupdate=false
     
 //   }
 
-  async Comment(post) {
+ Comment(post) {
    
       this.IDpost = post._id
     this.postSerives.displaycomment(this.IDpost)
@@ -507,6 +562,7 @@ this.isupdate=false
 
   commentByV(comment,commentByV){
 if(comment === commentByV){
+  
   return true
 }
   }

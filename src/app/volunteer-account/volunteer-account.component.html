@@ -147,9 +147,9 @@
 
 
         </div>
-        <div class="row">
+        <!-- <div class="row">
 
-        </div>
+        </div> -->
       </div>
       <div class="col-md-6 account_main ">
         <div class="account_headline overflow-hidden">
@@ -260,10 +260,13 @@
                     <form #comment="ngForm">
 
                       <div class="row form-group">
-                        <input type="text" class="form-control w-100 float-right"
-                          style="border-radius:10px;text-align: center;" [(ngModel)]="commentclass.text" #text
-                          placeholder="your comment" name="text">
-                        <button (click)="sendcomment()" class="hidden"></button>
+                        <img class="float-left ml-3"
+                          src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                        <input type="text" class="form-control ml-2 pr-0  "
+                          style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" [(ngModel)]="commentclass.text"
+                          #text placeholder="your comment" name="text">
+                        <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
+                        <button (click)="sendcomment(comment,post)" class="hidden"></button>
                       </div>
 
                     </form>
@@ -351,98 +354,102 @@
                 </div>
          
 
-                <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
-                  <div class="info">
-                    <div class="details" *ngIf="NameF">
-                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editfname()"></i>
-                      <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
-                      <p>{{volunteerdetaile.fname }} </p>
-
-                    </div>
-                    
-
-                    <div class="details pb-5 mb-5" *ngIf="EditFName">
-                      <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
-                      <form #userForm="ngForm">
-                        <div class="form-group">
-                          <input type="text" class="form-control" #fname [(ngModel)]="volunteerdetaile.fname"
-                            value="{{volunteerdetaile.fname}}" class="w-100" name="fname">
-                        </div>
-                        <button type="submit" (click)="editFname(fname.value)"
-                          class="float-right maincolor mt-1 mr-1 mb-5">Edit</button>
-                      </form>
-                    </div>
-
-
-                    <div class="details" *ngIf="lastname">
-                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="Lname()"></i>
-                      <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
-                      <p>{{volunteerdetaile.lname }}</p>
-
-                    </div>
-
-
-
-                    <div class="details pb-5" *ngIf="editlname">
-                      <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
-                      <form #userForm="ngForm">
-                        <div class="form-group">
-                          <input type="text" class="form-control" #lname [(ngModel)]="volunteerdetaile.lname"
-                            value="{{volunteerdetaile.lname}}" class="w-100" name="lname">
-                        </div>
-                        <button type="submit" (click)="editLname(lname.value)"
-                          class="float-right maincolor mt-2 mr-1 mb-5 ">Edit</button>
-                      </form>
-                    </div>
-
-                    <div class="details"*ngIf="phone" >
-                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editphone()"></i>
-                      <h6 style="color: #3B6D8C;">Volunteer phone</h6>
-                      <p>{{volunteerdetaile.phone }}</p>
-
-                    </div>
-
-
-                    <div class="details pb-5" *ngIf="phoneEdit">
-                      <h6 style="color: #3B6D8C;">Volunteer phone</h6>
-                      <form #userForm="ngForm">
-                        <div class="form-group">
-                          <input type="text" class="form-control" #phone [(ngModel)]="volunteerdetaile.phone"
-                            value="{{volunteerdetaile.phone}}" class="w-100" name="phone">
-                        </div>
-                        <button type="submit" (click)="newphone(phone.value)"
-                          class="float-right maincolor mt-2 mr-1 ">Edit</button>
-                      </form>
-                    </div>
-
-
-                    <div class="details" *ngIf="Country">
-                      <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>
-                      <h6 style="color: #3B6D8C;">Volunteer Country</h6>
-                      <p>{{volunteerdetaile. country }}</p>
-
-                    </div>
-
-
-                    <div class="details pb-5" *ngIf="countryedit">
-                      <h6 style="color: #3B6D8C;">Volunteer Country</h6>
-                      <form #userForm="ngForm">
-                        <div class="form-group">
-                          <input type="text" class="form-control" #country [(ngModel)]="volunteerdetaile.country"
-                            value="{{volunteerdetaile.country}}" class="w-100" name="country">
-                        </div>
-                        <button type="submit" (click)="Editcountry(country.value)"
-                          class="float-right maincolor mt-2 mr-1 ">Edit</button>
-                      </form>
-                    </div>
-
-
-                  </div>
-                </div>
+                
               </div>
             </div>
-
+            <div class="tab-pane fade" id="infodiv" role="tabpanel" aria-labelledby="infodiv-tab">
+              <div class="info">
+                <div class="details" *ngIf="NameF">
+                  <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editfname()"></i>
+                  <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
+                  <p>{{volunteerdetaile.fname }} </p>
+    
+                </div>
+                
+    
+                <div class="details pb-5 mb-5" *ngIf="EditFName">
+                  <h6 style="color: #3B6D8C;">Volunteer First Name</h6>
+                  <form #userForm="ngForm">
+                    <div class="form-group">
+                      <input type="text" class="form-control" #fname [(ngModel)]="volunteerdetaile.fname"
+                        value="{{volunteerdetaile.fname}}" class="w-100" name="fname">
+                    </div>
+                    <button type="submit" (click)="editFname(fname.value)"
+                      class="float-right maincolor mt-1 mr-1 mb-5">Edit</button>
+                  </form>
+                </div>
+    
+    
+                <div class="details" *ngIf="lastname">
+                  <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="Lname()"></i>
+                  <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
+                  <p>{{volunteerdetaile.lname }}</p>
+    
+                </div>
+    
+    
+    
+                <div class="details pb-5" *ngIf="editlname">
+                  <h6 style="color: #3B6D8C;">Volunteer Lastname</h6>
+                  <form #userForm="ngForm">
+                    <div class="form-group">
+                      <input type="text" class="form-control" #lname [(ngModel)]="volunteerdetaile.lname"
+                        value="{{volunteerdetaile.lname}}" class="w-100" name="lname">
+                    </div>
+                    <button type="submit" (click)="editLname(lname.value)"
+                      class="float-right maincolor mt-2 mr-1 mb-5 ">Edit</button>
+                  </form>
+                </div>
+    
+                <div class="details"*ngIf="phone" >
+                  <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editphone()"></i>
+                  <h6 style="color: #3B6D8C;">Volunteer phone</h6>
+                  <p>{{volunteerdetaile.phone }}</p>
+    
+                </div>
+    
+    
+                <div class="details pb-5" *ngIf="phoneEdit">
+                  <h6 style="color: #3B6D8C;">Volunteer phone</h6>
+                  <form #userForm="ngForm">
+                    <div class="form-group">
+                      <input type="text" class="form-control" #phone [(ngModel)]="volunteerdetaile.phone"
+                        value="{{volunteerdetaile.phone}}" class="w-100" name="phone">
+                    </div>
+                    <button type="submit" (click)="newphone(phone.value)"
+                      class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                  </form>
+                </div>
+    
+    
+                <div class="details" *ngIf="Country">
+                  <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>
+                  <h6 style="color: #3B6D8C;">Volunteer Country</h6>
+                  <p>{{volunteerdetaile. country }}</p>
+    
+                </div>
+    
+    
+                <div class="details pb-5" *ngIf="countryedit">
+                  <h6 style="color: #3B6D8C;">Volunteer Country</h6>
+                  <form #userForm="ngForm">
+                    <div class="form-group">
+                      <input type="text" class="form-control" #country [(ngModel)]="volunteerdetaile.country"
+                        value="{{volunteerdetaile.country}}" class="w-100" name="country">
+                    </div>
+                    <button type="submit" (click)="Editcountry(country.value)"
+                      class="float-right maincolor mt-2 mr-1 ">Edit</button>
+                  </form>
+                </div>
+    
+    
+              </div>
+            </div>
           </div>
         </div>
+
+        
       </div>
+
+      
     </div>

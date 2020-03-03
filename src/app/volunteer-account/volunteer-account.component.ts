@@ -69,6 +69,9 @@ displaydiv = false;
   
   charitydetailchanged: unknown;
   volunteerdetailchanged: unknown;
+  commentPostedBy: any;
+  commentByVolunteer: unknown;
+  commentByCharity: unknown;
 searcheng(){
   this.displaydiv = true;
 }
@@ -186,19 +189,19 @@ searcheng(){
       this.islike=true
   })
   }
-  comment() {
-    this.iscomment = true;
-    this.showcomment=true
+//   comment() {
+//     this.iscomment = true;
+//     this.showcomment=true
 
-this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost = allcomment
-    })
+// this.IDpost = document.getElementById('postID').innerHTML
+//     this.postSerives.displaycomment(this.IDpost)
+//     this.postSerives.allcomment().subscribe(allcomment => {
+//       console.log(allcomment)
+//       this.commentpost = allcomment
+//     })
 
     
-}
+// }
 
 editbutton(post) {
 
@@ -248,22 +251,92 @@ editbutton(post) {
   }
 
 
-  sendcomment() {
-    console.log('comment')
-    this.commentclass.postedby = this.code
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.commentclass.post = this.IDpost
-    console.log(this.commentclass);
+//   Comment(post) {
+   
+//     this.IDpost = post._id
+//   this.postSerives.displaycomment(this.IDpost)
+//    this.postSerives.allcomment().subscribe(allcomment => {
+//     // console.log(allcomment)
+//     this.commentpost = allcomment
 
-    this.postSerives.comment(this.commentclass)
+//   for(let comment of this.commentpost){
+//       // console.log(comment.postedby)
+//       this.commentPostedBy = comment.postedby
 
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost=allcomment
-  })
+
+//    this.postSerives.findUser(this.commentPostedBy)
+//       // console.log(this.commentPostedBy)
+
+//        this.postSerives.volunteer().subscribe(volunteer => {
+//        this.commentByVolunteer = volunteer
+//         // console.log(this.commentByVolunteer)
+//         console.log(this.commentByVolunteer.name);
+        
+//       })
+    
+//       this.postSerives.charity().subscribe(charity => {
+//         this.commentByCharity = charity
+//         // console.log(this.commentByCharity)
+//         console.log(this.commentByCharity.name);
+        
+//       })
+
+
+//     }
+    
+//   })
+// }
+ async commentByC(comment,commentByC){
+  if(comment === commentByC){
+   return true
+  }
 }
+
+
+commentByV(comment,commentByV){
+if(comment === commentByV){
+return true
+}
+}
+
+
+
+sendcomment(comment,post) {
+  console.log(comment)
+  console.log(post)
+  this.commentclass.postedby = this.code
+  this.IDpost = post._id
+  this.commentclass.post = this.IDpost
+  console.log(this.commentclass);
+
+  this.postSerives.comment(this.commentclass)
+
+  this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+  this.postSerives.allcomment().subscribe(allcomment => {
+    console.log(allcomment)
+    this.commentpost = allcomment
+    
+  })
+
+
+  this.commentclass.text =''
+ 
+
+}
+
+
+
+
+
+commentt(p,c) {
+  // console.log(p);
+  // console.log(c);
+  if (p== c) {
+    return true
+  }
+}
+
   onfileselected(event) {
     this.fileselected = event.target.files[0].name;
     console.log( this.fileselected );

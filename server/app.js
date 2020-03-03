@@ -261,7 +261,7 @@ io.on("connection", (socket) => {
   //   })
   // })
 
-  socket.on("edit", (post,id) => {
+  socket.on("edit", (post, id) => {
     console.log(post);
 
     console.log("update")
@@ -311,18 +311,22 @@ io.on("connection", (socket) => {
       }
     })
 
-  })
+  });
 
   socket.on("like", (like) => {
-    // console.log(like)
-    newlike = new likemodel({
-      postedby: like.postedby,
-      post: like.post
-    })
+    console.log(like)
+    newlike = new likemodel()
+    newlike.postedby = like.postedby,
+      newlike.post = like.post
+
+
     newlike.save((err, like) => {
       if (!err) {
         console.log("saved")
-        likemodel.find({}).populate('postedby.volunteer').populate('postedby.charity').exec(function (err, like) {
+        console.log(like);
+        io.emit("getThisLike", like)
+
+        likemodel.find({}).populate('postedby.volunteer || postedby.charity').exec(function (err, like) {
           if (like) {
             console.log(like)
             // console.log("tttttttttt")
@@ -336,6 +340,29 @@ io.on("connection", (socket) => {
         console.log(err)
       }
     })
+    // }
+
+
+  });
+
+  socket.on("removelike", (like) => {
+    console.log(like);
+console.log("remove");
+likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
+  if(err){
+    console.log(err);
+    
+  }
+
+  else{
+    console.log("finish");
+    likemodel.find({post:like.post},(err,likes)=>{
+      console.log(likes);
+      io.emit("postlikes",likes)
+      
+    })
+  }
+})
   })
 
   socket.on("ALLlikes", (postid) => {
@@ -376,63 +403,63 @@ io.on("connection", (socket) => {
 
 
   // find one charity
-  socket.on("findcharity",(id)=>{
-    mongoose.model("charity").findOne({_id:id},(err,charity)=>{
-      if(err){
+  socket.on("findcharity", (id) => {
+    mongoose.model("charity").findOne({ _id: id }, (err, charity) => {
+      if (err) {
         console.log(err);
-        
+
       }
-      else{
+      else {
         console.log(charity)
-        io.emit("getcharitybyID",charity)
+        io.emit("getcharitybyID", charity)
       }
     })
   });
 
 
-  socket.on("follow",(data) => {
+  socket.on("follow", (data) => {
     console.log(data)
-    console.log("asd")
-   
-    mongoose.model("charity").findOne({_id: data.follower },(err,charity)=>{
+    console.log("asd asd")
+
+    mongoose.model("charity").findOne({ _id: data.follower }, (err, charity) => {
       //  for(let followingcharity of charity){
-        
-    if(!err){
-      mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
-        if (err) {
-          console.log(err);
 
-        }
-        else {
+      if (!err) {
+        mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
+          if (err) {
+            console.log(err);
 
-          mongoose.model("charity").findOne({ _id: data.following }, (err, Charity) => {
-            if (!err) {
+          }
+          else {
 
-              console.log(Charity.follower)
-              if (Charity.follower == data.follower) {
-                console.log("fffffffffffffffff")
+            mongoose.model("charity").findOne({ _id: data.following }, (err, Charity) => {
+              if (!err) {
+
+                console.log(Charity.follower)
+                if (Charity.follower == data.follower) {
+                  console.log("fffffffffffffffff")
+                }
+                else {
+                  mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
+                    if (err) {
+                      console.log(err);
+
+                    }
+                    else {
+                      // console.log(data);
+
+                    }
+                  })
+                }
               }
-              else {
-                mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
-                  if (err) {
-                    console.log(err);
 
-                  }
-                  else {
-                    // console.log(data);
+            })
+          }
 
-                  }
-                })
-              }
-            }
-          
-         })
-   }
-     
-});
-}
+        });
+      }
     });
-   
+
 
 
   });
@@ -445,37 +472,37 @@ io.on("connection", (socket) => {
     console.log(data);
 
     mongoose.model("charity").findOne({ _id: data }, (err, charity) => {
-     if(err){
-       console.log(err);
-       
-     }
-     else{
-       console.log(charity);
+      if (err) {
+        console.log(err);
 
-       io.emit("following", charity)
-     }
-            
-             
-    })    
+      }
+      else {
+        console.log(charity);
+
+        io.emit("following", charity)
+      }
+
+
+    })
   });
- 
-  socket.on("remove", (removeID,charityID) => {
-    console.log(removeID,charityID)
-    mongoose.model("charity").update({ _id: charityID },{$pull: {following:removeID}}, (err, charity) => {
+
+  socket.on("remove", (removeID, charityID) => {
+    console.log(removeID, charityID)
+    mongoose.model("charity").update({ _id: charityID }, { $pull: { following: removeID } }, (err, charity) => {
       if (err) {
         console.log(err)
       }
       else {
         console.log(charity)
-        io.emit("charityAfterRemove",charity)
-        mongoose.model("charity").update({ _id: removeID },{$pull: {follower:charityID}}, (err, charity) => {
+        io.emit("charityAfterRemove", charity)
+        mongoose.model("charity").update({ _id: removeID }, { $pull: { follower: charityID } }, (err, charity) => {
           if (err) {
             console.log(err)
           }
-          else{
-            
+          else {
+
           }
-      })
+        })
       }
     })
   });
@@ -528,7 +555,7 @@ io.on("connection", (socket) => {
       }
       else {
         console.log(charity)
-        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+        mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
           io.emit("changed", charityAfterChange)
         })
       }
@@ -542,10 +569,10 @@ io.on("connection", (socket) => {
         console.log(err)
       }
       else {
-        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+        mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
           io.emit("changed", charityAfterChange)
         })
-        
+
       }
     })
   });
@@ -557,10 +584,10 @@ io.on("connection", (socket) => {
         console.log(err)
       }
       else {
-        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+        mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
           io.emit("changed", charityAfterChange)
         })
-        
+
       }
     })
   });
@@ -573,10 +600,10 @@ io.on("connection", (socket) => {
         console.log(err)
       }
       else {
-        mongoose.model("charity").findOne({_id:id},(err,charityAfterChange)=>{
+        mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
           io.emit("changed", charityAfterChange)
         })
-        
+
       }
     })
   });
@@ -585,21 +612,21 @@ io.on("connection", (socket) => {
   // volunteer
 
   socket.on("changefname", (id, change) => {
-console.log(id, change);
+    console.log(id, change);
 
     mongoose.model("volunteer").update({ _id: id }, { fname: change }, (err, volunteer) => {
       if (err) {
         console.log(err)
       }
       else {
-        
-        mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
           // io.emit("changed", volunteerAfterChange)
           io.emit("changedvolunteer", volunteerAfterChange)
           console.log(volunteerAfterChange);
-          
+
         })
-        
+
       }
     })
   });
@@ -607,63 +634,63 @@ console.log(id, change);
 
   socket.on("changelname", (id, change) => {
     console.log(id, change);
-    
-        mongoose.model("volunteer").update({ _id: id }, { lname: change }, (err, volunteer) => {
-          if (err) {
-            console.log(err)
-          }
-          else {
-            
-            mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
-              // io.emit("changed", volunteerAfterChange)
-              io.emit("changedvolunteer", volunteerAfterChange)
-              console.log(volunteerAfterChange);
-              
-            })
-            
-          }
-        })
-      });
 
-      socket.on("changePhoneVOL", (id, change) => {
-        console.log(id, change);
-        
-            mongoose.model("volunteer").update({ _id: id }, { phone: change }, (err, volunteer) => {
-              if (err) {
-                console.log(err)
-              }
-              else {
-                
-                mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
-                  // io.emit("changed", volunteerAfterChange)
-                  io.emit("changedvolunteer", volunteerAfterChange)
-                  console.log(volunteerAfterChange);
-                  
-                })
-                
-              }
-            })
-          });
-    
-          socket.on("changeCountryVOL", (id, change) => {
-            console.log(id, change);
-            
-                mongoose.model("volunteer").update({ _id: id }, { country: change }, (err, volunteer) => {
-                  if (err) {
-                    console.log(err)
-                  }
-                  else {
-                    
-                    mongoose.model("volunteer").findOne({_id:id},(err,volunteerAfterChange)=>{
-                      // io.emit("changed", volunteerAfterChange)
-                      io.emit("changedvolunteer", volunteerAfterChange)
-                      console.log(volunteerAfterChange);
-                      
-                    })
-                    
-                  }
-                })
-              });
+    mongoose.model("volunteer").update({ _id: id }, { lname: change }, (err, volunteer) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
+          // io.emit("changed", volunteerAfterChange)
+          io.emit("changedvolunteer", volunteerAfterChange)
+          console.log(volunteerAfterChange);
+
+        })
+
+      }
+    })
+  });
+
+  socket.on("changePhoneVOL", (id, change) => {
+    console.log(id, change);
+
+    mongoose.model("volunteer").update({ _id: id }, { phone: change }, (err, volunteer) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
+          // io.emit("changed", volunteerAfterChange)
+          io.emit("changedvolunteer", volunteerAfterChange)
+          console.log(volunteerAfterChange);
+
+        })
+
+      }
+    })
+  });
+
+  socket.on("changeCountryVOL", (id, change) => {
+    console.log(id, change);
+
+    mongoose.model("volunteer").update({ _id: id }, { country: change }, (err, volunteer) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+
+        mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
+          // io.emit("changed", volunteerAfterChange)
+          io.emit("changedvolunteer", volunteerAfterChange)
+          console.log(volunteerAfterChange);
+
+        })
+
+      }
+    })
+  });
 
 
 });
@@ -721,25 +748,25 @@ app.get('/return',
 
 
 
-  // const transporter = nodemailer.createTransport({
+// const transporter = nodemailer.createTransport({
 
-  //   host: 'smtp.gmail.com',
-  //   provider: 'gmail',
-  //   port: 465,
-  //   secure: true,
-  //   auth: {
-  //     user: ' www.manon4@gmail.com', // Enter here email address from which you want to send emails
-  //     pass: ' manon159357@@ ' // Enter here password for email account from which you want to send emails
-  //   },
-  //   tls: {
-  //   rejectUnauthorized: false
-  //   }
-  // });
-
-
+//   host: 'smtp.gmail.com',
+//   provider: 'gmail',
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     user: ' www.manon4@gmail.com', // Enter here email address from which you want to send emails
+//     pass: ' manon159357@@ ' // Enter here password for email account from which you want to send emails
+//   },
+//   tls: {
+//   rejectUnauthorized: false
+//   }
+// });
 
 
-/*-----------------------------------------------------------------------*/ 
+
+
+/*-----------------------------------------------------------------------*/
 
 
 
@@ -753,17 +780,17 @@ app.post('/send', function (req, res) {
     secure: false,
     requireTLS: true,
     auth: {
-        user: "monasoliman009@gmail.com",
-        pass: "mona 2019@@"
+      user: "monasoliman009@gmail.com",
+      pass: "mona 2019@@"
     }
-});
+  });
 
-var mailOptions={
-  from :req.body.email ,
-  to:"monasoliman009@gmail.com",
-  subject : 'This email is from savethem website',
-  text : req.body.msg,
-  html:`<ul>
+  var mailOptions = {
+    from: req.body.email,
+    to: "monasoliman009@gmail.com",
+    subject: 'This email is from savethem website',
+    text: req.body.msg,
+    html: `<ul>
   <p>This email is from savethem website<p/>
   <li>Customer Name :${req.body.name}</li>
   <li>Customer E.mail :${req.body.email}</li>
@@ -771,20 +798,21 @@ var mailOptions={
 
   
   </ul>`
-}
-console.log(mailOptions);
-smtpTransport.sendMail(mailOptions, function(error, response){
-if(error){
+  }
+  console.log(mailOptions);
+  smtpTransport.sendMail(mailOptions, function (error, response) {
+    if (error) {
       console.log(error);
-  res.json(error);
-}else{
+      res.json(error);
+    } else {
       console.log("Message sent: " + response.message);
-  res.json("sent");
-   }
-});})
+      res.json("sent");
+    }
+  });
+})
 
 
-/*-----------------------------------------------------------------------*/ 
+/*-----------------------------------------------------------------------*/
 
 server.listen(3000, function () {
   console.log("server running....");
