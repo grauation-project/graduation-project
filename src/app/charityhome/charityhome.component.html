@@ -298,9 +298,10 @@
         <div class="row" >
         
           <div id="charitysuggest" class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
+            
             <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
             <div class="sgt-text">
-              <h4 class="mb-0">{{ charity.name}}</h4>
+              <h4 class="mb-0" (click)="gocharity(charity)">{{ charity.name}}</h4>
               <span>{{ charity.country}}</span>
             </div>
             <span class="pr-2 ml-4"  id="addfolloing" attr.id="{{charity._id}}" (click)="follow(charity)">

@@ -280,6 +280,14 @@ closetest(needs){
     this.isadd=false
 this.isupdate=false
   }
+  istrusted=false;
+  gohome(){
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log(typeof params.get("_id"));
+    });
+    this.router.navigate(["/home/charity/"+ localStorage.getItem("id")]);
+  }
   ngOnInit() {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -332,6 +340,11 @@ this.isupdate=false
       }
 
     )
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
   }
   logout() {
     localStorage.removeItem("token");

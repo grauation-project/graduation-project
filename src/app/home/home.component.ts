@@ -112,8 +112,6 @@ refresh(){
   })
 
 
-
-
 }
 onSubmit(){
   console.log(this.code)

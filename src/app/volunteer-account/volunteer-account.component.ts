@@ -83,7 +83,14 @@ searcheng(){
   ) {}
   fileselected = "";
   istrusted=false;
+  refresh(){
 
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log(typeof params.get("_id"));
+    });
+    this.router.navigate(["/home/volunteer/"+ localStorage.getItem("id")]);
+  }
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {
       file.withCredentials = false;

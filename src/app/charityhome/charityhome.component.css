@@ -389,3 +389,6 @@ margin-right: 15%;}
 .searchsmall{
 color: black;
 }
+.sgt-text h4:hover{
+  cursor: pointer;
+}
