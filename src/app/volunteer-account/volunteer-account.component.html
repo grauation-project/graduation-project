@@ -26,54 +26,72 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
-      <form class="form-inline mr-auto searchform">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-      </form>
       <li class="nav-item mr-5">
-        <i class="fa fa-user-circle"></i>
-
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
+          <i class="fa fa-user-circle"></i>
+  
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      <form class="form-inline mr-5 searchform">
+          <div class="input-group-prepend">
+        <div class="btn-group">
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" aria-describedby="basic-addon1">
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+          </div>
+        </div>
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
+          </div>
+      </form>
       
     </ul>
   </div>
 </nav>
 <div class="container-fluid bg-light" *ngIf=displaydiv>
     <div class="row">
-      <div class="col-md-6">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Volunter Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-              <td>{{volunteer.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
       </div>
-      <div class="col-md-6">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Charity Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td (click)="gocharity(charity)">{{charity.name}}</td>
-              <td>{{charity.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
+        <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+        <div *ngIf=Voluntersearchlist>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> Volunter Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                <td>{{volunteer.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf=cahritysearchlist>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Charity Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                <td (click)="gocharity(charity)">{{charity.name}}</td>
+                <td>{{charity.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
       </div>
     </div>
   </div>

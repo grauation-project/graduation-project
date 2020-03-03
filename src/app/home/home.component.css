@@ -307,3 +307,12 @@ nav .form-control {
     background-color:#3B6D8C;
     color: #AFBF34;
   }
+  .navbar .btn{
+    color: white;
+    background-color: #AFBF34;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    margin-right: 5%;
+    height: 70%;
+    margin-top: 10%;
+  }

@@ -84,6 +84,9 @@ public commentPostedBy;
   listvolunteersearch;
   listcharitysearch;
   // slsText;
+  cahritysearchlist:boolean = false;
+  Voluntersearchlist:boolean = false;
+  
   isadd=false;
   isupdate=false;
   need = new Needs ("","","")
@@ -93,6 +96,20 @@ public commentPostedBy;
   displaydiv = false;
   searcheng() {
     this.displaydiv = true;
+  }
+  
+  Voluntersearch(){
+    this.Voluntersearchlist = true;
+    this.cahritysearchlist = false;
+
+  }
+  Charitysearch(){
+    this.cahritysearchlist = true;
+    this.Voluntersearchlist = false;
+
+  }
+  searcheng2(){
+    this.displaydiv=false;
   }
   toggleadd(){
     this.isadd=true

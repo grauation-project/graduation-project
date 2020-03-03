@@ -33,11 +33,27 @@ export class HomeComponent implements OnInit {
   listvolunteersearch;
   listcharitysearch ;
   profileimagee=""
-  // slsText;
-displaydiv = false;
-searcheng(){
-  this.displaydiv = true;
-}
+ // slsText;
+ displaydiv = false;
+ cahritysearchlist:boolean = false;
+ Voluntersearchlist:boolean = false;
+ 
+ Voluntersearch(){
+   this.Voluntersearchlist = true;
+   this.cahritysearchlist = false;
+
+ }
+ Charitysearch(){
+   this.cahritysearchlist = true;
+   this.Voluntersearchlist = false;
+
+ }
+ searcheng() {
+   this.displaydiv = true;
+ }
+ searcheng2(){
+   this.displaydiv=false;
+ }
   volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
   public code;
   public ID;
