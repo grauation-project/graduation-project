@@ -50,4 +50,8 @@ export class LoginService {
   forgerpassword(_login: Login){
     return this._http.post<any>("http://localhost:3000/savethem/login/forget/password", _login);
   }
+  resetpassword(_login: Login){
+    return this._http.post<any>("http://localhost:3000/savethem/login/reset/password", _login);
+
+  }
 }

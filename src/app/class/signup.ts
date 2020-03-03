@@ -8,7 +8,7 @@ export class Signup {
     public address: string,
     public phone: String,
     public img: string,
-    public following:[],
-public follower:[]
+//     public following:[],
+// public follower:[]
   ) {}
 }

@@ -98,7 +98,7 @@
                     class="custom-select" [class.is-invalid]="charityHasErr && charity.touched" required
                     #charity="ngModel" [(ngModel)]="new_payment.charity" name="charity">
                     <option value="default">charities</option>
-                    <option>resala</option>
+                    <option (select)="displaybankaccount(charity.name)" *ngFor="let charity of charitydetails">{{charity.name}}</option>
                   </select>
                   <small class="text-danger" [class.d-none]="!charityHasErr || charity.untouched">
                     Please choose a charity name</small>
@@ -106,7 +106,7 @@
 
                 <div class="form-group">
                   <label class="float-left">Charity Banking Account :</label>
-                  <input type="text" class="form-control" required [class.is-invalid]="
+                  <input type="text"  class="form-control" required [class.is-invalid]="
                         charityBankAccount.invalid && charityBankAccount.touched
                       " [(ngModel)]="new_payment.charityBankAccount" #charityBankAccount="ngModel"
                     name="charityBankAccount" />
@@ -183,7 +183,7 @@
                   <option value="default">charities</option>
                   <option value="name">name</option>
   
-                  <option *ngFor="let charity of charities">{{charity}}</option>
+                  <option  *ngFor="let charity of charitydetails">{{charity.name}}</option>
                 </select>
                 <small class="text-danger" [class.d-none]="!charityHasErr || charityname.untouched">
                   Please choose a charity name</small>

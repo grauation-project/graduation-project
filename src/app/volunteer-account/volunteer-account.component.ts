@@ -62,8 +62,7 @@ export class VolunteerAccountComponent implements OnInit {
   searchText;
   listvolunteersearch ;
   listcharitysearch ;
-  // slsText;
-displaydiv = false;
+ 
   IDpostdelete: any;
   profileimageee="";
   
@@ -72,8 +71,29 @@ displaydiv = false;
   commentPostedBy: any;
   commentByVolunteer: unknown;
   commentByCharity: unknown;
-searcheng(){
+
+ 
+
+// slsText;
+displaydiv = false;
+cahritysearchlist:boolean = false;
+Voluntersearchlist:boolean = false;
+
+Voluntersearch(){
+  this.Voluntersearchlist = true;
+  this.cahritysearchlist = false;
+
+}
+Charitysearch(){
+  this.cahritysearchlist = true;
+  this.Voluntersearchlist = false;
+
+}
+searcheng() {
   this.displaydiv = true;
+}
+searcheng2(){
+  this.displaydiv=false;
 }
   constructor(
     private _LoginService: LoginService,

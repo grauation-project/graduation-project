@@ -79,13 +79,16 @@ public commentPostedBy;
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
   public editclass = new Edit("", "", "", "")
-  charitydetaile = new Signup("", "", "", "", "", "", "", "",[],[]);
+  charitydetaile = new Signup("", "", "", "", "", "", "", "");
  
   title = 'Angular Search Using ng2-search-filter';
   searchText;
   listvolunteersearch;
   listcharitysearch;
   // slsText;
+  cahritysearchlist:boolean = false;
+  Voluntersearchlist:boolean = false;
+  
   isadd=false;
   isupdate=false;
   need = new Needs ("","","")
@@ -95,6 +98,20 @@ public commentPostedBy;
   displaydiv = false;
   searcheng() {
     this.displaydiv = true;
+  }
+  
+  Voluntersearch(){
+    this.Voluntersearchlist = true;
+    this.cahritysearchlist = false;
+
+  }
+  Charitysearch(){
+    this.cahritysearchlist = true;
+    this.Voluntersearchlist = false;
+
+  }
+  searcheng2(){
+    this.displaydiv=false;
   }
   toggleadd(){
     this.isadd=true

@@ -748,20 +748,6 @@ app.get('/return',
 
 
 
-// const transporter = nodemailer.createTransport({
-
-//   host: 'smtp.gmail.com',
-//   provider: 'gmail',
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: ' www.manon4@gmail.com', // Enter here email address from which you want to send emails
-//     pass: ' manon159357@@ ' // Enter here password for email account from which you want to send emails
-//   },
-//   tls: {
-//   rejectUnauthorized: false
-//   }
-// });
 
 
 
@@ -780,8 +766,8 @@ app.post('/send', function (req, res) {
     secure: false,
     requireTLS: true,
     auth: {
-      user: "monasoliman009@gmail.com",
-      pass: "mona 2019@@"
+      user: "savethemiti@gmail.com",
+      pass: "123456789@@"
     }
   });
 

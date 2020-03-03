@@ -18,6 +18,7 @@ useremail=new Login("","")
 
     this._LoginService.forgerpassword(this.useremail).subscribe(
      response=>{
+       localStorage.setItem("token",response)
        console.log(response);
        this.submitted=false;
        this.submit=true

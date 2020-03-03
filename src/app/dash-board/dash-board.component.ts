@@ -20,7 +20,7 @@ export class DashBoardComponent implements OnInit {
  
   public code;
   public ID;
-  charitydetails:any= new Signup("", "", "", "", "", "", "", "",[],[]);
+  charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   ngOnInit() {
    

@@ -28,55 +28,74 @@
           <a class="nav-link" href="#">Notifications</a>
         </li>
         <li class="nav-item mr-5">
-          <i class="fa fa-user-circle"></i>
-
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-        <form class="form-inline mr-auto searchform">
+            <i class="fa fa-user-circle"></i>
+    
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        <form class="form-inline mr-5 searchform">
+            <div class="input-group-prepend">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" aria-describedby="basic-addon1">
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+            </div>
+          </div>
           <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-            placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+            placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
+            </div>
         </form>
+      
       </ul>
     </div>
   </nav>
   <div class="container-fluid bg-light" *ngIf=displaydiv>
-    <div class="row">
-      <div class="col-md-6">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Volunter Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-              <td>{{volunteer.country}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Charity Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td (click)="gocharity(charity)">{{charity.name}}</td>
-              <td>{{charity.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+          <div *ngIf=Voluntersearchlist>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th> Volunter Name</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                  <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                  <td>{{volunteer.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf=cahritysearchlist>
+  
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Charity Name</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                  <td (click)="gocharity(charity)">{{charity.name}}</td>
+                  <td>{{charity.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
       </div>
     </div>
-  </div>
   <div class="contain">
     <div class="container-fluid p-0 overflow-hidden">
       <div class="row">
@@ -93,7 +112,9 @@
         <div class="col-md-5  account_details ">
           <div class="row">
             <img class="profile_img" [src]="profileimageee" />
-            <div class="right_container">
+
+            <div class="right_container ">
+              <h4 style="text-align: center;margin-bottom: 5%;">{{charitydetaile.name}}</h4>
 
               <div class="folowing_details overflow-hidden">
                 <div class="ml-4">
@@ -276,14 +297,14 @@
         </div>
         <div class="col-md-6 account_main ">
           <div class="account_headline overflow-hidden">
-            <h4>{{charitydetaile.name}}</h4>
             <p>
               charity
               <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                   class="fa fa-star"></i></span>
               <span>
                 <button class="setting">
-                  <a href="#">Setting</a>
+                  <a  id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
+                  aria-controls="infodiv"  aria-selected="false">Setting</a>
                 </button>
                 <button class="followbtn">
                   <a (click)="follow(charitydetaile)">
@@ -391,7 +412,7 @@
 
                         <div class="row form-group">
                           <img class="float-left ml-3"
-                            src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                          [src]="profileimageee" />
                           <input type="text" class="form-control ml-2 pr-0  "
                             style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" required
                             [(ngModel)]="commentclass.text" #text placeholder="your comment" name="text">

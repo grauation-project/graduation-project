@@ -28,14 +28,28 @@
         <a class="nav-link" href="#">Notifications</a>
       </li>
       <li class="nav-item mr-5">
-        <i class="fa fa-user-circle"></i>
-
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-      <form class="form-inline mr-auto searchform">
+          <i class="fa fa-user-circle"></i>
+  
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      <form class="form-inline mr-5 searchform">
+          <div class="input-group-prepend">
+        <div class="btn-group">
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" aria-describedby="basic-addon1">
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+          </div>
+        </div>
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+          placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
+          </div>
       </form>
+      
+     
     </ul>
   </div>
 </nav>
@@ -43,39 +57,45 @@
 <body class="container-fluid bg-light">
   <div class="container-fluid bg-light" *ngIf=displaydiv>
     <div class="row">
-      <div class="col-md-6">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Volunter Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-              <td>{{volunteer.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
       </div>
-      <div class="col-md-6">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Charity Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td (click)="gocharity(charity)">{{charity.name}}</td>
-              <td>{{charity.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
+        <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+        <div *ngIf=Voluntersearchlist>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> Volunter Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                <td>{{volunteer.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf=cahritysearchlist>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Charity Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                <td (click)="gocharity(charity)">{{charity.name}}</td>
+                <td>{{charity.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
       </div>
     </div>
   </div>
@@ -84,7 +104,7 @@
       <div class="shadow myprofile" style="border-radius: 4%;">
         <div class="" style="background-color: #3B6D8C;height: 80px;text-align: center;">
           <img [src]="profileimageee" class=" profileimage mt-5"> </div>
-        
+
         <div style="text-align: center;background-color: white;">
           <a [routerLink]="['charity/account']" style="text-decoration: none;color:#3B6D8C" class="bg-dark">
             <h5 class="pt-5">{{charitydetaile.name}}</h5>
@@ -92,7 +112,7 @@
 
           <p style="color: gray;">charity</p>
           <hr>
-          <div class="followdiv" >
+          <div class="followdiv">
             <h6 style="color: grey;" (click)="Folllowing(charitydetaile)">Following</h6>
             <p>22</p>
           </div>
@@ -154,38 +174,38 @@
         </div>
       </div>
 
-     
 
-      <div id="secondpost" class="row shadow mb-4"  *ngFor='let post of Allpost'>
+
+      <div id="secondpost" class="row shadow mb-4" *ngFor='let post of Allpost'>
         <div class="col-md-11    mr-5 mt-2  pb-0">
           <div class="row">
             <img [src]="profileimageee" class="cricle-img " height="40px">
-            
 
-            <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
+
+            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
 
               <h6>{{postedByCharity.name}}</h6>
-            </div>
+            </div> -->
 
-            <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
+            <!-- <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
 
               <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
             </div>
-           
+            -->
           </div>
-         
+
         </div>
-      
+
         <div class=" col-12 ml-3 mr-3 pt-3 mt-0">
           <h6>{{post.title}}</h6>
 
           <p>{{post.content}} </p>
           <hr>
-             </div>
-             
+        </div>
+
         <div class="row ml-2  postfooter">
           <div class="mr-3 ml-3">
-            
+
             <p><i class="fas fa-heart mr-1"></i>like</p>
           </div>
           <div>
@@ -256,9 +276,9 @@
       <div id="secondpost" class="row shadow  mb-4">
         <div class="row ml-2 mr-5">
           <span>
-            <img [src]="profileimageee"class="cricle-img " height="40px">
+            <img [src]="profileimageee" class="cricle-img " height="40px">
             hope
-           
+
           </span>
         </div>
         <hr>
@@ -292,35 +312,39 @@
 
       <div class="suggestions-list bg-white mt-4 shadow">
         <h5 class="pl-3 mt-3 mb-3">Suggestions</h5>
-      
+
         <hr>
-        <div class="row" *ngFor="let charity of charities">
-        
-          <div id="charitysuggest" class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
+        <div class="row">
+
+          <div id="charitysuggest" class="col-md-12 suggestion-usd  "
+            *ngFor="let charity of charitydetails; let index = index ">
             <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
             <div class="sgt-text">
               <h4 class="mb-0">{{ charity.name}}</h4>
               <span>{{ charity.country}}</span>
             </div>
-            <span class="pr-2 ml-4"  id="addfolloing" attr.id="{{charity._id}}" (click)="follow(charity)">
+            <span class="pr-2 ml-4" id="addfolloing" attr.id="{{charity._id}}" (click)="follow(charity)">
               <i class="fa fa-plus"></i>
             </span>
           </div>
 
 
-          
-<!-- attr.id="{{charity._id}}" -->
-            <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
-              <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
-            </span>
-          </div>
-        </div>
-      
 
+          <!-- attr.id="{{charity._id}}" -->
+          <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
+            <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
+          </span>
+        </div>
       </div>
 
 
     </div>
+
+
+  </div>
+
+
+
 
 
 

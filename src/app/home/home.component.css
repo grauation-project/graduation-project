@@ -235,10 +235,6 @@ body {
 
 }
 
-.navbar:hover {
-  opacity: 0.97;
-  padding: 1%;
-}
 
 .navbar a {
   color: white;
@@ -294,12 +290,29 @@ height: 15% !important;
 background-color:#AFBF34 ;
 color: whitesmoke;
  }
- .form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
+
 .form-control::placeholder  {
   font-family: 'FontAwesome';
 }
 .searchsmall{
 color: black;
 }
+nav .form-control {
+
+  margin-top: 1%;
+  margin-left: 6%;
+  margin-right: 15%;}
+  .nav-item i:hover{
+
+    background-color:#3B6D8C;
+    color: #AFBF34;
+  }
+  .navbar .btn{
+    color: white;
+    background-color: #AFBF34;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    margin-right: 5%;
+    height: 70%;
+    margin-top: 10%;
+  }

@@ -265,6 +265,8 @@ ul {
   font-family: 'Merriweather', serif;
   font-size: 18px;
   margin-right: 5%;
+  height: 70%;
+  margin-top: 10%
 
 }
 
@@ -344,9 +346,8 @@ ul {
 
 }
 
-.navbar:hover {
-  opacity: 0.97;
-  padding: 1%;
+.nav-item i:hover{
+background-color:#3B6D8C
 }
 
 .navbar a {
@@ -377,11 +378,13 @@ ul {
   
   }
   .searchbtn{
-height: 15%; 
+height: 5%; 
  }
- .form-control {
-  box-shadow: 0 10px 40px 0 #B0C1D9;
-}
+ nav .form-control {
+
+margin-top: 1%;
+margin-left: 2%;
+margin-right: 10%;}
 .form-control::placeholder  {
   font-family: 'FontAwesome';
 }

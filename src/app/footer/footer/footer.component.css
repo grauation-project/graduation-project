@@ -77,3 +77,11 @@ a {
 
 
 }
+@media screen and (max-width: 1000px) and (min-width: 600px) {
+  .footer_main {
+    margin-right: 52%
+  }
+  .footer_header ul {
+    margin-left: 80%;
+  }
+}

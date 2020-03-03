@@ -27,52 +27,71 @@
         <a class="nav-link" href="#">Notifications</a>
       </li>
       <li class="nav-item mr-5">
-        <i class="fa fa-user-circle"></i>
-
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-      <form class="form-inline mr-auto searchform">
+          <i class="fa fa-user-circle"></i>
+  
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      <form class="form-inline mr-5 searchform">
+          <div class="input-group-prepend">
+        <div class="btn-group">
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" aria-describedby="basic-addon1">
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+          </div>
+        </div>
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+          placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
+          </div>
       </form>
+      
     </ul>
   </div>
 </nav>
 <div class="container-fluid bg-light" *ngIf=displaydiv>
     <div class="row">
-      <div class="col-md-6">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Volunter Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-              <td>{{volunteer.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
       </div>
-      <div class="col-md-6">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Charity Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td (click)="gocharity(charity)">{{charity.name}}</td>
-              <td>{{charity.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-4">
+        <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+        <div *ngIf=Voluntersearchlist>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> Volunter Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                <td>{{volunteer.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf=cahritysearchlist>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Charity Name</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                <td (click)="gocharity(charity)">{{charity.name}}</td>
+                <td>{{charity.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
       </div>
     </div>
   </div>
@@ -97,8 +116,13 @@
       <div class="col-md-3  account_details ">
         <div class="row">
           <img class="profile_img" [src]="profileimageee" />
-          <div class="right_container">
-
+          <div class="right_container ">
+            <h4 style="text-align: center;">{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
+            <p style="text-align: center;">
+              volunteer
+            
+             
+            </p>
             <div class="folowing_details overflow-hidden">
               <div class="ml-4">
                 <span>Following</span>
@@ -110,10 +134,7 @@
               </div>
             </div>
             <div class="profile_links">
-              <div>
-                <i class="fas fa-globe-asia"></i>
-                <a href="#">www.example.com</a>
-              </div>
+             
               <div>
                 <i class="fab fa-facebook-square"></i>
                 <a href="#">www.facebook.com</a>
@@ -122,26 +143,13 @@
                 <i class="fab fa-twitter-square"></i>
                 <a href="#">www.twitter.com</a>
               </div>
-              <div>
-                <i class="fab fa-google-plus-square"></i>
-                <a href="#">www.googleplus.com</a>
-              </div>
-              <div>
-                <i class="fab fa-behance-square"></i>
-                <a href="#">www.behance.com</a>
-              </div>
-              <div>
-                <i class="fab fa-pinterest-square"></i>
-                <a href="#">www.pinterest.com</a>
-              </div>
+            
+            
               <div>
                 <i class="fa fa-instagram-square"></i>
                 <a href="#">www.instagram.com</a>
               </div>
-              <div>
-                <i class="fab fa-youtube-square"></i>
-                <a href="#">www.youtube.com</a>
-              </div>
+         
             </div>
           </div>
 
@@ -153,17 +161,7 @@
       </div>
       <div class="col-md-6 account_main ">
         <div class="account_headline overflow-hidden">
-          <h4>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
-          <p>
-            volunteer
-            <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                class="fa fa-star"></i></span>
-            <span>
-              <button class="setting" *ngIf="istrusted">
-                <a href="#">Setting</a>
-              </button>
-            </span>
-          </p>
+        
         </div>
         <div class="tab_feed overflow-hidden">
           <div class="nav nav-tabs " id="nav-tab" role="tablist">
