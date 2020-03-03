@@ -27,15 +27,16 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
+      <form class="form-inline mr-auto searchform">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
+      </form>
       <li class="nav-item mr-5">
         <i class="fa fa-user-circle"></i>
 
         <a class="nav-link" (click)="logout()">Logout</a>
       </li>
-      <form class="form-inline mr-auto searchform">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-          placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-      </form>
+  
     </ul>
   </div>
 </nav>

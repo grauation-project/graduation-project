@@ -4,6 +4,9 @@ import { Payment } from "../class/payment";
 import { Router } from "@angular/router";
 import { DonationMaterial } from '../class/donation-material';
 import { DonatationService } from '../services/donatation.service';
+import { CharityService } from '../services/charity.service';
+import { AdminService } from '../services/admin.service';
+import { Signup } from '../class/signup';
 
 declare var require: any;
 declare var $: any;
@@ -26,7 +29,8 @@ export class DonationComponent implements OnInit {
   constructor(
     private _PaymentService: PaymentService,
     private donateMaterialSerives :DonatationService,
-    private router: Router
+    private router: Router,
+    private _AdminService : AdminService
   ) {}
   paymentregister() {
     this.ispayment = true;
@@ -48,7 +52,39 @@ export class DonationComponent implements OnInit {
   donate(amount) {
     this.donateamount = amount;
   }
-  ngOnInit() {}
+  charitydetails:any= new Signup("", "", "", "", "", "", "", "");
+ 
+  ngOnInit() {
+
+
+
+    this._AdminService.getcharities().subscribe(
+      data  => {
+        this.charitydetails = data;
+
+        console.log(this.charitydetails);
+
+      },
+
+      error => {
+        console.log("error", error);
+
+      }
+    );
+
+
+
+
+
+
+
+  }
+  displaybankaccount(charitydetails){
+this.new_payment.charityBankAccount=charitydetails.charityBankAccount
+
+console.log(charitydetails.charityBankAccount)
+
+  }
   public new_payment = new Payment("", "", "", "", "", "", "", "", 0);
 
   onSubmit() {
