@@ -23,7 +23,7 @@ export class DonationComponent implements OnInit {
   public donateamount = "";
   charityHasErr: any;
   errormsg = "";
-  
+  errormsgg=""
   donationMaterial= new DonationMaterial("","","","","","","","")
 
   constructor(
@@ -91,13 +91,11 @@ console.log(charitydetails.charityBankAccount)
     console.log(this.new_payment);
     this._PaymentService.postpayment(this.new_payment).subscribe(
       response => {
-        console.log("Success!");
         this.router.navigate(["done"]);
       },
       error => {
-        console.log("error", error);
         this.router.navigate(["donation"]);
-        this.errormsg = error.error;
+        this.errormsg = "Somthing went wrong Please try again";
       }
     );
   }
@@ -109,10 +107,21 @@ console.log(charitydetails.charityBankAccount)
     }
   }
   Donate() {
-    console.log("hiiiii")
     this.donateMaterialSerives.DonateMaterial(this.donationMaterial).subscribe(
-      response => console.log("Success!", response),
-      error => console.log(error)
+      response => {
+        
+       this.router.navigate(["/done"]) 
+    
+    
+    
+    
+    
+    },
+      error => {
+
+this.errormsgg="Somthing went wrong Please try again"
+
+      }
     );
   }
   

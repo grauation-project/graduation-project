@@ -308,5 +308,13 @@ nav .form-control {
     color: #AFBF34;
   }
   a:hover{
-    cursor: pointer;
+    cursor: pointer;}
+  .navbar .btn{
+    color: white;
+    background-color: #AFBF34;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    margin-right: 5%;
+    height: 70%;
+    margin-top: 10%;
   }

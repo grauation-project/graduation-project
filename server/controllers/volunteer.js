@@ -44,10 +44,8 @@ var upload = multer({
 
 
 
-// app.use(bodyParser.urlencoded({useNewUrlParser:true},{useUnifiedTopology:true},{extended:true}));
 
 router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, next) => {
-  // console.log(req.file);
   const url = req.protocol + '://' + req.get('host')
   var {
     error
@@ -77,15 +75,7 @@ router.post("/signup", upload.single("img"), parseUrlencoded, async (req, res, n
   volunterr.password = await bcrypt.hash(volunterr.password, salt);
   await volunterr.save();
 
-  // var token = jwt.sign({
-  //     _id: volunterr._id,
-  //   },
-  //   config.get("jwtprivatekey")
-  // );
-  // res.cookie('jwt', token, {
-  //   // secure: true,
-  //   httpOnly: true
-  // })
+  
   res.status(200).json({
     volunterr,
     Request: {

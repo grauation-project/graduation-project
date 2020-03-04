@@ -390,34 +390,27 @@ ul {
   font-family: 'Merriweather', serif;
   font-size: 18px;
   margin-right: 5%;
-
+  height: 60%;
+  margin-top: 10%;
 }
-
 .navbar-nav ul li {
   float: left;
   margin-right: 4%;
   text-decoration: none;
-
 }
-
 .navbar a:hover {
   text-decoration: none;
-
 }
-
 .navbar-nav ul i {
   display: block;
   color: white
 }
-
 .navbar-nav ul a {
   color: white;
 }
-
 .iconcoler {
   color: white;
 }
-
 .navbar-nav ul a:visited {
   color: #3B6D8C
 }

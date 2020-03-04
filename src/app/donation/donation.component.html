@@ -13,22 +13,11 @@
 
           <div *ngIf="ispayment">
             <h4 style="color:red;text-align: center;">{{ errormsg }}</h4>
-            <!-- <div class="row ">
-              <input type="submit" value="25" (click)="donate(amount1.value)" #amount1 class="amount" />
-              <input type="submit" value="50" (click)="donate(amount2.value)" #amount2 class="amount" />
-              <input type="submit" value="100" (click)="donate(amount3.value)" #amount3 class="amount" />
-              <input type="submit" value="250" (click)="donate(amount4.value)" #amount4 class="amount" />
-              <input type="submit" value="500" (click)="donate(amount5.value)" #amount5 class="amount" />
-              <input type="submit" value="1000" (click)="donate(amount6.value)" #amount6 class="amount" />
-            </div> -->
+      
             <div>
-              <!-- <p>or enter your own amount</p> -->
 
               <form #donateOnlineForm="ngForm" novalidate (ngSubmit)="onSubmit()">
-                <!-- <input type="text" placeholder="100" [(ngModel)]="new_payment.amount" value="{{ donateamount }}"
-                  name="amount" class="inputamount" />
-                <br /><br />
-                <p class="title">your Information</p> -->
+            
                 <div class="form-group ">
                   <label class="float-left">Name :</label>
                   <input type="text" class="form-control" required [class.is-invalid]="donor.invalid && donor.touched"
@@ -123,8 +112,8 @@
 
           <div id="material" *ngIf="ismaterial">
 
-            <form #stockDonateForm="ngForm" novalidate method="POST" (submit)="Donate()" >
-           
+            <form #stockDonateForm="ngForm" novalidate method="POST" (ngSubmit)="Donate()" >
+           <h3 style="color: red;text-align: center;">{{errormsgg}}</h3>
               <div class="form-group">
   
                 <label class="col-form-label float-left">

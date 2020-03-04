@@ -45,7 +45,6 @@ var {
 
 
 router.post("/signup",upload.single("img"), parseUrlencoded, async (req, res, next) => {
-  console.log("hey");
   var {
     error
   } = validatecharity(req.body);
@@ -89,7 +88,6 @@ router.post("/signup",upload.single("img"), parseUrlencoded, async (req, res, ne
 
 router.get("/account/:id" , auth, async (req, res) => {
 
-  console.log("hi hi")
   let charityspec = await charity.findOne({
     _id: req.params.id
   });
@@ -99,7 +97,6 @@ router.get("/account/:id" , auth, async (req, res) => {
 
 
 router.post("/following/:id" , parseUrlencoded, async (req, res) => {
-  console.log("asd")
   let exit = charity.findOne({following:req.body.id},function(err,data){
 
     if(err){
@@ -154,6 +151,18 @@ else{
 
 });
 
+router.post("/account/img/:id", upload.single("img"),parseUrlencoded,async(req,res)=>{
 
+  charity.update({_id:req.params.id},{img:req.body.img},function(err,data){
+    if(err){
+        console.log(err)
+    }
+    res.send(data)
+})
+
+
+
+
+})
 
 module.exports = router;

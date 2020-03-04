@@ -6,12 +6,14 @@ const like = new Schema({
 
     postedby:{
       type:mongoose.Schema.Types.ObjectId,
-      enum:['volunteer','charity']
+      enum:['volunteer','charity'],
+     
     },
   
     post:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'post'
+        ref:'post',
+       
     }
     
 

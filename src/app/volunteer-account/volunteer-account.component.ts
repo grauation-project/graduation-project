@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 declare var require: any;
-import { Volunteerdetails } from "../class/Volunteerdetails";
+import { Volunteerdetails } from "../class/volunteerdetails";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { LoginService } from "../services/login.service";
 import { PostSeriveService } from '../services/post-serive.service';
@@ -28,7 +28,7 @@ export class VolunteerAccountComponent implements OnInit {
   imgprofile = require("../../assets/3.jpg");
   coverimmg=""
   imgnav = require("../../assets/1.jpg");
-  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
+  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
   volunteersignup = new Volunteer("", "", "", "", "", "", "","");
 
   public code;
@@ -62,15 +62,38 @@ export class VolunteerAccountComponent implements OnInit {
   searchText;
   listvolunteersearch ;
   listcharitysearch ;
-  // slsText;
-displaydiv = false;
+ 
   IDpostdelete: any;
   profileimageee="";
   
   charitydetailchanged: unknown;
   volunteerdetailchanged: unknown;
-searcheng(){
+  commentPostedBy: any;
+  commentByVolunteer: unknown;
+  commentByCharity: unknown;
+
+ 
+
+// slsText;
+displaydiv = false;
+cahritysearchlist:boolean = false;
+Voluntersearchlist:boolean = false;
+
+Voluntersearch(){
+  this.Voluntersearchlist = true;
+  this.cahritysearchlist = false;
+
+}
+Charitysearch(){
+  this.cahritysearchlist = true;
+  this.Voluntersearchlist = false;
+
+}
+searcheng() {
   this.displaydiv = true;
+}
+searcheng2(){
+  this.displaydiv=false;
 }
   constructor(
     private _LoginService: LoginService,
@@ -84,12 +107,17 @@ searcheng(){
   fileselected = "";
   istrusted=false;
   refresh(){
+  
+    if(localStorage.getItem("name")=="volunteer"){
 
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
-    });
-    this.router.navigate(["/home/volunteer/"+ localStorage.getItem("id")]);
+      this.router.navigate(["/home/volunteer/"+ localStorage.getItem("id")]);
+
+    }
+    else if(localStorage.getItem("name")=="charitiy"){
+
+      this.router.navigate(["/home/charity/"+ localStorage.getItem("id")]);
+
+    }
   }
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {
@@ -193,19 +221,19 @@ searcheng(){
       this.islike=true
   })
   }
-  comment() {
-    this.iscomment = true;
-    this.showcomment=true
+//   comment() {
+//     this.iscomment = true;
+//     this.showcomment=true
 
-this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost = allcomment
-    })
+// this.IDpost = document.getElementById('postID').innerHTML
+//     this.postSerives.displaycomment(this.IDpost)
+//     this.postSerives.allcomment().subscribe(allcomment => {
+//       console.log(allcomment)
+//       this.commentpost = allcomment
+//     })
 
     
-}
+// }
 
 editbutton(post) {
 
@@ -255,22 +283,92 @@ editbutton(post) {
   }
 
 
-  sendcomment() {
-    console.log('comment')
-    this.commentclass.postedby = this.code
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.commentclass.post = this.IDpost
-    console.log(this.commentclass);
+//   Comment(post) {
+   
+//     this.IDpost = post._id
+//   this.postSerives.displaycomment(this.IDpost)
+//    this.postSerives.allcomment().subscribe(allcomment => {
+//     // console.log(allcomment)
+//     this.commentpost = allcomment
 
-    this.postSerives.comment(this.commentclass)
+//   for(let comment of this.commentpost){
+//       // console.log(comment.postedby)
+//       this.commentPostedBy = comment.postedby
 
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost=allcomment
-  })
+
+//    this.postSerives.findUser(this.commentPostedBy)
+//       // console.log(this.commentPostedBy)
+
+//        this.postSerives.volunteer().subscribe(volunteer => {
+//        this.commentByVolunteer = volunteer
+//         // console.log(this.commentByVolunteer)
+//         console.log(this.commentByVolunteer.name);
+        
+//       })
+    
+//       this.postSerives.charity().subscribe(charity => {
+//         this.commentByCharity = charity
+//         // console.log(this.commentByCharity)
+//         console.log(this.commentByCharity.name);
+        
+//       })
+
+
+//     }
+    
+//   })
+// }
+ async commentByC(comment,commentByC){
+  if(comment === commentByC){
+   return true
+  }
 }
+
+
+commentByV(comment,commentByV){
+if(comment === commentByV){
+return true
+}
+}
+
+
+
+sendcomment(comment,post) {
+  console.log(comment)
+  console.log(post)
+  this.commentclass.postedby = this.code
+  this.IDpost = post._id
+  this.commentclass.post = this.IDpost
+  console.log(this.commentclass);
+
+  this.postSerives.comment(this.commentclass)
+
+  this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+  this.postSerives.allcomment().subscribe(allcomment => {
+    console.log(allcomment)
+    this.commentpost = allcomment
+    
+  })
+
+
+  this.commentclass.text =''
+ 
+
+}
+
+
+
+
+
+commentt(p,c) {
+  // console.log(p);
+  // console.log(c);
+  if (p== c) {
+    return true
+  }
+}
+
   onfileselected(event) {
     this.fileselected = event.target.files[0].name;
     console.log( this.fileselected );

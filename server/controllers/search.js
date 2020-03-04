@@ -7,19 +7,7 @@ var parseUrlencoded= bodyParser.urlencoded({extended:true});
 const volunteer = require('../models/volunteer');
 const charity = require('../models/charity');
 
-// route.get('/charity',parseUrlencoded,(req,res)=>{
-//     console.log('tag')
-//     charity.findOne({name:req.body.name},(err,data)=>{
-//         console.log('tag', '1')
-//         if (err){
-//             console.log(err)
-//         }
-//         else{
-//             // console.log(data)
-//             res.json(data)
-//         }
-//     })
-// });
+
 route.get('/listcharity',(req,res)=>{
     mongoose.model('charity').find().select('name country').then(listcharity=>{
       

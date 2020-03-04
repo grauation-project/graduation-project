@@ -27,57 +27,75 @@
 
           <a class="nav-link" href="#">Notifications</a>
         </li>
-        <form class="form-inline mr-auto searchform">
-          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
-            placeholder="Start searching" aria-label="Search" (click)="searcheng()">
-        </form>
         <li class="nav-item mr-5">
-          <i class="fa fa-user-circle"></i>
-
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-       
+            <i class="fa fa-user-circle"></i>
+    
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        <form class="form-inline mr-5 searchform">
+            <div class="input-group-prepend">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" aria-describedby="basic-addon1">
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+            </div>
+          </div>
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
+            </div>
+        </form>
+      
       </ul>
     </div>
   </nav>
   <div class="container-fluid bg-light" *ngIf=displaydiv>
-    <div class="row">
-      <div class="col-md-6">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Volunter Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-              <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-              <td>{{volunteer.country}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <br>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Charity Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-              <td (click)="gocharity(charity)">{{charity.name}}</td>
-              <td>{{charity.country}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+          <div *ngIf=Voluntersearchlist>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th> Volunter Name</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
+                  <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
+                  <td>{{volunteer.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf=cahritysearchlist>
+  
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Charity Name</th>
+                  <th>Country</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let charity of listcharitysearch | filter:searchText">
+                  <td (click)="gocharity(charity)">{{charity.name}}</td>
+                  <td>{{charity.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
       </div>
     </div>
-  </div>
   <div class="contain">
     <div class="container-fluid p-0 overflow-hidden">
       <div class="row">
@@ -93,6 +111,13 @@
       <div class="row">
         <div class="col-md-5  account_details ">
           <div class="row">
+            <form style="display:none" #changeForm="ngForm" (ngSubmit)="onSubmitimg()">
+              <input type="file" #img [(ngModel)]="changeimage.img"name="img"(change)="showupload()" id="file_upload_id" >
+           <input type="submit" (click)="uploader.uploadAll()" id="file_upload_ids"/>
+
+            </form>
+            <i class="fas fa-cloud-upload-alt" (click)="_uploaded()" *ngIf="uploaded"></i>
+            <i (click)="_upload()" id="icon_upload"class="fas fa-camera-retro" style="color: #3B6D8C;font-size: 35px;position: absolute;left:60%;top: -12%;z-index: 2559877556632;cursor: pointer;"></i>
             <img class="profile_img" [src]="profileimageee" />
 
             <div class="right_container ">
@@ -248,11 +273,23 @@
 
               </div>
               <div class="clr"></div>
+
+
+
+
+
+
+
+
+
+
+
+
               <div class="provides">
                 <div class="post_topbar">
                   <div class="usy-dt">
                     <div class="usy-name">
-                      <h5>Provides</h5>
+                      <h3>Provides :</h3>
                     </div>
                   </div>
                   <div class="editPost  pr-0">
@@ -261,22 +298,130 @@
                       <i class="fa fa-ellipsis-v  pt-0"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
+                      <a class="dropdown-item" (click)="toggleaddprovide()">Add Provide</a>
+
                       <!-- <a class="dropdown-item" href="#">Something else here</a> -->
 
                     </div>
                   </div>
                 </div>
 
-                <p>
-                  dfdffffffffffffffffffffffffff
-                </p>
+                <div class="view" *ngIf="isaddprovide">
+                  <i (click)="closeviewprovide()" class="fas fa-times-circle"
+                    style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                  <form #addprovides="ngForm" novalidate (ngSubmit)="addprovide(addprovides)">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                        #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                        [(ngModel)]="providess.name">
+                      <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
 
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Quantity" required
+                        [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                        [(ngModel)]="providess.quantity" class="form-control" name="quantity">
+                      <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                        Required</small>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="description" id="description" #description="ngModel"
+                        [class.is-invalid]="description.invalid && description.touched" required
+                        [(ngModel)]="providess.description" placeholder="Enter description" rows="3"></textarea>
+                      <small [class.d-none]="description.valid || description.untouched" class="text-danger">description
+                        is required</small>
+
+                    </div>
+
+                    <button type="submit" name="submit" [disabled]="addprovides.form.invalid"
+                      class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+                <div class="need " *ngFor="let provide of listprovide; let i = index">
+                  <div class="btn-group drop float-right ">
+                    <button class="btn  btn-sm " type="button" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v s mr-1" style="color: white;"></i>
+
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" (click)="updateprovides(provide)">Edit</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="deleteprovides(provide)">Delete</a>
+                    </div>
+                  </div>
+                  <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i+1" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i +1">
+                    <h5>{{provide.name}}</h5>
+                    <div class="collapse" [attr.id]="'collapse-' + i+1">
+                      <div class="card card-body" style="background-color: #AFBF34;">
+                        <h6>Quantity :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{provide.quantity}}</p>
+                        <h6>Description :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{provide.description}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="view w-100 " class="test" [id]="provide._id">
+                    <i (click)="closetests(provide)" class="fas fa-times-circle"
+                      style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                    <form #addprovides="ngForm" novalidate (ngSubmit)="updateprovidess(provide,addprovides)">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                          #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                          [(ngModel)]="providess.name">
+                        <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is
+                          required</small>
+
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" required
+                          [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                          [(ngModel)]="providess.quantity" class="form-control" name="quantity">
+                        <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                          Required</small>
+                      </div>
+                      <div class="form-group">
+                        <textarea class="form-control" name="description" id="description" #description="ngModel"
+                          [class.is-invalid]="description.invalid && description.touched" required
+                          [(ngModel)]="providess.description" placeholder="Enter description" rows="3"></textarea>
+                        <small [class.d-none]="description.valid || description.untouched"
+                          class="text-danger">description is required</small>
+
+                      </div>
+
+                      <button type="submit" name="submit" [disabled]="addprovides.form.invalid"
+                        class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="col-md-6 account_main ">
           <div class="account_headline overflow-hidden">
             <p>
@@ -301,7 +446,7 @@
               <a class="nav-item nav-link active" id="feeddiv-tab" data-toggle="tab" href="#feeddiv" role="tab"
                 aria-controls="feeddiv" aria-selected="true">Feed</a>
               <a class="nav-item nav-link" id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
-                aria-controls="infodiv"  aria-selected="false">Info</a>
+                aria-controls="infodiv" aria-selected="false">Info</a>
 
             </div>
             <div class="tab-content" id="nav-tabContent">
@@ -351,23 +496,25 @@
                         aria-expanded="false">
                         <i class="fa fa-ellipsis-v  pt-0"></i>
                       </a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
                      
-                        <button name="edit" data-toggle="modal" data-target="#editpost"  (click)="editbutton(post)"  class="text-dark "><a>Edit
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                        <button name="edit" data-toggle="modal" data-target="#editpost" (click)="editbutton(post)"
+                          class="text-dark "><a>Edit
                             post</a></button>
-                        <button name="edit" data-toggle="modal" data-target="#deletepost"
-                        (click)="deletebutton(post)"  class=" text-dark "><a>Delete post</a></button>
-                       
+                        <button name="edit" data-toggle="modal" data-target="#deletepost" (click)="deletebutton(post)"
+                          class=" text-dark "><a>Delete post</a></button>
+
                       </div>
                     </div>
-                    <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
-                    [attr.aria-controls]="'collapse-' + i">
+                    <!-- <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i"> -->
                     <div>
                       <img class="float-left mr-2" [src]="profileimageee" />
                       <h5>{{charitydetaile.name}}</h5>
 
 
-                      <span><i class="fa fa-clock-o"></i>3 minutes</span>
+                      <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
                     </div>
                     <div>
                       <p id="postTitle">{{post.title}}</p>
@@ -376,50 +523,49 @@
                       </p>
                       <h5 class="hidden" id="postID">{{post._id}}</h5>
                     </div>
-                    <div class="reactions ">
-                      <a id="like">
-                        <i class="fas fa-heart" (click)="like(post)"></i>
+                    <div class="reactions row">
+                      <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+                        border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
+                        {{postlikes}}</div>
+                      <a>
+                        <i class="fas fa-heart" id="like" (click)="like(post)" ></i>
                         Like</a>
                       <a id="comment">
                         <i class="far fa-comment" (click)="Comment(post)"></i>
                         Comment</a>
                     </div>
-                    </div>
-                    <!-- comment -->
-
-                    <!-- *ngIf="commentt(comment.postby,post._id)" -->
-
                     <div>
 
-                      <form #comment="ngForm" class="pr-0">
+                      <form #comment="ngForm" novalidate class="pr-0">
 
                         <div class="row form-group">
                           <img class="float-left ml-3"
                           [src]="profileimageee" />
                           <input type="text" class="form-control ml-2 pr-0  "
-                            style="border-radius:55px;text-align: center; width: 80%;" [(ngModel)]="commentclass.text"
-                            #text placeholder="your comment" name="text">
+                            style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" required
+                            [(ngModel)]="commentclass.text" #text placeholder="your comment" name="text">
                           <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
-                          <button (click)="sendcomment(comment,post)" class="hidden"></button>
+                          <button (click)="sendcomment(comment,post)" [disabled]="comment.form.invalid"
+                            class="hidden"></button>
                         </div>
 
                       </form>
                       <div *ngFor="let comment of commentpost">
 
                         <div *ngIf="commentt(comment.post,post._id)">
-                          <div class="row" *ngIf="commentByCharity">
-                            <input class="hidden" (click)="hidden(comment)">
+                          <div class="row pl-1" *ngIf="commentByCharity">
+                            <!-- {{commentByCharity._id}} -->
 
-                            <div class="mt-2 ml-2" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+                            <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
 
                               <h6>{{commentByCharity.name}}</h6>
-                            </div>
+                            </div> 
 
                             <div class="mt-2 ml-2" id="posttedby"
                               *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
 
                               <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
-                            </div>
+                            </div> -->
 
                             <p>
                               {{comment.text}}
@@ -428,7 +574,7 @@
                         </div>
                       </div>
 
-                      <!--  -->
+
 
 
                     </div>
@@ -461,8 +607,8 @@
                           <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                             <div class="form-group">
                               <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title"
-                                placeholder="Title of Post" name="title">
+                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title" placeholder="Title of Post"
+                                name="title">
                               <br>
                               <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
                                 [(ngModel)]="newPost.content" value="{{postContent}}" name="content"></textarea>
@@ -505,7 +651,7 @@
                     </div>
                   </div>
 
-                 
+
                 </div>
               </div>
 
@@ -593,7 +739,7 @@
                   </div>
 
 
-                  
+
 
                   <div class="details" *ngIf="Country">
                     <i class="far fa-edit float-right" *ngIf="istrusted" style="color: #3B6D8C;" (click)="country()"></i>
@@ -620,6 +766,3 @@
             </div>
           </div>
         </div>
-
-        <!-- </div> -->
-        <!-- </body> -->

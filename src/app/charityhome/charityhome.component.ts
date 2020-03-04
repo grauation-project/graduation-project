@@ -62,10 +62,25 @@ export class CharityhomeComponent implements OnInit {
   // slsText;
   displaydiv = false;
   auth=true;
+  cahritysearchlist:boolean = false;
+  Voluntersearchlist:boolean = false;
+  
+  Voluntersearch(){
+    this.Voluntersearchlist = true;
+    this.cahritysearchlist = false;
+
+  }
+  Charitysearch(){
+    this.cahritysearchlist = true;
+    this.Voluntersearchlist = false;
+
+  }
   searcheng() {
     this.displaydiv = true;
   }
-
+  searcheng2(){
+    this.displaydiv=false;
+  }
 charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   ngOnInit() {
@@ -130,9 +145,6 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
 
 
-
-   
-
      // subscribe search
   this.charityService.listCharity().subscribe(data=>{
     this.listcharitysearch=data
@@ -140,6 +152,7 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
   this.volunteerService.listvolunteer().subscribe(data=>{
     this.listvolunteersearch=data
   });
+
   this._AdminService.getcharities().subscribe(
     data  => {
       this.charitydetails = data;
@@ -227,8 +240,6 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
     console.log(this.likeclass);
 
     this.postSerives.like(this.likeclass)
-
-
   }
 
   showlike() {
@@ -246,24 +257,31 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
   // follow
   
   follow(charity) {
-   
 
+    document.getElementById(charity._id).style.display = "none";
+    document.getElementById(charity.email).style.display = "block";
 
     if(this.code === charity._id){
       alert("you can't follow yourself")
     }
-
+    // console.log(this.charitydetaile.following.length);
+    
+    // if(this.charitydetaile.following.length==0){
+    //   this.postSerives.follow(this.followClass)
+    
+    // }
+    
     
     // document.getElementById(charity._id).style.display = "none";
     // document.getElementById(charity.email).style.display = "block";
 
     //     this.isfollow=false
     //     console.log("hhhhhhhhh")
-   else{
+  //  if(this.charitydetaile.following.length>0){
 
-    this.followClass.follower = this.code
-    this.followClass.following = charity._id
-    console.log(this.followClass)
+  //   this.followClass.follower = this.code
+  //   this.followClass.following = charity._id
+  //   console.log(this.followClass)
   //  console.log(this.charitydetaile.following);
 
   
@@ -282,8 +300,11 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
     //   }
       
     // }
-    this.postSerives.follow(this.followClass)
+    
 
+    this.postSerives.follow(this.followClass)
+    
+    
 
    }
     
@@ -293,7 +314,7 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
 
 
-  }
+  // }
 
   Folllowing(charityFollowing) {
     console.log("ooooooooooooooo");
