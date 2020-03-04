@@ -13,13 +13,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
   loginerror = "";
   onSubmit() {
-    console.log(this.loginModel);
     this.loginserve.userlogin(this.loginModel).subscribe(
       response => {
-        console.log("Success!", response);
-        console.log("Success!", response.token);
-        console.log(response.name);
-        // this.router.navigate(["login"]);
+      
         localStorage.setItem("token", response.token as string);
         localStorage.setItem("name", response.name  as string);
 
@@ -27,12 +23,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/home/volunteer", response.volunteer]);
           localStorage.setItem("id", response.volunteer as string);
 
-          console.log(response.volunteer);
         } else if (response.name === "charitiy") {
           this.router.navigate(["/home/charity", response.charity]);
           localStorage.setItem("id", response.charity as string);
 
-          console.log(response.volunteer);
         } else {
           localStorage.setItem("id", response.admin as string);
 
@@ -42,11 +36,10 @@ export class LoginComponent implements OnInit {
 
       error => {
         {
-          this.loginerror = error.error;
+          this.loginerror = "Something went wrong please try again";
           this.router.navigate(["login"]);
         }
 
-        // this.router.navigate(["signup"]);
       }
     );
   }
