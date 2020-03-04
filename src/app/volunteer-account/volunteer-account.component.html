@@ -25,15 +25,11 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
-      <li class="nav-item mr-5">
-          <i class="fa fa-user-circle"></i>
-  
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-      <form class="form-inline mr-5 searchform">
+    
+      <form class="form-inline  searchform">
           <div class="input-group-prepend">
         <div class="btn-group">
-          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          <button type="button" class="btn btn-success mt-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" aria-describedby="basic-addon1">
           </button>
           <div class="dropdown-menu">
@@ -42,10 +38,15 @@
             <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
           </div>
         </div>
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        <input class="form-control mt-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
           </div>
       </form>
+      <li class="nav-item " style="margin-left: 10%;">
+        <i class="fa fa-user-circle"></i>
+
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
       
     </ul>
   </div>
@@ -97,14 +98,9 @@
 <div class="contain">
   <div class="container-fluid p-0 overflow-hidden">
     <div class="row">
-      <div class="col-md-12 profile_background"  [ngStyle]="{ 'background-image': 'url(' +coverimmg + ')'}">
+      <div class="col-md-12 profile_background">
         <button class="btnprofile" *ngIf="istrusted">
-          <form (ngSubmit)="coverimg()" >
-          <input type="file" [(ngModel)]="volunteerdetaile.coverimg" ng2FileSelect [uploader]="uploader" ENCTYPE="multipart/form-data"
-          (change)="onfileselected($event)"  class="form-input"   #coverimg="ngModel" name="coverimg" id="file" class="inputfile" />
-          <label for="file">Change Image</label>       
-          <input type="submit" name="submit" (click)="uploader.uploadAll()" >
-        </form>
+          <a href="#">Change Image</a>
         </button>
         <div class="clr"></div>
       </div>
@@ -115,7 +111,7 @@
       <div class="col-md-3  account_details ">
         <div class="row">
           <img class="profile_img" [src]="profileimageee" />
-          <div class="right_container ">
+          <div class="right_container  ">
             <h4 style="text-align: center;">{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h4>
             <p style="text-align: center;">
               volunteer

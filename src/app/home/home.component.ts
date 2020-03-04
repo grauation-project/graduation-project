@@ -10,7 +10,6 @@ import { Follow } from '../class/follow';
 import { log } from 'util';
 import { Like } from '../class/like';
 import { Comment } from 'src/app/class/comment';
-// import { VolunteerList } from '../class/volunteer copy';
 declare var require: any;
 
 @Component({
@@ -74,24 +73,20 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.postSerives.getpost().subscribe(data=>{
-      console.log(data)
       this.Allpost=data
     });
 
     
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
     });
     this._LoginService.volunteerdetails(this.code).subscribe(
       data => {
         this.volunteerdetaile = data;
         this.profileimagee= require("../../../server/upload/"+this.volunteerdetaile .img.substr(12));
         this.ID = this.code.slice(0, 9);
-        console.log(this.volunteerdetaile);
       },
       error => {
-        console.log(error);
         this.router.navigate(["login"]);
       }
     );
@@ -107,24 +102,20 @@ export class HomeComponent implements OnInit {
 refresh(){
 
   this.postSerives.getpost().subscribe(data=>{
-    console.log(data)
     this.Allpost=data
   });
 
   
   this.route.paramMap.subscribe((params: ParamMap) => {
     this.code = params.get("_id");
-    console.log(typeof params.get("_id"));
   });
   this._LoginService.volunteerdetails(this.code).subscribe(
     data => {
       this.volunteerdetaile = data;
       this.profileimagee= require("../../../server/upload/"+this.volunteerdetaile .img.substr(12));
       this.ID = this.code.slice(0, 9);
-      console.log(this.volunteerdetaile);
     },
     error => {
-      console.log(error);
       this.router.navigate(["login"]);
     }
   );
@@ -140,14 +131,9 @@ refresh(){
 
 }
 onSubmit(){
-  console.log(this.code)
-    console.log("create")
      this.newPost.postedby = this.code
-    console.log(this.code)
     this.postSerives.newpost(this.newPost)
-    console.log(this.newPost),
       this.postSerives.getpost().subscribe(data => {
-        console.log(data)
         this.Allpost = data
       })
 
@@ -164,12 +150,10 @@ onSubmit(){
 
   
   govolunteer(volunteer){
-    console.log(volunteer);
     this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
     
   }
   gocharity(charity){
-    console.log(charity);
     this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
   }
 
@@ -228,19 +212,16 @@ return true
 
 
 sendcomment(comment,post) {
-  console.log(comment)
-  console.log(post)
+ 
   this.commentclass.postedby = this.code
   this.IDpost = post._id
   this.commentclass.post = this.IDpost
-  console.log(this.commentclass);
 
   this.postSerives.comment(this.commentclass)
 
   this.IDpost = post._id
   this.postSerives.displaycomment(this.IDpost)
   this.postSerives.allcomment().subscribe(allcomment => {
-    console.log(allcomment)
     this.commentpost = allcomment
     
   })
@@ -256,12 +237,10 @@ like(post) {
   this.likeclass.postedby = this.code
   this.IDpost = post._id
   this.likeclass.post = this.IDpost
-  console.log(this.likeclass);
   this.postSerives.like(this.likeclass)
 
   this.postSerives.postlikes(this.IDpost)
   this.postSerives.getLikes().subscribe(likes => {
-    console.log(likes)
     this.AllLikes = likes
   })
 }

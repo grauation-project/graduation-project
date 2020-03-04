@@ -58,7 +58,6 @@ export class CharityAccountComponent implements OnInit {
     private volunteerService: VolunteersignupService
   ) { }
   public iscomment = false;
-  // public islike = false;
   public showcomment = false;
 public isEdit =false;
 public name =true;
@@ -115,12 +114,10 @@ this.uploaded=true;
   onSubmitimg(){
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      // console.log(this.code)
-      console.log(typeof params.get("_id"));
     });
 this.charityService.changeimg(this.changeimage,this.code).subscribe(
-  response=>console.log(response),
-  error=>console.log(error)
+  response=>{},
+  error=>{}
 )
 
   }
@@ -156,21 +153,19 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
   addneed(addneeds:NgForm){
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+      ;});
     this.charityService.addneed(this.need,this.code).subscribe(
 
-      response => {console.log("Success!", response)
-      ,  this.isadd=false,
+      response => {
+        this.isadd=false,
       addneeds.reset()
       
       this._LoginService.charitydetails(this.code).subscribe(
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
@@ -186,10 +181,8 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
           
           this.listneeds = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listneeds);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -197,7 +190,6 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
 
     },
         error => {
-          console.log("error!", error),
           addneeds.reset()
 
         } 
@@ -210,21 +202,19 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+      ;});
     this.charityService.addprovide(this.providess,this.code).subscribe(
 
-      response => {console.log("Success!", response)
-      ,  this.isaddprovide=false,
+      response => {
+       this.isaddprovide=false,
       addprovides.reset()
       
       this._LoginService.charitydetails(this.code).subscribe(
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
@@ -240,10 +230,8 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
           
           this.listprovide = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listprovide);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -252,10 +240,8 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
           
           this.listneeds = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listneeds);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -263,7 +249,6 @@ this.charityService.changeimg(this.changeimage,this.code).subscribe(
 
     },
         error => {
-          console.log("error!", error),
           addprovides.reset()
 
         } 
@@ -309,10 +294,10 @@ closetests(provide){
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+     });
     this.charityService.updateneed(this.need,needs._id).subscribe(
 
-      response => {console.log("Success!", response)
+      response => {
       this.isupdate=false;
       addneeds.reset()
 
@@ -321,14 +306,11 @@ closetests(provide){
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
-    // subscribe search
       this.charityService.listCharity().subscribe(data=>{
         this.listcharitysearch=data
       });
@@ -340,10 +322,8 @@ closetests(provide){
           
           this.listneeds = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listneeds);
         },
         error => {
-          console.log(error);
           addneeds.reset()
 
         }
@@ -353,7 +333,6 @@ closetests(provide){
 
     },
         error => {
-          console.log("error!", error)
 
         } 
           
@@ -363,10 +342,8 @@ closetests(provide){
         
         this.listprovide = data;
         this.ID = this.code.slice(0, 9);
-        console.log(this.listprovide);
       },
       error => {
-        console.log(error);
       }
 
     )
@@ -383,10 +360,10 @@ closetests(provide){
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+});
     this.charityService.updateprovide(this.providess,provide._id).subscribe(
 
-      response => {console.log("Success!", response)
+      response => {
       this.isupdate=false;
       addprovides.reset()
 
@@ -395,10 +372,8 @@ closetests(provide){
           
           this.listprovide = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listprovide);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -406,10 +381,8 @@ closetests(provide){
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
@@ -426,7 +399,6 @@ closetests(provide){
 
     },
         error => {
-          console.log("error!", error)
 
         } 
           
@@ -451,24 +423,21 @@ closetests(provide){
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+      });
     this.charityService.deleteneed(needs._id).subscribe(
 
-      response => {console.log("Success!", response)
+      response => {
       
       
       this._LoginService.charitydetails(this.code).subscribe(
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
-    // subscribe search
       this.charityService.listCharity().subscribe(data=>{
         this.listcharitysearch=data
       });
@@ -480,10 +449,8 @@ closetests(provide){
           
           this.listneeds = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listneeds);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -491,7 +458,6 @@ closetests(provide){
 
     },
         error => {
-          console.log("error!", error)
 
         } 
           
@@ -503,24 +469,21 @@ closetests(provide){
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log( params.get("_id"));});
+});
     this.charityService.deleteprovide(provide._id).subscribe(
 
-      response => {console.log("Success!", response)
+      response => {
       
       
       this._LoginService.charitydetails(this.code).subscribe(
         data => {
           this.charitydetaile = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.charitydetaile);
         },
         error => {
-          console.log(error);
           this.router.navigate(["login"]);
         }
       );
-    // subscribe search
       this.charityService.listCharity().subscribe(data=>{
         this.listcharitysearch=data
       });
@@ -532,10 +495,8 @@ closetests(provide){
           
           this.listneeds = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listneeds);
         },
         error => {
-          console.log(error);
         }
   
       )
@@ -544,17 +505,14 @@ closetests(provide){
           
           this.listprovide = data;
           this.ID = this.code.slice(0, 9);
-          console.log(this.listprovide);
         },
         error => {
-          console.log(error);
         }
   
       )
 
     },
         error => {
-          console.log("error!", error)
 
         } 
           
@@ -587,7 +545,6 @@ this.isupdate=false
     }
   }
   _uploaded(){
-    console.log("enter")
     document.getElementById('file_upload_ids').click();
 
 
@@ -595,8 +552,7 @@ this.isupdate=false
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      // console.log(this.code)
-      console.log(typeof params.get("_id"));
+    
     });
     this.title = "ng8fileupload";
 
@@ -614,10 +570,8 @@ this.isupdate=false
       status: any,
       headers: any
     ) => {
-      console.log("ImageUpload:uploaded:", item.file);
-      alert("File uploaded successfully");
+      
     };
-    console.log(this.uploader);
   
 
     this._LoginService.charitydetails(this.code).subscribe(
@@ -626,24 +580,19 @@ this.isupdate=false
         this.profileimageee= require("../../../../server/upload/"+this.charitydetaile.img.substr(12));
 
         this.ID = this.code.slice(0, 9);
-        console.log(this.charitydetaile);
       },
       error => {
-        console.log(error);
         this.router.navigate(["login"]);
       }
     );
 
     //charity post
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
 
     this.postSerives.charityposts().subscribe(posts => {
-      console.log(posts)
       this.charityposts = posts
     })
 
-    // subscribe search
     this.charityService.listCharity().subscribe(data => {
       this.listcharitysearch = data
     });
@@ -658,10 +607,8 @@ this.isupdate=false
         
         this.listneeds = data;
         this.ID = this.code.slice(0, 9);
-        console.log(this.listneeds);
       },
       error => {
-        console.log(error);
       }
 
     )
@@ -670,10 +617,8 @@ this.isupdate=false
         
         this.listprovide = data;
         this.ID = this.code.slice(0, 9);
-        console.log(this.listprovide);
       },
       error => {
-        console.log(error);
       }
 
     )
@@ -699,14 +644,10 @@ this.isupdate=false
 
   // create post
   createPost() {
-    console.log("create")
     this.newPost.postedby = this.code
     this.postSerives.newpostfromACC(this.newPost),
-      console.log(this.newPost),
       this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(allpostcharity => {
-      console.log(allpostcharity)
       this.charityposts = allpostcharity
 
     })
@@ -717,26 +658,18 @@ this.isupdate=false
 
 
 
-// like
-
-// firstlike(post){
-//   this.firstClick=true
-// }
 
 
 
   like(post) {
     
-    // document.getElementById("like").style.color = "#3B6D8C";
     this.likeNo=true
     this.likeclass.postedby = this.code
     this.IDpost = post._id
     this.likeclass.post = this.IDpost
-    console.log(this.likeclass);
 
     this.postSerives.postlikes(this.IDpost)
     this.postSerives.getLikes().subscribe(likes => {
-      console.log(likes)
       this.AllLikes = likes
 
       for(let like of this.AllLikes){
@@ -745,7 +678,6 @@ this.isupdate=false
         if(like.post === this.IDpost && like.postedby === this.code){
           this.postSerives.removelike(this.likeclass)
           this.postSerives.postlikeslast().subscribe(likes=>{
-            console.log(likes +"qqqqqqq");
             
           })
         }
@@ -753,16 +685,10 @@ this.isupdate=false
     })
     this.postSerives.like(this.likeclass)
 
-    // this.postSerives.getThisLike().subscribe(like=>{
-    //   console.log(like);
- 
-    // })
-// post like
+
     this.postSerives.postlikes(this.likeclass.post)
     this.postSerives.getLikes().subscribe(likes => {
-      console.log(likes)
       this.AllLikes = likes
-     console.log( this.postlikes);
      this.postlikes=this.AllLikes.length
     });
 
@@ -776,51 +702,30 @@ if(post===comment){
   }
 
   unlike(post){
-    // this.isslike=false
     console.log(post._id);
     
     document.getElementById("like").style.color = "grey";
-    // alert("unlike")
+    
   }
 
-  // showlike() {
-  //   // this.IDpost = document.getElementById('postID').innerHTML
-  //   this.postSerives.postlikes(this.IDpost)
-  //   this.postSerives.getLikes().subscribe(likes => {
-  //     console.log(likes)
-  //     this.AllLikes = likes
-  //     // this.likesPostedby = document.getElementById('likepostedby').innerHTML
-  //     // console.log(this.likesPostedby)
-  //     // this.postSerives.getlikesPostedby(this.likesPostedby)
-  //     // this.islike = true
-  //   })
-  // }
- 
-// Edit post
+
 
   editbutton(post) {
 
-    console.log(post._id)
     this.IDpost = post._id
     this.postTitle = post.title
-    console.log(this.postTitle)
     this.postContent = post.content
-    console.log(this.postContent)
 
   }
 
   edit() {
 
-    // /this.newPost.postID = this.IDpost
     this.newPost.postedby = this.code
 
-    // console.log(this.editclass)
     this.postSerives.edit(this.newPost,this.IDpost)
 
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(allpostcharity => {
-      console.log(allpostcharity)
       this.charityposts = allpostcharity
 
       this.editclass.title = "",
@@ -831,19 +736,14 @@ if(post===comment){
 
   }
 
-  // delete post
   deletebutton(post) {
-    console.log(post._id)
     this.IDpostdelete = post._id
   }
   delete() {
 
     this.postSerives.delete(this.IDpostdelete)
-    console.log(this.IDpostdelete);
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(posts => {
-      console.log(posts)
       this.charityposts = posts
     })
   }
@@ -852,49 +752,33 @@ if(post===comment){
 
  
   follow(charity) {
-    console.log(charity._id)
 
 
   }
 
-//   commntt(pp,cc){
-//     console.log(pp);
-//     console.log(cc);
-//     if(pp===cc)
-// {
-//   return true
-// }    
-    
-//   }
 
  Comment(post) {
    
       this.IDpost = post._id
     this.postSerives.displaycomment(this.IDpost)
      this.postSerives.allcomment().subscribe(allcomment => {
-      // console.log(allcomment)
       this.commentpost = allcomment
 
     for(let comment of this.commentpost){
-        // console.log(comment.postedby)
         this.commentPostedBy = comment.postedby
 
 
      this.postSerives.findUser(this.commentPostedBy)
-        // console.log(this.commentPostedBy)
 
          this.postSerives.volunteer().subscribe(volunteer => {
          this.commentByVolunteer = volunteer
-          // console.log(this.commentByVolunteer)
-          console.log(this.commentByVolunteer.name);
+         
           
         })
       
         this.postSerives.charity().subscribe(charity => {
           this.commentByCharity = charity
-          // console.log(this.commentByCharity)
-          console.log(this.commentByCharity.name);
-          
+         
         })
 
 
@@ -919,19 +803,16 @@ if(comment === commentByV){
   
 
   sendcomment(comment,post) {
-    console.log(comment)
-    console.log(post)
+  
     this.commentclass.postedby = this.code
     this.IDpost = post._id
     this.commentclass.post = this.IDpost
-    console.log(this.commentclass);
 
     this.postSerives.comment(this.commentclass)
 
     this.IDpost = post._id
     this.postSerives.displaycomment(this.IDpost)
     this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
       this.commentpost = allcomment
       
     })
@@ -947,8 +828,7 @@ if(comment === commentByV){
 
   
   commentt(p,c) {
-    // console.log(p);
-    // console.log(c);
+    
     if (p== c) {
       return true
     }
@@ -969,18 +849,14 @@ if(comment === commentByV){
 
   editname(change){
    this.code
-   console.log(change)
    this.postSerives.changename(this.code,change)
-   console.log(this.code,change)
-
+   
    this.isEdit =false
    this.name =true
 
    this.postSerives.changed().subscribe(data=>{
-    console.log(data);
      
     data=this.charitydetailchanged
-     console.log(this.charitydetailchanged);
      
    })
   }
@@ -989,13 +865,11 @@ if(comment === commentByV){
 }
   editaddr(change){
     this.postSerives.changeAdrress(this.code,change)
-    console.log(this.code,change)
  
     this.addressEdit=false
     this.address=true
     
     this.postSerives.changed().subscribe(data=>{
-     console.log(data);
     }) 
 
   }
@@ -1009,13 +883,11 @@ if(comment === commentByV){
 
   newphone(change){
     this.postSerives.changedphone(this.code,change)
-    console.log(this.code,change)
  
     this.phoneEdit=false
     this.phone=true
     
     this.postSerives.changed().subscribe(data=>{
-     console.log(data);
     }) 
 
   };
@@ -1029,13 +901,11 @@ if(comment === commentByV){
       editabout(change){
 
         this.postSerives.changeabout(this.code,change)
-        console.log(this.code,change)
      
         this.aboutEdit=false
         this.about=true
         
         this.postSerives.changed().subscribe(data=>{
-         console.log(data);
         }) 
     
 
@@ -1052,13 +922,11 @@ if(comment === commentByV){
           editcountry(change){
     
             this.postSerives.changecountry(this.code,change)
-            console.log(this.code,change)
          
             this.countryedit=false
             this.Country=true
             
             this.postSerives.changed().subscribe(data=>{
-             console.log(data);
             }) 
         
     
@@ -1066,12 +934,10 @@ if(comment === commentByV){
     
   
   govolunteer(volunteer){
-    console.log(volunteer);
     this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
     
   }
   gocharity(charity){
-    console.log(charity);
     this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
   }
 }

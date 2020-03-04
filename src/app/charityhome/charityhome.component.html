@@ -30,7 +30,7 @@
       <form class="form-inline mr-5 ml-5 mt-3 searchform">
           <div class="input-group-prepend">
         <div class="btn-group">
-          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          <button type="button" class="btn btn-success mt-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" aria-describedby="basic-addon1">
           </button>
           <div class="dropdown-menu">
@@ -39,7 +39,7 @@
             <div class="dropdown-item  text-dark" style="cursor: pointer;" (click)="Charitysearch()">Charities</div>
           </div>
         </div>
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        <input class="form-control mt-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
           </div>
       </form>
@@ -181,16 +181,7 @@
             <img [src]="profileimageee" class="cricle-img " height="40px">
 
 
-            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
-
-              <h6>{{postedByCharity.name}}</h6>
-            </div> -->
-
-            <!-- <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
-
-              <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
-            </div>
-            -->
+     
           </div>
 
         </div>

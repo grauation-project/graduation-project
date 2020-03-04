@@ -129,14 +129,10 @@ searcheng2(){
       status: any,
       headers: any
     ) => {
-      console.log("ImageUpload:uploaded:", item.file);
 
-      alert("File uploaded successfully");
     };
-    console.log(this.uploader);
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
     });
     this._LoginService.volunteerdetails(this.code).subscribe(
       data => {
@@ -144,19 +140,15 @@ searcheng2(){
         this.profileimageee= require("../../../server/upload/"+this.volunteerdetaile.img.substr(12));
 
         this.ID = this.code.slice(0, 9);
-        console.log(this.volunteerdetaile);
       },
       error => {
-        console.log(error);
         this.router.navigate(["login"]);
       }
     );
 
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
 
     this.postSerives.charityposts().subscribe(posts => {
-      console.log(posts)
       this.charityposts = posts
     })
      // subscribe search
@@ -182,14 +174,10 @@ searcheng2(){
   }
 
   onSubmit() {
-    console.log("create")
     this.newPost.postedby = this.code
     this.postSerives.newpostfromACC(this.newPost),
-      console.log(this.newPost),
       this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(allpostcharity => {
-      console.log(allpostcharity)
       this.charityposts=allpostcharity
 
     })
@@ -202,7 +190,6 @@ searcheng2(){
     this.likeclass.postedby = this.code
     this.IDpost = document.getElementById('postID').innerHTML
     this.likeclass.post = this.IDpost
-    console.log(this.likeclass);
 
     this.postSerives.like(this.likeclass)
 
@@ -213,10 +200,8 @@ searcheng2(){
     this.IDpost = document.getElementById('postID').innerHTML
     this.postSerives.postlikes(this.IDpost)
     this.postSerives.getLikes().subscribe(likes => {
-      console.log(likes)
       this.AllLikes=likes
       this.likesPostedby=document.getElementById("likepostedby")
-      console.log( this.likesPostedby)
       this.postSerives.getlikesPostedby(this.likesPostedby)
       this.islike=true
   })
@@ -237,12 +222,9 @@ searcheng2(){
 
 editbutton(post) {
 
-  console.log(post._id)
   this.IDpost=post._id
   this.postTitle=post.title
-  console.log(this.postTitle)
   this.postContent=post.content
-  console.log(this.postContent)
   
 }
 
@@ -254,9 +236,7 @@ editbutton(post) {
     this.postSerives.edit(this.newPost,this.IDpost)
 
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(allpostcharity => {
-      console.log(allpostcharity)
       this.charityposts = allpostcharity
 
       this.editclass.title = "",
@@ -266,18 +246,14 @@ editbutton(post) {
     })
   }
   deletebutton(post){
-    console.log(post._id)
     this.IDpostdelete=post._id
   }
   delete() {
 
     // this.IDpost = document.getElementById('postID').innerHTML
     this.postSerives.delete(this.IDpostdelete)
-    console.log(this.IDpostdelete);
     this.postSerives.getcharityid(this.code)
-    console.log(this.code)
     this.postSerives.charityposts().subscribe(posts => {
-      console.log(posts)
       this.charityposts = posts
     })
   }
@@ -334,19 +310,16 @@ return true
 
 
 sendcomment(comment,post) {
-  console.log(comment)
-  console.log(post)
+  
   this.commentclass.postedby = this.code
   this.IDpost = post._id
   this.commentclass.post = this.IDpost
-  console.log(this.commentclass);
 
   this.postSerives.comment(this.commentclass)
 
   this.IDpost = post._id
   this.postSerives.displaycomment(this.IDpost)
   this.postSerives.allcomment().subscribe(allcomment => {
-    console.log(allcomment)
     this.commentpost = allcomment
     
   })
@@ -371,18 +344,15 @@ commentt(p,c) {
 
   onfileselected(event) {
     this.fileselected = event.target.files[0].name;
-    console.log( this.fileselected );
     this.coverimmg= require("../../../server/upload/"+this.fileselected)
 
   }
   
   govolunteer(volunteer){
-    console.log(volunteer);
     this.router.navigate(['home/volunteer/'+volunteer._id+'/volunteer/account']);
     
   }
   gocharity(charity){
-    console.log(charity);
     this.router.navigate(['home/charity/'+charity._id+'/charity/account']);
   }
   // coverimg(){
@@ -411,15 +381,12 @@ commentt(p,c) {
 
    editFname(change){
     this.code
-    console.log(change)
     this.postSerives.changefname(this.code,change)
-    console.log(this.code,change)
  
     this.EditFName =false
     this.NameF =true
  
     this.postSerives.changedvolunteer().subscribe(data=>{
-     console.log(data);
       
     //  data=this.volunteerdetailchanged
     //   console.log(this.volunteerdetailchanged);
@@ -435,15 +402,12 @@ commentt(p,c) {
 
    editLname(change){
     this.code
-    console.log(change)
     this.postSerives.changeLname(this.code,change)
-    console.log(this.code,change)
  
     this.editlname =false
     this.lastname =true
  
     this.postSerives.changedvolunteer().subscribe(data=>{
-     console.log(data);
       
     
     })
@@ -457,15 +421,12 @@ commentt(p,c) {
 
    newphone(change){
     this.code
-    console.log(change)
     this.postSerives.changePhoneVOL(this.code,change)
-    console.log(this.code,change)
  
     this.phoneEdit =false
     this.phone =true
  
     this.postSerives.changedvolunteer().subscribe(data=>{
-     console.log(data);
       
     
     })
@@ -478,15 +439,12 @@ commentt(p,c) {
   
   Editcountry(change){
     this.code
-    console.log(change)
     this.postSerives.changecountryVOL(this.code,change)
-    console.log(this.code,change)
  
     this.countryedit =false
     this.Country =true
  
     this.postSerives.changedvolunteer().subscribe(data=>{
-     console.log(data);
       
     
     })
