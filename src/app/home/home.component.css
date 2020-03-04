@@ -316,3 +316,12 @@ nav .form-control {
     height: 70%;
     margin-top: 10%;
   }
+
+  .hidden
+{
+  visibility: hidden;
+}
+.like a:active 
+{
+color:#3B6D8C ;
+}

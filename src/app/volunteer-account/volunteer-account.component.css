@@ -577,3 +577,13 @@ color: black;
 	outline: 1px dotted white;
 	outline: -webkit-focus-ring-color auto 5px;
 }
+
+
+.hidden
+{
+  visibility: hidden;
+}
+.like a:active 
+{
+color:#3B6D8C ;
+}

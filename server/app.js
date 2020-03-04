@@ -189,11 +189,9 @@ io.on("connection", (socket) => {
                 io.emit("allPost", allpost)
                 console.log(allpost)
               }
-            })
+            });
 
           }
-
-
         })
       }
       if (err) {

@@ -155,10 +155,10 @@
                 <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                   <div class="form-group">
                     <input type="text" class="form-control postForm" name="title" #title="ngModel" required
-                      [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
+                      [(ngModel)]="newPost.title" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="Title of Post" name="title">
                     <br>
                     <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                      [(ngModel)]="newPost.content" placeholder="what are in your mind " name="content"></textarea>
+                      [(ngModel)]="newPost.content" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="what are in your mind " name="content"></textarea>
                   </div>
                   <div class="row modal-footer">
                     <input type="submit" class="btn maincolor img-vedio-btn text-light" [disabled]="post.form.invalid"
@@ -174,138 +174,103 @@
         </div>
       </div>
 
-
-
-      <div id="secondpost" class="row shadow mb-4" *ngFor='let post of Allpost'>
-        <div class="col-md-11    mr-5 mt-2  pb-0">
-          <div class="row">
-            <img [src]="profileimageee" class="cricle-img " height="40px">
-
-
-            <!-- <div class="mt-2 ml-2" *ngIf="postedBycharity(post.postedby,postedByCharity._id)">
-
-              <h6>{{postedByCharity.name}}</h6>
-            </div> -->
-
-            <!-- <div class="mt-2 ml-2" id="posttedby"  *ngIf="postedByvolunteer(post.postedby,postedByVolunteer._id)">
-
-              <h6>{{postedByVolunteer.fname}} {{postedByVolunteer.lname}}</h6>
-            </div>
-            -->
-          </div>
-
-        </div>
-
-        <div class=" col-12 ml-3 mr-3 pt-3 mt-0">
-          <h6>{{post.title}}</h6>
-
-          <p>{{post.content}} </p>
-          <hr>
-        </div>
-
-        <div class="row ml-2  postfooter">
-          <div class="mr-3 ml-3">
-
-            <p><i class="fas fa-heart mr-1"></i>like</p>
-          </div>
+      <div id="secondpost" class="row shadow " *ngFor="let post of Allpost">
+        <div class="col-md-11 mr-5 mt-2  pb-0">
           <div>
-            <p><i class="fas fa-comment mr-1 ml-3"></i>comment</p>
+            <img src="../../assets/download.jpg" class="cricle-img " height="40px">
+            
+                <!-- {{commentByCharity._id}} --> 
+
+                <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+
+                  <h6>{{commentByCharity.name}}</h6>
+                </div> 
+
+                <div class="mt-2 ml-2" id="posttedby"
+                  *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
+
+                  <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                </div> -->
+
           </div>
-        </div>
 
+        </div>
         <hr>
+        <div class="col-12 ml-3 mr-3 pt-0 mt-0">
+          <p>
+            {{post.title}}
+          </p>
+          <p>
+            {{post.content}}
+          </p>
+        
+          <!-- <div class="row ml-2  postfooter pt-1"> -->
+            <div class="reactions postfooter row pt-5 ml-2">
+          
+              <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+                border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
+                {{postlikes}}</div>
+              <a class="mr-3">
+                <i class="fas fa-heart " id="like" (click)="like(post)" ></i>
+                Like</a>
+              <a id="comment">
+                <i class="far fa-comment" (click)="Comment(post)"></i>
+                Comment</a>
+            </div>
+            
 
-      </div>
-
-      <div class="row mt-3  mb-4 pb-4 shadow">
-        <div class="col-12">
-          <h5 class="mt-3 ml-4">Top profiles</h5>
-        </div>
+          <!-- </div> -->
 
 
-        <div class="col-md-4 col-sm-9">
-          <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
-            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-              style="width:50%;margin: auto;">
-            <div class="card-body">
-              <h4 class="card-title">Joh Doe</h4>
-              <p class="card-text">Some example text some example text.</p>
-              <div style="text-align: center;">
-                <input type="button" class="btn maincolor" value="Follow">
+          <div>
+
+            <form #comment="ngForm" novalidate class="pr-0 pt-4">
+
+              <div class="row form-group" >
+                <img class="float-left ml-3" class="cricle-img"
+                  src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                <input type="text" class="form-control ml-2 pr-0  "
+                  style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" [(ngModel)]="commentclass.text"
+                  #text required placeholder="your comment" name="text">
+                <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
+                <button [disabled]="comment.form.invalid" (click)="sendcomment(comment,post)" class="hidden"></button>
               </div>
 
+            </form>
+            <div *ngFor="let comment of commentpost">
 
+              <div *ngIf="commentt(comment.post,post._id)">
+                <div class="row pl-1" *ngIf="commentByCharity">
+                  
+
+                  <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+
+                    <h6 style="color: #3B6D8C;">{{commentByCharity.name}}</h6>
+                  </div> 
+
+                  <div class="mt-2 ml-2" 
+                    *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
+
+                    <h6 style="color: #3B6D8C;">{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                  </div> -->
+
+                  <p class="mt-2 ml-2">
+                    {{comment.text}}
+                  </p>
+                </div>
+              </div>
             </div>
+
+           
+
+
           </div>
 
-        </div>
-
-        <div class="col-md-4 col-sm-9">
-          <div class="card mt-4 mb-3 " style="width:100%; text-align: center;">
-            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-              style="width:50%;margin: auto;">
-            <div class="card-body">
-              <h4 class="card-title">Joh Doe</h4>
-              <p class="card-text">Some example text some example text.</p>
-              <a href="#" class="btn maincolor">follow</a>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-md-4 col-sm-9">
-          <div class="card mt-4 mb-3" style="width:100%; text-align: center;">
-            <img class="cricle-img mt-3" src="../../assets/download.jpg" alt="Card image"
-              style="width:50%;margin: auto;">
-            <div class="card-body">
-              <h4 class="card-title">Joh Doe</h4>
-              <p class="card-text">Some example text some example text.</p>
-              <a class="btn maincolor">follow</a>
-            </div>
-          </div>
-
-        </div>
-
-
-
-
-
-      </div>
-
-
-
-      <div id="secondpost" class="row shadow  mb-4">
-        <div class="row ml-2 mr-5">
-          <span>
-            <img [src]="profileimageee" class="cricle-img " height="40px">
-            hope
-
-          </span>
-        </div>
-        <hr>
-        <div class="row ml-3 mr-3 ">
-          <h5 class="mt-3 mb-2">post title</h5>
-          <br>
-          <img src="../../assets/download.jpg" class="w-100">
-          <br>
-          <p>Jung Ho-seok (Korean: 정호석; born February 18, 1994), better known by his stage name J-Hope
-            (stylized as j-hope), is a South Korean rapper, songwriter, dancer, and record producer. In
-            2013, J-Hope made his debut as a member of the South Korean boy band BTS, managed under Big Hit
-            Entertainment.
-          </p>
-          <div class="row ml-2 postfooter">
-            <div class="mr-3">
-              <p><i class="fas fa-heart mr-1"></i>like</p>
-            </div>
-
-            <div>
-              <p><i class="fas fa-comment mr-1"></i>comment</p>
-            </div>
-
-          </div>
         </div>
         <hr>
 
       </div>
+
     </div>
 
     <div class="col-md-3 pl-2 pr-4">
@@ -331,9 +296,9 @@
 
 
           <!-- attr.id="{{charity._id}}" -->
-          <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
+          <!-- <span class="pr-1" attr.id="{{charity.email}}" style="display: none;">
             <i class="far fa-check-circle" style="color: #3B6D8C;"></i>
-          </span>
+          </span> -->
         </div>
       </div>
 

@@ -23,11 +23,12 @@ export class HomeComponent implements OnInit {
   commentByCharity;
   commentByVolunteer;
   commentpost;
- 
+  likeNo:false
   IDpost: string;
-  AllLikes: unknown;
+  AllLikes;
   public likeclass = new Like([], '');
   public commentclass = new Comment("", [], "");
+  postlikes: any;
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -106,10 +107,10 @@ export class HomeComponent implements OnInit {
   }
 refresh(){
 
-  this.postSerives.getpost().subscribe(data=>{
-    console.log(data)
-    this.Allpost=data
-  });
+  // this.postSerives.getpost().subscribe(data=>{
+  //   console.log(data)
+  //   this.Allpost=data
+  // });
 
   
   this.route.paramMap.subscribe((params: ParamMap) => {
@@ -176,7 +177,7 @@ onSubmit(){
   }
 
 
-  async Comment(post) {
+ Comment(post) {
    
     this.IDpost = post._id
   this.postSerives.displaycomment(this.IDpost)
@@ -195,7 +196,7 @@ onSubmit(){
        this.postSerives.volunteer().subscribe(volunteer => {
        this.commentByVolunteer = volunteer
         // console.log(this.commentByVolunteer)
-        console.log(this.commentByVolunteer.name);
+        // console.log(this.commentByVolunteer.name);
         
       })
     
@@ -227,6 +228,13 @@ return true
 }
 }
 
+commentt(p,c) {
+  // console.log(p);
+  // console.log(c);
+  if (p== c) {
+    return true
+  }
+}
 
 
 sendcomment(comment,post) {
@@ -254,17 +262,43 @@ sendcomment(comment,post) {
 }
 
 like(post) {
-  document.getElementById("like").style.color = "#3B6D8C";
+  // this.likeNo=true
   this.likeclass.postedby = this.code
   this.IDpost = post._id
   this.likeclass.post = this.IDpost
   console.log(this.likeclass);
-  this.postSerives.like(this.likeclass)
 
   this.postSerives.postlikes(this.IDpost)
   this.postSerives.getLikes().subscribe(likes => {
     console.log(likes)
     this.AllLikes = likes
+
+    for(let like of this.AllLikes){
+      // console.log(like);
+      
+      if(like.post === this.IDpost && like.postedby === this.code){
+        this.postSerives.removelike(this.likeclass)
+        this.postSerives.postlikeslast().subscribe(likes=>{
+          console.log(likes +"qqqqqqq");
+          
+        })
+      }
+    }
   })
+  this.postSerives.like(this.likeclass)
+
+  // this.postSerives.getThisLike().subscribe(like=>{
+  //   console.log(like);
+
+  // })
+// post like
+  this.postSerives.postlikes(this.likeclass.post)
+  this.postSerives.getLikes().subscribe(likes => {
+    console.log(likes)
+    this.AllLikes = likes
+   console.log( this.postlikes);
+   this.postlikes=this.AllLikes.length
+  });
 }
+
 }

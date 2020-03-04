@@ -325,7 +325,7 @@
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
                 <div class="mb-5 mt-3 p-3 create_post">
-                  <img class="ml-2" [src]="profileimageee" />
+                  <img class="ml-2" [src]="profileimageee" style="border-radius: 50%; height: 15%;width: 10%;"/>
                   <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
                     class="btn_post text-light ">
                   <div class="modal fade" id="post" role="dialog">
@@ -372,18 +372,19 @@
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                         <button name="edit" data-toggle="modal" data-target="#editpost" (click)="editbutton(post)"
-                          class="text-dark "><a>Edit
+                          class="text-dark " style="text-align: center;width: 80%;"><a>Edit
                             post</a></button>
                         <button name="edit" data-toggle="modal" data-target="#deletepost" (click)="deletebutton(post)"
-                          class=" text-dark "><a>Delete post</a></button>
+                          class=" text-dark " style="text-align: center;width: 80%;"><a>Delete post</a></button>
 
                       </div>
                     </div>
                     <!-- <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
                     [attr.aria-controls]="'collapse-' + i"> -->
                     <div>
-                      <img class="float-left mr-2" [src]="profileimageee" />
-                      <h5>{{charitydetaile.name}}</h5>
+                      <img class="float-left mr-2" [src]="profileimageee" style="border-radius: 50%; height: 15%;width: 10%;" />
+                      <h5 
+                      > {{charitydetaile.name}}</h5>
 
 
                       <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
@@ -411,8 +412,8 @@
                       <form #comment="ngForm" novalidate class="pr-0">
 
                         <div class="row form-group">
-                          <img class="float-left ml-3"
-                          [src]="profileimageee" />
+                          <img class="float-left ml-3 mt-2"
+                          [src]="profileimageee" style="border-radius: 50%; height: 25%;width: 10%;"/>
                           <input type="text" class="form-control ml-2 pr-0  "
                             style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" required
                             [(ngModel)]="commentclass.text" #text placeholder="your comment" name="text">
@@ -426,20 +427,20 @@
 
                         <div *ngIf="commentt(comment.post,post._id)">
                           <div class="row pl-1" *ngIf="commentByCharity">
-                            <!-- {{commentByCharity._id}} -->
+                            <!-- {{commentByCharity._id}} --> 
 
                             <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
 
-                              <h6>{{commentByCharity.name}}</h6>
+                              <h6 style="color: #3B6D8C;">{{commentByCharity.name}}</h6>
                             </div> 
 
                             <div class="mt-2 ml-2" id="posttedby"
                               *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
 
-                              <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                              <h6 style="color: #3B6D8C;">{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
                             </div> -->
 
-                            <p>
+                            <p class="ml-2">
                               {{comment.text}}
                             </p>
                           </div>
@@ -479,11 +480,14 @@
                           <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                             <div class="form-group">
                               <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                                value="{{postTitle}}" id="Title" [(ngModel)]="newPost.title" placeholder="Title of Post"
+                                value="{{postTitle}}" id="Title" style="
+                                  box-shadow: 0 10px 40px 0 #B0C1D9;"
+                               [(ngModel)]="newPost.title" placeholder="Title of Post"
                                 name="title">
                               <br>
                               <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                                [(ngModel)]="newPost.content" value="{{postContent}}" name="content"></textarea>
+                                [(ngModel)]="newPost.content" value="{{postContent}}"style="
+                                box-shadow: 0 10px 40px 0 #B0C1D9;" name="content"></textarea>
                             </div>
                             <div class="row modal-footer">
                               <input type="submit" (click)="edit()" class="btn maincolor img-vedio-btn text-light"
@@ -550,9 +554,9 @@
                     </form>
                   </div>
 
-
+<!-- 
                   <div class="details" *ngIf="about">
-                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="About()"></i>
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="About(charitydetaile)"></i>
                     <h6 style="color: #3B6D8C;"> About</h6>
                     <p></p>
                   </div>
@@ -568,7 +572,7 @@
                       <button type="submit" (click)="editabout(about.value)"
                         class="float-right maincolor mt-2 mr-1 ">Edit</button>
                     </form>
-                  </div>
+                  </div> -->
 
                   <div class="details" *ngIf="address">
                     <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editaddress()"></i>

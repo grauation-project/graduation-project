@@ -11,6 +11,7 @@ import { VolunteersignupService } from '../services/volunteersignup.service';
 import { Follow } from '../class/follow';
 import * as $ from 'jquery'
 import { AdminService } from '../services/admin.service';
+import { Charity } from '../class/charity';
 declare var require: any;
 
 @Component({
@@ -20,11 +21,15 @@ declare var require: any;
 })
 export class CharityhomeComponent implements OnInit {
   createpost;
+  postlikes;
+  likeNo;
   public email;
   charities: unknown;
   postPostedBy: any;
   profileimageee="";
   profileimag=""
+  commentByVolunteer;
+  commentByCharity;
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -54,7 +59,7 @@ export class CharityhomeComponent implements OnInit {
   public likeclass = new Like([], '')
   public commentclass = new Comment("", [], "");
   public followClass = new Follow("", "")
-
+public charityclass =new Charity('','','','','','','','',[],[])
   searchText;
   listvolunteersearch;
   listcharitysearch;
@@ -107,24 +112,25 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
     );
 
     // posts & posted by
-    this.postSerives.getpost().subscribe(data => {
-      console.log(data)
-      this.Allpost = data
+    this.postSerives.getpost().subscribe(data=>{
+      // console.log(data)
+      this.Allpost=data
+    
       for (let post of this.Allpost) {
-        console.log(post.postedby)
+        // console.log(post.postedby)
         this.postPostedBy = post.postedby
 
         this.postSerives.findUser(this.postPostedBy)
-        console.log(this.postPostedBy)
+        // console.log(this.postPostedBy)
 
         this.postSerives.volunteer().subscribe(volunteer => {
           this.postedByVolunteer = volunteer
-          console.log(this.postedByVolunteer)
+          // console.log(this.postedByVolunteer)
         })
       
         this.postSerives.charity().subscribe(charity => {
           this.postedByCharity = charity
-          console.log(this.postedByCharity)
+          // console.log(this.postedByCharity)
         })
         
 
@@ -135,7 +141,7 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
     this.postSerives.getallcharity();
 
     this.postSerives.charities().subscribe(charities => {
-      console.log(charities)
+      // console.log(charities)
       this.charities = charities
 
 
@@ -154,10 +160,10 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
   this._AdminService.getcharities().subscribe(
     data  => {
       this.charitydetails = data;
-       console.log(data)
+      //  console.log(data)
 
       
-      console.log(this.charitydetails);
+      // console.log(this.charitydetails);
 
     },
 
@@ -209,99 +215,190 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
   }
 
-  comment() {
-    this.iscomment = true;
+  Comment(post) {
+   
+    this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+   this.postSerives.allcomment().subscribe(allcomment => {
+    // console.log(allcomment)
+    this.commentpost = allcomment
 
+  for(let comment of this.commentpost){
+      // console.log(comment.postedby)
+      this.commentPostedBy = comment.postedby
+
+
+   this.postSerives.findUser(this.commentPostedBy)
+      // console.log(this.commentPostedBy)
+
+       this.postSerives.volunteer().subscribe(volunteer => {
+       this.commentByVolunteer = volunteer
+        // console.log(this.commentByVolunteer)
+        // console.log(this.commentByVolunteer.name);
+        
+      })
+    
+      this.postSerives.charity().subscribe(charity => {
+        this.commentByCharity = charity
+        // console.log(this.commentByCharity)
+        // console.log(this.commentByCharity.name);
+        
+      })
+
+
+    }
+    
+  })
+}
+  commentPostedBy(commentPostedBy: any) {
+    throw new Error("Method not implemented.");
   }
-
-  sendcomment() {
-    console.log('comment')
-    this.commentclass.postedby = this.code
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.commentclass.post = this.IDpost
-    console.log(this.commentclass);
-
-    this.postSerives.comment(this.commentclass)
-
-    this.IDpost = document.getElementById('postID').innerHTML
-    this.postSerives.displaycomment(this.IDpost)
-    this.postSerives.allcomment().subscribe(allcomment => {
-      console.log(allcomment)
-      this.commentpost = allcomment
-    })
+ async commentByC(comment,commentByC){
+  if(comment === commentByC){
+   return true
   }
-  like() {
-    document.getElementById("like").style.color = "#3B6D8C";
+}
+
+
+commentByV(comment,commentByV){
+if(comment === commentByV){
+
+return true
+}
+}
+
+
+
+sendcomment(comment,post) {
+  console.log(comment)
+  console.log(post)
+  this.commentclass.postedby = this.code
+  this.IDpost = post._id
+  this.commentclass.post = this.IDpost
+  console.log(this.commentclass);
+
+  this.postSerives.comment(this.commentclass)
+
+  this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+  this.postSerives.allcomment().subscribe(allcomment => {
+    console.log(allcomment)
+    this.commentpost = allcomment
+    
+  })
+
+
+  this.commentclass.text =''
+ 
+
+}
+
+
+
+
+
+commentt(p,c) {
+  // console.log(p);
+  // console.log(c);
+  if (p== c) {
+    return true
+  }
+}
+
+
+  like(post) {
+    
+    // document.getElementById("like").style.color = "#3B6D8C";
+    this.likeNo=true
     this.likeclass.postedby = this.code
-    this.IDpost = document.getElementById('postID').innerHTML
+    this.IDpost = post._id
     this.likeclass.post = this.IDpost
     console.log(this.likeclass);
 
-    this.postSerives.like(this.likeclass)
-  }
-
-  showlike() {
-    this.IDpost = document.getElementById('postID').innerHTML
     this.postSerives.postlikes(this.IDpost)
     this.postSerives.getLikes().subscribe(likes => {
       console.log(likes)
       this.AllLikes = likes
-      this.AllLikes.postedby = this.likesPostedby
-      this.postSerives.getlikesPostedby(this.likesPostedby)
-      this.islike = true
+
+      for(let like of this.AllLikes){
+        // console.log(like);
+        
+        if(like.post === this.IDpost && like.postedby === this.code){
+          this.postSerives.removelike(this.likeclass)
+          this.postSerives.postlikeslast().subscribe(likes=>{
+            console.log(likes +"qqqqqqq");
+            
+          })
+        }
+      }
     })
+    this.postSerives.like(this.likeclass)
+
+    // this.postSerives.getThisLike().subscribe(like=>{
+    //   console.log(like);
+ 
+    // })
+// post like
+    this.postSerives.postlikes(this.likeclass.post)
+    this.postSerives.getLikes().subscribe(likes => {
+      console.log(likes)
+      this.AllLikes = likes
+     console.log( this.postlikes);
+     this.postlikes=this.AllLikes.length
+    });
+
+
   }
+
 
   // follow
   
   follow(charity) {
+console.log(charity);
 
     document.getElementById(charity._id).style.display = "none";
-    document.getElementById(charity.email).style.display = "block";
+    // document.getElementById(charity.email).style.display = "block";
 
     if(this.code === charity._id){
       alert("you can't follow yourself")
     }
-    // console.log(this.charitydetaile.following.length);
-    
-    // if(this.charitydetaile.following.length==0){
-    //   this.postSerives.follow(this.followClass)
-    
-    // }
+    console.log(this.charityclass.following.length);
     
     
-    // document.getElementById(charity._id).style.display = "none";
-    // document.getElementById(charity.email).style.display = "block";
-
-    //     this.isfollow=false
-    //     console.log("hhhhhhhhh")
-  //  if(this.charitydetaile.following.length>0){
-
-  //   this.followClass.follower = this.code
-  //   this.followClass.following = charity._id
-  //   console.log(this.followClass)
-  //  console.log(this.charitydetaile.following);
+    if(this.charityclass.following.length === 0){
+      this.followClass.follower = this.code
+    this.followClass.following = charity._id
+      this.postSerives.follow(this.followClass)
+    console.log("zero");
+    
+    }
+    
+  //  if(this.charityclass.following.length !== 0){
+else{
+    this.followClass.follower = this.code
+    this.followClass.following = charity._id
+    console.log(this.followClass)
+   console.log(this.charityclass.following);
 
   
    
-    // for(let onefollowing of this.charitydetaile.following){
-    //   console.log(onefollowing);
-    //   if(onefollowing !== this.followClass.following){
-    //     this.postSerives.follow(this.followClass)
+    for(let onefollowing of this.charityclass.following){
+      console.log(onefollowing);
+      if(onefollowing !== this.followClass.following){
+        this.postSerives.follow(this.followClass)
        
-    //   }
-    //   else if(onefollowing == this.followClass.following){
-    //     alert("you are already follow this charity")
-    //   }
-    //   else{
-    //     this.postSerives.follow(this.followClass)
-    //   }
+      }
+      else if(onefollowing == this.followClass.following){
+        alert("you are already follow this charity")
+      }
+      // else{
+      //   this.postSerives.follow(this.followClass)
+      // }
       
-    // }
+    }
     
 
-    this.postSerives.follow(this.followClass)
-    
+  
     
 
    }
@@ -312,7 +409,7 @@ charitydetails:any= new Signup("", "", "", "", "", "", "", "");
 
 
 
-  // }
+  }
 
   Folllowing(charityFollowing) {
     console.log("ooooooooooooooo");

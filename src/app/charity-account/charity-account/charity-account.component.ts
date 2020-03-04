@@ -687,25 +687,25 @@ if(comment === commentByV){
   };
 
 
-  About(){
-    this.about=false
-    this.aboutEdit=true
-      }
+  // About(){
+  //   this.about=false
+  //   this.aboutEdit=true
+  //     }
 
-      editabout(change){
+  //     editabout(change){
 
-        this.postSerives.changeabout(this.code,change)
-        console.log(this.code,change)
+  //       this.postSerives.changeabout(this.code,change)
+  //       console.log(this.code,change)
      
-        this.aboutEdit=false
-        this.about=true
+  //       this.aboutEdit=false
+  //       this.about=true
         
-        this.postSerives.changed().subscribe(data=>{
-         console.log(data);
-        }) 
+  //       this.postSerives.changed().subscribe(data=>{
+  //        console.log(data);
+  //       }) 
     
 
-      }
+  //     }
 
 
 
