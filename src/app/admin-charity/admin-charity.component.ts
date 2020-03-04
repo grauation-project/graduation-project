@@ -20,18 +20,15 @@ export class AdminCharityComponent implements OnInit {
     this._AdminService.getcharities().subscribe(
       data  => {
         this.charitydetails = data;
-        console.log(this.charitydetails);
 
       },
 
       error => {
-        console.log("error", error);
 
       }
     );
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
     });
   
   }
@@ -40,31 +37,27 @@ export class AdminCharityComponent implements OnInit {
 this._AdminService.deletecharity(charitydetails._id).subscribe(
 
 
-  response => {console.log("Success!", response)
+  response => {
 
 
   this._AdminService.getcharities().subscribe(
     data  => {
       this.charitydetails = data;
-      console.log(this.charitydetails);
 
     },
 
     error => {
-      console.log("error", error);
 
     }
   );
   this.route.paramMap.subscribe((params: ParamMap) => {
     this.code = params.get("_id");
-    console.log(typeof params.get("_id"));
   });
 
 
 
 
 },  error => {
-  console.log("error!", error)
 
 } 
 

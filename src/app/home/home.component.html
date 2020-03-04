@@ -135,7 +135,7 @@
 
       <div class="row shadow writepost">
 
-        <img [src]="profileimagee" class="profileimg mt-4">
+        <img [src]="profileimagee" class="mt-4 ml-3" style="border-radius: 50%;width: 10%;height: 40%;">
         <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
           class="btn maincolor mt-4 mr-2 pr-2 text-light postbtn">
       </div>
@@ -154,10 +154,10 @@
             <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                  [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
+                  [(ngModel)]="newPost.title" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="Title of Post" name="title">
                 <br>
                 <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                  [(ngModel)]="newPost.content" placeholder="what are in your mind " name="content"></textarea>
+                  [(ngModel)]="newPost.content" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="what are in your mind " name="content"></textarea>
               </div>
               <div class="row modal-footer">
                 <input type="submit" class="btn maincolor img-vedio-btn text-light" [disabled]="post.form.invalid"
@@ -171,11 +171,23 @@
       </div>
     </div>
 
-      <div id="secondpost" class="row shadow" *ngFor="let post of Allpost">
+      <div id="secondpost" class="row shadow " *ngFor="let post of Allpost">
         <div class="col-md-11 mr-5 mt-2  pb-0">
           <div>
             <img src="../../assets/download.jpg" class="cricle-img " height="40px">
-            hope
+            
+                <!-- {{commentByCharity._id}} -->  
+
+                 <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+
+                  <h6>{{commentByCharity.name}}</h6>
+                </div> 
+
+                <div class="mt-2 ml-2" id="posttedby"
+                  *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
+
+                  <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                </div> -->
 
           </div>
 
@@ -188,31 +200,36 @@
           <p>
             {{post.content}}
           </p>
-          <div class="row ml-2 postfooter">
-            <div class="mr-3 ml-3">
-              <p id="like">
-                <i class="fas fa-heart mr-1"  (click)="like(post)"></i>
-                like</p>
+         
+          <!-- <div class="row ml-2  postfooter pt-1"> -->
+            <div class="reactions postfooter row mt-4 pt-3">
+              <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+                border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
+                {{postlikes}}</div>
+              <a class="mr-3">
+                <i class="fas fa-heart " id="like" (click)="like(post)" ></i>
+                Like</a>
+              <a id="comment">
+                <i class="far fa-comment" (click)="Comment(post)"></i>
+                Comment</a>
             </div>
-            <div>
-              <p><i class="fas fa-comment mr-1 ml-3"></i>comment</p>
-            </div>
+            
 
-          </div>
+          <!-- </div> -->
 
 
           <div>
 
-            <form #comment="ngForm" class="pr-0">
+            <form #comment="ngForm" novalidate class="pr-0 pt-1">
 
-              <div class="row form-group">
+              <div class="row form-group" >
                 <img class="float-left ml-3" class="cricle-img"
                   src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
                 <input type="text" class="form-control ml-2 pr-0  "
                   style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" [(ngModel)]="commentclass.text"
-                  #text placeholder="your comment" name="text">
+                  #text required placeholder="your comment" name="text">
                 <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
-                <button (click)="sendcomment(comment,post)" class="hidden"></button>
+                <button [disabled]="comment.form.invalid" (click)="sendcomment(comment,post)" class="hidden"></button>
               </div>
 
             </form>
@@ -222,18 +239,18 @@
                 <div class="row pl-1" *ngIf="commentByCharity">
                   
 
-                  <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+                  <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
 
-                    <h6>{{commentByCharity.name}}</h6>
+                    <h6 style="color: #3B6D8C;">  {{commentByCharity.name}}</h6>
                   </div> 
 
                   <div class="mt-2 ml-2" 
                     *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
 
-                    <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
-                  </div>
+                    <h6 style="color: #3B6D8C;">{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                  </div> -->
 
-                  <p>
+                  <p class="mt-2 ml-2">
                     {{comment.text}}
                   </p>
                 </div>
@@ -309,7 +326,7 @@
         
    
    
-    <div class="col-md-3 pl-2 pr-4">
+    <!-- <div class="col-md-3 pl-2 pr-4">
 
         <div class="suggestions-list bg-white mt-4">
             <h5 class="pl-3">Suggestions</h5>
@@ -347,7 +364,7 @@
 
 
   </div>
-</div>
+</div> -->
 
 </div> 
 

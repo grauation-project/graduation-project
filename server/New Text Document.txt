@@ -87,7 +87,8 @@ public charityclass =new Charity('','','','','','','','',[],[])
   searcheng2(){
     this.displaydiv=false;
   }
-charitydetails:Signup[]= [];
+charitydetails:any= new Signup("", "", "", "", "", "", "", "");
+
   ngOnInit() {
     $("#addfolloing").on('click',function(){
       $(this).closest("#charitysuggest").remove();
@@ -155,7 +156,7 @@ charitydetails:Signup[]= [];
 
   this._AdminService.getcharities().subscribe(
     data  => {
-      this.charitydetails = data as Signup[];
+      this.charitydetails = data;
 
       
     

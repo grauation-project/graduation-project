@@ -24,11 +24,9 @@ route.post("/material", parseUrlencoded, (req, res) => {
 
     donateMaterial.save((error, data) => {
         if (error) {
-            console.log(error)
         }
         else {
             res.json()
-            console.log(data)
         }
 
     })

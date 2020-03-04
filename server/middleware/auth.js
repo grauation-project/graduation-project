@@ -25,7 +25,6 @@ function auth(req, resp, next) {
 
           var decoded = jwt.verify(token, config.get('jwtprivatekey'));
           req.volunteer = decoded;
-          //verfied if user deleted or not
           var freshuser = volunteer.findById(decoded._id);
           if (!freshuser) {
             resp.status(401).send("token is no longer exsist.")
@@ -39,7 +38,6 @@ function auth(req, resp, next) {
 
         var decoded = jwt.verify(token, config.get('jwtprivatekey'));
         req.admin = decoded;
-        //verfied if user deleted or not
         var freshuser = admin.findById(decoded._id);
         if (!freshuser) {
           resp.status(401).send("token is no longer exsist.")
@@ -56,7 +54,6 @@ function auth(req, resp, next) {
 
       var decoded = jwt.verify(token, config.get('jwtprivatekey'));
       req.charity = decoded;
-      //verfied if user deleted or not
       var freshuser = charity.findById(decoded._id);
       if (!freshuser) {
         resp.status(401).send("token is no longer exsist.")

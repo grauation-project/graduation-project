@@ -53,7 +53,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
           _id: charitiy._id
         }, config.get('jwtprivatekey'))
         res.cookie('jwt', token, {
-          // secure: true,
           httpOnly: true
         })
         res.header("x_auth_token_charity", token).status(200).json({
@@ -77,7 +76,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
             _id: admins._id
           }, config.get('jwtprivatekey'))
           res.cookie('jwt', token, {
-            // secure: true,
             httpOnly: true
           })
           res.header("x_auth_token_admin", token).status(200).json({
@@ -104,7 +102,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
         _id: volunteers._id
       }, config.get('jwtprivatekey'))
       res.cookie('jwt', token, {
-        // secure: true,
         httpOnly: true
       })
       res.header("x_auth_token_volunteer", token).status(200).json({
@@ -269,7 +266,6 @@ router.post("/reset/password",parseUrlencoded,async(req,res)=>{
 
   charity.update({email:req.body.email},{password:req.body.password},function(err,data){
     if(err){
-        console.log(err)
     }
     res.send(data)
 })
@@ -284,7 +280,6 @@ router.post("/reset/password",parseUrlencoded,async(req,res)=>{
       
         admin.update({email:req.body.email},{password:req.body.password},function(err,data){
           if(err){
-              console.log(err)
           }
           res.send(data)
       })
@@ -299,7 +294,6 @@ router.post("/reset/password",parseUrlencoded,async(req,res)=>{
   
     volunteer.update({email:req.body.email},{password:req.body.password},function(err,data){
       if(err){
-          console.log(err)
       }
       res.send(data)
   })

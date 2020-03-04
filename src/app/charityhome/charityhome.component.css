@@ -391,6 +391,14 @@ margin-right: 10%;}
 .searchsmall{
 color: black;
 }
+
+.hidden
+{
+  visibility: hidden;
+}
+.like a:active 
+{
+color:#3B6D8C ;}
 .sgt-text h4:hover{
   cursor: pointer;
 }

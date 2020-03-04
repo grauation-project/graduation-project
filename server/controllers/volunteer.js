@@ -27,7 +27,6 @@ const storage = multer.diskStorage({
   }
 });
 const fileFilter = (req, file, cb) => {
-  // reject a file
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
     cb(null, true);
   } else {
@@ -103,7 +102,6 @@ res.status(200).json("done")
 })
 router.get("/account/:id", auth, async (req, res) => {
 
-  console.log("hi hi")
   let volunterspec = await volunteer.findOne({
     _id: req.params.id
   });

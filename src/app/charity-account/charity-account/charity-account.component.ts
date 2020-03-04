@@ -99,8 +99,8 @@ public commentPostedBy;
   isupdate=false;
   need = new Needs ("","","");
   providess = new Provides("","","")
-  listneeds = new Listneed ("","","","")
-  listprovide =new Listprovide("","","","")
+  listneeds :Listneed[]=[]
+  listprovide :Listprovide[]=[]
   changeimage=new  Changeimg("")
   displaydiv = false;
   searcheng() {
@@ -702,7 +702,6 @@ if(post===comment){
   }
 
   unlike(post){
-    console.log(post._id);
     
     document.getElementById("like").style.color = "grey";
     
@@ -893,23 +892,7 @@ if(comment === commentByV){
   };
 
 
-  About(){
-    this.about=false
-    this.aboutEdit=true
-      }
-
-      editabout(change){
-
-        this.postSerives.changeabout(this.code,change)
-     
-        this.aboutEdit=false
-        this.about=true
-        
-        this.postSerives.changed().subscribe(data=>{
-        }) 
-    
-
-      }
+ 
 
 
 

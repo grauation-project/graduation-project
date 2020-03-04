@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var router = express.Router();
 var bcrypt = require("bcryptjs");
 var parseUrlencoded= bodyParser.urlencoded({extended:true});
+var mongoose = require("mongoose");
 
 const app = express();
 
@@ -21,7 +22,6 @@ router.post("/update/:id",(req,res)=>{
     {new :true},
     function(err,updatepost){
 if(err){
-  console.log(err)
 }
 else{
   res.json(updatepost)
@@ -33,7 +33,6 @@ else{
 router.delete("/delete/:id",(req,res)=>{
   postModel.findByIdAndRemove(req.params.id,(err,deletepost)=>{
     if(err){
-      console.log(err)
     }
     else{
       res.json(deletepost)
@@ -43,8 +42,28 @@ router.delete("/delete/:id",(req,res)=>{
 })
 
 
+router.get("/posts/list",async(req,res)=>{
+
+  let result = await   postModel.find({});
+res.json(result)
 
 
+
+
+})
+
+router.delete("/posts/:id", function (req, resp) {
+
+  postModel.findOneAndRemove({
+      _id: req.params.id
+    },
+    function (err, data) {
+      if (!err) {
+      }
+    })
+
+  resp.json("post done")
+})
 
 
 module.exports = router;

@@ -1,1 +1,23 @@
-<p>postsadmin works!</p>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	 <div id="blog" class="row"> 
+                
+       
+          
+                 
+                 
+                  <div class="col-md-10 blogShort pb-5" *ngFor="let post of listpost">
+                     <h1> {{post.title}}</h1>
+                     <article><p>
+{{post.content}}                    
+                         </p></article>
+                     <a (click)="clickdelete(post)"class="btn btn-blog pull-right marginBottom10" >Delete</a> 
+                 </div>
+                 
+               <div class="col-md-12 gap10"></div>
+             </div>
+</div>

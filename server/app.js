@@ -133,7 +133,6 @@ io.on("connection", (socket) => {
   console.log("new user connected");
   postModel.find({}, (err, allpost) => {
     if (err) {
-      console.log(err)
     }
     else {
       io.emit("allPost", allpost)
@@ -191,11 +190,9 @@ io.on("connection", (socket) => {
                 io.emit("allPost", allpost)
                 console.log(allpost)
               }
-            })
+            });
 
           }
-
-
         })
       }
       if (err) {
@@ -368,16 +365,13 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   })
 
   socket.on("ALLlikes", (postid) => {
-    console.log(postid)
 
     likemodel.find({ post: postid }, (err, likes) => {
       if (!err) {
-        console.log(likes)
 
         io.emit("getAllLikes", likes)
       }
       else {
-        console.log(err)
       }
     })
   });
@@ -393,11 +387,9 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   socket.on("allCharity", () => {
     mongoose.model("charity").find({}, (err, data) => {
       if (!err) {
-        console.log(data)
         io.emit('getCharities', data)
       }
       else {
-        console.log(err)
       }
     });
 
@@ -408,11 +400,9 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   socket.on("findcharity", (id) => {
     mongoose.model("charity").findOne({ _id: id }, (err, charity) => {
       if (err) {
-        console.log(err);
 
       }
       else {
-        console.log(charity)
         io.emit("getcharitybyID", charity)
       }
     })
@@ -420,8 +410,7 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
 
   socket.on("follow", (data) => {
-    console.log(data)
-    console.log("asd asd")
+  
 
     mongoose.model("charity").findOne({ _id: data.follower }, (err, charity) => {
       //  for(let followingcharity of charity){
@@ -429,7 +418,6 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
       if (!err) {
         mongoose.model("charity").update({ _id: data.follower }, { $push: { following: data.following } }, (err, following) => {
           if (err) {
-            console.log(err);
 
           }
           else {
@@ -439,12 +427,10 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
                 console.log(Charity.follower)
                 if (Charity.follower == data.follower) {
-                  console.log("fffffffffffffffff")
                 }
                 else {
                   mongoose.model("charity").update({ _id: data.following }, { $push: { follower: data.follower.toString() } }, (err, data) => {
                     if (err) {
-                      console.log(err);
 
                     }
                     else {
@@ -469,17 +455,13 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
 
   socket.on("getfollowing", (data) => {
-    console.log("lllllllllllllllllllllll");
 
-    console.log(data);
 
     mongoose.model("charity").findOne({ _id: data }, (err, charity) => {
       if (err) {
-        console.log(err);
 
       }
       else {
-        console.log(charity);
 
         io.emit("following", charity)
       }
@@ -489,17 +471,13 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   });
 
   socket.on("remove", (removeID, charityID) => {
-    console.log(removeID, charityID)
     mongoose.model("charity").update({ _id: charityID }, { $pull: { following: removeID } }, (err, charity) => {
       if (err) {
-        console.log(err)
       }
       else {
-        console.log(charity)
         io.emit("charityAfterRemove", charity)
         mongoose.model("charity").update({ _id: removeID }, { $pull: { follower: charityID } }, (err, charity) => {
           if (err) {
-            console.log(err)
           }
           else {
 
@@ -510,12 +488,10 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   });
 
   socket.on("findUser", (id) => {
-    console.log("USER")
-    console.log(id);
+   
     mongoose.model("charity").findOne({ _id: id }, (err, charity) => {
 
       if (err) {
-        console.log(err);
 
       }
 
@@ -524,18 +500,14 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
         mongoose.model("volunteer").findOne({ _id: id }, (err, volunteer) => {
 
           if (err) {
-            console.log(err)
           }
           else {
-            console.log(volunteer)
             io.emit("isVolunteer", volunteer)
-            console.log(volunteer)
           }
 
         })
       }
       else {
-        console.log(charity)
         io.emit("ischarity", charity)
       }
 
@@ -549,14 +521,11 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   // setting
 
   socket.on("changeName", (id, change) => {
-    console.log(id, change);
 
     mongoose.model("charity").update({ _id: id }, { name: change }, (err, charity) => {
       if (err) {
-        console.log(err)
       }
       else {
-        console.log(charity)
         mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
           io.emit("changed", charityAfterChange)
         })
@@ -568,7 +537,6 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
     mongoose.model("charity").update({ _id: id }, { address: change }, (err, charity) => {
       if (err) {
-        console.log(err)
       }
       else {
         mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
@@ -583,7 +551,6 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
     mongoose.model("charity").update({ _id: id }, { phone: change }, (err, charity) => {
       if (err) {
-        console.log(err)
       }
       else {
         mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
@@ -599,7 +566,6 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
     mongoose.model("charity").update({ _id: id }, { country: change }, (err, charity) => {
       if (err) {
-        console.log(err)
       }
       else {
         mongoose.model("charity").findOne({ _id: id }, (err, charityAfterChange) => {
@@ -614,18 +580,15 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   // volunteer
 
   socket.on("changefname", (id, change) => {
-    console.log(id, change);
 
     mongoose.model("volunteer").update({ _id: id }, { fname: change }, (err, volunteer) => {
       if (err) {
-        console.log(err)
       }
       else {
 
         mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
           // io.emit("changed", volunteerAfterChange)
           io.emit("changedvolunteer", volunteerAfterChange)
-          console.log(volunteerAfterChange);
 
         })
 
@@ -639,14 +602,12 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
 
     mongoose.model("volunteer").update({ _id: id }, { lname: change }, (err, volunteer) => {
       if (err) {
-        console.log(err)
       }
       else {
 
         mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
           // io.emit("changed", volunteerAfterChange)
           io.emit("changedvolunteer", volunteerAfterChange)
-          console.log(volunteerAfterChange);
 
         })
 
@@ -655,18 +616,15 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   });
 
   socket.on("changePhoneVOL", (id, change) => {
-    console.log(id, change);
 
     mongoose.model("volunteer").update({ _id: id }, { phone: change }, (err, volunteer) => {
       if (err) {
-        console.log(err)
       }
       else {
 
         mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
           // io.emit("changed", volunteerAfterChange)
           io.emit("changedvolunteer", volunteerAfterChange)
-          console.log(volunteerAfterChange);
 
         })
 
@@ -675,18 +633,15 @@ likemodel.findOneAndDelete({postedby:like.postedby},(err,data)=>{
   });
 
   socket.on("changeCountryVOL", (id, change) => {
-    console.log(id, change);
 
     mongoose.model("volunteer").update({ _id: id }, { country: change }, (err, volunteer) => {
       if (err) {
-        console.log(err)
       }
       else {
 
         mongoose.model("volunteer").findOne({ _id: id }, (err, volunteerAfterChange) => {
           // io.emit("changed", volunteerAfterChange)
           io.emit("changedvolunteer", volunteerAfterChange)
-          console.log(volunteerAfterChange);
 
         })
 
@@ -727,7 +682,6 @@ app.get('/auth/facebook/callback',
     failureRedirect: '/login'
   }),
   function (req, res) {
-    // Successful authentication, redirect home.
     res.redirect('/');
   });
 passport.serializeUser(function (user, cb) {
@@ -787,13 +741,10 @@ app.post('/send', function (req, res) {
   
   </ul>`
   }
-  console.log(mailOptions);
   smtpTransport.sendMail(mailOptions, function (error, response) {
     if (error) {
-      console.log(error);
       res.json(error);
     } else {
-      console.log("Message sent: " + response.message);
       res.json("sent");
     }
   });
@@ -803,5 +754,4 @@ app.post('/send', function (req, res) {
 /*-----------------------------------------------------------------------*/
 
 server.listen(3000, function () {
-  console.log("server running....");
 });

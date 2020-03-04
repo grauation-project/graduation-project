@@ -5,7 +5,11 @@ const Schema = mongoose.Schema
 const comment = new Schema({
 
 
-    text:String,
+    text:{
+      type:String,
+    min:1,
+  max:200
+},
     postedby:{
       type:mongoose.Schema.Types.ObjectId,
       enum:['volunteer','charity']
@@ -18,5 +22,7 @@ const comment = new Schema({
   
 
 })
+
+
 
 module.exports = mongoose.model("comment", comment)  

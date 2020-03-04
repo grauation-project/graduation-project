@@ -17,7 +17,6 @@ var {
   } = require("../models/charity");
 
 router.post("/add/:id",parseUrlencoded, function (req, res) {
-    console.log("hey");
     var {
         error
       } = validateprovide(req.body);
@@ -40,7 +39,6 @@ router.get("/list/:id",async(req,res)=>{
 let providespec= await provide.find({charity:req.params.id},function(err,data){
 
     if(err){
-        console.log(err)
     }
 
 })
@@ -58,7 +56,6 @@ router.post("/update/:id",parseUrlencoded,function(req,res){
 
     provide.update({_id:req.params.id},req.body,function(err,data){
     if(err){
-        console.log(err)
     }
     res.send(data)
 })
@@ -75,7 +72,6 @@ router.delete("/delete/:id",parseUrlencoded,function(req,res){
 
     provide.remove({_id:req.params.id},function(err){
     if(err){
-        console.log(err)
     }
 })
 

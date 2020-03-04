@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login } from '../class/login';
 import { HttpClient } from '@angular/common/http';
+import {Postss} from "../class/postss"
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,14 @@ export class AdminService {
     return this.http.delete(
       "http://localhost:3000/savethem/admin/volunteer/delete/"+_id)
 
+  }
+  listposts(){
+    return this.http.get(
+      "http://localhost:3000/post/posts/list")
+
+  }
+  deletepost(_id){
+    return this.http.delete(
+      "http://localhost:3000/post/posts/"+_id)
   }
 }

@@ -64,7 +64,6 @@ router.delete("/charity/delete/:id", function (req, resp) {
     },
     function (err, data) {
       if (!err) {
-        console.log("Deleted");
       }
     })
 

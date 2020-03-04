@@ -17,7 +17,6 @@ var {
   } = require("../models/charity");
 
 router.post("/add/:id",parseUrlencoded, function (req, res) {
-    console.log("hey");
     var {
         error
       } = validateneed(req.body);
@@ -40,7 +39,6 @@ router.get("/list/:id",async(req,res)=>{
 let needspec= await need.find({charity:req.params.id},function(err,data){
 
     if(err){
-        console.log(err)
     }
 
 })
@@ -58,7 +56,6 @@ router.post("/update/:id",parseUrlencoded,function(req,res){
 
 need.update({_id:req.params.id},req.body,function(err,data){
     if(err){
-        console.log(err)
     }
     res.send(data)
 })

@@ -11,7 +11,6 @@ var {
 } = require("../models/donationone");
 
 router.post("/payment", parseUrlencoded, async (req, res) => {
-  console.log("hey");
   var {
     error
   } = validatepayment(req.body);

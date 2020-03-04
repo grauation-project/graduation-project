@@ -169,8 +169,8 @@
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
               <div class="mb-5 mt-3 p-3 create_post" *ngIf="istrusted">
-                <img class="ml-2 w-22" [src]="profileimageee"  />
-                <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
+                <img class="ml-2 w-22" [src]="profileimageee" class="profileimg" style="border-radius: 50%;" />
+                <input type="submit" name="post" value="Post" class="btn" style="border-radius: 2%;" data-toggle="modal" data-target="#post"
                   class="btn_post text-light ">
                 <div class="modal fade" id="post" role="dialog">
                   <div class="modal-dialog">
@@ -186,10 +186,10 @@
                         <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                              [(ngModel)]="newPost.title" placeholder="Title of Post" name="title">
+                              [(ngModel)]="newPost.title" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="Title of Post" name="title">
                             <br>
                             <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                              [(ngModel)]="newPost.content" placeholder="what are in your mind "
+                              [(ngModel)]="newPost.content" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" placeholder="what are in your mind "
                               name="content"></textarea>
                           </div>
                           <div class="row modal-footer">
@@ -210,28 +210,30 @@
               </div>
 
               <div class="posts">
-                <div class="post" *ngFor="let post of charityposts ">
+                <div class="post" *ngFor="let post of charityposts; let i = index">
                   <div class="editPost  pr-0">
                     <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
                       <i class="fa fa-ellipsis-v  pt-0"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                     
-                      <button name="edit" data-toggle="modal" data-target="#editpost"  (click)="editbutton(post)"  class="text-dark"><a>Edit
+
+                      <button name="edit" data-toggle="modal" data-target="#editpost" (click)="editbutton(post)"
+                        class="text-light " style="text-align: center;width: 80%;"> <a>Edit
                           post</a></button>
-                      <button name="edit" data-toggle="modal" data-target="#deletepost"
-                      (click)="deletebutton(post)"  class="btn_post text-dark "><a>Delete post</a></button>
-                     
+                      <button name="edit" data-toggle="modal" data-target="#deletepost" (click)="deletebutton(post)"
+                        class=" text-light" style="text-align: center;width: 80%;"><a>Delete post</a></button>
+
                     </div>
                   </div>
+                  <!-- <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-expanded]="false"
+                  [attr.aria-controls]="'collapse-' + i"> -->
                   <div>
-                    <img class="float-left mr-2"
-                    [src]="profileimageee"  />
+                    <img class="float-left mr-2" [src]="profileimageee" style="border-radius: 50%;width: 10%;height: 10%;"/>
                     <h5>{{volunteerdetaile.fname }} {{volunteerdetaile.lname }}</h5>
-                    
-                   
-                    <span><i class="fa fa-clock-o"></i>3 minutes</span>
+
+
+                    <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
                   </div>
                   <div>
                     <p id="postTitle">{{post.title}}</p>
@@ -240,55 +242,76 @@
                     </p>
                     <h5 class="hidden" id="postID">{{post._id}}</h5>
                   </div>
-                  <div class="reactions ">
-                    <a id="like" (click)="showlike()">
-                      <i class="fas fa-heart" (click)="like()"></i>
+                  <div class="reactions row">
+                    <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+                      border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
+                      {{postlikes}}</div>
+                    <a>
+                      <i class="fas fa-heart" id="like" (click)="like(post)" ></i>
                       Like</a>
-                    <a (click)="comment()">
-                      <i class="far fa-comment"></i>
+                    <a id="comment">
+                      <i class="far fa-comment" (click)="Comment(post)"></i>
                       Comment</a>
                   </div>
+                  <div>
 
-                  <div *ngIf="iscomment">
-                    <form #comment="ngForm">
+                    <form #comment="ngForm" novalidate class="pr-0">
 
-                      <div class="row form-group">
-                        <img class="float-left ml-3"
-                          src="http://gambolthemes.net/workwise-new/images/resources/bg-img4.png" />
+                      <div class="row form-group ml-2">
+                        <img class=" ml-2 pl-3 profileimg" style="border-radius: 50%;width: 10%;"
+                        [src]="profileimageee" />
                         <input type="text" class="form-control ml-2 pr-0  "
-                          style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" [(ngModel)]="commentclass.text"
-                          #text placeholder="your comment" name="text">
+                          style="border-radius:55px;text-align: center; width: 80%;" attr.id="{{post._id}}" required
+                          [(ngModel)]="commentclass.text" #text placeholder="your comment" name="text">
                         <!-- <i class="fas fa-chevron-circle-right mt-2" style="height: 50px;width: 50px;" ></i> -->
-                        <button (click)="sendcomment(comment,post)" class="hidden"></button>
+                        <button (click)="sendcomment(comment,post)" [disabled]="comment.form.invalid"
+                          class="hidden"></button>
                       </div>
 
                     </form>
-                  </div>
-
-
-                  <div *ngIf="showcomment">
                     <div *ngFor="let comment of commentpost">
-                      <div class="row">
-                        <p>
-                          {{comment.postedby}}
-                        </p>
-                        <p>
-                          {{comment.text}}
-                        </p>
+
+                      <div *ngIf="commentt(comment.post,post._id)">
+                        <div class="row pl-1" *ngIf="commentByCharity">
+                          <!-- {{commentByCharity._id}} --> 
+
+                          <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+
+                            <h6>{{commentByCharity.name}}</h6>
+                          </div> 
+
+                          <div class="mt-2 ml-2" id="posttedby"
+                            *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
+
+                            <h6>{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
+                          </div> -->
+
+                          <p>
+                            {{comment.text}}
+                          </p>
+                        </div>
                       </div>
-               
                     </div>
 
-                    <div *ngIf="islike">
-                      <div *ngFor="let like of AllLikes">
-                        <p>{{like.postedby}}</p>
-                      </div>
 
-                    </div>
+
+
                   </div>
+
+
+
+
+
+
+                  <div *ngIf="islike">
+                    <div *ngFor="let like of AllLikes">
+                      <p>{{like.postedby}}</p>
+                    </div>
+
+                  </div>
+
 
                 </div>
-
                 <div class="modal fade" id="editpost" role="dialog">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -301,11 +324,11 @@
                         <form #post="ngForm" novalidate (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <input type="text" class="form-control postForm" name="title" #title="ngModel"
-                              value="{{postTitle}}" [(ngModel)]="newPost.title" placeholder="Title of Post"
+                              value="{{postTitle}}" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" [(ngModel)]="newPost.title" placeholder="Title of Post"
                               name="title">
                             <br>
                             <textarea class=" form-control postForm" rows="5" id="comment" #content="ngModel"
-                              [(ngModel)]="newPost.content" value="{{postContent}}" placeholder="what are in your mind "
+                              [(ngModel)]="newPost.content" style=" box-shadow: 0 10px 40px 0 #B0C1D9;" value="{{postContent}}" placeholder="what are in your mind "
                               name="content"></textarea>
                           </div>
                           <div class="row modal-footer">

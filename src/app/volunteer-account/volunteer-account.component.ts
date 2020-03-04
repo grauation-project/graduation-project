@@ -66,11 +66,11 @@ export class VolunteerAccountComponent implements OnInit {
   IDpostdelete: any;
   profileimageee="";
   
-  charitydetailchanged: unknown;
-  volunteerdetailchanged: unknown;
-  commentPostedBy: any;
-  commentByVolunteer: unknown;
-  commentByCharity: unknown;
+  charitydetailchanged;
+  volunteerdetailchanged;
+  commentPostedBy;
+  commentByVoluntee;
+  commentByCharity;
 
  
 

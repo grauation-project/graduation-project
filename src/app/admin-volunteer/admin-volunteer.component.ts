@@ -19,18 +19,15 @@ export class AdminVolunteerComponent implements OnInit {
     this._AdminService.getvolunteers().subscribe(
       data  => {
         this.Volunteerdetails = data;
-        console.log(this.Volunteerdetails);
 
       },
 
       error => {
-        console.log("error", error);
 
       }
     );
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
-      console.log(typeof params.get("_id"));
     });
   }
   deletevolunteer(Volunteerdetails){
@@ -38,29 +35,25 @@ export class AdminVolunteerComponent implements OnInit {
     this._AdminService.deletevolunteer(Volunteerdetails._id).subscribe(
 
 
-      response => {console.log("Success!", response)
+      response => {
     
       this._AdminService.getvolunteers().subscribe(
         data  => {
           this.Volunteerdetails = data;
-          console.log(this.Volunteerdetails);
   
         },
   
         error => {
-          console.log("error", error);
   
         }
       );
       this.route.paramMap.subscribe((params: ParamMap) => {
         this.code = params.get("_id");
-        console.log(typeof params.get("_id"));
       });
    
         },
     
         error => {
-          console.log("error", error);
     
         }
       );
