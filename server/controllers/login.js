@@ -49,7 +49,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
         return res.status(400).send("invalid email or password.");
 
       } else {
-        console.log("you are charity")
         var token = jwt.sign({
           _id: charitiy._id
         }, config.get('jwtprivatekey'))
@@ -74,7 +73,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
           return res.status(400).send("invalid email or password.");
 
         } else {
-          console.log("you are admin")
           var token = jwt.sign({
             _id: admins._id
           }, config.get('jwtprivatekey'))
@@ -102,7 +100,6 @@ router.post('/', parseUrlencoded, async (req, res) => {
       return res.status(400).send("invalid email or password.");
 
     } else {
-      console.log("you are volunteer")
       var token = jwt.sign({
         _id: volunteers._id
       }, config.get('jwtprivatekey'))
@@ -129,26 +126,6 @@ function validate(req) {
   return joi.validate(req, schema)
 }
 
-// if 
-//   charity.findOne({email:req.body.email})
-//   if(!charity){
-//     volunteer.findOne({email:req.body.email})
-//   }
-//   else if(!volunteer){
-//     admin.findOne({email:req.body.email})
-//   }
-// else if(!admin){
-//   console.log('Email Not Registered')
-//   res.status(501).json({Msg :'Email Not Registered'})
-// }
-//   else{
-//     bcrypt.compare(req.body.password, volunteer.password, (err, match) => {
-//       if (match) {
-//         console.log("login");
-//       }
-//       console.log(err);
-//     })
-//   }
 
 router.post("/forget/password", parseUrlencoded,async(req,res)=>{
   
@@ -165,7 +142,6 @@ router.post("/forget/password", parseUrlencoded,async(req,res)=>{
 });
 
 
-console.log(mailOptions);
 
   let volunteers = await volunteer.findOne({
     email: req.body.email
@@ -194,11 +170,9 @@ console.log(mailOptions);
       }
       smtpTransport.sendMail(mailOptions, function(error, response){
         if(error){
-              console.log(error);
           res.json(error);
         }
         else{
-              console.log("Message sent: " + response.message);
           res.json(token);
            }
 
@@ -227,11 +201,9 @@ console.log(mailOptions);
         }
         smtpTransport.sendMail(mailOptions, function(error, response){
           if(error){
-                console.log(error);
             res.json(error);
           }
           else{
-                console.log("Message sent: " + response.message);
             res.json(token);
              }
   
@@ -263,11 +235,9 @@ console.log(mailOptions);
 
     smtpTransport.sendMail(mailOptions, function(error, response){
       if(error){
-            console.log(error);
         res.json(error);
       }
       else{
-            console.log("Message sent: " + response.message);
         res.json( token);
          }
 

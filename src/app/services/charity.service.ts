@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Signup } from "../class/signup";
 import { Needs } from "../class/needs"
 import { Observable } from 'rxjs';
+import { Provides } from '../class/provides';
+import { Changeimg } from '../class/changeimg';
 @Injectable({
   providedIn: "root"
 })
@@ -23,16 +25,40 @@ export class CharityService {
       "http://localhost:3000/savethem/needs/add/"+_id,
       need)
   }
+  addprovide(provide:Provides,_id){
+    return this.http.post(
+      "http://localhost:3000/savethem/provides/add/"+_id,
+      provide)
+  }
   listneed(_id){
     return this.http.get<any>(
       "http://localhost:3000/savethem/needs/list/"+_id)
   }
+  listprovide(_id){
+    return this.http.get<any>(
+      "http://localhost:3000/savethem/provides/list/"+_id)
+  }
   deleteneed(_id){
     return this.http.delete("http://localhost:3000/savethem/needs/delete/"+_id)
+  }
+  deleteprovide(_id){
+    return this.http.delete("http://localhost:3000/savethem/provides/delete/"+_id)
   }
   updateneed(need:Needs,_id){
     return this.http.post(
       "http://localhost:3000/savethem/needs/update/"+_id,
       need)
+  }
+  updateprovide(provide:Provides,_id){
+    return this.http.post(
+      "http://localhost:3000/savethem/provides/update/"+_id,
+      provide)
+  }
+  changeimg(img: Changeimg,_id){
+
+    return this.http.post(
+      "http://localhost:3000/savethem/charity/account/img/"+_id,
+      img)
+
   }
 }

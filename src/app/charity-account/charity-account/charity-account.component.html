@@ -14,7 +14,7 @@
       <ul class="navbar-nav  ">
         <li class="nav-item active">
           <i class="fas fa-home align-center "></i>
-          <a class="nav-link " (click)="refresh()">
+          <a class="nav-link " (click)="gohome()">
             Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
@@ -100,7 +100,7 @@
     <div class="container-fluid p-0 overflow-hidden">
       <div class="row">
         <div class="col-md-12 profile_background">
-          <button class="btnprofile">
+          <button class="btnprofile" *ngIf="istrusted">
             <a href="#">Change Image</a>
           </button>
           <div class="clr"></div>
@@ -111,6 +111,13 @@
       <div class="row">
         <div class="col-md-5  account_details ">
           <div class="row">
+            <form style="display:none" #changeForm="ngForm" (ngSubmit)="onSubmitimg()">
+              <input type="file" #img [(ngModel)]="changeimage.img"name="img"(change)="showupload()" id="file_upload_id" >
+           <input type="submit" (click)="uploader.uploadAll()" id="file_upload_ids"/>
+
+            </form>
+            <i class="fas fa-cloud-upload-alt" (click)="_uploaded()" *ngIf="uploaded"></i>
+            <i (click)="_upload()" id="icon_upload"class="fas fa-camera-retro" style="color: #3B6D8C;font-size: 35px;position: absolute;left:60%;top: -12%;z-index: 2559877556632;cursor: pointer;"></i>
             <img class="profile_img" [src]="profileimageee" />
 
             <div class="right_container ">
@@ -158,7 +165,7 @@
                     </div>
                   </div>
                   <div class="editPost  pr-0">
-                    <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                    <a href="#" title="" *ngIf="istrusted"class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
                       <i class="fa fa-ellipsis-v  pt-0"></i>
                     </a>
@@ -266,11 +273,23 @@
 
               </div>
               <div class="clr"></div>
+
+
+
+
+
+
+
+
+
+
+
+
               <div class="provides">
                 <div class="post_topbar">
                   <div class="usy-dt">
                     <div class="usy-name">
-                      <h5>Provides</h5>
+                      <h3>Provides :</h3>
                     </div>
                   </div>
                   <div class="editPost  pr-0">
@@ -279,22 +298,130 @@
                       <i class="fa fa-ellipsis-v  pt-0"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Edit post</a>
-                      <a class="dropdown-item" href="#">delete post</a>
+                      <a class="dropdown-item" (click)="toggleaddprovide()">Add Provide</a>
+
                       <!-- <a class="dropdown-item" href="#">Something else here</a> -->
 
                     </div>
                   </div>
                 </div>
 
-                <p>
-                  dfdffffffffffffffffffffffffff
-                </p>
+                <div class="view" *ngIf="isaddprovide">
+                  <i (click)="closeviewprovide()" class="fas fa-times-circle"
+                    style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                  <form #addprovides="ngForm" novalidate (ngSubmit)="addprovide(addprovides)">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                        #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                        [(ngModel)]="providess.name">
+                      <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is required</small>
 
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Quantity" required
+                        [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                        [(ngModel)]="providess.quantity" class="form-control" name="quantity">
+                      <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                        Required</small>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="description" id="description" #description="ngModel"
+                        [class.is-invalid]="description.invalid && description.touched" required
+                        [(ngModel)]="providess.description" placeholder="Enter description" rows="3"></textarea>
+                      <small [class.d-none]="description.valid || description.untouched" class="text-danger">description
+                        is required</small>
+
+                    </div>
+
+                    <button type="submit" name="submit" [disabled]="addprovides.form.invalid"
+                      class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+                <div class="need " *ngFor="let provide of listprovide; let i = index">
+                  <div class="btn-group drop float-right ">
+                    <button class="btn  btn-sm " type="button" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fa fa-ellipsis-v s mr-1" style="color: white;"></i>
+
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" (click)="updateprovides(provide)">Edit</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="deleteprovides(provide)">Delete</a>
+                    </div>
+                  </div>
+                  <div data-toggle="collapse" [attr.data-target]="'#collapse-' + i+1" [attr.aria-expanded]="false"
+                    [attr.aria-controls]="'collapse-' + i +1">
+                    <h5>{{provide.name}}</h5>
+                    <div class="collapse" [attr.id]="'collapse-' + i+1">
+                      <div class="card card-body" style="background-color: #AFBF34;">
+                        <h6>Quantity :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{provide.quantity}}</p>
+                        <h6>Description :</h6>
+                        <p style="color: #3B6D8C;font-size: 17px;">{{provide.description}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="view w-100 " class="test" [id]="provide._id">
+                    <i (click)="closetests(provide)" class="fas fa-times-circle"
+                      style="font-size: 20px;color:#3B6D8C;margin-left: 90%;"></i>
+                    <form #addprovides="ngForm" novalidate (ngSubmit)="updateprovidess(provide,addprovides)">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Name" name="name" id="name"
+                          #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required
+                          [(ngModel)]="providess.name">
+                        <small [class.d-none]="name.valid || name.untouched" class="text-danger">Name is
+                          required</small>
+
+                      </div>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" required
+                          [class.is-invalid]="quantity.invalid && quantity.touched" #quantity="ngModel"
+                          [(ngModel)]="providess.quantity" class="form-control" name="quantity">
+                        <small class="text-danger " [class.d-none]="quantity.valid || quantity.untouched">quantity is
+                          Required</small>
+                      </div>
+                      <div class="form-group">
+                        <textarea class="form-control" name="description" id="description" #description="ngModel"
+                          [class.is-invalid]="description.invalid && description.touched" required
+                          [(ngModel)]="providess.description" placeholder="Enter description" rows="3"></textarea>
+                        <small [class.d-none]="description.valid || description.untouched"
+                          class="text-danger">description is required</small>
+
+                      </div>
+
+                      <button type="submit" name="submit" [disabled]="addprovides.form.invalid"
+                        class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="col-md-6 account_main ">
           <div class="account_headline overflow-hidden">
             <p>
@@ -302,7 +429,7 @@
               <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                   class="fa fa-star"></i></span>
               <span>
-                <button class="setting">
+                <button class="setting" *ngIf="istrusted">
                   <a  id="infodiv-tab" data-toggle="tab" href="#infodiv" role="tab"
                   aria-controls="infodiv"  aria-selected="false">Setting</a>
                 </button>
@@ -324,15 +451,16 @@
             </div>
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="feeddiv" role="tabpanel" aria-labelledby="feeddiv-tab">
-                <div class="mb-5 mt-3 p-3 create_post">
+                <div class="mb-5 mt-3 p-3 create_post" *ngIf="istrusted">
                   <img class="ml-2" [src]="profileimageee" style="border-radius: 50%; height: 15%;width: 10%;"/>
+                
                   <input type="submit" name="post" value="Post" data-toggle="modal" data-target="#post"
                     class="btn_post text-light ">
                   <div class="modal fade" id="post" role="dialog">
                     <div class="modal-dialog">
 
 
-                      <div class="modal-content">
+                      <div class="modal-content" >
                         <div class="modal-header ">
 
                           <h4 class="modal-title text-light float-left">Post</h4>
@@ -365,10 +493,11 @@
                 <div class="posts">
                   <div class="post" *ngFor="let post of charityposts; let i = index">
                     <div class="editPost  pr-0">
-                      <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" aria-haspopup="true"
+                      <a href="#" title="" class="ed-opts-open dropdownpost" data-toggle="dropdown" *ngIf="istrusted" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fa fa-ellipsis-v  pt-0"></i>
                       </a>
+                     
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                         <button name="edit" data-toggle="modal" data-target="#editpost" (click)="editbutton(post)"
@@ -535,7 +664,7 @@
                 <div class="info">
                   <div class="details" *ngIf="name">
                     <i class="far fa-edit float-right" style="color: #3B6D8C;"
-                      (click)="editInformation(charitydetaile)"></i>
+                      (click)="editInformation(charitydetaile)" *ngIf="istrusted"></i>
                     <h6 style="color: #3B6D8C;">Charity Name</h6>
                     <h6>{{charitydetaile.name}}</h6>
 
@@ -556,7 +685,11 @@
 
 <!-- 
                   <div class="details" *ngIf="about">
+<<<<<<< HEAD
                     <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="About(charitydetaile)"></i>
+=======
+                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="About()" *ngIf="istrusted"></i>
+>>>>>>> 208fdb048b65da147ef1a18794b351fab674896f
                     <h6 style="color: #3B6D8C;"> About</h6>
                     <p></p>
                   </div>
@@ -575,7 +708,7 @@
                   </div> -->
 
                   <div class="details" *ngIf="address">
-                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editaddress()"></i>
+                    <i class="far fa-edit float-right" *ngIf="istrusted" style="color: #3B6D8C;" (click)="editaddress()"></i>
                     <h6 style="color: #3B6D8C;">Charity address</h6>
                     <p>{{charitydetaile.address}}</p>
 
@@ -595,7 +728,7 @@
 
 
                   <div class="details" *ngIf="phone">
-                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="editphone()"></i>
+                    <i class="far fa-edit float-right" *ngIf="istrusted" style="color: #3B6D8C;" (click)="editphone()"></i>
                     <h6 style="color: #3B6D8C;">Charity phone</h6>
                     <p>{{charitydetaile.phone}}</p>
 
@@ -618,7 +751,7 @@
 
 
                   <div class="details" *ngIf="Country">
-                    <i class="far fa-edit float-right" style="color: #3B6D8C;" (click)="country()"></i>
+                    <i class="far fa-edit float-right" *ngIf="istrusted" style="color: #3B6D8C;" (click)="country()"></i>
                     <h6 style="color: #3B6D8C;">Charity Country</h6>
                     <p>{{charitydetaile.country}}</p>
 
@@ -642,6 +775,3 @@
             </div>
           </div>
         </div>
-
-        <!-- </div> -->
-        <!-- </body> -->

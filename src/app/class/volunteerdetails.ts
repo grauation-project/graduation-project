@@ -8,6 +8,5 @@ export class Volunteerdetails {
     public phone: String,
     public country: String,
     public img: any,
-    public coverimg: any
   ) {}
 }

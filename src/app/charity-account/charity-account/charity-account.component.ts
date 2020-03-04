@@ -15,6 +15,11 @@ import { Needs } from "../../class/needs"
 import { NgForm } from '@angular/forms';
 import { Listneed } from 'src/app/class/listneed';
 import { async } from '@angular/core/testing';
+import { Provides } from 'src/app/class/provides';
+import { Listprovide } from 'src/app/class/listprovide';
+import { Changeimg } from 'src/app/class/changeimg';
+import { error } from 'protractor';
+import { FileUploader } from 'ng2-file-upload';
 declare var require: any;
 
 @Component({
@@ -23,6 +28,7 @@ declare var require: any;
   styleUrls: ["./charity-account.component.css"]
 })
 export class CharityAccountComponent implements OnInit {
+ 
   public charityposts;
   IDpost: string;
   editpost: {}
@@ -68,7 +74,7 @@ likeNo=false
 public commentByCharity;
 public commentByVolunteer ;
 fileselected = "";
-
+uploaded=false
   public code;
   public ID;
   public Allpost
@@ -88,18 +94,38 @@ public commentPostedBy;
   // slsText;
   cahritysearchlist:boolean = false;
   Voluntersearchlist:boolean = false;
-  
+  uploader:FileUploader
   isadd=false;
+  isaddprovide=false
   isupdate=false;
-  need = new Needs ("","","")
+  need = new Needs ("","","");
+  providess = new Provides("","","")
   listneeds = new Listneed ("","","","")
-    
-  
+  listprovide =new Listprovide("","","","")
+  changeimage=new  Changeimg("")
   displaydiv = false;
   searcheng() {
     this.displaydiv = true;
   }
+  showupload(){
+this.uploaded=true;
+
+
+  }
+  onSubmitimg(){
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      // console.log(this.code)
+      console.log(typeof params.get("_id"));
+    });
+this.charityService.changeimg(this.changeimage,this.code).subscribe(
+  response=>console.log(response),
+  error=>console.log(error)
+)
+
+  }
   
+   
   Voluntersearch(){
     this.Voluntersearchlist = true;
     this.cahritysearchlist = false;
@@ -115,11 +141,17 @@ public commentPostedBy;
   }
   toggleadd(){
     this.isadd=true
-   this.need.name="";
+   this.providess.name="";
+   this.providess.quantity=""
+   this.providess.description=""
+
+
+  }
+  toggleaddprovide(){
+    this.isaddprovide=true;
+    this.need.name="";
    this.need.quantity=""
    this.need.description=""
-
-
   }
   addneed(addneeds:NgForm){
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -173,6 +205,79 @@ public commentPostedBy;
     )
 
   }
+
+  addprovide(addprovides:NgForm){
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.addprovide(this.providess,this.code).subscribe(
+
+      response => {console.log("Success!", response)
+      ,  this.isaddprovide=false,
+      addprovides.reset()
+      
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+      this.charityService.listprovide(this.code).subscribe(
+        data => {
+          
+          this.listprovide = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listprovide);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      this.charityService.listneed(this.code).subscribe(
+        data => {
+          
+          this.listneeds = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listneeds);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      
+
+    },
+        error => {
+          console.log("error!", error),
+          addprovides.reset()
+
+        } 
+          
+    )
+
+  
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
+
+  }
   updateneeds(needs){
 
 document.getElementById(needs._id).style.display="block"
@@ -182,8 +287,21 @@ this.need.description=needs.description
 
 
 }
+updateprovides(provide){
+
+  document.getElementById(provide._id).style.display="block"
+  this.providess.name=provide.name;
+  this.providess.quantity=provide.quantity;
+  this.providess.description=provide.description
+
+}
 closetest(needs){
   document.getElementById(needs._id).style.display="none"
+
+}
+closetests(provide){
+  document.getElementById(provide._id).style.display="none"
+
 
 }
   updateneedss(needs,addneeds:NgForm){
@@ -240,6 +358,92 @@ closetest(needs){
         } 
           
     )
+    this.charityService.listprovide(this.code).subscribe(
+      data => {
+        
+        this.listprovide = data;
+        this.ID = this.code.slice(0, 9);
+        console.log(this.listprovide);
+      },
+      error => {
+        console.log(error);
+      }
+
+    )
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
+  
+
+  }
+  updateprovidess(provide,addprovides:NgForm){
+
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.updateprovide(this.providess,provide._id).subscribe(
+
+      response => {console.log("Success!", response)
+      this.isupdate=false;
+      addprovides.reset()
+
+      this.charityService.listprovide(this.code).subscribe(
+        data => {
+          
+          this.listprovide = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listprovide);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+  
+
+      
+
+    },
+        error => {
+          console.log("error!", error)
+
+        } 
+          
+    )
+
+
+  
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
+  
+
+
+
+
 
 
   }
@@ -295,17 +499,127 @@ closetest(needs){
 
 
   }
+  deleteprovides(provide){
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log( params.get("_id"));});
+    this.charityService.deleteprovide(provide._id).subscribe(
+
+      response => {console.log("Success!", response)
+      
+      
+      this._LoginService.charitydetails(this.code).subscribe(
+        data => {
+          this.charitydetaile = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.charitydetaile);
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(["login"]);
+        }
+      );
+    // subscribe search
+      this.charityService.listCharity().subscribe(data=>{
+        this.listcharitysearch=data
+      });
+      this.volunteerService.listvolunteer().subscribe(data=>{
+        this.listvolunteersearch=data
+      });
+      this.charityService.listneed(this.code).subscribe(
+        data => {
+          
+          this.listneeds = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listneeds);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+      this.charityService.listprovide(this.code).subscribe(
+        data => {
+          
+          this.listprovide = data;
+          this.ID = this.code.slice(0, 9);
+          console.log(this.listprovide);
+        },
+        error => {
+          console.log(error);
+        }
+  
+      )
+
+    },
+        error => {
+          console.log("error!", error)
+
+        } 
+          
+    )
+
+
+
+
+  }
   closeview(){
     this.isadd=false
 this.isupdate=false
   }
-  ngOnInit() {
+  closeviewprovide(){
+    this.isaddprovide=false;
+    this.isupdate=false
 
+  }
+  istrusted=false;
+  gohome(){
+    if(localStorage.getItem("name")=="volunteer"){
+
+      this.router.navigate(["/home/volunteer/"+ localStorage.getItem("id")]);
+
+    }
+    else if(localStorage.getItem("name")=="charitiy"){
+
+      this.router.navigate(["/home/charity/"+ localStorage.getItem("id")]);
+
+    }
+  }
+  _uploaded(){
+    console.log("enter")
+    document.getElementById('file_upload_ids').click();
+
+
+  }
+  ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.code = params.get("_id");
       // console.log(this.code)
       console.log(typeof params.get("_id"));
     });
+    this.title = "ng8fileupload";
+
+    this.uploader= new FileUploader({
+      url: "http://localhost:3000/savethem/charity/account/img/"+this.code,
+  
+      itemAlias: "img"
+    });
+    this.uploader.onAfterAddingFile = file => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (
+      item: any,
+      response: any,
+      status: any,
+      headers: any
+    ) => {
+      console.log("ImageUpload:uploaded:", item.file);
+      alert("File uploaded successfully");
+    };
+    console.log(this.uploader);
+  
+
     this._LoginService.charitydetails(this.code).subscribe(
       data => {
         this.charitydetaile = data;
@@ -350,7 +664,25 @@ this.isupdate=false
         console.log(error);
       }
 
-    );
+    )
+    this.charityService.listprovide(this.code).subscribe(
+      data => {
+        
+        this.listprovide = data;
+        this.ID = this.code.slice(0, 9);
+        console.log(this.listprovide);
+      },
+      error => {
+        console.log(error);
+      }
+
+    )
+    if(localStorage.getItem("id")==this.code){
+
+      this.istrusted=true;
+
+    }
+  
 
 
 
@@ -652,7 +984,9 @@ if(comment === commentByV){
      
    })
   }
-
+  _upload(){
+    document.getElementById('file_upload_id').click();
+}
   editaddr(change){
     this.postSerives.changeAdrress(this.code,change)
     console.log(this.code,change)

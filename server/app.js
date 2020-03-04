@@ -13,6 +13,7 @@ var donatepayment = require("./controllers/donationone");
 var donatematerial = require("./controllers/donate material")
 var admin = require("./controllers/admin");
 var needs = require("./controllers/needs")
+var provides = require("./controllers/provides")
 require("express-async-errors");
 var winston = require("winston");
 
@@ -113,7 +114,8 @@ app.use("/savethem/donatepayment", donatepayment);
 app.use("/savethem/volunteer", volunteer);
 app.use("/savethem/admin", admin);
 app.use("/donate", donatematerial);
-app.use("/savethem/needs", needs)
+app.use("/savethem/needs", needs);
+app.use("/savethem/provides",provides);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(

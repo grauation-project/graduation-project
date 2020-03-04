@@ -41,10 +41,7 @@ export class SignupComponent implements OnInit {
       status: any,
       headers: any
     ) => {
-      console.log("ImageUpload:uploaded:", item.file);
-      alert("File uploaded successfully");
     };
-    console.log(this.uploader);
   }
   onfileselected(event) {
     this.fileselected = event.target.files[0].name;
@@ -65,15 +62,13 @@ export class SignupComponent implements OnInit {
     console.log(this.charitymodel);
     this.charityserve.signUpCharity(this.charitymodel).subscribe(
       response => {
-        console.log("Success!", response);
         this.router.navigate(["login"]);
       },
 
       error => {
-        console.log("error", error);
-        this.charityerror = error.error;
+       
+        this.charityerror = "Something went wrong Please try again.";
 
-        this.router.navigate(["signup"]);
       }
     );
   }
@@ -83,15 +78,12 @@ export class SignupComponent implements OnInit {
 
     this.volunteerservices.volunteersign(this.volunteersignup).subscribe(
       response => {
-        console.log("Success!", response);
         this.router.navigate(["login"]);
       },
 
       error => {
-        console.log("error", error);
-        this.volunteererror = error.error;
+        this.volunteererror = "Something went wrong Please try again.";
 
-        this.router.navigate(["signup"]);
       }
     );
   }

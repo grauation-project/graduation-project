@@ -33,7 +33,7 @@ var donationmaterial = new Schema({
     },
     address: {
         type: String,
-        minlength: 10,
+        minlength: 4,
         maxlength: 200,
         required: true,
     },

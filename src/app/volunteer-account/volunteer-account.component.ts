@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 declare var require: any;
-import { Volunteerdetails } from "../class/Volunteerdetails";
+import { Volunteerdetails } from "../class/volunteerdetails";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { LoginService } from "../services/login.service";
 import { PostSeriveService } from '../services/post-serive.service';
@@ -28,7 +28,7 @@ export class VolunteerAccountComponent implements OnInit {
   imgprofile = require("../../assets/3.jpg");
   coverimmg=""
   imgnav = require("../../assets/1.jpg");
-  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
+  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
   volunteersignup = new Volunteer("", "", "", "", "", "", "","");
 
   public code;
@@ -106,7 +106,19 @@ searcheng2(){
   ) {}
   fileselected = "";
   istrusted=false;
+  refresh(){
+  
+    if(localStorage.getItem("name")=="volunteer"){
 
+      this.router.navigate(["/home/volunteer/"+ localStorage.getItem("id")]);
+
+    }
+    else if(localStorage.getItem("name")=="charitiy"){
+
+      this.router.navigate(["/home/charity/"+ localStorage.getItem("id")]);
+
+    }
+  }
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {
       file.withCredentials = false;

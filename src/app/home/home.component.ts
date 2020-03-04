@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostSeriveService } from '../services/post-serive.service';
 import { Post } from '../class/post';
 import { LoginService } from "../services/login.service";
-import { Volunteerdetails } from "../class/Volunteerdetails";
+import { Volunteerdetails } from "../class/volunteerdetails";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { CharityService } from '../services/charity.service';
 import { VolunteersignupService } from '../services/volunteersignup.service';
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
  searcheng2(){
    this.displaydiv=false;
  }
-  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "","");
+  volunteerdetaile = new Volunteerdetails("", "", "", "", "", "", "", "");
  
   public code;
   public ID;
@@ -137,8 +137,6 @@ refresh(){
     this.listvolunteersearch=data 
     
   })
-
-
 
 
 }

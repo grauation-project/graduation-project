@@ -1,4 +1,3 @@
-<html>
 <nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#"><img src="../../assets/1.jpg" class="nav_logo" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -27,28 +26,28 @@
 
         <a class="nav-link" href="#">Notifications</a>
       </li>
-      <li class="nav-item mr-5">
-          <i class="fa fa-user-circle"></i>
-  
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-      <form class="form-inline mr-5 searchform">
+     
+      <form class="form-inline mr-5 ml-5 mt-3 searchform">
           <div class="input-group-prepend">
         <div class="btn-group">
           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" aria-describedby="basic-addon1">
           </button>
           <div class="dropdown-menu">
-            <div class="dropdown-item text-dark" (click)="Voluntersearch()">Volunters</div>
+            <div class="dropdown-item text-dark" style="cursor: pointer;" (click)="Voluntersearch()">Volunters</div>
             <div class="dropdown-divider"></div>
-            <div class="dropdown-item  text-dark" (click)="Charitysearch()">Charities</div>
+            <div class="dropdown-item  text-dark" style="cursor: pointer;" (click)="Charitysearch()">Charities</div>
           </div>
         </div>
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
           placeholder="Start searching" aria-label="Search" (keypress)="searcheng()" (keydown)="searcheng2()">
           </div>
       </form>
-      
+      <li class="nav-item mr-5 ml-5">
+        <i class="fa fa-user-circle"></i>
+
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
      
     </ul>
   </div>
@@ -60,19 +59,19 @@
       <div class="col-md-4">
       </div>
       <div class="col-md-4">
-        <small class="searchsmall">Start searching for a charity or volunter by name or country</small><br>
+        <small class="searchsmall" style="text-align: center;color: #AFBF34;">Start searching for a charity or volunter by name or country</small><br>
         <div *ngIf=Voluntersearchlist>
           <table class="table table-striped">
             <thead>
               <tr>
-                <th> Volunter Name</th>
-                <th>Country</th>
+                <th style="color: #AFBF34;"> Volunter Name</th>
+                <th style="color: #AFBF34;">Country</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let volunteer of listvolunteersearch | filter:searchText">
-                <td (click)="govolunteer(volunteer)">{{volunteer.fname }} {{volunteer.lname}}</td>
-                <td>{{volunteer.country}}</td>
+                <th (click)="govolunteer(volunteer)" style="color: #3B6D8C;cursor: pointer;">{{volunteer.fname }} {{volunteer.lname}}</th>
+                <th (click)="govolunteer(volunteer)" style="color: #3B6D8C; cursor: pointer;">{{volunteer.country}}</th>
               </tr>
             </tbody>
           </table>
@@ -82,14 +81,14 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Charity Name</th>
-                <th>Country</th>
+                <th style="color: #AFBF34;">Charity Name</th>
+                <th style="color: #AFBF34;">Country</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let charity of listcharitysearch | filter:searchText">
-                <td (click)="gocharity(charity)">{{charity.name}}</td>
-                <td>{{charity.country}}</td>
+                <th (click)="gocharity(charity)" style="color: #3B6D8C;cursor: pointer;">{{charity.name}}</th>
+                <th (click)="gocharity(charity)" style="color: #3B6D8C;cursor: pointer;">{{charity.country}}</th>
               </tr>
             </tbody>
           </table>
@@ -279,19 +278,21 @@
         <h5 class="pl-3 mt-3 mb-3">Suggestions</h5>
 
         <hr>
-        <div class="row">
+        
+          <div id="charitysuggest" class="col-md-12 suggestion-usd  " *ngFor="let charity of charitydetails; let index = index ">
+            
+        <div class="row"  *ngIf="index %3 ==1">
 
-          <div id="charitysuggest" class="col-md-12 suggestion-usd  "
-            *ngFor="let charity of charitydetails; let index = index ">
+         
             <img [src]="charity.img.substr(12)" class="cricle-img" alt="">
             <div class="sgt-text">
-              <h4 class="mb-0">{{ charity.name}}</h4>
+              <h4 class="mb-0" (click)="gocharity(charity)">{{ charity.name}}</h4>
               <span>{{ charity.country}}</span>
             </div>
             <span class="pr-2 ml-4" id="addfolloing" attr.id="{{charity._id}}" (click)="follow(charity)">
               <i class="fa fa-plus"></i>
             </span>
-          </div>
+          
 
 
 
@@ -314,6 +315,4 @@
 
 
 
-</body>
 
-</html>

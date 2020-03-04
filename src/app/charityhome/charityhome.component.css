@@ -265,7 +265,7 @@ ul {
   font-family: 'Merriweather', serif;
   font-size: 18px;
   margin-right: 5%;
-  height: 70%;
+  height: 60%;
   margin-top: 10%
 
 }
@@ -398,5 +398,7 @@ color: black;
 }
 .like a:active 
 {
-color:#3B6D8C ;
+color:#3B6D8C ;}
+.sgt-text h4:hover{
+  cursor: pointer;
 }

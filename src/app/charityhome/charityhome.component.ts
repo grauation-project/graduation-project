@@ -60,11 +60,14 @@ export class CharityhomeComponent implements OnInit {
   public commentclass = new Comment("", [], "");
   public followClass = new Follow("", "")
 public charityclass =new Charity('','','','','','','','',[],[])
+  randomNumber = Math.floor(Math.random() * 10) + 1;
+
   searchText;
   listvolunteersearch;
   listcharitysearch;
   // slsText;
   displaydiv = false;
+  auth=true;
   cahritysearchlist:boolean = false;
   Voluntersearchlist:boolean = false;
   
@@ -447,6 +450,11 @@ else{
   }
   gocharity(charity) {
     console.log(charity);
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.code = params.get("_id");
+      console.log(typeof params.get("_id"));
+    });
+  
     this.router.navigate(['home/charity/' + charity._id + '/charity/account']);
   }
 

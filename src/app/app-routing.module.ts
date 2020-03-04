@@ -22,6 +22,7 @@ import { PostsadminComponent } from './postsadmin/postsadmin.component';
 import { CheckauthService } from './services/checkauth.service';
 import { ForgetpassComponent } from './forgetpass/forgetpass.component';
 import { ResetComponent } from './reset/reset.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path: "", component: HomeregisterationComponent },
   { path: "login", component: LoginComponent,    
@@ -88,7 +89,8 @@ const routes: Routes = [
   },
   {path:"charity/account/_id",component:CharityAccountComponent},
   {path:"charity/home/:_id",component:CharityhomeComponent},
-  {path:"following/:_id",component:FollowingComponent}
+  {path:"following/:_id",component:FollowingComponent},
+  {path:"**",component:NotfoundComponent}
 ];
 
 @NgModule({  

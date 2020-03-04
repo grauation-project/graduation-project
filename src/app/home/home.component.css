@@ -307,6 +307,8 @@ nav .form-control {
     background-color:#3B6D8C;
     color: #AFBF34;
   }
+  a:hover{
+    cursor: pointer;}
   .navbar .btn{
     color: white;
     background-color: #AFBF34;

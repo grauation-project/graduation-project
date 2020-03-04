@@ -49,9 +49,7 @@ router.delete("/volunteer/delete/:id", function (req, resp) {
       _id: req.params.id
     },
     function (err, data) {
-      console.log("removed")
       if (!err) {
-        console.log("Deleted");
       }
     })
 
@@ -65,7 +63,6 @@ router.delete("/charity/delete/:id", function (req, resp) {
       _id: req.params.id
     },
     function (err, data) {
-      console.log("removed")
       if (!err) {
         console.log("Deleted");
       }
@@ -97,7 +94,6 @@ router.post("/add", parseUrlencoded, async (req, res) => {
 
 router.get("/account/:id", auth, async (req, res) => {
 
-  console.log("hi hi")
   let adminspec = await admin.findOne({
     _id: req.params.id
   });
