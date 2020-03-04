@@ -20,6 +20,7 @@ declare var require: any;
 })
 export class HomeComponent implements OnInit {
   charities;
+  postPostedBy: any;
   commentByCharity;
   commentByVolunteer;
   commentpost;
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
   public likeclass = new Like([], '');
   public commentclass = new Comment("", [], "");
   postlikes: any;
+  public postedByVolunteer;
+  public postedByCharity;
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -75,8 +78,29 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.postSerives.getpost().subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.Allpost=data
+    
+      for (let post of this.Allpost) {
+        // console.log(post.postedby)
+        this.postPostedBy = post.postedby
+
+        this.postSerives.findUser(this.postPostedBy)
+        // console.log(this.postPostedBy)
+
+        this.postSerives.volunteer().subscribe(volunteer => {
+          this.postedByVolunteer = volunteer
+          // console.log(this.postedByVolunteer)
+        })
+      
+        this.postSerives.charity().subscribe(charity => {
+          this.postedByCharity = charity
+          // console.log(this.postedByCharity)
+        })
+        
+
+      }
+
     });
 
     

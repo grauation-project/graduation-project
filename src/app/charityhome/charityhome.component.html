@@ -206,9 +206,9 @@
           <!-- <div class="row ml-2  postfooter pt-1"> -->
             <div class="reactions postfooter row pt-5 ml-2">
           
-              <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
+              <!-- <div class="ml-3" attr.id="{{post._id}}" *ngIf="likeNo"  style="color: #3B6D8C;border-radius: 50%;
                 border: #3B6D8C 1px solid; height: 24px;text-align:center;width: 22px;">
-                {{postlikes}}</div>
+                {{postlikes}}</div> -->
               <a class="mr-3">
                 <i class="fas fa-heart " id="like" (click)="like(post)" ></i>
                 Like</a>
@@ -242,7 +242,7 @@
                 <div class="row pl-1" *ngIf="commentByCharity">
                   
 
-                  <!-- <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
+                  <div class="mt-2 pl-3" *ngIf="commentByC(comment.postedby,commentByCharity._id)">
 
                     <h6 style="color: #3B6D8C;">{{commentByCharity.name}}</h6>
                   </div> 
@@ -251,7 +251,7 @@
                     *ngIf="commentByV(comment.postedby,commentByVolunteer._id)">
 
                     <h6 style="color: #3B6D8C;">{{commentByVolunteer.fname}} {{commentByVolunteer.lname}}</h6>
-                  </div> -->
+                  </div>
 
                   <p class="mt-2 ml-2">
                     {{comment.text}}

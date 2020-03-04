@@ -57,7 +57,7 @@ export class VolunteerAccountComponent implements OnInit {
   public commentclass = new Comment("", [], "");
   public newPost = new Post('', '', '', [], [],null);
   public editclass = new Edit("", "", "", "")
-
+  commentByVolunteer
   title = 'Angular Search Using ng2-search-filter';
   searchText;
   listvolunteersearch ;
@@ -283,42 +283,44 @@ editbutton(post) {
   }
 
 
-//   Comment(post) {
+  Comment(post) {
    
-//     this.IDpost = post._id
-//   this.postSerives.displaycomment(this.IDpost)
-//    this.postSerives.allcomment().subscribe(allcomment => {
-//     // console.log(allcomment)
-//     this.commentpost = allcomment
+    this.IDpost = post._id
+  this.postSerives.displaycomment(this.IDpost)
+   this.postSerives.allcomment().subscribe(allcomment => {
+    // console.log(allcomment)
+    this.commentpost = allcomment
 
-//   for(let comment of this.commentpost){
-//       // console.log(comment.postedby)
-//       this.commentPostedBy = comment.postedby
+  for(let comment of this.commentpost){
+      // console.log(comment.postedby)
+      this.commentPostedBy = comment.postedby
 
 
-//    this.postSerives.findUser(this.commentPostedBy)
-//       // console.log(this.commentPostedBy)
+   this.postSerives.findUser(this.commentPostedBy)
+      // console.log(this.commentPostedBy)
 
-//        this.postSerives.volunteer().subscribe(volunteer => {
-//        this.commentByVolunteer = volunteer
-//         // console.log(this.commentByVolunteer)
-//         console.log(this.commentByVolunteer.name);
+       this.postSerives.volunteer().subscribe(volunteer => {
+       this.commentByVolunteer = volunteer
+        // console.log(this.commentByVolunteer)
+        // console.log(this.commentByVolunteer.name);
         
-//       })
+      })
     
-//       this.postSerives.charity().subscribe(charity => {
-//         this.commentByCharity = charity
-//         // console.log(this.commentByCharity)
-//         console.log(this.commentByCharity.name);
+      this.postSerives.charity().subscribe(charity => {
+        this.commentByCharity = charity
+        // console.log(this.commentByCharity)
+        console.log(this.commentByCharity.name);
         
-//       })
+      })
 
 
-//     }
+    }
     
-//   })
-// }
+  })
+}
  async commentByC(comment,commentByC){
+  console.log(this.commentByCharity)
+  console.log(commentByC)
   if(comment === commentByC){
    return true
   }
