@@ -22,13 +22,13 @@ export class AddadminComponent implements OnInit {
     console.log(this.adminModel);
     this. _AdminService.addadmin(this.adminModel).subscribe(
       response => {
-        console.log("Success!", response);
+       
         userForm.reset();
         this.charityerror="Added Sucessfuly"
       },
 
       error => {
-        console.log("error", error);
+       
         this.charityerror = error.error;
 
       }

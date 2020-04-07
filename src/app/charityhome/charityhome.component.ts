@@ -28,8 +28,8 @@ export class CharityhomeComponent implements OnInit {
   postPostedBy: any;
   profileimageee="";
   profileimag=""
-  commentByVolunteer;
-  commentByCharity;
+  commentByVolunteer = new Signup("", "", "", "", "", "", "", "");
+  commentByCharity =   new Signup("", "", "", "", "", "", "", "");
   constructor(
     private _LoginService: LoginService,
     private router: Router,
@@ -156,6 +156,7 @@ charitydetails:Signup[]= [];
   this._AdminService.getcharities().subscribe(
     data  => {
       this.charitydetails = data as Signup[];
+      //  console.log(data)
 
       
     
@@ -220,14 +221,18 @@ charitydetails:Signup[]= [];
       // console.log(this.commentPostedBy)
 
        this.postSerives.volunteer().subscribe(volunteer => {
-       this.commentByVolunteer = volunteer
       
+       this.commentByVolunteer = volunteer as Signup
+        // console.log(this.commentByVolunteer)
+        // console.log(this.commentByVolunteer.name);
         
       })
     
       this.postSerives.charity().subscribe(charity => {
-        this.commentByCharity = charity
       
+        this.commentByCharity = charity as Signup
+        // console.log(this.commentByCharity)
+        // console.log(this.commentByCharity.name);
         
       })
 
@@ -240,14 +245,16 @@ charitydetails:Signup[]= [];
     throw new Error("Method not implemented.");
   }
  async commentByC(comment,commentByC){
-  if(comment === commentByC){
+  console.log(comment === commentByC)
+  if(comment === commentByC||commentByC != undefined){
    return true
   }
 }
 
 
 commentByV(comment,commentByV){
-if(comment === commentByV){
+  
+  if(comment === commentByV){
 
     this.IDpost = document.getElementById('postID').innerHTML
     this.postSerives.displaycomment(this.IDpost)
@@ -262,17 +269,18 @@ return true
 
 sendcomment(comment,post) {
  
+  
   this.commentclass.postedby = this.code
   this.IDpost = post._id
   this.commentclass.post = this.IDpost
-  console.log(this.commentclass);
+ 
 
   this.postSerives.comment(this.commentclass)
 
   this.IDpost = post._id
   this.postSerives.displaycomment(this.IDpost)
   this.postSerives.allcomment().subscribe(allcomment => {
-    console.log(allcomment)
+   
     this.commentpost = allcomment
     
   })
@@ -304,14 +312,16 @@ commentt(p,c) {
 
     this.postSerives.postlikes(this.IDpost)
     this.postSerives.getLikes().subscribe(likes => {
+    
+
       this.AllLikes = likes
 
       for(let like of this.AllLikes){
-        // console.log(like);
         
         if(like.post === this.IDpost && like.postedby === this.code){
           this.postSerives.removelike(this.likeclass)
           this.postSerives.postlikeslast().subscribe(likes=>{
+           
             
           })
         }
@@ -344,6 +354,7 @@ commentt(p,c) {
 
     if(this.code === charity._id){
       alert("you can't follow yourself")
+      return;
     }
    
     
@@ -373,19 +384,10 @@ else{
      
       
     }
-    
-
-  
-    
+       
 
    }
     
-    
-
-  
-
-
-
   }
 
   Folllowing(charityFollowing) {
